@@ -1,0 +1,4 @@
+- Stables::{second_, third_} vs. std::vector<Player*>
+- Commentary styles
+- Variables declaration at the beginning or anywhere in the method?
+- Test policy / design (bigger board to test all buildings, etc)

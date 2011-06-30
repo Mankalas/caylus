@@ -1,0 +1,18 @@
+[TODO] Use YAML to represent a game
+[TODO] Create at lease one complete game to test as many features as possible
+
+---
+
+Scratch...
+
+game:
+ - players
+   - 1
+   - 2
+ - order
+   - 1
+   - 2
+ - starting_buildings
+   - ...
+ - moves
+   - player

@@ -1,0 +1,145 @@
+* Bugs *
+
+[TODO] Check why the project won't compile when returning a reference
+on methods resources() and workers() in file player.hh, lines 51 and
+53.
+
+* Game implementation *
+[TODO] Establish a test engine
+[TODO] User interfaces
+[TODO] Graphical interface (SFML?)
+       [TODO] Alternative compilation if SFML not present
+[TODO] Networking
+[TODO] AI engine
+
+* General rules *
+[TODO] Two players rules
+       [TODO] 5 deniers each
+       [TODO] Alternative player order -> no stables
+       [TODO] When a players passes, worker cost is 3
+[TODO] Simplified favor -> 1 favor == 3 prestige
+[TODO] Favor management
+       [TODO] Column activation according to the active castle section (active section == section not scored yet)
+       [TODO] Activation between level 1 and current level
+       [TODO] If more than one favor during a phase, activation on different lines
+       [????] Impossible to gain more than 4 favors in a phase
+       [TODO] Use of buildings
+[DONE] Neutral buildings random placement
+[DONE] Random player order
+[DONE] Initial resources
+[TEST] Scoring
+       [TODO] Following the turn order
+       [TEST] Counting house in the actual section then bonus/malus
+[TODO] End of game (after scoring of last section (after bailiff reaches Tower scoring or all the 14 houses are built)
+       [TODO] Bonus
+       [TODO] If tie, everybody tied win
+[TODO] Test residence built on a building which has a worker on it
+
+* Game phases *
+[TEST] Phase 1/7 : Income
+	[TEST] Hotel
+	[TEST] Residence
+	[TEST] Library
+[TEST] Phase 2/7 : Placing workers
+	[TEST] No worker on residences, prestige, unbuild or occupied
+	[TEST] Worker cost
+	[TEST] Pass
+	       [DONE] 1 denier for the first to pass
+	[TEST] Putting on a special, fixed or neutral
+	[TEST] Putting on another player's building
+	       [DONE] Prestige point gained by the owner
+	[TEST] Putting on our own building
+	       [TEST] worker costs 1 denier
+	[DONE] Putting at the castle
+	       [DONE] one worker per player
+[DONE] Phase 3/7 : Activating special buildings
+[DONE] Phase 4/7 : Provost move
+       [DONE] Pass
+       [DONE] 1 denier per space
+       [DONE] Boundary checks (not back the bridge, not after the last space of the board, +/-3)
+[DONE] Phase 5/7 : Activating buildings
+       [DONE] Building activation according to the provost's position
+       [DONE] Building's effect not mandatory except production buildings
+[TEST] Phase 6/7 : Activating the castle
+       [DONE] Three sections
+       [DONE] Batch of three cubes, one must be food
+       [TEST] Active part depends on the bailiff
+       [DONE] If no room, begin the following section
+       [TEST] Penalty if no house built (except if Towers are full)
+       [DONE] Royal favor gain
+[TEST] Phase 7/7 : End of turn
+       [DONE] Bailiff / provost move
+       [TEST] Scoring (castle section full or bailiff reach end of section)
+
+* Buildings *
+[TEST] Gate
+	[TEST] No worker on residences, prestige, unbuild or occupied
+	[TEST] Castle, Inn, Stables (only one worker per player on these)
+	[TEST] 1 prestige if another player's building
+[DONE] Trading Post
+[DONE] Merchant's Guild
+[TEST] Stables (only one worker per player)
+[DONE] Joust Field
+[TEST] Inn
+       [TEST] Activation (move from the left circle to the right)
+       [TEST] Effect (worker cost equals 1)
+       [TEST] Remove the worker
+[TEST] Lawyer
+       [TEST] Replaced building goes back to the pile
+       [TEST] Cannot be replaced
+       [TEST] If there is a worker on the replaced building, action is delayed until activated
+[TEST] Production buildings
+       [TODO] Stone buildings "tax"
+[TEST] Construction buildings
+       [TEST] Suppress the building from the game's pile
+       [DONE] Prestige point earned
+       [TEST] Residential and prestige buildings' rules (built on neutral or own building)
+[TEST] Trade buildings
+
+--
+
+Scratch...
+
+Cathedral -> 5 stones + 3 golds + 1 residence + ((1 architect + worker
+on architect + provost after architect) or (((4 building favors + last
+favor column unlocked) or 5 building favors) + 1 building favor))
+
+Residence -> 1 cloth + (1 lawyer + worker on lawyer + provost after
+lawyer + 1 denier) or ((3 building favors or 4 building favors) + 1
+building favor) + (1 neutral building or 1 player's building)
+
+Stone -> Worker on (stone production building or trade building) or
+(1+ resource favor + resource favor) or other player's tax
+
+Gold -> Worker on (mine or trade building) or (((4 resource favors +
+last resource column unlocked) or 5 resource favors) + 1 resource favor)
+
+Architect -> 1 stone + 1 food + (1 mason + worker on mason + provost
+after mason) or (((2 building favors + third favor column unlocked) or
+3+ building favors) + 1 building favor) + empty slot available and "accessible" /* not the last slot on
+the board for example */
+
+<category> favor -> Favor + no previous <category> favor on this phase
+
+Worker on <construction building> -> x deniers + no other player's
+worker on building
+
+Provost -> max 3 denier and/or worker on Merchant guild
+
+Favor -> First to build most at castle or (worker on joust field + 1
+denier + 1 cloth) or build (cathedral or college or monument or statue
+or theater) or (end of (dungeon, walls, tower) and (2+ houses built))
+
+Cloth -> Worker on (cloth production building or trade building) or
+(1+ resource favor + resource favor) or other player's tax
+
+Lawyer -> 1 cloth + ((worker on neutral carpenter or fixed carpenter)
++ 1 wood) or (1+ building favor + building favor) + empty slot
+available and accessible
+
+Denier -> worker on trading post or worker on trade building or first
+to the bridge
+
+Mason -> 1 food + ((worker on neutral carpenter or fixed carpenter)
++ 1 wood) or (1+ building favor + building favor) + empty slot
+available and accessible
