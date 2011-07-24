@@ -9,16 +9,18 @@
  */
 
 #include <iostream>
-// #include "game-engine.hh"
-// #include <vector>
-// #include "gfx-window.hh"
-// #include "gfx-sprite-library.hh"
+#include <vector>
+#include "game-engine.hh"
+#include "view.hh"
+
+//#include "gfx-window.hh"
+//#include "gfx-sprite-library.hh"
 
 int main(int argc, char** argv)
 {
   bool command_line = false;
   std::string host = "";
-  int option = NULL;
+  int option = 0;
 
   while ((option = getopt(argc, argv, "ci:h:p:s")) != -1)
     {
@@ -27,12 +29,6 @@ int main(int argc, char** argv)
 	case 'c' :
 	  std::cout << "Command line game." << std::endl;
 	  command_line = true;
-	  break;
-	case 'i':
-	  std::cout << "number of ia : " << optarg << std::endl;
-	  break;
-	case 'p':
-	  std::cout << "number of players : " << optarg << std::endl;
 	  break;
 	case 's' :
 	  std::cout << "Server game." << std::endl;
@@ -45,9 +41,13 @@ int main(int argc, char** argv)
 	  std::cerr << "Error" << std::endl;
 	}
     }
-  return 1;
 
-//   GameEngine g(3, 1);
+  GameEngine g;
+
+  View view(g);
+
+  g.initialize();
+
 //   int i = 0;
 
 //   while (++i)

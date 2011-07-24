@@ -21,8 +21,45 @@
 #include "human.hh"
 #include "ai.hh"
 
-void GameEngine::_initialize()
+void GameEngine::initialize()
 {
+  unsigned int max_players = 5;
+
+  unsigned nb_humans = ask_nb_humans_(max_players);
+  std::cout << nb_humans << " humans to play.\n";
+  for (unsigned i = 0; i < nb_humans; ++i)
+    {
+      //std::cout << "Player's name ?";
+      players_.push_back(new Human("Dave"));
+    }
+  // Register AI players.
+  unsigned nb_ai;
+  if (nb_humans > 2)
+    {
+      nb_ai = ask_nb_ai_(0, max_players - nb_humans);
+    }
+  else
+    {
+      nb_ai = ask_nb_ai_(2 - nb_humans, max_players - nb_humans);
+    }
+  std::cout << nb_ai << " ai to play.\n";
+  for (unsigned i = 0; i < nb_ai; ++i)
+    {
+      //user_interface_->showMessage("AI's name?");
+      players_.push_back(new AI("HAL"));
+    }
+  // Shuffle players order.
+  foreach (Player* p, players_)
+    {
+      order_.push_back(p);
+    }
+  std::random_shuffle(order_.begin(), order_.end());
+  // Give each player his initial denier amount.
+  for (unsigned i = 1; i < players_.size(); i++)
+    {
+      players_[i]->resources() += Resource::denier * ((i < 3) ? 1 : 2);
+    }
+
   provost_ = PROVOST_INIT_CASE;
   bailiff_ = BAILIFF_INIT_CASE;
 
@@ -57,47 +94,14 @@ void GameEngine::_initialize()
 GameEngine::GameEngine()
   : road_(this)
 {
-    std::cout << "Initializing GameEngine... ";
-  _initialize();
-  std::cout << "Done." << std::endl;
 }
 
 GameEngine::~GameEngine()
-{}
-
-GameEngine::GameEngine(const unsigned player_max, const unsigned nb_humans)
-  : road_(this)
 {
-  std::cout << "Initializing GameEngine... ";
-  _initialize();
-
-  // Register humans players.
-  // user_interface_->showMessage("How many human players? (min 0, max 5)");
-  // unsigned nb_humans = player_max + 1;
-  // while (nb_humans > player_max)
-  //   nb_humans = user_interface_->getInt();
-  for (unsigned i = 0; i < nb_humans; ++i)
+  foreach(Player& p, players_)
     {
-      std::cout << "Player's name ?";
-      players_.push_back(new Human("Dave"));
+      delete player;
     }
-  // Register AI players.
-  unsigned nb_ai = player_max - nb_humans;
-  // while (nb_ai > player_max - nb_humans)
-  //   nb_ai = user_interface_->getInt();
-  for (unsigned i = 0; i < nb_ai; ++i)
-    {
-      //user_interface_->showMessage("AI's name?");
-      players_.push_back(new AI("HAL"));
-    }
-  // Shuffle players order.
-  foreach (Player* p, players_)
-    order_.push_back(p);
-  std::random_shuffle(order_.begin(), order_.end());
-  // Give each player his initial denier amount.
-  for (unsigned i = 1; i < players_.size(); i++)
-    players_[i]->resources() += Resource::denier * ((i < 3) ? 1 : 2);
-  std::cout << "Done." << std::endl;
 }
 
 void GameEngine::activateBuildings()

@@ -12,6 +12,8 @@
 
 # include <vector>
 # include <boost/smart_ptr.hpp>
+# include <boost/signal.hpp>
+# include <boost/bind.hpp>
 # include "building.hh"
 # include "player.hh"
 # include "road.hh"
@@ -25,8 +27,35 @@
 class GameEngine
 {
 public:
+
+  typedef boost::signals::connection connection_t;
+
+  typedef boost::signal<unsigned (unsigned)> nb_human_signal_t;
+  typedef boost::signal<unsigned (unsigned, unsigned)> nb_ai_signal_t;
+
+  nb_human_signal_t ask_nb_humans_;
+  nb_ai_signal_t ask_nb_ai_;
+
+public:
+
+  connection_t connectAskNbHumans(nb_human_signal_t::slot_function_type subscriber)
+  {
+    return ask_nb_humans_.connect(subscriber);
+  };
+
+  connection_t connectAskNbAi(nb_ai_signal_t::slot_function_type subscriber)
+  {
+    return ask_nb_ai_.connect(subscriber);
+  };
+
+  void disconnect(connection_t& cnx)
+  {
+    cnx.disconnect();
+  }
+
   /** Default constructor. */
   GameEngine();
+
   /** Constructor. Initializes the vector of players with the given
    * number.
    *
@@ -37,6 +66,10 @@ public:
 
   /** Destructor. */
   ~GameEngine();
+
+ /** Initialize the current object. Used for code factorization,
+   * shared by the constructors. */
+  void initialize();
 
   /** Step 1. Calculate the income for each player at the
    * beginning of each turn. */
@@ -112,9 +145,7 @@ private:
   /// Road's index of the building the bailiff is in.
   unsigned bailiff_;
 
-  /** Initialize the current object. Used for code factorization,
-   * shared by the constructors. */
-  void _initialize();
+
 
   /** Actions the player can do when placing his worker.
    *
@@ -155,6 +186,7 @@ private:
   /** The bailiff moves according to its relative position with the
       Prevost.*/
   void _moveBailiff();
+
 };
 
 /**
