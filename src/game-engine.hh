@@ -13,7 +13,7 @@
 # include <vector>
 # include <boost/smart_ptr.hpp>
 # include <boost/signal.hpp>
-# include <boost/bind.hpp>
+# include <boost/thread.hpp>
 # include "building.hh"
 # include "player.hh"
 # include "road.hh"
@@ -23,6 +23,8 @@
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11
 
+class View;
+
 /** Handles the global processus of the game. */
 class GameEngine
 {
@@ -30,39 +32,19 @@ public:
 
   typedef boost::signals::connection connection_t;
 
-  typedef boost::signal<unsigned (unsigned)> nb_human_signal_t;
-  typedef boost::signal<unsigned (unsigned, unsigned)> nb_ai_signal_t;
+  typedef boost::signal<unsigned (unsigned)> nb_humans_signal_t;
+  typedef boost::signal<unsigned (unsigned, unsigned)> nb_ais_signal_t;
 
-  nb_human_signal_t ask_nb_humans_;
-  nb_ai_signal_t ask_nb_ai_;
 
 public:
 
-  connection_t connectAskNbHumans(nb_human_signal_t::slot_function_type subscriber)
-  {
-    return ask_nb_humans_.connect(subscriber);
-  };
+  void connectNbHumansSignal(nb_humans_signal_t::slot_function_type subscriber);
+  void connectNbAIsSignal(nb_ais_signal_t::slot_function_type subscriber);
 
-  connection_t connectAskNbAi(nb_ai_signal_t::slot_function_type subscriber)
-  {
-    return ask_nb_ai_.connect(subscriber);
-  };
-
-  void disconnect(connection_t& cnx)
-  {
-    cnx.disconnect();
-  }
+  void subscribe(View* view);
 
   /** Default constructor. */
   GameEngine();
-
-  /** Constructor. Initializes the vector of players with the given
-   * number.
-   *
-   * @param nb_players Number of players to play.
-   * @param nb_humans
-   */
-  GameEngine(const unsigned nb_players, const unsigned nb_humans);
 
   /** Destructor. */
   ~GameEngine();
@@ -127,6 +109,12 @@ public:
   const unsigned& provost() const;
   unsigned& provost();
 
+  boost::mutex& mutex();
+  boost::condition_variable* waitingPlayers();
+  boost::condition_variable* waitingViews();
+  boost::condition_variable* disconnectViews();
+  void operator()();
+
 private:
   /// The order in which the player are "called".
   std::vector<Player*> order_;
@@ -144,7 +132,18 @@ private:
   unsigned provost_;
   /// Road's index of the building the bailiff is in.
   unsigned bailiff_;
-
+  ///
+  std::vector<View*> views_;
+  ///
+  boost::mutex mutex_;
+  ///
+  nb_humans_signal_t ask_nb_humans_;
+  ///
+  nb_ais_signal_t ask_nb_ais_;
+  ///
+  boost::condition_variable waiting_players_;
+  boost::condition_variable waiting_views_;
+  boost::condition_variable disconnect_views_;
 
 
   /** Actions the player can do when placing his worker.

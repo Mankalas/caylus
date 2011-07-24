@@ -1,21 +1,34 @@
 #include "view.hh"
+#include <boost/bind.hpp>
 
-View::View(GameEngine& ge)
+View::View(GameEngine* ge)
   :ge_(ge)
 {
-  connections_.push_back(ge_.connectAskNbHumans(boost::bind(&View::ask_nb_humans, this, _1)));
-  connections_.push_back(ge_.connectAskNbAi(boost::bind(&View::ask_nb_ai, this, _1, _2)));
+  ge_->subscribe(this);
+  disconnected_ = ge_->disconnectViews();
+  ge_->connectNbHumansSignal(boost::bind(&View::ask_nb_humans, this, _1));
+  ge_->connectNbAIsSignal(boost::bind(&View::ask_nb_ai, this, _1, _2));
+  std::cout << "View connecting...\n";
+  ge_->waitingViews()->notify_one();
 }
 
 View::~View()
 {
-  foreach(GameEngine::connection_t& cnx, connections_)
+  /*  foreach(GameEngine::connection_t& cnx, connections_)
     {
-      ge_.disconnect(cnx);
+      //ge_->disconnect(cnx);
     }
+  */
 }
 
-unsigned View::ask_nb_humans(unsigned max) const
+void View::operator()()
+{
+  boost::mutex mut;
+  boost::unique_lock<boost::mutex> lock(mut);
+  disconnected_->wait(lock);
+}
+
+unsigned View::ask_nb_humans(unsigned max)
 {
   unsigned nb_humans = 0;
   while ((std::cout << "How many humans? (" << max << " max)\n") &&
@@ -28,7 +41,7 @@ unsigned View::ask_nb_humans(unsigned max) const
   return nb_humans;
 }
 
-unsigned View::ask_nb_ai(unsigned min, unsigned max) const
+unsigned View::ask_nb_ai(unsigned min, unsigned max)
 {
   unsigned nb_ai = min;
   while ((std::cout << "How many AIs? (" << min << " min, " << max << " max)\n") &&

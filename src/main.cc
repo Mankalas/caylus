@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <boost/thread.hpp>
 #include "game-engine.hh"
 #include "view.hh"
 
@@ -44,24 +45,17 @@ int main(int argc, char** argv)
 
   GameEngine g;
 
-  View view(g);
+  boost::thread controller_thread = boost::thread(boost::ref(g));
 
-  g.initialize();
+  boost::mutex mutex;
+  boost::unique_lock<boost::mutex> lock(mutex);
+  g.waitingPlayers()->wait(lock);
+  std::cout << "Game engine ready.\n";
 
-//   int i = 0;
+  View view(&g);
+  boost::thread view_thread = boost::thread(view);
 
-//   while (++i)
-//   {
-//     g.collectIncome();
-//     g.placeWorkers();
-//     g.activateSpecialBuildings();
-// //    g.activateBridge();
-//     g.activateBuildings();
-//     g.activateCastle();
-//     g.endOfTurn();
-//   }
-//   std::cout << "Game Over!" << std::endl;
-
-//   return 0;
+  controller_thread.join();
+  return 0;
 }
 

@@ -97,6 +97,48 @@ GameEngine::provost()
   return provost_;
 }
 
+inline boost::mutex&
+GameEngine::mutex()
+{
+  return mutex_;
+}
+
+inline boost::condition_variable*
+GameEngine::waitingPlayers()
+{
+  return &waiting_players_;
+}
+
+inline boost::condition_variable*
+GameEngine::waitingViews()
+{
+  return &waiting_views_;
+}
+
+inline boost::condition_variable*
+GameEngine::disconnectViews()
+{
+  return &disconnect_views_;
+}
+
+inline void
+GameEngine::connectNbHumansSignal(GameEngine::nb_humans_signal_t::slot_function_type subscriber)
+{
+  ask_nb_humans_.connect(subscriber);
+}
+
+inline void
+GameEngine::connectNbAIsSignal(GameEngine::nb_ais_signal_t::slot_function_type subscriber)
+{
+  ask_nb_ais_.connect(subscriber);
+}
+
+inline void
+GameEngine::subscribe(View* view)
+{
+  views_.push_back(view);
+}
+
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
 {
   foreach (const Player* p, g.order())

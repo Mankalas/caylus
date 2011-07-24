@@ -12,6 +12,7 @@
 #include <ctime>
 #include <cmath>
 #include <algorithm>
+#include <boost/bind.hpp>
 #include "game-engine.hh"
 #include "resource.hh"
 #include "all-buildings.hh"
@@ -20,6 +21,20 @@
 #include "console-ui.hh"
 #include "human.hh"
 #include "ai.hh"
+
+void GameEngine::operator() ()
+{
+  std::cout << "Waiting for challenger.\n";
+  waiting_players_.notify_one();
+  boost::mutex mutex;
+  boost::unique_lock<boost::mutex> lock(mutex);
+  waiting_views_.wait(lock);
+  std::cout << "initializing game.\n";
+  initialize();
+
+  // Disconnect the views.
+  disconnect_views_.notify_all();
+}
 
 void GameEngine::initialize()
 {
@@ -36,11 +51,11 @@ void GameEngine::initialize()
   unsigned nb_ai;
   if (nb_humans > 2)
     {
-      nb_ai = ask_nb_ai_(0, max_players - nb_humans);
+      nb_ai = ask_nb_ais_(0, max_players - nb_humans);
     }
   else
     {
-      nb_ai = ask_nb_ai_(2 - nb_humans, max_players - nb_humans);
+      nb_ai = ask_nb_ais_(2 - nb_humans, max_players - nb_humans);
     }
   std::cout << nb_ai << " ai to play.\n";
   for (unsigned i = 0; i < nb_ai; ++i)
@@ -98,9 +113,9 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine()
 {
-  foreach(Player& p, players_)
+  foreach(Player* p, players_)
     {
-      delete player;
+      delete p;
     }
 }
 

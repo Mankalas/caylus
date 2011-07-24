@@ -7,17 +7,20 @@
 class View
 {
 public:
-  View(GameEngine& ge);
+  View(GameEngine* ge);
   virtual ~View();
 
-  unsigned ask_nb_humans(unsigned max) const;
-  unsigned ask_nb_ai(unsigned min, unsigned max) const;
+  unsigned ask_nb_humans(unsigned max);
+  unsigned ask_nb_ai(unsigned min, unsigned max);
+
+  void operator()();
 
 protected:
-  GameEngine& ge_;
+  GameEngine* ge_;
 
 private:
   std::vector<GameEngine::connection_t> connections_;
+  boost::condition_variable* disconnected_;
 
 };
 

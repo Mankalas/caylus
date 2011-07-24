@@ -2,7 +2,7 @@ bin_PROGRAMS = caylus_ia
 
 caylus_ia_CXXFLAGS = -W -Wall -Wextra -Werror -ansi -pedantic -O5
 
-caylus_ia_LDADD = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lboost_signals
+caylus_ia_LDADD = -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -lboost_signals -lboost_thread
 
 caylus_ia_LDFLAGS =
 

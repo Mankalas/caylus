@@ -1,6 +1,6 @@
 # Initialize Autoconf. Specify package's name, version number, and
 # bug-report address.
-AC_INIT([caylus_ia], [0.1], [mankalas@gmail.com,crucugny@gmail.com])
+AC_INIT([caylus_ia], [0.1], [mankalas@gmail.com,nicuveo@gmail.com])
 
 # Check for a C++ compiler.
 AC_PROG_CXX
