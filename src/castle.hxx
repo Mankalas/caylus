@@ -11,9 +11,9 @@
 #ifndef CASTLE_HXX
 # define CASTLE_HXX
 
-# include <vector>
-# include "player.hh"
 # include "castle.hh"
+
+using namespace controller;
 
 inline
 const std::vector<Player*>& CastlePart::houses() const

@@ -22,6 +22,8 @@
 #include "human.hh"
 #include "ai.hh"
 
+using namespace controller;
+
 void GameEngine::operator() ()
 {
   std::cout << "Waiting for challenger.\n";
@@ -42,10 +44,11 @@ void GameEngine::initialize()
 
   unsigned nb_humans = ask_nb_humans_(max_players);
   std::cout << nb_humans << " humans to play.\n";
+  // TODO: Wait for challengers
   for (unsigned i = 0; i < nb_humans; ++i)
     {
       //std::cout << "Player's name ?";
-      players_.push_back(new Human("Dave"));
+	    //players_.push_back(new Human());
     }
   // Register AI players.
   unsigned nb_ai;
@@ -61,7 +64,9 @@ void GameEngine::initialize()
   for (unsigned i = 0; i < nb_ai; ++i)
     {
       //user_interface_->showMessage("AI's name?");
-      players_.push_back(new AI("HAL"));
+	    Player *ai = new Player();
+	    ai->setView(new view::AI());
+      players_.push_back(ai);
     }
   // Shuffle players order.
   foreach (Player* p, players_)
@@ -104,6 +109,7 @@ void GameEngine::initialize()
   buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
   buildings_.push_back(BuildingSmartPtr(new Architect(this)));
   buildings_.push_back(BuildingSmartPtr(new Mason(this)));
+  board_updated_();
 }
 
 GameEngine::GameEngine()
@@ -136,10 +142,10 @@ void GameEngine::activateBridge()
       assert(p);
       deniers = p->resources()[Resource::denier];
       if (deniers == 0)
-	{
-	  //p->userInterface()->showMessage("You're too poor for corruption.");
-	  continue;
-	}
+      {
+	      //p->userInterface()->showMessage("You're too poor for corruption.");
+	      continue;
+      }
 
       shift = p->askProvostShift();
       // If the provost is not moved before the bridge, or over the end
@@ -228,7 +234,7 @@ void GameEngine::_playerMove(Player* p)
       // Get the player input.
       //p->userInterface()->showMessage("Your turn " + p->name() +
       //" (-1 for castle, 34 for the bridge)");
-      player_input = p->askWorkerPlacement(road_);
+      player_input = p->askWorkerPlacement();
 
       // Players chose the bridge.
       if (player_input == 34)
@@ -351,4 +357,23 @@ void GameEngine::build(BuildingSmartPtr& building, Player* p)
   game_b->build(p);
   road_.build(game_b);
   buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
+}
+
+void GameEngine::subscribeView(View *view)
+{
+	// Only the first player can set the number of other players.
+	if (players_.empty())
+	{
+		ask_nb_humans_.connect(view->getAskNbHumansSlot());
+		ask_nb_ais_.connect(view->getAskNbAIsSlot());
+	}
+	// No need to update the board for AIs.
+	if (view->isHuman())
+	{
+		board_updated_.connect(((Human*)view)->getUpdateBoardSlot());
+	}
+	// New player, linked to the subscribing view.
+	Player *p = new Player();
+	p->setView(view);
+	players_.push_back(p);
 }

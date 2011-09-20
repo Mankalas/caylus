@@ -10,33 +10,42 @@
 #ifndef HUMAN_HH
 # define HUMAN_HH
 
-# include "player.hh"
-# include "resource-map.hh"
+# include "view.hh"
 # include "user-interface.hh"
 
-class Road;
-
-class Human : public Player
+namespace view
 {
-public:
 
-  Human();
-  Human(const std::string& name);
+	class Human : public View
+	{
+	public:
+		Human(controller::GameEngine* ge);
+		virtual ~Human();
 
-  virtual BuildingSmartPtr askBuilding(const std::vector<BuildingSmartPtr>&) const;
-  virtual std::string askName() const;
-  virtual int askProvostShift() const;
-  virtual int askWorkerPlacement(const Road&, bool) const;
-  virtual ResourceMap askResources(const ResourceMap&) const;
-  virtual bool askYesNo() const;
-  virtual bool askJoustField() const;
-  const UserInterface* userInterface() const;
-  UserInterface* userInterface();
+		virtual std::string askName() const;
+		virtual bool isHuman() const;
 
-private:
-  UserInterface* user_interface_;
-};
+		virtual int askProvostShift() const;
+		virtual bool askYesNo() const;
+		virtual bool askJoustField() const;
+		virtual int askWorkerPlacement() const;
+		virtual unsigned askBuilding() const;
+		virtual unsigned askResourceChoice() const;
 
+		unsigned askNbHumans(unsigned max);
+		unsigned askNbAIs(unsigned min, unsigned max);
+
+		void updateBoard();
+		boost::signal<void (void)>::slot_function_type getUpdateBoardSlot() const;
+
+		const UserInterface* userInterface() const;
+		UserInterface* userInterface();
+
+	private:
+		UserInterface* user_interface_;
+	};
+
+}
 # include "human.hxx"
 
 #endif

@@ -11,20 +11,25 @@
 
 # include "building.hh"
 
-/** \brief It represents the buildings which give the builder royal
- * favors. It therefore overrides the on_build method in order to
- * trigger the favor selection mechanism.
- *
- */
-class FavorBuilding : virtual public Building
+namespace controller
 {
-  public:
-    ~FavorBuilding();
 
-  protected:
-    FavorBuilding();
+	/** \brief It represents the buildings which give the builder royal
+	 * favors. It therefore overrides the on_build method in order to
+	 * trigger the favor selection mechanism.
+	 *
+	 */
+	class FavorBuilding : virtual public Building
+	{
+	public:
+		~FavorBuilding();
 
-    virtual void on_build ();
-};
+	protected:
+		FavorBuilding();
+
+		virtual void on_build ();
+	};
+
+}
 
 #endif /* !FAVOR_BUILDING_HH_ */

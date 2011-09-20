@@ -12,6 +12,8 @@
 # include <boost/assign/list_of.hpp>
 # include "resource-map.hh"
 
+using namespace controller;
+
 inline ResourceMap::operator std::vector<ResourceMap> () const
 {
   return boost::assign::list_of (*this);

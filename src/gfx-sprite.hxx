@@ -6,8 +6,8 @@
   \date   2007-10-05
 */
 
-inline
-sf::Sprite gfx::Sprite::getSprite() const
+inline const sf::Sprite&
+gfx::Sprite::getSprite() const
 {
   return sprite_;
 }

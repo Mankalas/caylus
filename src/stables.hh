@@ -12,17 +12,22 @@
 
 # include "omniscient-building.hh"
 
-class Stables : public OmniscientBuilding
+namespace controller
 {
-  public:
-    Stables(GameEngine* ge);
 
-    virtual void on_activate(void);
-    virtual void worker_set(Player&);
-    virtual void worker_unset();
+	class Stables : public OmniscientBuilding
+	{
+	public:
+		Stables(GameEngine* ge);
 
-  private:
-    std::vector<Player*> players_;
-};
+		virtual void on_activate(void);
+		virtual void worker_set(Player&);
+		virtual void worker_unset();
+
+	private:
+		std::vector<Player*> players_;
+	};
+
+}
 
 #endif /* !STABLES_HH_ */

@@ -20,226 +20,271 @@
 # include "omniscient-building.hh"
 # include "player.hh"
 
-class Statue : public FavorBuilding
-{
-  public:
-    Statue ();
-};
+enum e_building
+	{
+		STATUE,
+		THEATER,
+		COLLEGE,
+		MONUMENT,
+		GRANARY,
+		WEAVER,
+		CATHEDRAL,
+		GOLDMINE,
+		NQUARRY,
+		WQUARRY,
+		WORKSHOP,
+		NFARM,
+		WFFARM,
+		WCFARM,
+		SFARM,
+		FOREST,
+		PARK,
+		NSAWMILL,
+		WSAWMILL,
+		RESIDENCE,
+		LIBRARY,
+		HOTEL,
+		CHURCH,
+		FPEDDLER,
+		WPEDDLER,
+		JEWELLER,
+		TAILOR,
+		ALCHEMIST,
+		BANK,
+		TRADING_POST,
+		NCARPENTER,
+		FCARPENTER,
+		LAWYER,
+		ARCHITECT,
+		MASON,
+		NMARKETPLACE,
+		WMARKETPLACE
+	};
 
-class Theater : public FavorBuilding
+namespace controller
 {
-  public:
-    Theater ();
-};
 
-class College : public FavorBuilding
-{
-  public:
-    College ();
-};
+	class Statue : public FavorBuilding
+	{
+	public:
+		Statue ();
+	};
 
-class Monument : public FavorBuilding
-{
-  public:
-    Monument ();
-};
+	class Theater : public FavorBuilding
+	{
+	public:
+		Theater ();
+	};
 
-class Granary : public Building
-{
-  public:
-    Granary ();
-};
+	class College : public FavorBuilding
+	{
+	public:
+		College ();
+	};
 
-class Weaver : public Building
-{
-  public:
-    Weaver ();
-};
+	class Monument : public FavorBuilding
+	{
+	public:
+		Monument ();
+	};
 
-class Cathedral : public Building
-{
-  public:
-    Cathedral ();
-};
+	class Granary : public Building
+	{
+	public:
+		Granary ();
+	};
 
-class GoldMine : public ProductionBuilding
-{
-  public:
-    GoldMine ();
-};
+	class Weaver : public Building
+	{
+	public:
+		Weaver ();
+	};
 
-class NQuarry : public ProductionBuilding
-{
-  public:
-    NQuarry ();
-};
+	class Cathedral : public Building
+	{
+	public:
+		Cathedral ();
+	};
 
-class WQuarry : public ProductionBuilding
-{
-  public:
-    WQuarry ();
-};
+	class GoldMine : public ProductionBuilding
+	{
+	public:
+		GoldMine ();
+	};
 
-class Workshop : public ProductionBuilding
-{
-  public:
-    Workshop ();
-};
+	class NQuarry : public ProductionBuilding
+	{
+	public:
+		NQuarry ();
+	};
 
-class NFarm : public ProductionBuilding
-{
-  public:
-    NFarm ();
-};
+	class WQuarry : public ProductionBuilding
+	{
+	public:
+		WQuarry ();
+	};
 
-class WFFarm : public ProductionBuilding
-{
-  public:
-    WFFarm ();
-};
+	class Workshop : public ProductionBuilding
+	{
+	public:
+		Workshop ();
+	};
 
-class WCFarm : public ProductionBuilding
-{
-  public:
-    WCFarm ();
-};
+	class NFarm : public ProductionBuilding
+	{
+	public:
+		NFarm ();
+	};
 
-class SFarm : public ProductionBuilding
-{
-  public:
-    SFarm ();
-};
+	class WFFarm : public ProductionBuilding
+	{
+	public:
+		WFFarm ();
+	};
 
-class Forest : public ProductionBuilding
-{
-  public:
-    Forest ();
-};
+	class WCFarm : public ProductionBuilding
+	{
+	public:
+		WCFarm ();
+	};
 
-class Park : public ProductionBuilding
-{
-  public:
-    Park ();
-};
+	class SFarm : public ProductionBuilding
+	{
+	public:
+		SFarm ();
+	};
 
-class NSawmill : public ProductionBuilding
-{
-  public:
-    NSawmill ();
-};
+	class Forest : public ProductionBuilding
+	{
+	public:
+		Forest ();
+	};
 
-class WSawmill : public ProductionBuilding
-{
-  public:
-    WSawmill ();
-};
+	class Park : public ProductionBuilding
+	{
+	public:
+		Park ();
+	};
 
-class Residence : public ResidentialBuilding
-{
-  public:
-    Residence ();
-};
+	class NSawmill : public ProductionBuilding
+	{
+	public:
+		NSawmill ();
+	};
 
-class Library : public ResidentialBuilding
-{
-  public:
-    Library ();
-};
+	class WSawmill : public ProductionBuilding
+	{
+	public:
+		WSawmill ();
+	};
 
-class Hotel : public ResidentialBuilding
-{
-  public:
-    Hotel ();
-};
+	class Residence : public ResidentialBuilding
+	{
+	public:
+		Residence ();
+	};
 
-class Church : public TradeBuilding, public FavorBuilding
-{
-  public:
-    Church ();
-};
+	class Library : public ResidentialBuilding
+	{
+	public:
+		Library ();
+	};
 
-class FPeddler : public TradeBuilding
-{
-  public:
-    FPeddler ();
-};
+	class Hotel : public ResidentialBuilding
+	{
+	public:
+		Hotel ();
+	};
 
-class WPeddler : public TradeBuilding
-{
-  public:
-    WPeddler ();
-};
+	class Church : public TradeBuilding, public FavorBuilding
+	{
+	public:
+		Church ();
+	};
 
-class Jeweller : public TradeBuilding
-{
-  public:
-    Jeweller ();
-};
+	class FPeddler : public TradeBuilding
+	{
+	public:
+		FPeddler ();
+	};
 
-class Tailor : public TradeBuilding
-{
-  public:
-    Tailor ();
-};
+	class WPeddler : public TradeBuilding
+	{
+	public:
+		WPeddler ();
+	};
 
-class Alchemist : public TradeBuilding
-{
-  public:
-    Alchemist ();
-};
+	class Jeweller : public TradeBuilding
+	{
+	public:
+		Jeweller ();
+	};
 
-class Bank : public TradeBuilding
-{
-  public:
-    Bank ();
-};
+	class Tailor : public TradeBuilding
+	{
+	public:
+		Tailor ();
+	};
 
-class TradingPost : public ProductionBuilding
-{
-  public:
-    TradingPost ();
-};
+	class Alchemist : public TradeBuilding
+	{
+	public:
+		Alchemist ();
+	};
 
-class NCarpenter : public ConstructionBuilding
-{
-  public:
-    NCarpenter(GameEngine* ge);
-};
+	class Bank : public TradeBuilding
+	{
+	public:
+		Bank ();
+	};
 
-class FCarpenter : public ConstructionBuilding
-{
-  public:
-    FCarpenter(GameEngine* ge);
-};
+	class TradingPost : public ProductionBuilding
+	{
+	public:
+		TradingPost ();
+	};
 
-class Lawyer : public ConstructionBuilding
-{
-  public:
-    Lawyer(GameEngine* ge);
-};
+	class NCarpenter : public ConstructionBuilding
+	{
+	public:
+		NCarpenter(GameEngine* ge);
+	};
 
-class Architect : public ConstructionBuilding
-{
-  public:
-    Architect(GameEngine* ge);
-};
+	class FCarpenter : public ConstructionBuilding
+	{
+	public:
+		FCarpenter(GameEngine* ge);
+	};
 
-class Mason : public ConstructionBuilding
-{
-  public:
-    Mason(GameEngine* ge);
-};
+	class Lawyer : public ConstructionBuilding
+	{
+	public:
+		Lawyer(GameEngine* ge);
+	};
 
-class NMarketplace : public TradeBuilding
-{
-  public:
-    NMarketplace ();
-};
+	class Architect : public ConstructionBuilding
+	{
+	public:
+		Architect(GameEngine* ge);
+	};
 
-class WMarketplace : public TradeBuilding
-{
-  public:
-    WMarketplace ();
-};
+	class Mason : public ConstructionBuilding
+	{
+	public:
+		Mason(GameEngine* ge);
+	};
 
+	class NMarketplace : public TradeBuilding
+	{
+	public:
+		NMarketplace ();
+	};
+
+	class WMarketplace : public TradeBuilding
+	{
+	public:
+		WMarketplace ();
+	};
+
+}
 #endif /* !ALL_BUILDINGS_HH_ */

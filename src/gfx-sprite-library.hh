@@ -13,7 +13,8 @@
 # include <string>
 # include "gfx-sprite.hh"
 
-namespace gfx {
+namespace gfx
+{
 
   /** \brief Object containing oftenly used images.
    *

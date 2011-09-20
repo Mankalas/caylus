@@ -31,13 +31,15 @@ ProductionBuilding::on_activate ()
   }
 
   unsigned i = 0;
-  std::cout << i++ << ". Nothing" << std::endl;
+  /*std::cout << i++ << ". Nothing" << std::endl;
   foreach (ResourceMap r, worker_choices_)
     std::cout << i++ << ". " << r << std::endl;
 
-  int choice = ConsoleUI::inst()->askChoice(0, worker_choices_.size());
+    int choice = ConsoleUI::inst()->askChoice(0, worker_choices_.size());*/
+
+  unsigned choice = ask_resource_choice_();
   if (choice == 0)
-    return;
+	  return;
   --choice;
 
   worker_->resources() += worker_choices_[choice];

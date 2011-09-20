@@ -11,13 +11,13 @@
 
 # include <sstream>
 # include <list>
+# include "gfx-sprite.hh"
 # include "game-engine.hh"
 
 /** \brief Everything that has to access the graphical library is in
     this namespace. */
-namespace gfx {
-
-  class Sprite;
+namespace gfx
+{
 
   /** \brief This visitor pattern is used to display graphical
    * objects.
@@ -34,9 +34,10 @@ namespace gfx {
      */
     void operator()(gfx::Sprite& sprite);
 
-    void operator()(GameEngine& game_engine);
+	  void operator()(controller::GameEngine& game_engine);
 
   };
 
 }
+
 #endif // DISPLAYVISITOR_H

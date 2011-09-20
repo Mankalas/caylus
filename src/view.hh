@@ -1,27 +1,58 @@
+/**
+ * @file   view.hh
+ * @author Vincent Boucheny <vincent.boucheny@hpc-sa.com>
+ * @date   Mon Sep 19 18:11:44 2011
+ *
+ * @brief
+ *
+ *
+ */
+
 #ifndef VIEW_HH
 # define VIEW_HH
 
-# include "game-engine.hh"
 # include <vector>
+# include <boost/signal.hpp>
+# include <boost/thread.hpp>
 
-class View
+namespace controller
 {
-public:
-  View(GameEngine* ge);
-  virtual ~View();
+	class GameEngine;
+}
 
-  unsigned ask_nb_humans(unsigned max);
-  unsigned ask_nb_ai(unsigned min, unsigned max);
+namespace view
+{
 
-  void operator()();
+	class View
+	{
+	public:
+		View(controller::GameEngine* ge);
+		virtual ~View() = 0;
 
-protected:
-  GameEngine* ge_;
+		virtual std::string askName() const = 0;
+		virtual bool isHuman() const;
 
-private:
-  std::vector<GameEngine::connection_t> connections_;
-  boost::condition_variable* disconnected_;
+		virtual int askProvostShift() const = 0;
+		virtual bool askYesNo() const = 0;
+		virtual bool askJoustField() const = 0;
+		virtual int askWorkerPlacement() const = 0;
+		virtual unsigned askBuilding() const = 0;
+		virtual unsigned askResourceChoice() const = 0;
 
-};
+		boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
+		boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
+		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
+		boost::signal<int (void)>::slot_function_type getAskWorkerPlacementSlot() const;
+		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
+		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 
+		void operator()(){};
+
+	protected:
+		const controller::GameEngine* ge_;
+		//		std::vector<controller::GameEngine::connection_t> connections_;
+		boost::condition_variable* disconnected_;
+	};
+
+}
 #endif

@@ -13,74 +13,83 @@
 # include <vector>
 # include <map>
 # include <iostream>
-# include <ostream>
 # include "resource-map.hh"
 # include "user-interface.hh"
 # include "building.hh"
+# include "view.hh"
 
 # define NB_WORKERS 1
 
-using namespace std;
-
-class Road;
-
-/** \brief A player is an entity that's playing the game. It can be
- * either Human or AI.
- *
- */
-class Player
+namespace controller
 {
-public:
-  Player();
-  Player(const string& name);
-  Player(const Player&);
+	class Road;
 
-  bool operator==(const Player& p) const;
+	/** \brief A player is an entity that's playing the game. It can be
+	 * either Human or AI.
+	 *
+	 */
+	class Player
+	{
+	public:
+		Player();
+		Player(const std::string& name);
+		Player(const Player&);
 
-  /// Accessors.
+		// Operators.
+		bool operator==(const Player& p) const;
 
-  void setFavorBuilding(int);
-  int getFavorBuilding() const;
-  void setFavorResource(int);
-  int getFavorResource() const;
-  void setFavorDenier(int);
-  int getFavorDenier() const;
-  void setFavorPrestige(int);
-  int getFavorPrestige() const;
-  const std::string& name() const;
-  void setPrestige(int);
-  int getPrestige() const;
-  const ResourceMap& resources() const;
-  ResourceMap& resources();
-  const unsigned& workers() const;
-  unsigned& workers();
-  const unsigned& residences() const;
-  unsigned& residences();
+		// Signals.
+		typedef boost::signal<int (void)> ask_provost_shift_signal_t;
 
-  virtual BuildingSmartPtr askBuilding(const std::vector<BuildingSmartPtr>&) const = 0;
-  virtual std::string askName() const = 0;
-  virtual int askProvostShift() const = 0;
-  virtual int askWorkerPlacement(const Road&, bool = true) const = 0;
-  virtual ResourceMap askResources(const ResourceMap&) const = 0;
-  virtual bool askYesNo() const = 0;
-  virtual bool askJoustField() const = 0;
+		// Accessors.
+		void setFavorBuilding(int);
+		int getFavorBuilding() const;
+		void setFavorResource(int);
+		int getFavorResource() const;
+		void setFavorDenier(int);
+		int getFavorDenier() const;
+		void setFavorPrestige(int);
+		int getFavorPrestige() const;
+		const std::string& name() const;
+		void setPrestige(int);
+		int getPrestige() const;
+		const ResourceMap& resources() const;
+		ResourceMap& resources();
+		const unsigned& workers() const;
+		unsigned& workers();
+		const unsigned& residences() const;
+		unsigned& residences();
+		const view::View *view() const;
+		view::View* view();
+		void setView(view::View* view);
 
-protected:
+		/// Actions.
+		int askProvostShift() const;
+		int askWorkerPlacement() const;
 
-  void _initialize(void);
+	private:
 
-  int favor_building_;
-  int favor_resource_;
-  int favor_denier_;
-  int favor_prestige_;
-  unsigned int workers_;
-  string name_;
-  int prestige_;
-  ResourceMap resources_;
-  unsigned int residences_;
-};
+		void _initialize(void);
 
-ostream& operator<<(ostream&, const Player&);
+		int favor_building_;
+		int favor_resource_;
+		int favor_denier_;
+		int favor_prestige_;
+		unsigned int workers_;
+		std::string name_;
+		int prestige_;
+		ResourceMap resources_;
+		unsigned int residences_;
+		view::View* view_;
+
+		// Signals.
+		boost::signal<int (void)> ask_provost_shift_signal_;
+		boost::signal<int (void)> ask_worker_placement_signal_;
+	};
+
+}
+
+std::ostream& operator<<(std::ostream&, const controller::Player&);
 
 # include "player.hxx"
 

@@ -6,28 +6,28 @@
 #ifndef INN_HH_
 # define INN_HH_
 
-
 # include "omniscient-building.hh"
 
-
-class Inn : public Building
+namespace controller
 {
-  public:
-    Inn();
 
-    virtual void on_activate(void);
-    Player* host();
-    const Player* host() const;
+	class Inn : public Building
+	{
+	public:
+		Inn();
 
-  private:
-    Player* host_;
-};
+		virtual void on_activate(void);
+		Player* host();
+		const Player* host() const;
 
+	private:
+		Player* host_;
+	};
 
-std::ostream& operator<<(ostream&, const Inn&);
+}
 
+std::ostream& operator<<(std::ostream&, const controller::Inn&);
 
 # include "inn.hxx"
-
 
 #endif /* !INN_HH_ */

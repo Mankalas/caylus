@@ -8,10 +8,12 @@
 
 #include "gfx-sprite-library.hh"
 
-gfx::SpriteLibrary* gfx::SpriteLibrary::instance_ = NULL;
+using namespace gfx;
 
-gfx::SpriteLibrary::SpriteLibrary()
+SpriteLibrary* SpriteLibrary::instance_ = NULL;
+
+SpriteLibrary::SpriteLibrary()
 {
-  sprites_ = std::map<std::string, gfx::Sprite*>();
-  sprites_["board"] = new gfx::Sprite("../share/img/board_limited_edition.jpg");
+  sprites_ = std::map<std::string, Sprite*>();
+  sprites_["board"] = new Sprite("../share/img/board_limited_edition.jpg");
 }

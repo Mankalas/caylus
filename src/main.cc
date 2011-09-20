@@ -12,50 +12,49 @@
 #include <vector>
 #include <boost/thread.hpp>
 #include "game-engine.hh"
-#include "view.hh"
+#include "human.hh"
 
-//#include "gfx-window.hh"
-//#include "gfx-sprite-library.hh"
+#include "gfx-window.hh"
+#include "gfx-sprite-library.hh"
 
 int main(int argc, char** argv)
 {
-  bool command_line = false;
-  std::string host = "";
-  int option = 0;
+	bool command_line = false;
+	std::string host = "";
+	int option = 0;
 
-  while ((option = getopt(argc, argv, "ci:h:p:s")) != -1)
-    {
-      switch (option)
+	while ((option = getopt(argc, argv, "ci:h:p:s")) != -1)
 	{
-	case 'c' :
-	  std::cout << "Command line game." << std::endl;
-	  command_line = true;
-	  break;
-	case 's' :
-	  std::cout << "Server game." << std::endl;
-	  break;
-	case 'h' :
-	  std::cout << optarg << std::endl;
-	  host = std::string(optarg);
-	  break;
-	case '?':
-	  std::cerr << "Error" << std::endl;
+		switch (option)
+		{
+		case 'c' :
+			std::cout << "Command line game." << std::endl;
+			command_line = true;
+			break;
+		case 's' :
+			std::cout << "Server game." << std::endl;
+			break;
+		case 'h' :
+			std::cout << optarg << std::endl;
+			host = std::string(optarg);
+			break;
+		case '?':
+			std::cerr << "Error" << std::endl;
+		}
 	}
-    }
 
-  GameEngine g;
+	GameEngine g;
 
-  boost::thread controller_thread = boost::thread(boost::ref(g));
+	boost::thread controller_thread = boost::thread(boost::ref(g));
 
-  boost::mutex mutex;
-  boost::unique_lock<boost::mutex> lock(mutex);
-  g.waitingPlayers()->wait(lock);
-  std::cout << "Game engine ready.\n";
+	boost::mutex mutex;
+	boost::unique_lock<boost::mutex> lock(mutex);
+	g.waitingPlayers()->wait(lock);
+	std::cout << "Game engine ready.\n";
 
-  View view(&g);
-  boost::thread view_thread = boost::thread(view);
+	Human human(&g);
+	boost::thread human_thread = boost::thread(human);
 
-  controller_thread.join();
-  return 0;
+	controller_thread.join();
+	return 0;
 }
-

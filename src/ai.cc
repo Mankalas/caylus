@@ -47,3 +47,23 @@ BuildingSmartPtr AI::askBuilding(const std::vector<BuildingSmartPtr>& building_c
 bool AI::askJoustField() const {
   return false;
 }
+
+int AI::askProvostShift() const
+{
+	return 3;
+}
+
+int AI::askWorkerPlacement() const
+{
+	return 2;
+}
+
+unsigned AI::askBuilding() const
+{
+	return 1;
+}
+
+unsigned AI::askResourceChoice() const
+{
+	return 0;
+}
