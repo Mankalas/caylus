@@ -33,26 +33,19 @@ Building::build (Player* current)
   assert(current);
 
   owner_ = current;
-  bool cost_ok = false;
-  if (current)
+  foreach (const ResourceMap cost, cost_)
   {
-    foreach (const ResourceMap cost, cost_)
-    {
-      if (current->resources() >= cost)
-      {
-        cost_ok = true;
-        current->resources() += gain_;
-        current->resources() -= cost;
-        on_build ();
-      }
-    }
+	  if (current->resources() >= cost)
+	  {
+		  current->resources() += gain_;
+		  current->resources() -= cost;
+		  on_build ();
+	  }
+	  else
+	  {
+		  assert(false);  // throw exception -> the player does not have enough resources.
+	  }
   }
-
-  if (!cost_ok)
-  {
-    throw new int(); // throw exception -> the player does not have enough resources.
-  }
-
 }
 
 void

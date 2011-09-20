@@ -22,14 +22,14 @@ Gate::Gate(GameEngine* ge)
 void Gate::on_activate()
 {
   BuildingSmartPtr building;
-  int choice = 0;
+  //int choice = 0;
 
   std::cout << *game_ << std::endl;
   try
   {
-    while (worker_)
+	  /*while (worker_)
     {
-      choice = ConsoleUI::inst()->getBuilding(game_->road(), false);
+	    choice = ConsoleUI::inst()->getBuilding(game_->road(), false);
       if (choice == -1)
       {
         if (game_->addToCastle(worker_))
@@ -43,7 +43,8 @@ void Gate::on_activate()
         building->worker_set(*worker_);
         worker_ = NULL;
       }
-    }
+      }*/
+	  worker_->askWorkerPlacement();
   }
   catch(OccupiedBuildingEx*)
   {

@@ -14,21 +14,25 @@
 # include "building.hh"
 # include "game-engine.hh"
 
-class OmniscientBuilding : virtual public Building
+namespace controller
 {
-  protected:
-    OmniscientBuilding(GameEngine* ge);
 
-    GameEngine* game_;
+	class OmniscientBuilding : virtual public Building
+	{
+	protected:
+		OmniscientBuilding(GameEngine* ge);
 
-  public:
-    virtual ~OmniscientBuilding();
+		GameEngine* game_;
 
-    const GameEngine* game() const;
-    GameEngine* game();
-    void game(GameEngine*);
-};
+	public:
+		virtual ~OmniscientBuilding();
 
+		const GameEngine* game() const;
+		GameEngine* game();
+		void game(GameEngine*);
+	};
+
+}
 # include "omniscient-building.hxx"
 
 #endif //OMNISCIENT_BUILDING_HH

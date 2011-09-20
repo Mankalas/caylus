@@ -12,6 +12,8 @@
 # include <boost/assign/list_of.hpp>
 # include "resource.hh"
 
+using namespace controller;
+
 inline const std::list<Resource>&
 Resource::list ()
 {

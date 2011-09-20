@@ -41,7 +41,8 @@ TradeBuilding::on_activate ()
               << ex.second << std::endl;
   }
 
-  if (0 == (choice = ConsoleUI::inst()->askChoice(0, choice - 1)))
+  choice = ask_resource_choice_();
+  if (0 == choice)
     return;
 
   const std::pair<ResourceMap, ResourceMap>& exchange = exchanges[choice - 1];

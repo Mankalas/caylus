@@ -11,6 +11,9 @@
 
 # include "player.hh"
 
+using namespace controller;
+using namespace view;
+
 inline ResourceMap& Player::resources()
 {
   return resources_;
@@ -106,6 +109,38 @@ inline std::ostream& operator<<(std::ostream& o, const Player& player)
   o << "Player " << player.name() << " - " << player.resources()
     << " - Workers left : " << player.workers();
   return o;
+}
+
+inline
+const View *Player::view() const
+{
+	return view_;
+}
+
+inline
+View *Player::view()
+{
+	return view_;
+}
+
+inline
+void Player::setView(View* view)
+{
+	view_ = view;
+	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
+	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
+}
+
+inline
+int Player::askProvostShift() const
+{
+	return ask_provost_shift_signal_();
+}
+
+inline
+int Player::askWorkerPlacement() const
+{
+	return ask_worker_placement_signal_();
 }
 
 #endif //PLAYER_HXX

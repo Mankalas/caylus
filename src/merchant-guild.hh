@@ -12,12 +12,16 @@
 
 # include "omniscient-building.hh"
 
-class MerchantGuild : public OmniscientBuilding
+namespace controller
 {
-  public:
-    MerchantGuild(GameEngine* ge);
 
-    virtual void on_activate(void);
-};
+	class MerchantGuild : public OmniscientBuilding
+	{
+	public:
+		MerchantGuild(GameEngine* ge);
 
+		virtual void on_activate(void);
+	};
+
+}
 #endif /* !MERCHANT_GUILD_HH_ */

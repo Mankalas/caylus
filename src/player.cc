@@ -8,6 +8,8 @@
 
 #include "player.hh"
 
+using namespace controller;
+
 Player::Player():
   favor_building_(0),
   favor_resource_(0),

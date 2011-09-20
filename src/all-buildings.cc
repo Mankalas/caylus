@@ -8,6 +8,8 @@
 
 #include "all-buildings.hh"
 
+using namespace controller;
+
 Statue::Statue ()
   : Building("Statue",
              BuildingType::prestige,

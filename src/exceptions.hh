@@ -11,33 +11,37 @@
 #ifndef EXCEPTIONS_HH
 # define EXCEPTIONS_HH
 
-class Exception
+namespace controller
 {
 
-};
+	class Exception
+	{
 
-class NotEnoughDenierEx : public Exception
-{
-};
+	};
 
-class OccupiedBuildingEx : public Exception
-{
-};
+	class NotEnoughDenierEx : public Exception
+	{
+	};
 
-class UnactivableBuildingEx : public Exception
-{
-};
+	class OccupiedBuildingEx : public Exception
+	{
+	};
 
-class NoBuildingEx : public Exception
-{
-};
+	class UnactivableBuildingEx : public Exception
+	{
+	};
 
-class MemAllocError : public Exception
-{
-};
+	class NoBuildingEx : public Exception
+	{
+	};
 
-class ImageNotFound : public Exception
-{
-};
+	class MemAllocError : public Exception
+	{
+	};
 
+	class ImageNotFound : public Exception
+	{
+	};
+
+}
 #endif //EXCEPTIONS_HH

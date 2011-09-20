@@ -11,6 +11,8 @@
 
 # include "enum-object.hh"
 
+using namespace controller;
+
 template <typename Exact>
 unsigned EnumObject<Exact>::ids_ = 0;
 

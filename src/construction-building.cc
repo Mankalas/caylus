@@ -11,6 +11,8 @@
 #include "construction-building.hh"
 #include "console-ui.hh"
 
+using namespace controller;
+
 ConstructionBuilding::~ConstructionBuilding()
 {
 }
@@ -25,12 +27,12 @@ ConstructionBuilding::ConstructionBuilding(GameEngine* ge, const BuildingType& c
 
 void ConstructionBuilding::on_activate()
 {
-  unsigned i = 1;
+	//  unsigned i = 1;
   unsigned choice = 0;
 
   std::map<unsigned, BuildingSmartPtr> building_choice;
 
-  std::cout << "0. Pass" << std::endl;
+  /*std::cout << "0. Pass" << std::endl;
   foreach (const BuildingSmartPtr& building, game_->buildings())
   {
     if (building->type() == construc_type)
@@ -39,11 +41,17 @@ void ConstructionBuilding::on_activate()
       building_choice[i++] = building;
     }
   }
-  choice = ConsoleUI::inst()->askChoice(0, building_choice.size() + 1);
+  choice = ConsoleUI::inst()->askChoice(0, building_choice.size() + 1);*/
+  choice = ask_building_signal_();
   if (choice == 0)
     return;
   else
     game_->build(*(std::find(game_->buildings().begin(),
                              game_->buildings().end(),
                              building_choice[choice])), worker_);
+}
+
+void ConstructionBuilding::on_build()
+{
+	ask_building_signal_.connect(owner_->view()->getAskBuildingSlot());
 }

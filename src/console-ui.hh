@@ -13,34 +13,26 @@
 
 # include <string>
 # include <vector>
-# include "resource-map.hh"
 # include "user-interface.hh"
 
-class Road;
-
-class ConsoleUI : public UserInterface
+namespace view
 {
-public:
-  static ConsoleUI* inst();
+	class ConsoleUI : public UserInterface
+	{
+	public:
 
-  int askProvostShift() const;
-  int askChoice(int, int) const;
-  int askChoice(std::vector<int>&) const;
+		int askProvostShift() const;
+		int askChoice(int, int) const;
+		int askChoice(std::vector<int>&) const;
 
-  // Inherited from UserInterface
-  virtual void showMessage(const std::string) const;
-  virtual int getInt() const;
-  virtual std::string getString() const;
-  virtual int getBuilding(const Road&, bool = true) const;
-  virtual std::string askName() const;
-  virtual int askWorkerPlacement(const Road&, bool = true) const;
-  virtual ResourceMap askResources(const ResourceMap& choices) const;
-  virtual bool askYesNo() const;
+		virtual void showMessage(const std::string) const;
+		virtual int getInt() const;
+		virtual std::string getString() const;
+		virtual std::string askName() const;
+		virtual bool askYesNo() const;
 
-private:
-  static ConsoleUI* instance_;
+	};
 
-  ConsoleUI();
-};
+}
 
 #endif //CONSOLE_UI_HH

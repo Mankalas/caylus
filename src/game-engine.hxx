@@ -12,6 +12,9 @@
 # define GAME_ENGINE_HXX
 
 # include "game-engine.hh"
+# include "player.hh"
+
+using namespace controller;
 
 inline const std::vector<BuildingSmartPtr>& GameEngine::buildings() const
 {
@@ -119,24 +122,6 @@ inline boost::condition_variable*
 GameEngine::disconnectViews()
 {
   return &disconnect_views_;
-}
-
-inline void
-GameEngine::connectNbHumansSignal(GameEngine::nb_humans_signal_t::slot_function_type subscriber)
-{
-  ask_nb_humans_.connect(subscriber);
-}
-
-inline void
-GameEngine::connectNbAIsSignal(GameEngine::nb_ais_signal_t::slot_function_type subscriber)
-{
-  ask_nb_ais_.connect(subscriber);
-}
-
-inline void
-GameEngine::subscribe(View* view)
-{
-  views_.push_back(view);
 }
 
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)

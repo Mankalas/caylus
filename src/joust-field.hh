@@ -13,12 +13,16 @@
 
 # include "building.hh"
 
-class JoustField : public Building
+namespace controller
 {
-  public:
-    JoustField();
-  virtual void on_activate(void);
-};
 
+	class JoustField : public Building
+	{
+	public:
+		JoustField();
+		virtual void on_activate(void);
+	};
+
+}
 
 #endif //JOUST_FIELD_HH

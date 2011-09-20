@@ -12,22 +12,31 @@
 
 # include "omniscient-building.hh"
 
-/** \brief It represents all the buildings that, when activated, allow
- * the worker to contruct new buildings. The constructor takes one
- * additional argument: the type of building the worker is allowed to
- * build.
- */
-class ConstructionBuilding : public OmniscientBuilding
+namespace controller
 {
-  public:
-    virtual ~ConstructionBuilding();
 
-    const BuildingType construc_type;
+	/** \brief It represents all the buildings that, when activated, allow
+	 * the worker to contruct new buildings. The constructor takes one
+	 * additional argument: the type of building the worker is allowed to
+	 * build.
+	 */
+	class ConstructionBuilding : public OmniscientBuilding
+	{
+	public:
+		virtual ~ConstructionBuilding();
 
-  protected:
-    ConstructionBuilding(GameEngine* ge, const BuildingType& construc_type);
+		const BuildingType construc_type;
 
-    virtual void on_activate ();
-};
+	protected:
+		ConstructionBuilding(GameEngine* ge, const BuildingType& construc_type);
 
+		virtual void on_activate ();
+		boost::signal<unsigned (void)> ask_building_signal_;
+
+	private:
+		virtual void on_build();
+
+	};
+
+}
 #endif //CONSTRUCTION_BUILDING_HH

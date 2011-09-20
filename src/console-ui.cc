@@ -13,17 +13,8 @@
 #include "player.hh"
 #include "road.hh"
 
-ConsoleUI* ConsoleUI::instance_ = NULL;
-
 ConsoleUI::ConsoleUI()
 {}
-
-ConsoleUI* ConsoleUI::inst()
-{
-  if (instance_ == NULL)
-    instance_ = new ConsoleUI();
-  return instance_;
-}
 
 int ConsoleUI::askChoice(int from, int to) const
 {
@@ -83,7 +74,7 @@ std::string ConsoleUI::getString() const
   return result;
 }
 
-int ConsoleUI::getBuilding(const Road& road, bool bridge) const
+/*int ConsoleUI::getBuilding(const Road& road, bool bridge) const
 {
   int i = -1;
   std::vector<int> choices = std::vector<int>();
@@ -99,7 +90,7 @@ int ConsoleUI::getBuilding(const Road& road, bool bridge) const
   if (bridge)
     choices.push_back(34);
   return askChoice(choices);
-}
+  }*/
 
 std::string ConsoleUI::askName() const
 {
@@ -113,18 +104,18 @@ int ConsoleUI::askProvostShift() const
   return askChoice(-3, 3);
 }
 
-int ConsoleUI::askWorkerPlacement(const Road& road, bool bridge) const
+/*int ConsoleUI::askWorkerPlacement(const Road& road, bool bridge) const
 {
   showMessage("Please place worker");
   return getBuilding(road, bridge);
-}
+  }
 
 ResourceMap ConsoleUI::askResources(const ResourceMap& choices) const
 {
   //int i = choices[Resource::gold];
   showMessage("Your must pick in your ressources");
   return ResourceMap(choices);
-}
+  }*/
 
 bool ConsoleUI::askYesNo() const {
   showMessage("Yes / No (1 / 0)");

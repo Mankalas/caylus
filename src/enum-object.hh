@@ -13,46 +13,51 @@
 # include <string>
 # include <list>
 
-/** \brief It is made to be used as the base class to any enum
- * object. It uses static inheritance: the Exact template type
- * corresponds to the real derived type.
- *
- * The main idea is simple: with a static unsigned attribute, each
- * created instance has a unique id. As each usual comparison operator
- * is declared, they can be easily compared (in a switch statement) or
- * used as keys in standard containers.
- *
- * The constructor takes a string which is the name each enum field
- * will use when printed by operator <<.
- *
- * The way instances can be copied (or not) has to be defined in
- * derived classes.
- *
- */
-template <typename Exact>
-class EnumObject
+namespace controller
 {
-public:
-  bool operator <  (const EnumObject& elt) const;
-  bool operator >  (const EnumObject& elt) const;
-  bool operator <= (const EnumObject& elt) const;
-  bool operator >= (const EnumObject& elt) const;
-  bool operator == (const EnumObject& elt) const;
-  bool operator != (const EnumObject& elt) const;
 
-  const std::string& name () const;
+	/** \brief It is made to be used as the base class to any enum
+	 * object. It uses static inheritance: the Exact template type
+	 * corresponds to the real derived type.
+	 *
+	 * The main idea is simple: with a static unsigned attribute, each
+	 * created instance has a unique id. As each usual comparison operator
+	 * is declared, they can be easily compared (in a switch statement) or
+	 * used as keys in standard containers.
+	 *
+	 * The constructor takes a string which is the name each enum field
+	 * will use when printed by operator <<.
+	 *
+	 * The way instances can be copied (or not) has to be defined in
+	 * derived classes.
+	 *
+	 */
+	template <typename Exact>
+	class EnumObject
+	{
+	public:
+		bool operator <  (const EnumObject& elt) const;
+		bool operator >  (const EnumObject& elt) const;
+		bool operator <= (const EnumObject& elt) const;
+		bool operator >= (const EnumObject& elt) const;
+		bool operator == (const EnumObject& elt) const;
+		bool operator != (const EnumObject& elt) const;
 
-protected:
-  EnumObject (const std::string& name);
+		const std::string& name () const;
 
-  static unsigned ids_;
+	protected:
+		EnumObject (const std::string& name);
 
-  std::string name_;
-  unsigned id_;
-};
+		static unsigned ids_;
+
+		std::string name_;
+		unsigned id_;
+	};
+
+}
 
 template <typename Exact>
-std::ostream& operator << (std::ostream&, const EnumObject<Exact>&);
+std::ostream& operator << (std::ostream&, const controller::EnumObject<Exact>&);
 
 #include "enum-object.hxx"
 

@@ -11,29 +11,33 @@
 
 # include "building.hh"
 
-/** \brief It represents all the buildings that, when activated, give
- * resources to the worker. The constructor takes two additional
- * arguments:
- *   - worker_choices: this is a vector containing the different
- *     resources the worker can gain while working on the building.
- *   - owner_choices: this is a vector containing the different
- *     resources the owner can gain while somebody else work on the
- *     building.
- */
-class ProductionBuilding : public virtual Building
+namespace controller
 {
-  public:
-    virtual ~ProductionBuilding();
 
-    const std::vector<ResourceMap> owner_choices_;
-    const std::vector<ResourceMap> worker_choices_;
+	/** \brief It represents all the buildings that, when activated, give
+	 * resources to the worker. The constructor takes two additional
+	 * arguments:
+	 *   - worker_choices: this is a vector containing the different
+	 *     resources the worker can gain while working on the building.
+	 *   - owner_choices: this is a vector containing the different
+	 *     resources the owner can gain while somebody else work on the
+	 *     building.
+	 */
+	class ProductionBuilding : public virtual Building
+	{
+	public:
+		virtual ~ProductionBuilding();
 
-  protected:
-    ProductionBuilding (const std::vector<ResourceMap>& wchoice,
-			const std::vector<ResourceMap>& ochoice);
+		const std::vector<ResourceMap> owner_choices_;
+		const std::vector<ResourceMap> worker_choices_;
 
-    virtual void on_activate ();
-};
+	protected:
+		ProductionBuilding (const std::vector<ResourceMap>& wchoice,
+		                    const std::vector<ResourceMap>& ochoice);
 
+		virtual void on_activate ();
+	};
+
+}
 
 #endif /* !PRODUCTION_BUILDING_HH_ */

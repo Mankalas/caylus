@@ -12,31 +12,36 @@
 # include <vector>
 # include "building.hh"
 
-class GameEngine;
-
-class Road
+namespace controller
 {
-  public:
-    Road (GameEngine* ge);
 
-    const std::vector<BuildingSmartPtr>& get () const;
+	class GameEngine;
 
-    BuildingSmartPtr& operator [] (unsigned i);
-    const BuildingSmartPtr& operator [] (unsigned i) const;
+	class Road
+	{
+	public:
+		Road (GameEngine* ge);
 
-    BuildingSmartPtr& operator [] (const std::string&);
-    const BuildingSmartPtr& operator [] (const std::string&) const;
+		const std::vector<BuildingSmartPtr>& get () const;
 
-    BuildingSmartPtr build (BuildingSmartPtr bd);
-    void clear();
+		BuildingSmartPtr& operator [] (unsigned i);
+		const BuildingSmartPtr& operator [] (unsigned i) const;
 
-  private:
-    std::vector<BuildingSmartPtr> buildings_;
-    /// Because of the GoldMine, we cannot use buildings_.push_back() to
-    /// add a new building. Instead, we use this index to insert the new
-    /// building into the correct slot.
-    unsigned free_slot_;
-};
+		BuildingSmartPtr& operator [] (const std::string&);
+		const BuildingSmartPtr& operator [] (const std::string&) const;
+
+		BuildingSmartPtr build (BuildingSmartPtr bd);
+		void clear();
+
+	private:
+		std::vector<BuildingSmartPtr> buildings_;
+		/// Because of the GoldMine, we cannot use buildings_.push_back() to
+		/// add a new building. Instead, we use this index to insert the new
+		/// building into the correct slot.
+		unsigned free_slot_;
+	};
+
+}
 
 std::ostream& operator<<(std::ostream&, const Road&);
 
