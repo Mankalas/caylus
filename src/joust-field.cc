@@ -27,8 +27,7 @@ void JoustField::on_activate(void)
     std::cout << "Not enough resources. Try again." << std::endl;
     return;
   }
-  worker_->askJoustField();
-  if (worker_->askYesNo())
+  if (ask_proceed_())
   {
     worker_->resources() -= ResourceMap(Resource::denier + Resource::cloth);
     worker_->resources() += Resource::favor;

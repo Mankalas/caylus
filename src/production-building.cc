@@ -30,7 +30,7 @@ ProductionBuilding::on_activate ()
     return;
   }
 
-  unsigned i = 0;
+  //unsigned i = 0;
   /*std::cout << i++ << ". Nothing" << std::endl;
   foreach (ResourceMap r, worker_choices_)
     std::cout << i++ << ". " << r << std::endl;

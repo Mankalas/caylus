@@ -21,6 +21,9 @@ namespace controller
 	public:
 		JoustField();
 		virtual void on_activate(void);
+
+	private:
+		boost::signal<bool (void)> ask_proceed_;
 	};
 
 }

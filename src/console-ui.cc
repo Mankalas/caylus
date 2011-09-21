@@ -13,6 +13,8 @@
 #include "player.hh"
 #include "road.hh"
 
+using namespace std;
+
 ConsoleUI::ConsoleUI()
 {}
 
@@ -22,62 +24,62 @@ int ConsoleUI::askChoice(int from, int to) const
 
   while (choice < from || choice > to)
   {
-    std::cout << "Your choices are : ";
+    cout << "Your choices are : ";
     for (int i = from; i < to; ++i)
-      std::cout << i << ", ";
-    std::cout << to << "." << std::endl;
-    std::cin >> choice;
+      cout << i << ", ";
+    cout << to << "." << endl;
+    cin >> choice;
   }
   return choice;
 }
 
-int ConsoleUI::askChoice(std::vector<int>& choices) const
+int ConsoleUI::askChoice(vector<int>& choices) const
 {
-  std::vector<int>::const_iterator it = choices.end();
+  vector<int>::const_iterator it = choices.end();
   int choice = -42;
 
   while (*it != choice)
   {
-    std::cout << "Your choices are : ";
+    cout << "Your choices are : ";
     foreach (int i, choices)
-      std::cout << i << ", ";
-    std::cout << std::endl;
-    std::cin >> choice;
-    if (!std::cin)
+      cout << i << ", ";
+    cout << endl;
+    cin >> choice;
+    if (!cin)
     {
-      std::cin.clear();
-      std::cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(),'\n');
     }
     else
-      it = std::find(choices.begin(), choices.end(), choice);
+      it = find(choices.begin(), choices.end(), choice);
   }
   return choice;
 }
 
-void ConsoleUI::showMessage(std::string message) const
+void ConsoleUI::showMessage(string message) const
 {
-  std::cout << " ----- " << message
-            << " -----" << std::endl;
+  cout << " ----- " << message
+            << " -----" << endl;
 }
 
 int ConsoleUI::getInt() const
 {
   int result = 0;
-  std::cin >> result;
+  cin >> result;
   return result;
 }
 
-std::string ConsoleUI::getString() const
+string ConsoleUI::getString() const
 {
-  std::string result;
-  std::cin >> result;
+  string result;
+  cin >> result;
   return result;
 }
 
 /*int ConsoleUI::getBuilding(const Road& road, bool bridge) const
 {
   int i = -1;
-  std::vector<int> choices = std::vector<int>();
+  vector<int> choices = vector<int>();
 
   foreach (BuildingSmartPtr b, road.get())
   {
@@ -92,7 +94,7 @@ std::string ConsoleUI::getString() const
   return askChoice(choices);
   }*/
 
-std::string ConsoleUI::askName() const
+string ConsoleUI::askName() const
 {
   showMessage("What's the player's name?");
   return getString();

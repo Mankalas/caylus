@@ -47,6 +47,7 @@ namespace controller
 	private:
 		std::vector<std::pair<ResourceMap, ResourceMap> > createExchangeVector() const;
 
+		boost::signal<unsigned (void)> ask_resource_choice_;
 	};
 
 }
