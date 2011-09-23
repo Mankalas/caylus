@@ -13,16 +13,18 @@
 # include <vector>
 # include <map>
 # include <iostream>
+# include <boost/signal.hpp>
 # include "resource-map.hh"
-# include "user-interface.hh"
-# include "building.hh"
-# include "view.hh"
 
 # define NB_WORKERS 1
 
+namespace view
+{
+	class View;
+}
+
 namespace controller
 {
-	class Road;
 
 	/** \brief A player is an entity that's playing the game. It can be
 	 * either Human or AI.

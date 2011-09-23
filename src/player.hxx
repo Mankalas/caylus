@@ -124,14 +124,6 @@ View *Player::view()
 }
 
 inline
-void Player::setView(View* view)
-{
-	view_ = view;
-	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
-	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
-}
-
-inline
 int Player::askProvostShift() const
 {
 	return ask_provost_shift_signal_();

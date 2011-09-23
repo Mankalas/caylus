@@ -11,10 +11,13 @@
 # define CASTLE_HH
 
 # include <vector>
-# include "player.hh"
+# include <boost/signal.hpp>
 
 namespace controller
 {
+	class Player;
+	class ResourceMap;
+
 	/** A CastlePart is one of the following element of the castle :
 	 * dungeon, walls, towers. Due to their identical behaviour, they are
 	 * generalized with this class. It handles all the counting (prestige,
@@ -143,6 +146,7 @@ namespace controller
 		unsigned part_index_;
 		/// The active part of the Castle.
 		CastlePart* active_part_;
+		boost::signal<ResourceMap * (void)> ask_payment_;
 		///
 		//unsigned prestige_;
 		/// The greatest number of houses built during this activation.
@@ -157,7 +161,7 @@ namespace controller
 		 *
 		 * @return Whether the player can afford a houses or not.
 		 */
-		bool _checkResources(const Player& p) const;
+		bool _checkResources(const Player* p) const;
 
 		/** To ease the choice of the resources the player will use to build
 		 * a house, this method generates a vector with all the possibles
@@ -167,15 +171,15 @@ namespace controller
 		 *
 		 * @return The possible resources combinations.
 		 */
-		std::vector<std::pair<Resource, Resource> >
-		_createResourcesVector(const Player& p) const;
+		/*std::vector<ResourceMap*>
+		  _createResourcesVector(const Player* p) const;*/
 
 		/** Actually build a house.
 		 *
 		 * @param p The player who's building.
 		 * @param resources The two resources used to build the house.
 		 */
-		void _build(Player* p, std::pair<Resource, Resource> resources);
+		void _build(Player* p, ResourceMap *resources);
 	};
 
 }

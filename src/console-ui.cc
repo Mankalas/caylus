@@ -15,9 +15,6 @@
 
 using namespace std;
 
-ConsoleUI::ConsoleUI()
-{}
-
 int ConsoleUI::askChoice(int from, int to) const
 {
   int choice = from - 1;

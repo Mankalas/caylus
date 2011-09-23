@@ -1,22 +1,22 @@
 #include "ai.hh"
 #include "road.hh"
 
-AI::AI(){}
+using namespace std;
+using namespace view;
+using namespace controller;
 
-AI::AI(const std::string& name):
-  Player(name){}
+AI::AI(GameEngine *ge)
+  :View(ge)
+{
+}
 
-std::string AI::askName() const
+string AI::askName() const
 {
   return "toto";
 }
 
-int AI::askProvostShift() const {
-  return 0;
-}
-
-int AI::askWorkerPlacement(const Road& road, bool bridge) const {
-  if ((workers_ == 0 || resources_[Resource::denier] == 0) && bridge)
+int AI::askWorkerPlacement() const {
+  /*if ((workers_ == 0 || resources_[Resource::denier] == 0) && bridge)
     {
       return 34;
     }
@@ -28,20 +28,21 @@ int AI::askWorkerPlacement(const Road& road, bool bridge) const {
 	  return i;
 	}
       i++;
-    }
-  return 34;
+      }*/
+  return 5;
 }
 
-ResourceMap AI::askResources(const ResourceMap& choices) const {
-  return ResourceMap(choices);
+unsigned AI::askResourceChoice(/*const ResourceMap& choices*/) const {
+  return 3;
 }
 
 bool AI::askYesNo() const {
   return true;
-}
+				  }
 
-BuildingSmartPtr AI::askBuilding(const std::vector<BuildingSmartPtr>& building_choices) const {
-  return building_choices[0];
+unsigned AI::askBuilding(/*const vector<BuildingSmartPtr>& building_choices*/) const
+{
+  return 1;
 }
 
 bool AI::askJoustField() const {
@@ -51,19 +52,4 @@ bool AI::askJoustField() const {
 int AI::askProvostShift() const
 {
 	return 3;
-}
-
-int AI::askWorkerPlacement() const
-{
-	return 2;
-}
-
-unsigned AI::askBuilding() const
-{
-	return 1;
-}
-
-unsigned AI::askResourceChoice() const
-{
-	return 0;
 }

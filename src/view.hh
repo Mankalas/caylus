@@ -27,7 +27,7 @@ namespace view
 	{
 	public:
 		View(controller::GameEngine* ge);
-		virtual ~View() = 0;
+		~View();
 
 		virtual std::string askName() const = 0;
 		virtual bool isHuman() const;
@@ -40,13 +40,11 @@ namespace view
 		virtual unsigned askResourceChoice() const = 0;
 
 		boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
-		boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
-		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
+
 		boost::signal<int (void)>::slot_function_type getAskWorkerPlacementSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 
-		void operator()(){};
 
 	protected:
 		const controller::GameEngine* ge_;

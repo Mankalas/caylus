@@ -9,7 +9,7 @@
 
 #include <map>
 #include "construction-building.hh"
-#include "console-ui.hh"
+#include "view.hh"
 
 using namespace controller;
 
@@ -53,5 +53,5 @@ void ConstructionBuilding::on_activate()
 
 void ConstructionBuilding::on_build()
 {
-	ask_building_signal_.connect(owner_->view()->getAskBuildingSlot());
+  ask_building_signal_.connect(owner_->view()->getAskBuildingSlot());
 }

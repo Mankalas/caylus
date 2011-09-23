@@ -30,7 +30,7 @@ namespace view
 		virtual std::string getString() const;
 		virtual std::string askName() const;
 		virtual bool askYesNo() const;
-
+		virtual void updateBoard(/*GameEngine &ge*/) const {};
 	};
 
 }

@@ -7,7 +7,8 @@
 */
 
 #include "player.hh"
-
+#include "view.hh"
+using namespace view;
 using namespace controller;
 
 Player::Player():
@@ -48,4 +49,11 @@ Player::Player(const Player& player):
   resources_(player.resources_),
   residences_(player.residences_)
 {
+}
+
+void Player::setView(View* view)
+{
+  view_ = view;
+  ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
+  ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
 }

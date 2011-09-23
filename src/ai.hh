@@ -19,8 +19,7 @@ namespace view
 	{
 	public:
 
-		AI();
-		AI(const std::string& name);
+		AI(controller::GameEngine *ge);
 
 		virtual std::string askName() const;
 

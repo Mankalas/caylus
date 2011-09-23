@@ -18,7 +18,6 @@
 # include "player.hh"
 # include "road.hh"
 # include "castle.hh"
-# include "user-interface.hh"
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11

@@ -9,7 +9,6 @@
 */
 
 #include "trade-building.hh"
-#include "console-ui.hh"
 
 TradeBuilding::~TradeBuilding()
 {

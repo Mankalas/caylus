@@ -18,7 +18,6 @@
 #include "all-buildings.hh"
 #include "exceptions.hh"
 #include "inn.hh"
-#include "console-ui.hh"
 #include "human.hh"
 #include "ai.hh"
 
@@ -48,7 +47,7 @@ void GameEngine::initialize()
   for (unsigned i = 0; i < nb_humans; ++i)
     {
       //std::cout << "Player's name ?";
-	    //players_.push_back(new Human());
+      //players_.push_back(new Human());
     }
   // Register AI players.
   unsigned nb_ai;
@@ -64,8 +63,8 @@ void GameEngine::initialize()
   for (unsigned i = 0; i < nb_ai; ++i)
     {
       //user_interface_->showMessage("AI's name?");
-	    Player *ai = new Player();
-	    ai->setView(new view::AI());
+      Player *ai = new Player();
+      ai->setView(new view::AI(this));
       players_.push_back(ai);
     }
   // Shuffle players order.
@@ -142,10 +141,10 @@ void GameEngine::activateBridge()
       assert(p);
       deniers = p->resources()[Resource::denier];
       if (deniers == 0)
-      {
-	      //p->userInterface()->showMessage("You're too poor for corruption.");
-	      continue;
-      }
+	{
+	  //p->userInterface()->showMessage("You're too poor for corruption.");
+	  continue;
+	}
 
       shift = p->askProvostShift();
       // If the provost is not moved before the bridge, or over the end
@@ -260,7 +259,7 @@ void GameEngine::_playerMove(Player* p)
 		}
 	    }
 	  else {}
-	    //p->userInterface()->showMessage("Not enough denier to play the castle");
+	  //p->userInterface()->showMessage("Not enough denier to play the castle");
 	}
 
       assert(player_input <= (int)road_.get().size());
@@ -361,19 +360,21 @@ void GameEngine::build(BuildingSmartPtr& building, Player* p)
 
 void GameEngine::subscribeView(View *view)
 {
-	// Only the first player can set the number of other players.
-	if (players_.empty())
-	{
-		ask_nb_humans_.connect(view->getAskNbHumansSlot());
-		ask_nb_ais_.connect(view->getAskNbAIsSlot());
-	}
-	// No need to update the board for AIs.
-	if (view->isHuman())
-	{
-		board_updated_.connect(((Human*)view)->getUpdateBoardSlot());
-	}
-	// New player, linked to the subscribing view.
-	Player *p = new Player();
-	p->setView(view);
-	players_.push_back(p);
+  Human *human = NULL;
+  // Only the first player can set the number of other players.
+  if (players_.empty() && view->isHuman())
+    {
+      human = (Human*)view;
+      ask_nb_humans_.connect(human->getAskNbHumansSlot());
+      ask_nb_ais_.connect(human->getAskNbAIsSlot());
+    }
+  // No need to update the board for AIs.
+  if (view->isHuman())
+    {
+      board_updated_.connect(human->getUpdateBoardSlot());
+    }
+  // New player, linked to the subscribing view.
+  Player *p = new Player();
+  p->setView(view);
+  players_.push_back(p);
 }

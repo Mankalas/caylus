@@ -8,7 +8,6 @@
  */
 
 #include "merchant-guild.hh"
-#include "console-ui.hh"
 
 MerchantGuild::MerchantGuild(GameEngine* ge)
   : Building("Merchant guild",

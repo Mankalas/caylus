@@ -2,6 +2,7 @@
 # define USER_INTERFACE_HH
 
 # include <string>
+# include "game-engine.hh"
 
 namespace view
 {
@@ -18,6 +19,7 @@ namespace view
 		virtual int askProvostShift() const = 0;
 		virtual int askChoice(int, int) const = 0;
 		virtual int askChoice(std::vector<int>&) const = 0;
+		virtual void updateBoard(/*GameEngine &ge*/) const = 0;
 	};
 
 }

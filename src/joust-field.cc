@@ -9,7 +9,6 @@
  */
 
 #include "joust-field.hh"
-#include "console-ui.hh"
 
 JoustField::JoustField()
   : Building("Joust field",

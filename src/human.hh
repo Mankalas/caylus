@@ -32,12 +32,15 @@ namespace view
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
 
-		unsigned askNbHumans(unsigned max);
-		unsigned askNbAIs(unsigned min, unsigned max);
+		unsigned askNbHumans(unsigned max) const;
+		unsigned askNbAIs(unsigned min, unsigned max) const;
 
-		void updateBoard();
+		void updateBoard() const;
 		boost::signal<void (void)>::slot_function_type getUpdateBoardSlot() const;
+		boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
+		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
 
+		void operator()();
 		const UserInterface* userInterface() const;
 		UserInterface* userInterface();
 
