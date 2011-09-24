@@ -137,6 +137,8 @@ namespace controller
 		unsigned provost_;
 		/// Road's index of the building the bailiff is in.
 		unsigned bailiff_;
+		unsigned nb_humans_;
+		unsigned nb_ais_;
 
 		///
 		std::vector<view::View*> views_;
@@ -149,9 +151,8 @@ namespace controller
 		///
 		board_updated_signal_t board_updated_;
 		///
+		boost::condition_variable game_start_;
 		boost::condition_variable waiting_players_;
-		boost::condition_variable waiting_views_;
-		boost::condition_variable disconnect_views_;
 
 
 		/** Actions the player can do when placing his worker.
@@ -193,7 +194,7 @@ namespace controller
 		/** The bailiff moves according to its relative position with the
 		    Prevost.*/
 		void _moveBailiff();
-
+		void _run();
 	};
 
 }

@@ -1,5 +1,5 @@
 #include "ai.hh"
-#include "road.hh"
+#include "game-engine.hh"
 
 using namespace std;
 using namespace view;
@@ -8,6 +8,7 @@ using namespace controller;
 AI::AI(GameEngine *ge)
   :View(ge)
 {
+	ge->subscribeView(this);
 }
 
 string AI::askName() const
@@ -52,4 +53,9 @@ bool AI::askJoustField() const {
 int AI::askProvostShift() const
 {
 	return 3;
+}
+
+bool AI::isHuman() const
+{
+	return false;
 }

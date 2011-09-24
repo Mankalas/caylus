@@ -10,11 +10,6 @@ using namespace controller;
 View::View(GameEngine* ge)
   :ge_(ge)
 {
-  ge->subscribeView(this);
-  //disconnected_ = ge_->disconnectViews();
-  //_connectSignals();
-  cout << "View connecting...\n";
-  ge->waitingViews()->notify_one();
 }
 
 View::~View(){}
@@ -23,7 +18,6 @@ boost::signal<int (void)>::slot_function_type View::getAskProvostShiftSlot() con
 {
 	return boost::bind(&View::askProvostShift, this);
 }
-
 
 boost::signal<int (void)>::slot_function_type View::getAskWorkerPlacementSlot() const
 {
@@ -38,9 +32,4 @@ boost::signal<unsigned (void)>::slot_function_type View::getAskBuildingSlot() co
 boost::signal<unsigned (void)>::slot_function_type View::getResourceChoice() const
 {
 	return boost::bind(&View::askResourceChoice, this);
-}
-
-bool View::isHuman() const
-{
-	return false;
 }

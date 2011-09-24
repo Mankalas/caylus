@@ -30,7 +30,7 @@ namespace view
 		~View();
 
 		virtual std::string askName() const = 0;
-		virtual bool isHuman() const;
+		virtual bool isHuman() const = 0;
 
 		virtual int askProvostShift() const = 0;
 		virtual bool askYesNo() const = 0;

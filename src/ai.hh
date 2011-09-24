@@ -22,7 +22,7 @@ namespace view
 		AI(controller::GameEngine *ge);
 
 		virtual std::string askName() const;
-
+		virtual bool isHuman() const;
 		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;

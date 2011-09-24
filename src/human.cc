@@ -1,6 +1,7 @@
 #include "human.hh"
 
 #include <iostream>
+#include "logger.hh"
 
 using namespace std;
 using namespace view;
@@ -9,6 +10,7 @@ using namespace controller;
 Human::Human(GameEngine* ge)
   :View(ge)
 {
+	ge->subscribeView(this);
 }
 
 Human::~Human()
@@ -38,9 +40,9 @@ bool Human::askJoustField() const {
 
 void Human::operator()()
 {
-  boost::mutex mut;
-  boost::unique_lock<boost::mutex> lock(mut);
-  disconnected_->wait(lock);
+	//  boost::mutex mut;
+	//boost::unique_lock<boost::mutex> lock(mut);
+  //disconnected_->wait(lock);
 }
 
 boost::signal<unsigned (unsigned)>::slot_function_type Human::getAskNbHumansSlot() const
@@ -55,6 +57,7 @@ boost::signal<unsigned (unsigned, unsigned)>::slot_function_type Human::getAskNb
 
 unsigned Human::askNbHumans(unsigned max) const
 {
+	Logger::log("Asking nb humans.");
   unsigned nb_humans = 0;
   while ((cout << "How many humans? (" << max << " max)\n") &&
 	 (!(cin >> nb_humans) || (nb_humans > max)))
