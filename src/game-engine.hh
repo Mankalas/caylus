@@ -24,7 +24,7 @@
 
 namespace view
 {
-	class View;
+	class Human;
 }
 
 namespace controller

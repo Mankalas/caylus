@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	Logger::log("Game engine ready.");
 
 	Human human(&g);
-	g.subscribeView(human);
+	g.subscribeView(&human);
 
 	boost::thread human_thread = boost::thread(human);
 
