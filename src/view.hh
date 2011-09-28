@@ -25,31 +25,31 @@ namespace view
 
 	class View
 	{
-	public:
-		View(controller::GameEngine* ge);
-		~View();
+		public:
+			View(controller::GameEngine *ge);
+			~View();
 
-		virtual std::string askName() const = 0;
-		virtual bool isHuman() const = 0;
+			virtual std::string askName() const = 0;
+			virtual bool isHuman() const = 0;
 
-		virtual int askProvostShift() const = 0;
-		virtual bool askYesNo() const = 0;
-		virtual bool askJoustField() const = 0;
-		virtual int askWorkerPlacement() const = 0;
-		virtual unsigned askBuilding() const = 0;
-		virtual unsigned askResourceChoice() const = 0;
+			virtual int askProvostShift() const = 0;
+			virtual bool askYesNo() const = 0;
+			virtual bool askJoustField() const = 0;
+			virtual int askWorkerPlacement() const = 0;
+			virtual unsigned askBuilding() const = 0;
+			virtual unsigned askResourceChoice() const = 0;
 
-		boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
+			boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
 
-		boost::signal<int (void)>::slot_function_type getAskWorkerPlacementSlot() const;
-		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
-		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
+			boost::signal<int (void)>::slot_function_type getAskWorkerPlacementSlot() const;
+			boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
+			boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 
 
-	protected:
-		const controller::GameEngine* ge_;
-		//		std::vector<controller::GameEngine::connection_t> connections_;
-		boost::condition_variable* disconnected_;
+		protected:
+			const controller::GameEngine *ge_;
+			//		std::vector<controller::GameEngine::connection_t> connections_;
+			boost::condition_variable *disconnected_;
 	};
 
 }

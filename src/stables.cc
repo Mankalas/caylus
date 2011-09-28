@@ -12,55 +12,57 @@
 #include "player.hh"
 #include "exceptions.hh"
 
-Stables::Stables(GameEngine* ge)
-  : Building("Stables",
-	     BuildingType::fixed,
-	     ResourceMap(0),
-	     ResourceMap(0)),
-    OmniscientBuilding(ge)
+Stables::Stables(GameEngine *ge)
+	: Building("Stables",
+	           BuildingType::fixed,
+	           ResourceMap(0),
+	           ResourceMap(0)),
+	OmniscientBuilding(ge)
 {
 }
 
-void Stables::worker_set(Player& current)
+void Stables::worker_set(Player &current)
 {
-  if (players_.size() == 3)
-    throw new OccupiedBuildingEx();
+	if (players_.size() == 3)
+	{
+		throw new OccupiedBuildingEx();
+	}
 
-  players_.insert(players_.begin(), &current);
-  current.workers() -= 1;
+	players_.insert(players_.begin(), &current);
+	current.workers() -= 1;
 
-  std::cout << "STATE OF STABLES : " << std::endl;
-  foreach(const Player* p, players_)
-    std::cout << "\t" << *p << std::endl;
+	std::cout << "STATE OF STABLES : " << std::endl;
+	foreach(const Player * p, players_)
+	std::cout << "\t" << *p << std::endl;
 
-  // If no worker, Building::activate will not call on_activate.
-  worker_ = &current;
+	// If no worker, Building::activate will not call on_activate.
+	worker_ = &current;
 }
 
 void Stables::worker_unset()
 {
-  players_.clear();
+	players_.clear();
 }
 
 void Stables::on_activate()
 {
-  std::cout << "Activating Stables" << std::endl;
-  std::vector<Player*>& order = game_->order();
-  std::vector<Player*>::iterator it;
-  Player* p;
+	std::cout << "Activating Stables" << std::endl;
+	std::vector<Player *>& order = game_->order();
+	std::vector<Player *>::iterator it;
+	Player *p;
 
-  for (unsigned i = 0; i < players_.size(); ++i)
-  {
-    p = players_[i];
-    it = std::find(order.begin(), order.end(), p);
+	for (unsigned i = 0; i < players_.size(); ++i)
+	{
+		p = players_[i];
+		it = std::find(order.begin(), order.end(), p);
 
-    assert(p);
-    assert(it != order.end());
+		assert(p);
+		assert(it != order.end());
 
-    std::cout << "Moving " << *p << std::endl;
-    std::swap(*it, order[i]);
-  }
+		std::cout << "Moving " << *p << std::endl;
+		std::swap(*it, order[i]);
+	}
 
-  // See above.
-  worker_ = 0;
+	// See above.
+	worker_ = 0;
 }

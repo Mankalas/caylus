@@ -16,23 +16,23 @@ ResidentialBuilding::~ResidentialBuilding()
 
 
 ResidentialBuilding::ResidentialBuilding (unsigned deniers)
-  : Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
-    deniers(deniers)
+	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
+	  deniers(deniers)
 {
-  assert (deniers > 0);
+	assert (deniers > 0);
 }
 
 
 void
 ResidentialBuilding::on_build ()
 {
-  assert (owner_);
-  owner_->residences() += deniers;
+	assert (owner_);
+	owner_->residences() += deniers;
 }
 
 void
 ResidentialBuilding::on_demolish ()
 {
-  assert (owner_);
-  owner_->residences() -= deniers;
+	assert (owner_);
+	owner_->residences() -= deniers;
 }

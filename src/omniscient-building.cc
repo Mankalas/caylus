@@ -10,9 +10,9 @@
 
 #include "omniscient-building.hh"
 
-OmniscientBuilding::OmniscientBuilding (GameEngine* ge)
-  : Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
-    game_(ge)
+OmniscientBuilding::OmniscientBuilding (GameEngine *ge)
+	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
+	  game_(ge)
 {
 }
 

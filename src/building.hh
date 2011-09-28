@@ -36,47 +36,47 @@ namespace controller
 	 */
 	class Building
 	{
-	public:
-		virtual ~Building ();
+		public:
+			virtual ~Building ();
 
-		const std::string& name() const;
-		const BuildingType& type() const;
-		const ResourceMap& gain() const;
-		const std::vector<ResourceMap>& cost() const;
+			const std::string &name() const;
+			const BuildingType &type() const;
+			const ResourceMap &gain() const;
+			const std::vector<ResourceMap>& cost() const;
 
-		Player* owner();
-		const Player* owner() const;
+			Player *owner();
+			const Player *owner() const;
 
-		Player* worker();
-		const Player* worker() const;
-		void worker(Player*);
+			Player *worker();
+			const Player *worker() const;
+			void worker(Player *);
 
-		void build(Player* current = 0);
-		virtual void worker_set(Player& current);
-		void activate();
-		virtual void worker_unset();
-		void demolish();
+			void build(Player *current = 0);
+			virtual void worker_set(Player &current);
+			void activate();
+			virtual void worker_unset();
+			void demolish();
 
-	protected:
-		Building (const std::string& name,
-		          const BuildingType& type,
-		          const std::vector<ResourceMap>& cost,
-		          const ResourceMap&  gain);
+		protected:
+			Building (const std::string &name,
+			          const BuildingType &type,
+			          const std::vector<ResourceMap>& cost,
+			          const ResourceMap  &gain);
 
-		const std::string name_;
-		const BuildingType type_;
-		const ResourceMap gain_;
-		const std::vector<ResourceMap> cost_;
-		Player* owner_;
-		Player* worker_;
+			const std::string name_;
+			const BuildingType type_;
+			const ResourceMap gain_;
+			const std::vector<ResourceMap> cost_;
+			Player *owner_;
+			Player *worker_;
 
-		virtual void on_build    ();
-		virtual void on_activate ();
-		virtual void on_demolish ();
+			virtual void on_build    ();
+			virtual void on_activate ();
+			virtual void on_demolish ();
 	};
 
 }
-std::ostream& operator<<(std::ostream&, const controller::Building&);
+std::ostream &operator<<(std::ostream &, const controller::Building &);
 
 typedef boost::shared_ptr<controller::Building> BuildingSmartPtr;
 

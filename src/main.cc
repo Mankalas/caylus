@@ -17,7 +17,7 @@
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 	bool command_line = false;
 	std::string host = "";
@@ -27,19 +27,19 @@ int main(int argc, char** argv)
 	{
 		switch (option)
 		{
-		case 'c' :
-			std::cout << "Command line game." << std::endl;
-			command_line = true;
-			break;
-		case 's' :
-			std::cout << "Server game." << std::endl;
-			break;
-		case 'h' :
-			std::cout << optarg << std::endl;
-			host = std::string(optarg);
-			break;
-		case '?':
-			std::cerr << "Error" << std::endl;
+			case 'c' :
+				std::cout << "Command line game." << std::endl;
+				command_line = true;
+				break;
+			case 's' :
+				std::cout << "Server game." << std::endl;
+				break;
+			case 'h' :
+				std::cout << optarg << std::endl;
+				host = std::string(optarg);
+				break;
+			case '?':
+				std::cerr << "Error" << std::endl;
 		}
 	}
 

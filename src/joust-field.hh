@@ -18,12 +18,12 @@ namespace controller
 
 	class JoustField : public Building
 	{
-	public:
-		JoustField();
-		virtual void on_activate(void);
+		public:
+			JoustField();
+			virtual void on_activate(void);
 
-	private:
-		boost::signal<bool (void)> ask_proceed_;
+		private:
+			boost::signal<bool (void)> ask_proceed_;
 	};
 
 }

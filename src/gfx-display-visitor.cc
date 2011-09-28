@@ -13,13 +13,13 @@
 using namespace gfx;
 using namespace controller;
 
-void DisplayVisitor::operator()(Sprite& sprite)
+void DisplayVisitor::operator()(Sprite &sprite)
 {
-  sf::Sprite sf_sprite = sprite.getSprite();
-  Window::window->Draw(sf_sprite);
+	sf::Sprite sf_sprite = sprite.getSprite();
+	Window::window->Draw(sf_sprite);
 }
 
-void DisplayVisitor::operator()(GameEngine& ge)
+void DisplayVisitor::operator()(GameEngine &ge)
 {
 	std::cout << "DisplayVisitor : " << &ge << std::endl;
 }

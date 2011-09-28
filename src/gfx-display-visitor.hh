@@ -19,24 +19,24 @@
 namespace gfx
 {
 
-  /** \brief This visitor pattern is used to display graphical
-   * objects.
-   *
-   * The Visitor explores miscellaneous objects and uses the
-   * configured graphical library to display them on the game's
-   * screen.
-   */
-  class DisplayVisitor
-  {
-  public:
-    /** \brief Display a Sprite.
-     *	\param	sprite The sprite to display.
-     */
-    void operator()(gfx::Sprite& sprite);
+	/** \brief This visitor pattern is used to display graphical
+	 * objects.
+	 *
+	 * The Visitor explores miscellaneous objects and uses the
+	 * configured graphical library to display them on the game's
+	 * screen.
+	 */
+	class DisplayVisitor
+	{
+		public:
+			/** \brief Display a Sprite.
+			 *	\param	sprite The sprite to display.
+			 */
+			void operator()(gfx::Sprite &sprite);
 
-	  void operator()(controller::GameEngine& game_engine);
+			void operator()(controller::GameEngine &game_engine);
 
-  };
+	};
 
 }
 

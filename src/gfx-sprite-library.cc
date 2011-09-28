@@ -10,10 +10,10 @@
 
 using namespace gfx;
 
-SpriteLibrary* SpriteLibrary::instance_ = NULL;
+SpriteLibrary *SpriteLibrary::instance_ = NULL;
 
 SpriteLibrary::SpriteLibrary()
 {
-  sprites_ = std::map<std::string, Sprite*>();
-  sprites_["board"] = new Sprite("../share/img/board_limited_edition.jpg");
+	sprites_ = std::map<std::string, Sprite *>();
+	sprites_["board"] = new Sprite("../share/img/board_limited_edition.jpg");
 }

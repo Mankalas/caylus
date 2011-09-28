@@ -16,19 +16,19 @@
 
 class Logger
 {
-public:
-	static void log(const std::string& msg)
-	{
-		std::cout << msg << std::endl;
-	}
+	public:
+		static void log(const std::string &msg)
+		{
+			std::cout << msg << std::endl;
+		}
 
-	template <class T>
-	static std::string to_string(const T& t)
-	{
-		std::stringstream ss;
-		ss << t;
-		return ss.str();
-	}
+		template <class T>
+		static std::string to_string(const T &t)
+		{
+			std::stringstream ss;
+			ss << t;
+			return ss.str();
+		}
 };
 
 #endif

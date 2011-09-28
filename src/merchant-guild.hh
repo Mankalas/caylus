@@ -17,10 +17,10 @@ namespace controller
 
 	class MerchantGuild : public OmniscientBuilding
 	{
-	public:
-		MerchantGuild(GameEngine* ge);
+		public:
+			MerchantGuild(GameEngine *ge);
 
-		virtual void on_activate(void);
+			virtual void on_activate(void);
 	};
 
 }

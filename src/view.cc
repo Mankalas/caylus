@@ -7,12 +7,12 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-View::View(GameEngine* ge)
-  :ge_(ge)
+View::View(GameEngine *ge)
+	: ge_(ge)
 {
 }
 
-View::~View(){}
+View::~View() {}
 
 boost::signal<int (void)>::slot_function_type View::getAskProvostShiftSlot() const
 {

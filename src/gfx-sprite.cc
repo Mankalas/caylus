@@ -12,21 +12,25 @@
 #include "exceptions.hh"
 
 gfx::Sprite::Sprite():
-  sprite_(sf::Sprite()),
-  image_(new sf::Image()) {}
+	sprite_(sf::Sprite()),
+	image_(new sf::Image()) {}
 
 gfx::Sprite::Sprite(const std::string file_name)
 {
-  image_ = new sf::Image();
-  if (image_ == NULL)
-    throw new MemAllocError();
-  if (!image_->LoadFromFile(file_name))
-    throw new ImageNotFound();
-  sprite_ = sf::Sprite(*image_);
+	image_ = new sf::Image();
+	if (image_ == NULL)
+	{
+		throw new MemAllocError();
+	}
+	if (!image_->LoadFromFile(file_name))
+	{
+		throw new ImageNotFound();
+	}
+	sprite_ = sf::Sprite(*image_);
 }
 
-gfx::Sprite::Sprite(const gfx::Sprite& copy) :
-  sprite_(copy.sprite_),
-  image_(copy.image_) {}
+gfx::Sprite::Sprite(const gfx::Sprite &copy) :
+	sprite_(copy.sprite_),
+	image_(copy.image_) {}
 
 gfx::Sprite::~Sprite() {}

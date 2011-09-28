@@ -18,34 +18,34 @@ namespace view
 
 	class Human : public View
 	{
-	public:
-		Human(controller::GameEngine* ge);
-		virtual ~Human();
+		public:
+			Human(controller::GameEngine *ge);
+			virtual ~Human();
 
-		virtual std::string askName() const;
-		virtual bool isHuman() const;
+			virtual std::string askName() const;
+			virtual bool isHuman() const;
 
-		virtual int askProvostShift() const;
-		virtual bool askYesNo() const;
-		virtual bool askJoustField() const;
-		virtual int askWorkerPlacement() const;
-		virtual unsigned askBuilding() const;
-		virtual unsigned askResourceChoice() const;
+			virtual int askProvostShift() const;
+			virtual bool askYesNo() const;
+			virtual bool askJoustField() const;
+			virtual int askWorkerPlacement() const;
+			virtual unsigned askBuilding() const;
+			virtual unsigned askResourceChoice() const;
 
-		unsigned askNbHumans(unsigned max) const;
-		unsigned askNbAIs(unsigned min, unsigned max) const;
+			unsigned askNbHumans(unsigned max) const;
+			unsigned askNbAIs(unsigned min, unsigned max) const;
 
-		void updateBoard() const;
-		boost::signal<void (void)>::slot_function_type getUpdateBoardSlot() const;
-		boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
-		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
+			void updateBoard() const;
+			boost::signal<void (void)>::slot_function_type getUpdateBoardSlot() const;
+			boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
+			boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
 
-		void operator()();
-		const UserInterface* userInterface() const;
-		UserInterface* userInterface();
+			void operator()();
+			const UserInterface *userInterface() const;
+			UserInterface *userInterface();
 
-	private:
-		UserInterface* user_interface_;
+		private:
+			UserInterface *user_interface_;
 	};
 
 }

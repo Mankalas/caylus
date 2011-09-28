@@ -19,31 +19,31 @@ namespace controller
 
 	class Road
 	{
-	public:
-		Road (GameEngine* ge);
+		public:
+			Road (GameEngine *ge);
 
-		const std::vector<BuildingSmartPtr>& get () const;
+			const std::vector<BuildingSmartPtr>& get () const;
 
-		BuildingSmartPtr& operator [] (unsigned i);
-		const BuildingSmartPtr& operator [] (unsigned i) const;
+			BuildingSmartPtr &operator [] (unsigned i);
+			const BuildingSmartPtr &operator [] (unsigned i) const;
 
-		BuildingSmartPtr& operator [] (const std::string&);
-		const BuildingSmartPtr& operator [] (const std::string&) const;
+			BuildingSmartPtr &operator [] (const std::string &);
+			const BuildingSmartPtr &operator [] (const std::string &) const;
 
-		BuildingSmartPtr build (BuildingSmartPtr bd);
-		void clear();
+			BuildingSmartPtr build (BuildingSmartPtr bd);
+			void clear();
 
-	private:
-		std::vector<BuildingSmartPtr> buildings_;
-		/// Because of the GoldMine, we cannot use buildings_.push_back() to
-		/// add a new building. Instead, we use this index to insert the new
-		/// building into the correct slot.
-		unsigned free_slot_;
+		private:
+			std::vector<BuildingSmartPtr> buildings_;
+			/// Because of the GoldMine, we cannot use buildings_.push_back() to
+			/// add a new building. Instead, we use this index to insert the new
+			/// building into the correct slot.
+			unsigned free_slot_;
 	};
 
 }
 
-std::ostream& operator<<(std::ostream&, const Road&);
+std::ostream &operator<<(std::ostream &, const Road &);
 
 # include "road.hxx"
 

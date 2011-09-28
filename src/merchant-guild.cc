@@ -9,21 +9,23 @@
 
 #include "merchant-guild.hh"
 
-MerchantGuild::MerchantGuild(GameEngine* ge)
-  : Building("Merchant guild",
-             BuildingType::fixed,
-             ResourceMap(0),
-             ResourceMap(0)),
-    OmniscientBuilding(ge)
+MerchantGuild::MerchantGuild(GameEngine *ge)
+	: Building("Merchant guild",
+	           BuildingType::fixed,
+	           ResourceMap(0),
+	           ResourceMap(0)),
+	OmniscientBuilding(ge)
 {
 }
 
 void MerchantGuild::on_activate()
 {
-  std::cout << *game_ << std::endl;
-  int s = this->worker()->askProvostShift();
-  while (s < -3 || s > 3 || s + game_->provost() < 6 ||
-         s + game_->provost() > 33)
-    s = this->worker()->askProvostShift();
-  game_->provost() += s;
+	std::cout << *game_ << std::endl;
+	int s = this->worker()->askProvostShift();
+	while (s < -3 || s > 3 || s + game_->provost() < 6 ||
+	       s + game_->provost() > 33)
+	{
+		s = this->worker()->askProvostShift();
+	}
+	game_->provost() += s;
 }

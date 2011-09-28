@@ -15,13 +15,13 @@ const BuildingType BuildingType::stone       = BuildingType ("stone");
 const BuildingType BuildingType::residential = BuildingType ("residential");
 const BuildingType BuildingType::prestige    = BuildingType ("prestige");
 
-BuildingType::BuildingType (const BuildingType& r)
-  : EnumObject<BuildingType> (r)
+BuildingType::BuildingType (const BuildingType &r)
+	: EnumObject<BuildingType> (r)
 {
-  this->operator = (r);
+	this->operator = (r);
 }
 
-BuildingType::BuildingType (const std::string& name)
-  : EnumObject<BuildingType> (name)
+BuildingType::BuildingType (const std::string &name)
+	: EnumObject<BuildingType> (name)
 {
 }

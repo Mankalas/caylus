@@ -19,14 +19,14 @@ const Resource Resource::denier   = Resource ("denier");
 const Resource Resource::prestige = Resource ("prestige point");
 const Resource Resource::favor    = Resource ("royal favor");
 
-Resource::Resource (const std::string& name)
-  : EnumObject<Resource> (name)
+Resource::Resource (const std::string &name)
+	: EnumObject<Resource> (name)
 {
-  list_.push_back (*this);
+	list_.push_back (*this);
 }
 
-Resource::Resource (const Resource& r)
-  : EnumObject<Resource> (r)
+Resource::Resource (const Resource &r)
+	: EnumObject<Resource> (r)
 {
-  this->operator = (r);
+	this->operator = (r);
 }

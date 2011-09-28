@@ -19,18 +19,18 @@ namespace view
 {
 	class ConsoleUI : public UserInterface
 	{
-	public:
+		public:
 
-		int askProvostShift() const;
-		int askChoice(int, int) const;
-		int askChoice(std::vector<int>&) const;
+			int askProvostShift() const;
+			int askChoice(int, int) const;
+			int askChoice(std::vector<int>&) const;
 
-		virtual void showMessage(const std::string) const;
-		virtual int getInt() const;
-		virtual std::string getString() const;
-		virtual std::string askName() const;
-		virtual bool askYesNo() const;
-		virtual void updateBoard(/*GameEngine &ge*/) const {};
+			virtual void showMessage(const std::string) const;
+			virtual int getInt() const;
+			virtual std::string getString() const;
+			virtual std::string askName() const;
+			virtual bool askYesNo() const;
+			virtual void updateBoard(/*GameEngine &ge*/) const {};
 	};
 
 }

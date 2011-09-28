@@ -15,7 +15,7 @@ FavorBuilding::~FavorBuilding()
 
 
 FavorBuilding::FavorBuilding()
-  : Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0))
+	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0))
 {
 }
 
@@ -23,7 +23,7 @@ FavorBuilding::FavorBuilding()
 void
 FavorBuilding::on_build ()
 {
-  assert (owner_);
+	assert (owner_);
 
-  // owner_->favor_proceed (); TODO:
+	// owner_->favor_proceed (); TODO:
 }

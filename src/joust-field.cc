@@ -11,24 +11,24 @@
 #include "joust-field.hh"
 
 JoustField::JoustField()
-  : Building("Joust field",
-             BuildingType::fixed,
-             ResourceMap(0),
-             ResourceMap(0))
+	: Building("Joust field",
+	           BuildingType::fixed,
+	           ResourceMap(0),
+	           ResourceMap(0))
 {
 }
 
 void JoustField::on_activate(void)
 {
-  if (worker_->resources()[Resource::denier] < 1 ||
-      worker_->resources()[Resource::cloth] < 1)
-  {
-    std::cout << "Not enough resources. Try again." << std::endl;
-    return;
-  }
-  if (ask_proceed_())
-  {
-    worker_->resources() -= ResourceMap(Resource::denier + Resource::cloth);
-    worker_->resources() += Resource::favor;
-  }
+	if (worker_->resources()[Resource::denier] < 1 ||
+	    worker_->resources()[Resource::cloth] < 1)
+	{
+		std::cout << "Not enough resources. Try again." << std::endl;
+		return;
+	}
+	if (ask_proceed_())
+	{
+		worker_->resources() -= ResourceMap(Resource::denier + Resource::cloth);
+		worker_->resources() += Resource::favor;
+	}
 }
