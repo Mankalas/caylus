@@ -1,10 +1,9 @@
-/*!
-  \file   road.cc
-  \brief  Implementation of Road.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   road.hh
+ * @date   Tue Jan 06 15:15:57 2009
+ * @author Nicuvëo
+ * @brief  Declaration of the road class.
+ */
 
 #include <algorithm>
 #include <cassert>
@@ -70,8 +69,6 @@ Road::build(BuildingSmartPtr bd)
 	assert(free_slot_ < buildings_.size ());
 
 	buildings_[free_slot_++] = bd;
-
-	return bd;
 }
 
 void
