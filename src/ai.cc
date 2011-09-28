@@ -8,7 +8,6 @@ using namespace controller;
 AI::AI(GameEngine *ge)
 	: View(ge)
 {
-	ge->subscribeView(this);
 }
 
 string AI::askName() const

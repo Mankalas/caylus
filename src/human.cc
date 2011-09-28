@@ -10,7 +10,6 @@ using namespace controller;
 Human::Human(GameEngine *ge)
 	: View(ge)
 {
-	ge->subscribeView(this);
 }
 
 Human::~Human()

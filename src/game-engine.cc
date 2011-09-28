@@ -1,5 +1,5 @@
 /**
- * @file   game - engine.cc
+ * @file   game-engine.cc
  * @author  <mankalas@localhost,>
  * @date   Thu Jan 22 13:57:35 2009
  *
@@ -13,9 +13,9 @@
 #include <cmath>
 #include <algorithm>
 #include <boost/bind.hpp>
-#include "game - engine.hh"
+#include "game-engine.hh"
 #include "resource.hh"
-#include "all - buildings.hh"
+#include "all-buildings.hh"
 #include "exceptions.hh"
 #include "inn.hh"
 #include "human.hh"
@@ -32,6 +32,24 @@ void GameEngine::operator() ()
 	waiting_players_.notify_one();
 	Logger::log("Waiting for the game to start...");
 	game_start_.wait(lock);
+
+	// First player.
+	Human *human = players[0]->view();
+	for (unsigned i = 0; i < nb_humans_ - 1; ++i)
+	{
+		Player *p = new Player();
+		p->setView(human);
+		Logger::log("Adding new human.");
+		players_.push_back(p);
+		this->board_updated_.connect(human);
+	}
+	for (unsigned i = 0; i < nb_ais_; ++i)
+	{
+		Player *p = new Player();
+		p->setView(new view::AI(this));
+		Logger::log("Adding new AI.");
+		players_.push_back(p);
+	}
 	Logger::log("HERE WE GO!");
 	initialize();
 	_run();
@@ -362,50 +380,36 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
-void GameEngine::subscribeView(View *view)
+void GameEngine::subscribeView(Human *human)
 {
-	Human *human = NULL;
 	Logger::log("Subcribing view.");
-	/** std::cout << players_.size() << " or " << players_.empty() << " and " << view->isHuman() <<  std::endl; */
 	/**  Only the first player can set the number of other players. */
-	if (players_.empty() && view->isHuman())
+	if (!players_.empty() || !human->isHuman())
 	{
-		Logger::log("GE asks view for players.");
-		unsigned max_players = 5;
-		human = (Human *)view;
-		ask_nb_humans_.connect(human->getAskNbHumansSlot());
-		nb_humans_ = ask_nb_humans_(max_players);
-		Logger::log(Logger::to_string(nb_humans_) + " humans.");
-		ask_nb_ais_.connect(human->getAskNbAIsSlot());
-		/**  Register AI players. */
-		unsigned nb_ais_;
-		if (nb_humans_ > 2)
-		{
-			nb_ais_ = ask_nb_ais_(0, max_players - nb_humans_);
-		}
-		else
-		{
-			nb_ais_ = ask_nb_ais_(2 - nb_humans_, max_players - nb_humans_);
-		}
-		Logger::log(Logger::to_string(nb_ais_) + " ais.");
-		for (unsigned i = 0; i < nb_ais_; ++i)
-		{
-			new view::AI();
-		}
+		return;
 	}
-	/**  No need to update the board for AIs. */
-	if (view->isHuman())
+	Logger::log("GE asks view for players.");
+	unsigned max_players = 5;
+	ask_nb_humans_.connect(human->getAskNbHumansSlot());
+	nb_humans_ = ask_nb_humans_(max_players);
+	Logger::log(Logger::to_string(nb_humans_) + " humans.");
+	ask_nb_ais_.connect(human->getAskNbAIsSlot());
+	/**  Register AI players. */
+	unsigned nb_ais_;
+	if (nb_humans_ > 2)
 	{
-		board_updated_.connect(human->getUpdateBoardSlot());
+		nb_ais_ = ask_nb_ais_(0, max_players - nb_humans_);
 	}
+	else
+	{
+		nb_ais_ = ask_nb_ais_(2 - nb_humans_, max_players - nb_humans_);
+	}
+	Logger::log(Logger::to_string(nb_ais_) + " ais.");
 	/**  New player, linked to the subscribing view. */
 	Player *p = new Player();
-	p->setView(view);
+	p->setView(human);
 	Logger::log("Adding new player.");
 	players_.push_back(p);
-	if (players_.size() == nb_humans_ + nb_ais_)
-	{
-		Logger::log("Releasing the lock on game_start.");
-		game_start_.notify_one();
-	}
+	Logger::log("Releasing the lock on game_start.");
+	game_start_.notify_one();
 }

@@ -46,7 +46,7 @@ namespace controller
 			void connectNbAIsSignal(nb_ais_signal_t::slot_function_type subscriber);
 			void connectBoardUpdatedSignal(board_updated_signal_t::slot_function_type subscriber);
 
-			void subscribeView(view::View *view);
+			void subscribeView(view::Human *human);
 
 			/** Default constructor. */
 			GameEngine();
