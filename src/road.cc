@@ -1,9 +1,10 @@
 /**
  * @file   road.hh
- * @date   Tue Jan 06 15:15:57 2009
  * @author Nicuvëo
- * @brief  Declaration of the road class.
+ * @date   Tue Jan 06 15:15:57 2009
+ * @brief  Implementation of the road class.
  */
+
 
 #include <algorithm>
 #include <cassert>

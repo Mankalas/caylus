@@ -1,11 +1,9 @@
-/*!
-  \file   ai.h
-  \brief  AI declaration
-
-  \author Mankalas
-  \date   2008-12-14
-*/
-
+/**
+ * @file   ai.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Fri Dec 12 16:13:39 2008
+ * @brief  Declaration of the ai class.
+ */
 
 #ifndef AI_HH
 # define AI_HH
@@ -14,7 +12,9 @@
 
 namespace view
 {
-
+	/**
+	 * AI implementation.
+	 */
 	class AI : public View
 	{
 		public:
@@ -32,4 +32,5 @@ namespace view
 	};
 
 }
+
 #endif
