@@ -21,6 +21,8 @@ namespace view
 
 			AI(controller::GameEngine *ge);
 
+		virtual void operator()(){}
+
 			virtual std::string askName() const;
 			virtual bool isHuman() const;
 			virtual int askProvostShift() const;

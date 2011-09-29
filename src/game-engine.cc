@@ -1,10 +1,9 @@
 /**
  * @file   game-engine.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Jan 22 13:57:35 2009
  *
- * @brief  Implementation of GameEngine.
- *
+ * @brief  Implementation of the game-engine class.
  */
 
 #include <iostream>
@@ -34,14 +33,14 @@ void GameEngine::operator() ()
 	game_start_.wait(lock);
 
 	// First player.
-	Human *human = players[0]->view();
+	Human *human = (Human*)players_[0]->view();
 	for (unsigned i = 0; i < nb_humans_ - 1; ++i)
 	{
 		Player *p = new Player();
 		p->setView(human);
 		Logger::log("Adding new human.");
 		players_.push_back(p);
-		this->board_updated_.connect(human);
+		this->board_updated_.connect(human->getUpdateBoardSlot());
 	}
 	for (unsigned i = 0; i < nb_ais_; ++i)
 	{
@@ -315,7 +314,7 @@ void GameEngine::_playerMove(Player *p)
 
 void GameEngine::_startOfTurn()
 {
-	road_.clear();
+	road_.clearWorkers();
 	bridge_.clear();
 	castle_.clear();
 	foreach (Player * p, players_)

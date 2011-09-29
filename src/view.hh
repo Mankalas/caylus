@@ -39,6 +39,8 @@ namespace view
 			virtual unsigned askBuilding() const = 0;
 			virtual unsigned askResourceChoice() const = 0;
 
+		virtual void operator()() = 0;
+
 			boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
 
 			boost::signal<int (void)>::slot_function_type getAskWorkerPlacementSlot() const;

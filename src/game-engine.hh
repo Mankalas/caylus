@@ -1,10 +1,9 @@
 /**
  * @file   game-engine.hh
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Jan 22 14:56:27 2009
  *
- * @brief  Declaration of the GameEmgine class.
- *
+ * @brief  Declaration of the game-engine class.
  */
 
 #ifndef GAMEENGINE_H

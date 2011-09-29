@@ -1,10 +1,10 @@
-/*!
-  \file   enum-object.hh
-  \brief  This file contains EnumObject templated class.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   enum-object.hh
+ * @author Nicuvëo
+ * @date   Tue Jan 6 00:02:38 2009
+ *
+ * @brief  Declaration of the enum-object class.
+ */
 
 #ifndef ENUM_OBJECT_HH_
 # define ENUM_OBJECT_HH_

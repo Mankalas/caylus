@@ -63,7 +63,7 @@ Road::Road (GameEngine *ge)
 	std::cout << "Done." << std::endl;
 }
 
-BuildingSmartPtr
+void
 Road::build(BuildingSmartPtr bd)
 {
 	assert(bd);
@@ -73,7 +73,7 @@ Road::build(BuildingSmartPtr bd)
 }
 
 void
-Road::clear()
+Road::clearWorkers()
 {
 	foreach (BuildingSmartPtr b, buildings_)
 	{
