@@ -42,7 +42,8 @@ void GameEngine::operator() ()
 		players_.push_back(p);
 		this->board_updated_.connect(human->getUpdateBoardSlot());
 	}
-	for (unsigned i = 0; i < nb_ais_; ++i)
+	Logger::log(Logger::to_string(nb_ais_) + Logger::to_string(nb_humans_));
+	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
 		p->setView(new view::AI(this));
@@ -394,7 +395,6 @@ void GameEngine::subscribeView(Human *human)
 	Logger::log(Logger::to_string(nb_humans_) + " humans.");
 	ask_nb_ais_.connect(human->getAskNbAIsSlot());
 	/**  Register AI players. */
-	unsigned nb_ais_;
 	if (nb_humans_ > 2)
 	{
 		nb_ais_ = ask_nb_ais_(0, max_players - nb_humans_);
