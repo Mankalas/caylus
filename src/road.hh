@@ -1,10 +1,9 @@
-/*!
-  \file   road.hh
-  \brief  Declaration of Road.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   road.hh
+ * @date   Tue Jan 06 15:15:57 2009
+ * @author Nicuvëo
+ * @brief  Declaration of the road class.
+ */
 
 #ifndef ROAD_HH_
 # define ROAD_HH_
@@ -17,28 +16,62 @@ namespace controller
 
 	class GameEngine;
 
+	/**
+	 * The road represents the set of cases on which buildings are
+	 * built and manages the placement of a newly built building.
+	 *
+	 */
 	class Road
 	{
-		public:
-			Road (GameEngine *ge);
+	public:
+		/**
+		 * Constructor.
+		 *
+		 * @param ge The GameEngine.
+		 */
+		Road (GameEngine *ge);
 
-			const std::vector<BuildingSmartPtr>& get () const;
+		/**
+		 * Get the vector of the build buildings.
+		 * @return Buildings vector.
+		 */
+		const std::vector<BuildingSmartPtr>& get () const;
 
-			BuildingSmartPtr &operator [] (unsigned i);
-			const BuildingSmartPtr &operator [] (unsigned i) const;
+		/**
+		 * Return the building built at case i
+		 * @param i The index of the case.
+		 *
+		 * @return The building on this case.
+		 */
+		BuildingSmartPtr &operator [] (unsigned i);
+		const BuildingSmartPtr &operator [] (unsigned i) const;
 
-			BuildingSmartPtr &operator [] (const std::string &);
-			const BuildingSmartPtr &operator [] (const std::string &) const;
+		BuildingSmartPtr &operator [] (const std::string &);
+		const BuildingSmartPtr &operator [] (const std::string &) const;
 
-			BuildingSmartPtr build (BuildingSmartPtr bd);
-			void clear();
+		/**
+		 * Place the given building on the road, on the right case.
+		 *
+		 * @param bd The building to be built.
+		 */
+		void build (BuildingSmartPtr bd);
 
-		private:
-			std::vector<BuildingSmartPtr> buildings_;
-			/// Because of the GoldMine, we cannot use buildings_.push_back() to
-			/// add a new building. Instead, we use this index to insert the new
-			/// building into the correct slot.
-			unsigned free_slot_;
+		/**
+		 * Clear the road of all workers.
+		 */
+		void clearWorkers ();
+
+	private:
+		/**
+		 * List of all the buildings built on the road.
+		 */
+		std::vector<BuildingSmartPtr> buildings_;
+		/**
+		 * Because of the GoldMine, we cannot use buildings_.push_back()
+		 * to add a new building. Instead, we use this index to insert the
+		 * new building into the correct slot.
+		 */
+		unsigned free_slot_;
 	};
 
 }
