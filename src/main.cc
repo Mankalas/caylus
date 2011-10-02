@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <boost/thread.hpp>
+#include <stdlib.h>
 #include "game-engine.hh"
 #include "human.hh"
 #include "logger.hh"
@@ -43,7 +44,10 @@ int main(int argc, char **argv)
 		}
 	}
 
-	GameEngine g;
+	int nb_humans = atoi(argv[1]);
+	int nb_ais = atoi(argv[2]);
+
+	GameEngine g(nb_humans, nb_ais);;
 	boost::thread controller_thread = boost::thread(boost::ref(g));
 	Logger::log("Game Engine thread launched.");
 

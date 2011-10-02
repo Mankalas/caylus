@@ -33,25 +33,8 @@ void GameEngine::operator() ()
 	game_start_.wait(lock);
 
 	// First player.
-	Human *human = (Human*)players_[0]->view();
-	for (unsigned i = 0; i < nb_humans_ - 1; ++i)
-	{
-		Player *p = new Player();
-		p->setView(human);
-		Logger::log("Adding new human.");
-		players_.push_back(p);
-		this->board_updated_.connect(human->getUpdateBoardSlot());
-	}
-	Logger::log(Logger::to_string(nb_ais_) + Logger::to_string(nb_humans_));
-	while (players_.size() < nb_ais_ + nb_humans_)
-	{
-		Player *p = new Player();
-		p->setView(new view::AI(this));
-		Logger::log("Adding new AI.");
-		players_.push_back(p);
-	}
-	Logger::log("HERE WE GO!");
-	initialize();
+	//Human *human = (Human*)players_[0]->view();
+
 	_run();
 }
 
@@ -71,6 +54,31 @@ void GameEngine::_run()
 
 void GameEngine::initialize()
 {
+	assert(nb_humans_ <= 5);
+	for (unsigned i = 0; i < nb_humans_; ++i)
+	{
+		Player *p = new Player();
+		Logger::log("Adding new human.");
+		players_.push_back(p);
+
+	}
+	if (nb_humans_ > 1)
+	{
+		assert(nb_ais_ <= 5 - nb_humans_);
+	}
+	else
+	{
+		assert(nb_ais_ > 0);
+	}
+	Logger::log(Logger::to_string(nb_ais_) + Logger::to_string(nb_humans_));
+	while (players_.size() < nb_ais_ + nb_humans_)
+	{
+		Player *p = new Player();
+		p->setView(new view::AI(this));
+		Logger::log("Adding new AI.");
+		players_.push_back(p);
+	}
+	Logger::log("HERE WE GO!");
 	/**  Shuffle players order. */
 	foreach (Player * p, players_)
 	{
@@ -118,6 +126,13 @@ void GameEngine::initialize()
 GameEngine::GameEngine()
 	: road_(this)
 {
+	initialize();
+}
+
+GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
+	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais)
+{
+	initialize();
 }
 
 GameEngine::~GameEngine()
@@ -384,7 +399,7 @@ void GameEngine::subscribeView(Human *human)
 {
 	Logger::log("Subcribing view.");
 	/**  Only the first player can set the number of other players. */
-	if (!players_.empty() || !human->isHuman())
+	/*if (!players_.empty() || !human->isHuman())
 	{
 		return;
 	}
@@ -394,7 +409,7 @@ void GameEngine::subscribeView(Human *human)
 	nb_humans_ = ask_nb_humans_(max_players);
 	Logger::log(Logger::to_string(nb_humans_) + " humans.");
 	ask_nb_ais_.connect(human->getAskNbAIsSlot());
-	/**  Register AI players. */
+	Register AI players.
 	if (nb_humans_ > 2)
 	{
 		nb_ais_ = ask_nb_ais_(0, max_players - nb_humans_);
@@ -404,11 +419,14 @@ void GameEngine::subscribeView(Human *human)
 		nb_ais_ = ask_nb_ais_(2 - nb_humans_, max_players - nb_humans_);
 	}
 	Logger::log(Logger::to_string(nb_ais_) + " ais.");
-	/**  New player, linked to the subscribing view. */
-	Player *p = new Player();
-	p->setView(human);
-	Logger::log("Adding new player.");
-	players_.push_back(p);
-	Logger::log("Releasing the lock on game_start.");
+	New player, linked to the subscribing view. */
+	foreach (Player * p, players_)
+	{
+		if (p->view()->isHuman())
+		{
+			p->setView(human);
+			this->board_updated_.connect(human->getUpdateBoardSlot());
+		}
+	}
 	game_start_.notify_one();
 }

@@ -50,6 +50,9 @@ namespace controller
 			/** Default constructor. */
 			GameEngine();
 
+
+		  GameEngine(unsigned nb_humans, unsigned nb_ais);
+
 			/** Destructor. */
 			~GameEngine();
 
