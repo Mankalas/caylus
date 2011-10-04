@@ -422,7 +422,7 @@ void GameEngine::subscribeView(Human *human)
 	New player, linked to the subscribing view. */
 	foreach (Player * p, players_)
 	{
-		if (p->view()->isHuman())
+		if (p->view() == NULL)
 		{
 			p->setView(human);
 			this->board_updated_.connect(human->getUpdateBoardSlot());
