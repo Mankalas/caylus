@@ -28,7 +28,7 @@ namespace view
 		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
-		virtual BuildingSmartPtr askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const;
+		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement*> buildings) const;
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
 	};

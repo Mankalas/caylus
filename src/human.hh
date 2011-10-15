@@ -1,10 +1,10 @@
-/*!
-  \file   human.h
-  \brief  Human declaration
-
-  \author Mankalas
-  \date   2008-12-14
-*/
+/**
+ * @file   human.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Dec 14 22:20:55 2011
+ *
+ * @brief  Declaration of the human class.
+ */
 
 
 #ifndef HUMAN_HH
@@ -27,7 +27,7 @@ namespace view
 		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
-		virtual BuildingSmartPtr askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const;
+		virtual BoardElement* askWorkerPlacement(const std::vector<BoardElement*> buildings) const;
 
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;

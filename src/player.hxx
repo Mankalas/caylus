@@ -130,7 +130,7 @@ int Player::askProvostShift() const
 }
 
 inline
-BuildingSmartPtr Player::askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const
+BoardElement* Player::askWorkerPlacement(std::vector<BoardElement*> buildings) const
 {
 	return ask_worker_placement_signal_(buildings);
 }

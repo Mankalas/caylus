@@ -19,7 +19,8 @@ resource-map.cc resource-map.hh resource-map.hxx resource.cc		\
 resource.hh resource.hxx road.cc road.hh road.hxx stables.cc		\
 stables.hh trade-building.cc trade-building.hh console-ui.hh		\
 console-ui.cc joust-field.hh joust-field.cc castle.hh castle.cc		\
-castle.hxx human.hh human.cc human.hxx ai.hh ai.cc logger.hh
+castle.hxx human.hh human.cc human.hxx ai.hh ai.cc logger.hh bridge.hh	\
+bridge.hxx bridge.cc board-element.hh board-element.hxx
 #gfx-window.cc gfx-window.hxx gfx-window.hh gfx-sprite.hh gfx-sprite.cc	\
 #gfx-sprite.hxx gfx-sprite-library.cc gfx-sprite-library.hxx		\
 #gfx-sprite-library.hh

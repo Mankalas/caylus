@@ -1,10 +1,10 @@
-/*!
-  \File   Player.h
-  \brief  Player declaration
-
-  \author Mankalas
-  \date   2008-12-14
-*/
+/**
+ * @file   player.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Dec 14 22:03:48 2008
+ *
+ * @brief  Declaration of the player class.
+ */
 
 #ifndef PLAYER_H
 # define PLAYER_H
@@ -15,7 +15,7 @@
 # include <iostream>
 # include <boost/signal.hpp>
 # include "resource-map.hh"
-# include "building.hh"
+# include "board-element.hh"
 
 # define NB_WORKERS 1
 
@@ -65,7 +65,7 @@ namespace controller
 
 		/// Actions.
 		int askProvostShift() const;
-		BuildingSmartPtr askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const;
+		BoardElement* askWorkerPlacement(std::vector<BoardElement*> buildings) const;
 
 	private:
 
@@ -84,7 +84,7 @@ namespace controller
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;
-		boost::signal<BuildingSmartPtr (std::vector<BuildingSmartPtr>)> ask_worker_placement_signal_;
+		boost::signal<BoardElement* (std::vector<BoardElement*>)> ask_worker_placement_signal_;
 	};
 
 }

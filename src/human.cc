@@ -1,3 +1,11 @@
+/**
+ * @file   human.cc
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Dec 14 22:21:10 2011
+ *
+ * @brief  Declaration of the human class.
+ */
+
 #include "human.hh"
 
 #include <iostream>
@@ -104,8 +112,8 @@ boost::signal<void (void)>::slot_function_type Human::getUpdateBoardSlot() const
 	return boost::bind(&Human::updateBoard, this);
 }
 
-BuildingSmartPtr
-Human::askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const
+BoardElement*
+Human::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
 {
 	return buildings[0];//this->user_interface_->askBuilding(buildings);
 }

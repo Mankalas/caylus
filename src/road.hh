@@ -66,7 +66,7 @@ namespace controller
 		 *
 		 * @return Buildings vector.
 		 */
-		std::vector<BuildingSmartPtr> getAvailableBuildingsForPlayer() const;
+		std::vector<BoardElement*> getAvailableBuildingsForPlayer() const;
 
 	private:
 		/**

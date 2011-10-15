@@ -17,6 +17,7 @@
 # include "player.hh"
 # include "road.hh"
 # include "castle.hh"
+# include "bridge.hh"
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11
@@ -50,7 +51,6 @@ namespace controller
 
 		/** Default constructor. */
 		GameEngine();
-
 
 		GameEngine(unsigned nb_humans, unsigned nb_ais);
 
@@ -105,8 +105,8 @@ namespace controller
 		const std::vector<Player *>& order() const;
 		std::vector<Player *>& order();
 
-		const std::vector<Player *>& bridge() const;
-		std::vector<Player *>& bridge();
+		const Bridge& bridge() const;
+		Bridge& bridge();
 
 		const Castle &castle() const;
 		Castle &castle();
@@ -132,10 +132,10 @@ namespace controller
 		std::vector<BuildingSmartPtr> buildings_;
 		/// The "road" on the board of the game.
 		Road road_;
-		/// List of players on the bridge.
-		std::vector<Player *> bridge_;
 		/// List of players at the castle.
 		Castle castle_;
+		/// Bridge
+		Bridge bridge_;
 		/// Road's index of the building the provost is in.
 		unsigned provost_;
 		/// Road's index of the building the bailiff is in.
@@ -168,13 +168,6 @@ namespace controller
 		 * players with the workers, clear the board, etc. */
 		void _startOfTurn();
 
-		/** Add a player to the bridge. Checks whether he is the first and
-		 * give him the bonus denier accordingly.
-		 *
-		 * @param p The player to add.
-		 */
-		void _addToBridge(Player *p);
-
 		/** Check if a player can play at this stage of the game, ie does he
 		 * have enough money or worker.
 		 *
@@ -195,7 +188,7 @@ namespace controller
 		unsigned _getWorkerCost(const Player *p) const;
 
 		/** The bailiff moves according to its relative position with the
-		    Prevost.*/
+				Prevost.*/
 		void _moveBailiff();
 		void _run();
 	};

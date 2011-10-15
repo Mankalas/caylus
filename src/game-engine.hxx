@@ -56,12 +56,12 @@ inline std::vector<Player*>& GameEngine::players()
   return players_;
 }
 
-inline const std::vector<Player*>& GameEngine::bridge() const
+inline const Bridge& GameEngine::bridge() const
 {
   return bridge_;
 }
 
-inline std::vector<Player*>& GameEngine::bridge()
+inline Bridge& GameEngine::bridge()
 {
   return bridge_;
 }
@@ -120,7 +120,7 @@ inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
   o << g.road() << std::endl;
 
   o << "Bridge : ";
-  foreach (const Player* p, g.bridge())
+  foreach (const Player* p, g.bridge().players())
     o << p->name() << " - ";
 
   o << std::endl << g.castle();

@@ -18,7 +18,7 @@ namespace controller
 	class OmniscientBuilding : virtual public Building
 	{
 		public:
-			virtual ~OmniscientBuilding();
+			virtual ~OmniscientBuilding() = 0;
 
 			const GameEngine *game() const;
 			GameEngine *game();

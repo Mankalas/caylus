@@ -151,7 +151,7 @@ void GameEngine::activateBridge()
 	int deniers = 0;
 	int shift = 0;
 
-	foreach (Player * p, bridge_)
+	foreach (Player * p, bridge_.players())
 	{
 		assert(p);
 		deniers = p->resources()[Resource::denier];
@@ -216,7 +216,7 @@ void GameEngine::endOfTurn()
 void GameEngine::placeWorkers()
 {
 	_startOfTurn();
-	while (bridge_.size() != players_.size())
+	while (bridge_.players().size() != players_.size())
 	{
 		foreach (Player *p, order_)
 		{
@@ -245,26 +245,24 @@ bool GameEngine::addToCastle(Player *p)
 void GameEngine::_playerMove(Player *p)
 {
 	bool has_played = false;
-	BuildingSmartPtr player_building;
+	BoardElement * player_choice;
 	unsigned worker_cost = 0;
 
 	while (!has_played)
 	{
-		player_building = p->askWorkerPlacement(road_.getAvailableBuildingsForPlayer());
+		std::vector<BoardElement*> choices = road_.getAvailableBuildingsForPlayer();
+		player_choice = p->askWorkerPlacement(choices);
 
-		//  Players chose the bridge.
-		if (player_building == 34)
+		if (player_choice->isBridge())
 		{
-			_addToBridge(p);
+			bridge_.add(p);
 			has_played = true;
 			return;
 		}
 
 		worker_cost = _getWorkerCost(p);
-		/*Logger::log("wc: " << worker_cost);
-		  Logger::log("input : " << player_building);*/
 
-		if (-1 == player_building)
+		if (player_choice->isCastle())
 		{
 			if (p->resources()[Resource::denier] >= worker_cost)
 			{
@@ -277,8 +275,8 @@ void GameEngine::_playerMove(Player *p)
 			}
 		}
 
-		assert(player_building <= (int)road_.get().size());
-		Building *b = road_.get()[player_building].get();
+		assert(player_choice->isBuilding());
+		Building *b = (Building*)player_choice;
 
 		if (p->resources()[Resource::denier] >= (b->owner() == p ? 1 : worker_cost))
 		{
@@ -326,19 +324,10 @@ void GameEngine::_startOfTurn()
 	}
 }
 
-void GameEngine::_addToBridge(Player *p)
-{
-	if (bridge_.size() == 0)
-	{
-		p->resources() += Resource::denier;
-	}
-	bridge_.push_back(p);
-}
-
 bool GameEngine::_canPlayerPlay(Player *p)
 {
 	// If the player is already on the bridge, he cannot play.
-	if (std::find(bridge_.begin(), bridge_.end(), p) != bridge_.end())
+	if (bridge_.has(p))
 	{
 		return false;
 	}
@@ -346,7 +335,7 @@ bool GameEngine::_canPlayerPlay(Player *p)
 	    p->workers() == 0) 	// No worker left for the player
 	{
 		// Add him to the bridge.
-		_addToBridge(p);
+		bridge_.add(p);
 		return false;
 	}
 	return true;
@@ -360,7 +349,7 @@ unsigned GameEngine::_getWorkerCost(const Player *p) const
 		std::cerr << "The Inn isn't in the right case... returning a cost of 1 by default" << std::endl;
 		return 1;
 	}
-	return (inn->host() == p) ? 1 : bridge_.size() + 1;
+	return (inn->host() == p) ? 1 : bridge_.players().size() + 1;
 }
 
 void GameEngine::build(BuildingSmartPtr &building, Player *p)

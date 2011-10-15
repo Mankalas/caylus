@@ -9,13 +9,15 @@
 #include "exceptions.hh"
 #include "gate.hh"
 #include "console-ui.hh"
+#include "game-engine.hh"
+#include "board-element.hh"
 
 Gate::Gate(GameEngine *ge)
 	: Building("Gate",
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
-	OmniscientBuilding(ge)
+		OmniscientBuilding(ge)
 {
 }
 
@@ -24,15 +26,20 @@ void Gate::on_activate()
 	BuildingSmartPtr building;
 
 	try
-	{
-		building = worker_->askWorkerPlacement(game_.road().getAvailableBuildingsForPlayer());
-	}
+		{
+			BoardElement * player_choice = worker_->askWorkerPlacement(game_->road().getAvailableBuildingsForPlayer());
+			if (!player_choice->isBuilding())
+				{
+					on_activate();
+				}
+			building = BuildingSmartPtr((Building*)player_choice);
+		}
 	catch (OccupiedBuildingEx *)
-	{
-		on_activate();
-	}
+		{
+			on_activate();
+		}
 	catch (UnactivableBuildingEx *)
-	{
-		on_activate();
-	}
+		{
+			on_activate();
+		}
 }

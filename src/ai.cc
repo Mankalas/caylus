@@ -15,8 +15,8 @@ string AI::askName() const
 	return "toto";
 }
 
-BuildingSmartPtr
-AI::askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const
+BoardElement*
+AI::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
 {
 	return buildings[0];
 }
@@ -32,7 +32,7 @@ bool AI::askYesNo() const
 	return true;
 }
 
-unsigned AI::askBuilding(/*const vector<BuildingSmartPtr>& building_choices*/) const
+unsigned AI::askBuilding(/*const vector<BoardElement*>& building_choices*/) const
 {
 	return 1;
 }

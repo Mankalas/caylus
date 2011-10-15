@@ -66,5 +66,10 @@ Building::worker(Player* p)
   worker_ = p;
 }
 
+inline
+bool Building::isBuilding() const
+{
+	return true;
+}
 
 #endif /* !BUILDING_HXX_ */

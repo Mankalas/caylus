@@ -16,6 +16,7 @@
 #include "joust-field.hh"
 #include "inn.hh"
 #include "merchant-guild.hh"
+#include "board-element.hh"
 
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
@@ -83,16 +84,16 @@ Road::clearWorkers()
 	}
 }
 
-std::vector<BuildingSmartPtr>
+std::vector<BoardElement*>
 Road::getAvailableBuildingsForPlayer() const
 {
-	std::vector<BuildingSmartPtr> available_buildings;
+	std::vector<BoardElement*> available_buildings;
 
 	foreach (BuildingSmartPtr b, buildings_)
 	{
 		if (b->worker() == NULL)
 		{
-			available_buildings.push_back(b);
+			available_buildings.push_back((BoardElement*)b.get());
 		}
 	}
 	return available_buildings;
