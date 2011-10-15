@@ -8,6 +8,7 @@
  */
 
 #include "merchant-guild.hh"
+#include "game-engine.hh"
 
 MerchantGuild::MerchantGuild(GameEngine *ge)
 	: Building("Merchant guild",

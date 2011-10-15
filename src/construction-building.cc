@@ -10,6 +10,7 @@
 #include <map>
 #include "construction-building.hh"
 #include "view.hh"
+#include "game-engine.hh"
 
 using namespace controller;
 

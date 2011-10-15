@@ -1,21 +1,19 @@
 /**
  * @file   omniscient-building.hh
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Sun Jan 11 23:34:09 2009
  *
- * @brief
- *
- *
+ * @brief  Declaration of the omniscient-building class.
  */
 
 #ifndef OMNISCIENT_BUILDING_HH
 # define OMNISCIENT_BUILDING_HH
 
 # include "building.hh"
-# include "game-engine.hh"
 
 namespace controller
 {
+	class GameEngine;
 
 	class OmniscientBuilding : virtual public Building
 	{

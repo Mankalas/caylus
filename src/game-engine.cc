@@ -341,6 +341,7 @@ void GameEngine::_startOfTurn()
 		inn->host()->workers() -= 1;
 	}
 }
+
 void GameEngine::_addToBridge(Player *p)
 {
 	if (bridge_.size() == 0)
@@ -398,28 +399,6 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 void GameEngine::subscribeView(Human *human)
 {
 	Logger::log("Subcribing view.");
-	/**  Only the first player can set the number of other players. */
-	/*if (!players_.empty() || !human->isHuman())
-	{
-		return;
-	}
-	Logger::log("GE asks view for players.");
-	unsigned max_players = 5;
-	ask_nb_humans_.connect(human->getAskNbHumansSlot());
-	nb_humans_ = ask_nb_humans_(max_players);
-	Logger::log(Logger::to_string(nb_humans_) + " humans.");
-	ask_nb_ais_.connect(human->getAskNbAIsSlot());
-	Register AI players.
-	if (nb_humans_ > 2)
-	{
-		nb_ais_ = ask_nb_ais_(0, max_players - nb_humans_);
-	}
-	else
-	{
-		nb_ais_ = ask_nb_ais_(2 - nb_humans_, max_players - nb_humans_);
-	}
-	Logger::log(Logger::to_string(nb_ais_) + " ais.");
-	New player, linked to the subscribing view. */
 	foreach (Player * p, players_)
 	{
 		if (p->view() == NULL)

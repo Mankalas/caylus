@@ -104,9 +104,10 @@ boost::signal<void (void)>::slot_function_type Human::getUpdateBoardSlot() const
 	return boost::bind(&Human::updateBoard, this);
 }
 
-int Human::askWorkerPlacement() const
+BuildingSmartPtr
+Human::askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const
 {
-	return 5;
+	return this->user_interface_->askBuilding(buildings);
 }
 
 unsigned Human::askBuilding() const

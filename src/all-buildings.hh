@@ -17,8 +17,6 @@
 # include "trade-building.hh"
 # include "favor-building.hh"
 # include "construction-building.hh"
-# include "omniscient-building.hh"
-# include "player.hh"
 
 enum e_building
 {

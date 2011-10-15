@@ -7,10 +7,11 @@
  *
  */
 
-#include <algorithm>
 #include "stables.hh"
+#include <algorithm>
 #include "player.hh"
 #include "exceptions.hh"
+#include "game-engine.hh"
 
 Stables::Stables(GameEngine *ge)
 	: Building("Stables",

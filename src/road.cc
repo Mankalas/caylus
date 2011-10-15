@@ -83,3 +83,18 @@ Road::clearWorkers()
 		}
 	}
 }
+
+std::vector<BuildingSmartPtr>
+Road::getAvailableBuildings() const
+{
+	std::vector<BuildingSmartPtr> available_buildings;
+
+	foreach (BuildingSmartPtr b, buildings_)
+	{
+		if (b->worker() == NULL)
+		{
+			available_buildings.push_back(b);
+		}
+	}
+	return available_buildings;
+}
