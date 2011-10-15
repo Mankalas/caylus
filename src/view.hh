@@ -41,8 +41,7 @@ namespace view
 		virtual void operator()() = 0;
 
 		boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
-
-		boost::signal<controller::BoardElement* (std::vector<controller::BoardElement*>)>::slot_function_type getAskWorkerPlacementSlot() const;
+		boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*>)>::slot_function_type getAskWorkerPlacementSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 

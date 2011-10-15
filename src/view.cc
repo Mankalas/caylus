@@ -20,7 +20,7 @@ boost::signal<int (void)>::slot_function_type View::getAskProvostShiftSlot() con
 	return boost::bind(&View::askProvostShift, this);
 }
 
-boost::signal<BoardElement* (const std::vector<BoardElement*>)>::slot_function_type View::getAskWorkerPlacementSlot() const
+boost::signal<BoardElement* (const vector<BoardElement*>)>::slot_function_type View::getAskWorkerPlacementSlot() const
 {
 	return boost::bind(&View::askWorkerPlacement, this, _1);
 }

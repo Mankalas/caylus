@@ -1,15 +1,14 @@
-/*!
-  \file   player.hxx
-  \brief  Inline implementation for Player.
-
-  \author Mankalas
-  \date   2009-01-06
-*/
+/**
+ * @file   player.hxx
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Jun 01 23:30:32 2009
+ */
 
 #ifndef PLAYER_HXX
 # define PLAYER_HXX
 
 # include "player.hh"
+# include "exceptions.hh"
 
 using namespace controller;
 using namespace view;
@@ -126,12 +125,20 @@ View *Player::view()
 inline
 int Player::askProvostShift() const
 {
+	if (ask_provost_shift_signal_.empty())
+		{
+			throw new SignalNotConnected();
+		}
 	return ask_provost_shift_signal_();
 }
 
 inline
-BoardElement* Player::askWorkerPlacement(std::vector<BoardElement*> buildings) const
+BoardElement* Player::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
 {
+	if (ask_worker_placement_signal_.empty())
+		{
+			throw new SignalNotConnected();
+		}
 	return ask_worker_placement_signal_(buildings);
 }
 

@@ -17,11 +17,12 @@
 #include "inn.hh"
 #include "merchant-guild.hh"
 #include "board-element.hh"
+#include "logger.hh"
 
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
 {
-	std::cout << "Initializing Road... ";
+	Logger::log("Initializing Road... ");
 	std::vector<Building *> neutral = boost::assign::list_of<Building *>
 	                                  (new NFarm ())
 	                                  (new Forest ())
@@ -60,7 +61,7 @@ Road::Road (GameEngine *ge)
 
 	free_slot_ = 14;
 
-	std::cout << "Done." << std::endl;
+	Logger::log("Done.");
 }
 
 void
@@ -91,7 +92,7 @@ Road::getAvailableBuildingsForPlayer() const
 
 	foreach (BuildingSmartPtr b, buildings_)
 	{
-		if (b->worker() == NULL)
+		if (b != NULL && b->worker() == NULL)
 		{
 			available_buildings.push_back((BoardElement*)b.get());
 		}

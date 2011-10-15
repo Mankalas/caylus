@@ -250,7 +250,7 @@ void GameEngine::_playerMove(Player *p)
 
 	while (!has_played)
 	{
-		std::vector<BoardElement*> choices = road_.getAvailableBuildingsForPlayer();
+		const std::vector<BoardElement*> choices = road_.getAvailableBuildingsForPlayer();
 		player_choice = p->askWorkerPlacement(choices);
 
 		if (player_choice->isBridge())

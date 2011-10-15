@@ -84,7 +84,7 @@ namespace controller
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;
-		boost::signal<BoardElement* (std::vector<BoardElement*>)> ask_worker_placement_signal_;
+		boost::signal<BoardElement* (const std::vector<BoardElement*>)> ask_worker_placement_signal_;
 	};
 
 }

@@ -16,30 +16,42 @@ namespace controller
 
 	class Exception
 	{
-
 	};
 
-	class NotEnoughDenierEx : public Exception
+	class SystemException : public Exception
 	{
 	};
 
-	class OccupiedBuildingEx : public Exception
+	class SignalNotConnected : public SystemException
 	{
 	};
 
-	class UnactivableBuildingEx : public Exception
+	class GameException : public Exception
+	{
+
+	};
+
+	class NotEnoughDenierEx : public GameException
 	{
 	};
 
-	class NoBuildingEx : public Exception
+	class OccupiedBuildingEx : public GameException
 	{
 	};
 
-	class MemAllocError : public Exception
+	class UnactivableBuildingEx : public GameException
 	{
 	};
 
-	class ImageNotFound : public Exception
+	class NoBuildingEx : public GameException
+	{
+	};
+
+	class MemAllocError : public GameException
+	{
+	};
+
+	class ImageNotFound : public GameException
 	{
 	};
 
