@@ -61,6 +61,8 @@ namespace controller
 		 */
 		void clearWorkers ();
 
+		std::vector<BuildingSmartPtr> getAvailableBuildings() const;
+
 	private:
 		/**
 		 * List of all the buildings built on the road.
