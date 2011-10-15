@@ -19,9 +19,9 @@ boost::signal<int (void)>::slot_function_type View::getAskProvostShiftSlot() con
 	return boost::bind(&View::askProvostShift, this);
 }
 
-boost::signal<int (void)>::slot_function_type View::getAskWorkerPlacementSlot() const
+boost::signal<BuildingSmartPtr (std::vector<BuildingSmartPtr>)>::slot_function_type View::getAskWorkerPlacementSlot() const
 {
-	return boost::bind(&View::askWorkerPlacement, this);
+	return boost::bind(&View::askWorkerPlacement, this, _1);
 }
 
 boost::signal<unsigned (void)>::slot_function_type View::getAskBuildingSlot() const

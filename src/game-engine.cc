@@ -245,15 +245,15 @@ bool GameEngine::addToCastle(Player *p)
 void GameEngine::_playerMove(Player *p)
 {
 	bool has_played = false;
-	int player_input = 0;
+	BuildingSmartPtr player_building;
 	unsigned worker_cost = 0;
 
 	while (!has_played)
 	{
-		player_input = p->askWorkerPlacement();
+		player_building = p->askWorkerPlacement(road_.getAvailableBuildingsForPlayer());
 
 		//  Players chose the bridge.
-		if (player_input == 34)
+		if (player_building == 34)
 		{
 			_addToBridge(p);
 			has_played = true;
@@ -261,10 +261,10 @@ void GameEngine::_playerMove(Player *p)
 		}
 
 		worker_cost = _getWorkerCost(p);
-		Logger::log("wc: " << worker_cost);
-		Logger::log("input : " << player_input);
+		/*Logger::log("wc: " << worker_cost);
+		  Logger::log("input : " << player_building);*/
 
-		if (-1 == player_input)
+		if (-1 == player_building)
 		{
 			if (p->resources()[Resource::denier] >= worker_cost)
 			{
@@ -277,8 +277,8 @@ void GameEngine::_playerMove(Player *p)
 			}
 		}
 
-		assert(player_input <= (int)road_.get().size());
-		Building *b = road_.get()[player_input].get();
+		assert(player_building <= (int)road_.get().size());
+		Building *b = road_.get()[player_building].get();
 
 		if (p->resources()[Resource::denier] >= (b->owner() == p ? 1 : worker_cost))
 		{
@@ -293,18 +293,18 @@ void GameEngine::_playerMove(Player *p)
 			}
 			catch (OccupiedBuildingEx *)
 			{
-				Logger::log("***** " << b->name() << " already occupied.");
+				Logger::log("Already occupied.");
 				return;
 			}
 			catch (UnactivableBuildingEx *)
 			{
-				Logger::log("***** " << b->name() << " does not accept workers.");
+				Logger::log("Does not accept workers.");
 				return;
 			}
 		}
 		else
 		{
-			Logger::log("***** Not enough denier to play ");
+			Logger::log("Not enough denier to play ");
 			return;
 		}
 	}

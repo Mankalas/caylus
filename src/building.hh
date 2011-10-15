@@ -12,6 +12,7 @@
 # include <boost/smart_ptr.hpp>
 # include "resource-map.hh"
 # include "building-type.hh"
+# include "board-element.hh"
 
 namespace controller
 {
@@ -34,7 +35,7 @@ namespace controller
 	 * buildings as derived classes.
 	 *
 	 */
-	class Building
+	class Building : public BoardElement
 	{
 		public:
 			virtual ~Building ();

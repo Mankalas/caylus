@@ -5,7 +5,6 @@
  * @brief  Implementation of the road class.
  */
 
-
 #include <algorithm>
 #include <cassert>
 #include <cstdlib>
@@ -85,7 +84,7 @@ Road::clearWorkers()
 }
 
 std::vector<BuildingSmartPtr>
-Road::getAvailableBuildings() const
+Road::getAvailableBuildingsForPlayer() const
 {
 	std::vector<BuildingSmartPtr> available_buildings;
 

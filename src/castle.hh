@@ -12,6 +12,7 @@
 
 # include <vector>
 # include <boost/signal.hpp>
+# include "board-element.hh"
 
 namespace controller
 {
@@ -91,7 +92,7 @@ namespace controller
 	/** The Castle itself. Contains the players who placed a worker in the
 	 * Castle plus the three Castle Parts (dungeon, walls, towers).
 	 */
-	class Castle
+	class Castle : public BoardElement
 	{
 		public:
 			/** Constructor. */

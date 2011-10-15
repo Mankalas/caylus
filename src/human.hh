@@ -15,7 +15,6 @@
 
 namespace view
 {
-
 	class Human : public View
 	{
 	public:
@@ -28,7 +27,7 @@ namespace view
 		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
-		BuildingSmartPtr askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const;
+		virtual BuildingSmartPtr askWorkerPlacement(std::vector<BuildingSmartPtr> buildings) const;
 
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;

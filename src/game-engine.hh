@@ -20,6 +20,7 @@
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11
+# define INN_CASE 5
 
 namespace view
 {

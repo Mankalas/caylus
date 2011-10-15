@@ -32,7 +32,7 @@ namespace controller
 		Road (GameEngine *ge);
 
 		/**
-		 * Get the vector of the build buildings.
+		 * Get the vector of the built buildings.
 		 * @return Buildings vector.
 		 */
 		const std::vector<BuildingSmartPtr>& get () const;
@@ -49,8 +49,7 @@ namespace controller
 		BuildingSmartPtr &operator [] (const std::string &);
 		const BuildingSmartPtr &operator [] (const std::string &) const;
 
-		/**
-		 * Place the given building on the road, on the right case.
+		/** Build a building on the road.
 		 *
 		 * @param bd The building to be built.
 		 */
@@ -61,7 +60,13 @@ namespace controller
 		 */
 		void clearWorkers ();
 
-		std::vector<BuildingSmartPtr> getAvailableBuildings() const;
+		/**
+		 * Get a list of buildings that a player can pick to place his
+		 * worker. This list contains also the Bridge and the Castle.
+		 *
+		 * @return Buildings vector.
+		 */
+		std::vector<BuildingSmartPtr> getAvailableBuildingsForPlayer() const;
 
 	private:
 		/**
