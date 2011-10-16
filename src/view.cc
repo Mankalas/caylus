@@ -15,12 +15,12 @@ View::View(GameEngine *ge)
 
 View::~View() {}
 
-boost::signal<int (void)>::slot_function_type View::getAskProvostShiftSlot() const
+ProvostShiftSlot View::getAskProvostShiftSlot() const
 {
 	return boost::bind(&View::askProvostShift, this);
 }
 
-boost::signal<BoardElement* (const vector<BoardElement*>)>::slot_function_type View::getAskWorkerPlacementSlot() const
+WorkerPlacementSlot View::getAskWorkerPlacementSlot() const
 {
 	return boost::bind(&View::askWorkerPlacement, this, _1);
 }

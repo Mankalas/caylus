@@ -65,7 +65,7 @@ namespace controller
 
 		/// Actions.
 		int askProvostShift() const;
-		BoardElement* askWorkerPlacement(std::vector<BoardElement*> buildings) const;
+		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> buildings) const;
 
 	private:
 

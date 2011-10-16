@@ -1,13 +1,15 @@
-/*!
-  \file   player.cc
-  \brief  Implementation of Player.
-
-  \author Mankalas
-  \date   2009-01-06
-*/
+/**
+ * @file   player.cc
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Jun 06 19:47:49 2011
+ *
+ * @brief  Implementation of the player class.
+ */
 
 #include "player.hh"
 #include "view.hh"
+#include "logger.hh"
+
 using namespace view;
 using namespace controller;
 
@@ -53,7 +55,21 @@ Player::Player(const Player &player):
 
 void Player::setView(View *view)
 {
+	Logger::log("Poil de cul");
 	view_ = view;
 	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
 	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
+	if (ask_worker_placement_signal_.empty())
+		{
+			Logger::log("FAIL!!!");
+		}
+}
+
+BoardElement* Player::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
+{
+	if (ask_worker_placement_signal_.empty())
+		{
+			throw new SignalNotConnected();
+		}
+	return ask_worker_placement_signal_(buildings);
 }

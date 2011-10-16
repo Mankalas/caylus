@@ -19,6 +19,9 @@ namespace controller
 	class BoardElement;
 }
 
+typedef boost::signal<int (void)>::slot_function_type ProvostShiftSlot;
+typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*>)>::slot_function_type WorkerPlacementSlot;
+
 namespace view
 {
 
@@ -40,17 +43,19 @@ namespace view
 
 		virtual void operator()() = 0;
 
-		boost::signal<int (void)>::slot_function_type getAskProvostShiftSlot() const;
-		boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*>)>::slot_function_type getAskWorkerPlacementSlot() const;
+		ProvostShiftSlot getAskProvostShiftSlot() const;
+		WorkerPlacementSlot getAskWorkerPlacementSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 
 
 	protected:
 		const controller::GameEngine *ge_;
-		//		std::vector<controller::GameEngine::connection_t> connections_;
 		boost::condition_variable *disconnected_;
+
+
 	};
 
 }
+
 #endif

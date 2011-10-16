@@ -132,14 +132,4 @@ int Player::askProvostShift() const
 	return ask_provost_shift_signal_();
 }
 
-inline
-BoardElement* Player::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
-{
-	if (ask_worker_placement_signal_.empty())
-		{
-			throw new SignalNotConnected();
-		}
-	return ask_worker_placement_signal_(buildings);
-}
-
 #endif //PLAYER_HXX
