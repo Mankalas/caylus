@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	boost::mutex mutex;
 	boost::unique_lock<boost::mutex> lock(mutex);
 	Logger::log("GE waiting for init to end.");
-	g.waitingPlayers()->wait(lock);
+	//g.waitingPlayers()->wait(lock);
 	Logger::log("Game engine ready.");
 
 	Human human(&g);

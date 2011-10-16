@@ -11,6 +11,7 @@
 #include "console-ui.hh"
 #include "game-engine.hh"
 #include "board-element.hh"
+#include "logger.hh"
 
 Gate::Gate(GameEngine *ge)
 	: Building("Gate",
@@ -26,20 +27,21 @@ void Gate::on_activate()
 	BuildingSmartPtr building;
 
 	try
+	{
+		Logger::log("Activating Gate.");
+		BoardElement * player_choice = worker_->askWorkerPlacement(game_->road().getAvailableBuildingsForPlayer());
+		if (!player_choice->isBuilding())
 		{
-			BoardElement * player_choice = worker_->askWorkerPlacement(game_->road().getAvailableBuildingsForPlayer());
-			if (!player_choice->isBuilding())
-				{
-					on_activate();
-				}
-			building = BuildingSmartPtr((Building*)player_choice);
+			on_activate();
 		}
+		building = BuildingSmartPtr((Building*)player_choice);
+	}
 	catch (OccupiedBuildingEx *)
-		{
-			on_activate();
-		}
+	{
+		on_activate();
+	}
 	catch (UnactivableBuildingEx *)
-		{
-			on_activate();
-		}
+	{
+		on_activate();
+	}
 }

@@ -29,7 +29,7 @@ namespace view
 	{
 	public:
 		View(controller::GameEngine *ge);
-		~View();
+		virtual ~View();
 
 		virtual std::string askName() const = 0;
 		virtual bool isHuman() const = 0;
@@ -48,10 +48,11 @@ namespace view
 		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
 		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
 
+		boost::condition_variable *disconnected();
 
 	protected:
 		const controller::GameEngine *ge_;
-		boost::condition_variable *disconnected_;
+		boost::condition_variable disconnected_;
 
 
 	};

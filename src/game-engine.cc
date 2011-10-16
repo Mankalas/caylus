@@ -27,8 +27,9 @@ void GameEngine::operator() ()
 {
 	boost::mutex mutex;
 	boost::unique_lock<boost::mutex> lock(mutex);
-	waiting_players_.notify_one();
+	//waiting_players_.notify_one();
 	game_start_.wait(lock);
+//	initialize();
 	_run();
 }
 
@@ -52,9 +53,8 @@ void GameEngine::initialize()
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
 		Player *p = new Player();
-		Logger::log("Adding new human.");
+		Logger::log("Adding new human player.");
 		players_.push_back(p);
-
 	}
 	if (nb_humans_ > 1)
 	{
@@ -67,8 +67,8 @@ void GameEngine::initialize()
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
-		p->setView(new view::AI(this));
-		Logger::log("Adding new AI.");
+		//p->setView(new view::AI(this));
+		Logger::log("Adding new AI player.");
 		players_.push_back(p);
 	}
  	// Shuffle players order.
@@ -76,7 +76,6 @@ void GameEngine::initialize()
 	{
 		order_.push_back(p);
 	}
-	std::random_shuffle(order_.begin(), order_.end());
 	// Give each player his initial denier amount.
 	for (unsigned i = 1; i < players_.size(); i++)
 	{
@@ -365,14 +364,24 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 
 void GameEngine::subscribeView(Human *human)
 {
-	Logger::log("Subcribing view.");
-	foreach (Player * p, players_)
+	Player * p = NULL;
+
+	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
+		Logger::log("Subcribing human view.");
+		p = players_[i];
 		if (p->view() == NULL)
 		{
 			p->setView(human);
 			this->board_updated_.connect(human->getUpdateBoardSlot());
 		}
 	}
+	for (unsigned i = 0; i < nb_ais_; ++i)
+	{
+		Logger::log("Subcribing AI view.");
+		p = players_[nb_humans_ + i];
+		p->setView(new view::AI(this));
+	}
+	std::random_shuffle(order_.begin(), order_.end());
 	game_start_.notify_one();
 }

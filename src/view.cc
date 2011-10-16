@@ -11,6 +11,7 @@ using namespace controller;
 View::View(GameEngine *ge)
 	: ge_(ge)
 {
+
 }
 
 View::~View() {}
@@ -33,4 +34,9 @@ boost::signal<unsigned (void)>::slot_function_type View::getAskBuildingSlot() co
 boost::signal<unsigned (void)>::slot_function_type View::getResourceChoice() const
 {
 	return boost::bind(&View::askResourceChoice, this);
+}
+
+boost::condition_variable *View::disconnected()
+{
+	return &disconnected_;
 }

@@ -55,14 +55,9 @@ Player::Player(const Player &player):
 
 void Player::setView(View *view)
 {
-	Logger::log("Poil de cul");
 	view_ = view;
 	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
 	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
-	if (ask_worker_placement_signal_.empty())
-		{
-			Logger::log("FAIL!!!");
-		}
 }
 
 BoardElement* Player::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
