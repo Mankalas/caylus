@@ -29,6 +29,13 @@ namespace view
 	{
 	public:
 		View(controller::GameEngine *ge);
+		/**
+		 * Copy contructor, in order to avoir compilation errors due to
+		 * the non-copyable propertie of the View's condition_variable.
+		 *
+		 * @param v The copied view.
+		 */
+		View(View &v);
 		virtual ~View();
 
 		virtual std::string askName() const = 0;
@@ -53,8 +60,6 @@ namespace view
 	protected:
 		const controller::GameEngine *ge_;
 		boost::condition_variable disconnected_;
-
-
 	};
 
 }

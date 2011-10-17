@@ -143,9 +143,7 @@ namespace controller
 		unsigned nb_humans_;
 		unsigned nb_ais_;
 
-		///
-		std::vector<view::View *> views_;
-		///
+		/// Used to wait until a view subscribes.
 		boost::mutex mutex_;
 		///
 		nb_humans_signal_t ask_nb_humans_;
@@ -153,10 +151,6 @@ namespace controller
 		nb_ais_signal_t ask_nb_ais_;
 		///
 		board_updated_signal_t board_updated_;
-		///
-		boost::condition_variable game_start_;
-		boost::condition_variable waiting_players_;
-
 
 		/** Actions the player can do when placing his worker.
 		 *

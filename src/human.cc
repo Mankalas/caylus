@@ -51,7 +51,7 @@ void Human::operator()()
 {
 	boost::mutex mut;
 	boost::unique_lock<boost::mutex> lock(mut);
-	disconnected()->wait(lock);
+	disconnected_.wait(lock);
 }
 
 boost::signal<unsigned (unsigned)>::slot_function_type Human::getAskNbHumansSlot() const

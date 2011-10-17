@@ -11,7 +11,11 @@ using namespace controller;
 View::View(GameEngine *ge)
 	: ge_(ge)
 {
+}
 
+View::View(View &v)
+	: ge_(v.ge_)
+{
 }
 
 View::~View() {}

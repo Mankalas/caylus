@@ -106,12 +106,6 @@ GameEngine::mutex()
   return mutex_;
 }
 
-inline boost::condition_variable*
-GameEngine::waitingPlayers()
-{
-  return &waiting_players_;
-}
-
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
 {
   foreach (const Player* p, g.order())
