@@ -12,6 +12,7 @@
 #include "game-engine.hh"
 #include "board-element.hh"
 #include "logger.hh"
+#include "castle.hh"
 
 Gate::Gate(GameEngine *ge)
 	: Building("Gate",
@@ -24,17 +25,30 @@ Gate::Gate(GameEngine *ge)
 
 void Gate::on_activate()
 {
-	BuildingSmartPtr building;
-
 	try
 	{
 		Logger::log("Activating Gate.");
-		BoardElement * player_choice = worker_->askWorkerPlacement(game_->road().getAvailableBuildingsForPlayer());
-		if (!player_choice->isBuilding())
+		BoardElement * player_choice = NULL;
+		std::vector<BoardElement *> choices = game_->road().getAvailableBuildingsForPlayer();
+		choices.push_back(&game_->castle());
+		do
 		{
-			on_activate();
+			player_choice = worker_->askWorkerPlacement(choices);
 		}
-		building = BuildingSmartPtr((Building*)player_choice);
+		while (!player_choice->isBuilding() || !player_choice->isCastle());
+		if (player_choice->isBuilding())
+		{
+			Logger::log("Gate activated for Building.\n");
+			Building * building = dynamic_cast<Building*>(player_choice);
+			Logger::log(building->name());
+		}
+		else
+		{
+			Logger::log("Gate activated for Castle.\n");
+			Castle * castle = dynamic_cast<Castle*>(player_choice);
+			castle->add(worker_);
+		}
+
 	}
 	catch (OccupiedBuildingEx *)
 	{

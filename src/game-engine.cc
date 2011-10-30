@@ -34,6 +34,7 @@ void GameEngine::_run()
 {
 	while (true)
 	{
+		_startOfTurn();
 		collectIncome();
 		placeWorkers();
 		activateSpecialBuildings();
@@ -66,6 +67,7 @@ void GameEngine::initialize()
 	{
 		Player *p = new Player();
 		Logger::log("Adding new AI player.");
+		p->setName("HAL");
 		players_.push_back(p);
 	}
 
@@ -202,7 +204,6 @@ void GameEngine::endOfTurn()
 
 void GameEngine::placeWorkers()
 {
-	_startOfTurn();
 	while (bridge_.players().size() != players_.size())
 	{
 		foreach (Player *p, order_)
@@ -232,7 +233,7 @@ bool GameEngine::addToCastle(Player *p)
 void GameEngine::_playerMove(Player *p)
 {
 	bool has_played = false;
-	BoardElement * player_choice;
+	const BoardElement * player_choice;
 	unsigned worker_cost = 0;
 
 	while (!has_played)

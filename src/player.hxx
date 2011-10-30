@@ -68,6 +68,11 @@ inline const std::string& Player::name() const
   return name_;
 }
 
+inline void Player::setName(const std::string name)
+{
+	name_ = name;
+}
+
 inline void Player::setPrestige(int new_var)
 {
   prestige_ = new_var;

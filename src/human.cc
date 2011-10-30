@@ -113,7 +113,7 @@ boost::signal<void (void)>::slot_function_type Human::getUpdateBoardSlot() const
 }
 
 BoardElement*
-Human::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
+Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	return buildings[0];//this->user_interface_->askBuilding(buildings);
 }

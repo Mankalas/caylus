@@ -21,12 +21,13 @@ MerchantGuild::MerchantGuild(GameEngine *ge)
 
 void MerchantGuild::on_activate()
 {
+	assert(worker_);
 	std::cout << *game_ << std::endl;
-	int s = this->worker()->askProvostShift();
+	int s = worker_->askProvostShift();
 	while (s < -3 || s > 3 || s + game_->provost() < 6 ||
 	       s + game_->provost() > 33)
 	{
-		s = this->worker()->askProvostShift();
+		s = worker_->askProvostShift();
 	}
 	game_->provost() += s;
 }

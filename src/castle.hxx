@@ -111,12 +111,6 @@ CastlePart* Castle::towers()
   return parts_[2];
 }
 
-inline
-bool Castle::isCastle() const
-{
-	return true;
-}
-
 inline std::ostream& operator<<(std::ostream& o, const Castle& c)
 {
   o << "Castle : ";

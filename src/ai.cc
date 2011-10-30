@@ -1,6 +1,9 @@
 #include "ai.hh"
 #include "game-engine.hh"
-
+#include "logger.hh"
+#include "building.hh"
+#include <time.h>
+#include <stdlib.h>
 using namespace std;
 using namespace view;
 using namespace controller;
@@ -8,6 +11,7 @@ using namespace controller;
 AI::AI(GameEngine *ge)
 	: View(ge)
 {
+	srand(time(NULL));
 }
 
 string AI::askName() const
@@ -16,9 +20,11 @@ string AI::askName() const
 }
 
 BoardElement*
-AI::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
+AI::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
-	return buildings[0];
+	int choice = rand() % buildings.size();
+	Logger::log(Logger::to_string(choice));
+	return buildings[choice];
 }
 
 

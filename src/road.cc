@@ -94,7 +94,11 @@ Road::getAvailableBuildingsForPlayer() const
 	{
 		if (b != NULL && b->worker() == NULL)
 		{
-			available_buildings.push_back((BoardElement*)b.get());
+			BoardElement * board_element = (BoardElement*)b.get();
+			if (board_element != NULL)
+			{
+				available_buildings.push_back(board_element);
+			}
 		}
 	}
 	return available_buildings;

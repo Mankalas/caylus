@@ -51,6 +51,7 @@ namespace controller
 		void setFavorPrestige(int);
 		int getFavorPrestige() const;
 		const std::string &name() const;
+		void setName(const std::string name);
 		void setPrestige(int);
 		int getPrestige() const;
 		const ResourceMap &resources() const;
@@ -65,7 +66,7 @@ namespace controller
 
 		/// Actions.
 		int askProvostShift() const;
-		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> buildings) const;
+		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> & buildings) const;
 
 	private:
 
@@ -84,7 +85,7 @@ namespace controller
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;
-		boost::signal<BoardElement* (const std::vector<BoardElement*>)> ask_worker_placement_signal_;
+		boost::signal<BoardElement* (const std::vector<BoardElement*> &)> ask_worker_placement_signal_;
 	};
 
 }
