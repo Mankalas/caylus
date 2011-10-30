@@ -86,7 +86,7 @@ Building::activate ()
 void
 Building::worker_unset ()
 {
-	worker_ = 0;
+	worker_ = NULL;
 }
 
 void
@@ -112,6 +112,11 @@ Building::on_activate ()
 void
 Building::on_demolish ()
 {
+}
+
+bool Building::isBuilding() const
+{
+	return true;
 }
 
 std::ostream&

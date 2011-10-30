@@ -5,12 +5,7 @@
  */
 
 #include "bridge.hh"
-
-inline bool
-Bridge::isBridge() const
-{
-	return true;
-}
+#include "player.hh"
 
 inline
 const std::vector<Player *>& Bridge::players() const

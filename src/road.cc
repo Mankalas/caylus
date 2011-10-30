@@ -22,7 +22,7 @@
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
 {
-	Logger::log("Initializing Road... ");
+	Logger::instance().log("Initializing Road... ");
 	std::vector<Building *> neutral = boost::assign::list_of<Building *>
 	                                  (new NFarm ())
 	                                  (new Forest ())
@@ -61,7 +61,7 @@ Road::Road (GameEngine *ge)
 
 	free_slot_ = 14;
 
-	Logger::log("Done.");
+	Logger::instance().log("Done.");
 }
 
 void
@@ -94,7 +94,11 @@ Road::getAvailableBuildingsForPlayer() const
 	{
 		if (b != NULL && b->worker() == NULL)
 		{
-			available_buildings.push_back((BoardElement*)b.get());
+			BoardElement * board_element = (BoardElement*)b.get();
+			if (board_element != NULL)
+			{
+				available_buildings.push_back(board_element);
+			}
 		}
 	}
 	return available_buildings;

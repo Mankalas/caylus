@@ -9,6 +9,8 @@
 #ifndef BOARD_ELEMENT_HH
 # define BOARD_ELEMENT_HH
 
+# include <vector>
+
 namespace controller
 {
 	// TODO: Make this class pure abstract.
@@ -20,7 +22,5 @@ namespace controller
 		virtual bool isBridge() const;
 	};
 }
-
-# include "board-element.hxx"
 
 #endif

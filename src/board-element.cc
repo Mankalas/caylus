@@ -1,26 +1,25 @@
 /**
- * @file   board-element.hxx
+ * @file   board-element.cc
  * @author Vincent Boucheny <mankalas@gmail.com>
- * @date   Sat Oct 15 21:49:05 2011
+ * @date   Fri Oct 21 00:26:25 2011
+ *
+ * @brief  Implementation of the board-element class.
  */
 
 #include "board-element.hh"
 
 using namespace controller;
 
-inline
 bool BoardElement::isCastle() const
 {
 	return false;
 }
 
-inline
 bool BoardElement::isBridge() const
 {
 	return false;
 }
 
-inline
 bool BoardElement::isBuilding() const
 {
 	return false;

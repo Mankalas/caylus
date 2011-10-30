@@ -60,7 +60,8 @@ void Player::setView(View *view)
 	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
 }
 
-BoardElement* Player::askWorkerPlacement(const std::vector<BoardElement*> buildings) const
+BoardElement*
+Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
 	if (ask_worker_placement_signal_.empty())
 		{

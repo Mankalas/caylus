@@ -115,7 +115,6 @@ void Castle::activate()
 			else
 			{
 				can_pay = true;
-
 				/*//ConsoleUI::inst()->printMessage("OK for activation");
 						std::pair<Resource, Resource> pair;
 						std::vector<std::pair<Resource, Resource> > pairs =
@@ -148,7 +147,11 @@ void Castle::activate()
 		}
 	}
 	nb_build_ = 0;
-	favored_->resources() += Resource::favor;
+	// Can be NULL if no player built anything.
+	if (favored_ != NULL)
+	{
+		favored_->resources() += Resource::favor;
+	}
 }
 
 bool Castle::add(Player *p)
@@ -241,4 +244,9 @@ bool Castle::_checkResources(const Player *p) const
 		++count;
 	}
 	return count >= 2;
+}
+
+bool Castle::isCastle() const
+{
+	return true;
 }

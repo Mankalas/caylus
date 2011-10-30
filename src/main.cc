@@ -17,6 +17,7 @@
 #include "logger.hh"
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
+#include "logger.hh"
 
 int main(int argc, char **argv)
 {
@@ -47,15 +48,17 @@ int main(int argc, char **argv)
 	int nb_humans = atoi(argv[1]);
 	int nb_ais = atoi(argv[2]);
 
+	Logger logger();
+
 	GameEngine g(nb_humans, nb_ais);
 	boost::thread controller_thread = boost::thread(boost::ref(g));
-	Logger::log("Game Engine thread launched.");
+	Logger::instance().log("Game Engine thread launched.");
 
 	//boost::mutex mutex;
 	//boost::unique_lock<boost::mutex> lock(mutex);
-	//Logger::log("GE waiting for init to end.");
+	//Logger::instance().log("GE waiting for init to end.");
 	//g.waitingPlayers()->wait(lock);
-	//Logger::log("Game engine ready.");
+	//Logger::instance().log("Game engine ready.");
 
 	Human human(&g);
 	g.subscribeView(&human);
