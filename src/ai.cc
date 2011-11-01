@@ -23,7 +23,11 @@ BoardElement*
 AI::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	int choice = rand() % buildings.size();
+<<<<<<< HEAD
 	Logger::instance().log(Logger::instance().to_string<int>(choice));
+=======
+	Logger::log(Logger::to_string(choice));
+>>>>>>> 3d05f8338c3fe83888f78ecfad0dedc615162b67
 	return buildings[choice];
 }
 

@@ -66,7 +66,11 @@ void GameEngine::initialize()
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
+<<<<<<< HEAD
 		Logger::instance().log("Adding new AI player.");
+=======
+		Logger::log("Adding new AI player.");
+>>>>>>> 3d05f8338c3fe83888f78ecfad0dedc615162b67
 		p->setName("HAL");
 		players_.push_back(p);
 	}

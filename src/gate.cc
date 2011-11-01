@@ -27,7 +27,11 @@ void Gate::on_activate()
 {
 	try
 	{
+<<<<<<< HEAD
 		Logger::instance().log("Activating Gate.");
+=======
+		Logger::log("Activating Gate.");
+>>>>>>> 3d05f8338c3fe83888f78ecfad0dedc615162b67
 		BoardElement * player_choice = NULL;
 		std::vector<BoardElement *> choices = game_->road().getAvailableBuildingsForPlayer();
 		choices.push_back(&game_->castle());
@@ -38,6 +42,7 @@ void Gate::on_activate()
 		while (!player_choice->isBuilding() || !player_choice->isCastle());
 		if (player_choice->isBuilding())
 		{
+<<<<<<< HEAD
 			Logger::instance().log("Gate activated for Building.\n");
 			Building * building = dynamic_cast<Building*>(player_choice);
 			Logger::instance().log(building->name());
@@ -45,6 +50,15 @@ void Gate::on_activate()
 		else
 		{
 			Logger::instance().log("Gate activated for Castle.\n");
+=======
+			Logger::log("Gate activated for Building.\n");
+			Building * building = dynamic_cast<Building*>(player_choice);
+			Logger::log(building->name());
+		}
+		else
+		{
+			Logger::log("Gate activated for Castle.\n");
+>>>>>>> 3d05f8338c3fe83888f78ecfad0dedc615162b67
 			Castle * castle = dynamic_cast<Castle*>(player_choice);
 			castle->add(worker_);
 		}
