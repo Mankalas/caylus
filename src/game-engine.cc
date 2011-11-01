@@ -52,7 +52,7 @@ void GameEngine::initialize()
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
 		Player *p = new Player();
-		Logger::instance().log("Adding new human player.");
+		Logger::instance()->log("Adding new human player.");
 		players_.push_back(p);
 	}
 	if (nb_humans_ > 1)
@@ -66,11 +66,7 @@ void GameEngine::initialize()
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
-<<<<<<< HEAD
-		Logger::instance().log("Adding new AI player.");
-=======
-		Logger::log("Adding new AI player.");
->>>>>>> 3d05f8338c3fe83888f78ecfad0dedc615162b67
+		Logger::instance()->log("Adding new AI player.");
 		p->setName("HAL");
 		players_.push_back(p);
 	}
@@ -181,17 +177,17 @@ void GameEngine::activateCastle()
 
 void GameEngine::collectIncome()
 {
-	Logger::instance().log("Collecting income... ");
+	Logger::instance()->log("Collecting income... ");
 	foreach (Player *p, players_)
 	{
 		p->resources() += Resource::denier * (2 + p->residences());
 	}
-	Logger::instance().log("Done.");
+	Logger::instance()->log("Done.");
 }
 
 void GameEngine::endOfTurn()
 {
-	Logger::instance().log("End of turn.");
+	Logger::instance()->log("End of turn.");
 	_moveBailiff();
 	if (bailiff_ == 17 || bailiff_ == 18 ||
 	    bailiff_ == 30 || bailiff_ == 31 ||
@@ -203,7 +199,7 @@ void GameEngine::endOfTurn()
 	{
 		std::swap(order_.front(), order_.back());
 	}
-	Logger::instance().log("Done.");
+	Logger::instance()->log("Done.");
 }
 
 void GameEngine::placeWorkers()
@@ -275,26 +271,26 @@ void GameEngine::_playerMove(Player *p)
 			try
 			{
 				b->worker_set(*p);
-				/*Logger::instance().log("BEFORE: " << p->resources() << std::endl
+				/*Logger::instance()->log("BEFORE: " << p->resources() << std::endl
 				  << "     -= " << (Resource::denier * (b->owner() == p ? 1 : worker_cost)) << std::endl;*/
 				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
-				//Logger::instance().log("AFTER:  " << p->resources() << std::endl;
+				//Logger::instance()->log("AFTER:  " << p->resources() << std::endl;
 				has_played = true;
 			}
 			catch (OccupiedBuildingEx *)
 			{
-				Logger::instance().log("Already occupied.");
+				Logger::instance()->log("Already occupied.");
 				return;
 			}
 			catch (UnactivableBuildingEx *)
 			{
-				Logger::instance().log("Does not accept workers.");
+				Logger::instance()->log("Does not accept workers.");
 				return;
 			}
 		}
 		else
 		{
-			Logger::instance().log("Not enough denier to play ");
+			Logger::instance()->log("Not enough denier to play ");
 			return;
 		}
 	}
@@ -361,7 +357,7 @@ void GameEngine::subscribeView(Human *human)
 
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
-		Logger::instance().log("Subcribing human view.");
+		Logger::instance()->log("Subcribing human view.");
 		p = players_[i];
 		if (p->view() == NULL)
 		{
@@ -371,7 +367,7 @@ void GameEngine::subscribeView(Human *human)
 	}
 	for (unsigned i = 0; i < nb_ais_; ++i)
 	{
-		Logger::instance().log("Subcribing AI view.");
+		Logger::instance()->log("Subcribing AI view.");
 		p = players_[nb_humans_ + i];
 		p->setView(new view::AI(this));
 	}

@@ -16,7 +16,7 @@ class Logger
 {
 public:
 
-	static Logger & instance();
+	static Logger * instance();
 
 	~Logger();
 
@@ -46,5 +46,7 @@ private:
 	std::ofstream file_;
 	std::stack<eGameActor> actors_stack_;
 };
+
+# include "logger.hxx"
 
 #endif

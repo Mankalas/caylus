@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 
 	GameEngine g(nb_humans, nb_ais);
 	boost::thread controller_thread = boost::thread(boost::ref(g));
-	Logger::instance().log("Game Engine thread launched.");
+	Logger::instance()->log("Game Engine thread launched.");
 
 	//boost::mutex mutex;
 	//boost::unique_lock<boost::mutex> lock(mutex);

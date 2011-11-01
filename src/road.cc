@@ -22,7 +22,7 @@
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
 {
-	Logger::instance().log("Initializing Road... ");
+	Logger::instance()->log("Initializing Road... ");
 	std::vector<Building *> neutral = boost::assign::list_of<Building *>
 	                                  (new NFarm ())
 	                                  (new Forest ())
@@ -61,7 +61,7 @@ Road::Road (GameEngine *ge)
 
 	free_slot_ = 14;
 
-	Logger::instance().log("Done.");
+	Logger::instance()->log("Done.");
 }
 
 void

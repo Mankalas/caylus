@@ -66,7 +66,7 @@ boost::signal<unsigned (unsigned, unsigned)>::slot_function_type Human::getAskNb
 
 unsigned Human::askNbHumans(unsigned max) const
 {
-	Logger::instance().log("Asking nb humans.");
+	Logger::instance()->log("Asking nb humans.");
 	unsigned nb_humans = 0;
 	while ((cout << "How many humans? (" << max << " max)\n") &&
 	       (!(cin >> nb_humans) || (nb_humans > max)))
