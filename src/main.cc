@@ -17,7 +17,7 @@
 #include "logger.hh"
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
-#include "logger.hh"
+#include "exceptions.hh"
 
 int main(int argc, char **argv)
 {
@@ -48,6 +48,9 @@ int main(int argc, char **argv)
 	int nb_humans = atoi(argv[1]);
 	int nb_ais = atoi(argv[2]);
 
+	try
+		{
+
 	Logger logger();
 
 	GameEngine g(nb_humans, nb_ais);
@@ -66,5 +69,10 @@ int main(int argc, char **argv)
 	boost::thread human_thread = boost::thread(human);
 
 	controller_thread.join();
+		}
+	catch(Exception * ex)
+		{
+			std::cerr << ex->msg() << std::endl;
+		}
 	return 0;
 }

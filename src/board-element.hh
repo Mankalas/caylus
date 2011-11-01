@@ -10,16 +10,22 @@
 # define BOARD_ELEMENT_HH
 
 # include <vector>
+# include <string>
 
 namespace controller
 {
-	// TODO: Make this class pure abstract.
 	class BoardElement
 	{
 	public:
+		BoardElement(const std::string & name);
+
 		virtual bool isCastle() const;
 		virtual bool isBuilding() const;
 		virtual bool isBridge() const;
+		virtual const std::string & name() const;
+
+	protected:
+		const std::string name_;
 	};
 }
 

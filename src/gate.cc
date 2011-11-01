@@ -29,13 +29,9 @@ void Gate::on_activate()
 	{
 		Logger::instance()->log("Activating Gate.");
 		BoardElement * player_choice = NULL;
-		std::vector<BoardElement *> choices = game_->road().getAvailableBuildingsForPlayer();
-		choices.push_back(&game_->castle());
-		do
-		{
-			player_choice = worker_->askWorkerPlacement(choices);
-		}
-		while (!player_choice->isBuilding() || !player_choice->isCastle());
+		std::vector<BoardElement *> choices = game_->road().getAvailableBuildings(worker_);
+		choices.insert(choices.begin(), (BoardElement*)&game_->castle());
+		player_choice = worker_->askWorkerPlacement(choices);
 		if (player_choice->isBuilding())
 		{
 			Logger::instance()->log("Gate activated for Building.\n");

@@ -7,8 +7,14 @@
  */
 
 #include "board-element.hh"
+#include "logger.hh"
 
 using namespace controller;
+
+BoardElement::BoardElement(const std::string &name) :
+	name_(name)
+{
+}
 
 bool BoardElement::isCastle() const
 {
@@ -23,4 +29,9 @@ bool BoardElement::isBridge() const
 bool BoardElement::isBuilding() const
 {
 	return false;
+}
+
+const std::string & BoardElement::name() const
+{
+	return name_;
 }

@@ -1,22 +1,16 @@
-/*!
-  \file   building.hxx
-  \brief  Inline implementations for Building
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   building.hxx
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun 6 21:39:08 2011
+ *
+ * @brief  Inline implementation of the building class.
+ */
 
 #ifndef BUILDING_HXX_
 # define BUILDING_HXX_
 
 # include "building.hh"
 # include "player.hh"
-
-inline const std::string&
-Building::name() const
-{
-  return name_;
-}
 
 inline const BuildingType&
 Building::type() const

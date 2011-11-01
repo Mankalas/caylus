@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "logger.hh"
+#include "console-ui.hh"
 
 using namespace std;
 using namespace view;
@@ -18,6 +19,7 @@ using namespace controller;
 Human::Human(GameEngine *ge)
 	: View(ge)
 {
+	user_interface_ = new ConsoleUI();
 }
 
 Human::~Human()
@@ -39,13 +41,6 @@ bool Human::askJoustField() const
 {
 	return true;
 }
-
-/********void Human::_connectSignals()
-	 {
-	 ge_->connectNbHumansSignal(boost::bind(&Human::askNbHumans, this, _1));
-	 ge_->connectNbAIsSignal(boost::bind(&Human::askNbAIs, this, _1, _2));
-	 ge_->connectBoardUpdatedSignal(boost::bind(&Human::updateBoard, this));
-	 }*/
 
 void Human::operator()()
 {
@@ -115,7 +110,7 @@ boost::signal<void (void)>::slot_function_type Human::getUpdateBoardSlot() const
 BoardElement*
 Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
-	return buildings[0];//this->user_interface_->askBuilding(buildings);
+	return this->user_interface_->askBuilding(buildings);
 }
 
 unsigned Human::askBuilding() const

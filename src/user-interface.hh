@@ -3,7 +3,7 @@
 
 # include <string>
 # include <vector>
-# include "building.hh"
+# include "board-element.hh"
 
 namespace view
 {
@@ -17,7 +17,7 @@ namespace view
 		virtual std::string askName() const = 0;
 		virtual bool askYesNo() const = 0;
 
-		virtual BuildingSmartPtr askBuilding(std::vector<BuildingSmartPtr> buildings) const = 0;
+		virtual controller::BoardElement* askBuilding(const std::vector<controller::BoardElement*> & choices) const = 0;
 		virtual int askProvostShift() const = 0;
 		virtual int askChoice(int, int) const = 0;
 		virtual int askChoice(std::vector<int>&) const = 0;

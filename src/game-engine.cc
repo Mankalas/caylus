@@ -238,7 +238,7 @@ void GameEngine::_playerMove(Player *p)
 
 	while (!has_played)
 	{
-		const std::vector<BoardElement*> choices = road_.getAvailableBuildingsForPlayer();
+		const std::vector<BoardElement*> choices = getAvailableBoardElements(p);
 		player_choice = p->askWorkerPlacement(choices);
 
 		if (player_choice->isBridge())
@@ -357,7 +357,6 @@ void GameEngine::subscribeView(Human *human)
 
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
-		Logger::instance()->log("Subcribing human view.");
 		p = players_[i];
 		if (p->view() == NULL)
 		{
@@ -385,3 +384,14 @@ void GameEngine::subscribeView(Human *human)
 
 	mutex_.unlock();
 }
+
+const std::vector<BoardElement*>
+GameEngine::getAvailableBoardElements(const Player * worker) const
+{
+	std::vector<BoardElement*> available_buildings(road_.getAvailableBuildings(worker));
+
+	available_buildings.push_back((BoardElement*)&castle_);
+	available_buildings.push_back((BoardElement*)&bridge_);
+	return available_buildings;
+}
+

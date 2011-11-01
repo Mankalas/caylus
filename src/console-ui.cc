@@ -1,11 +1,9 @@
 /**
  * @file   console-ui.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Tue Jan 20 21:21:10 2009
  *
- * @brief
- *
- *
+ * @brief  Implementation of the console-ui class.
  */
 
 #include <limits>
@@ -14,6 +12,7 @@
 #include "road.hh"
 
 using namespace std;
+using namespace controller;
 
 int ConsoleUI::askChoice(int from, int to) const
 {
@@ -124,4 +123,28 @@ bool ConsoleUI::askYesNo() const
 {
 	showMessage("Yes / No (1 / 0)");
 	return getInt() == 1;
+}
+
+BoardElement* ConsoleUI::askBuilding(const std::vector<BoardElement*> & choices) const
+{
+	for (unsigned int i = 0; i < choices.size(); ++i)
+		{
+			BoardElement * board_element = choices[i];
+			assert(board_element);
+			std::cout << i + 1 << ". " << board_element->name() << std::endl;
+		}
+	return choices[getInputInt_(1, choices.size())];
+}
+
+int ConsoleUI::getInputInt_(int min, int max) const
+{
+	std::cout << "Enter a number between " << min << " and " << max << "." << std::endl;
+	int in = INT_MAX;
+	while (!(std::cin >> in) || in < min || in > max)
+		{
+			std::cout << "Try again." << std::endl;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	return in - 1;
 }

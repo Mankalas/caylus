@@ -41,14 +41,11 @@ namespace view
 		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
 
 		void operator()();
-		const UserInterface *userInterface() const;
-		UserInterface *userInterface();
 
 	private:
-		UserInterface *user_interface_;
+		UserInterface * user_interface_;
 	};
 
 }
-# include "human.hxx"
 
 #endif

@@ -86,7 +86,7 @@ Road::clearWorkers()
 }
 
 std::vector<BoardElement*>
-Road::getAvailableBuildingsForPlayer() const
+Road::getAvailableBuildings(const Player *) const
 {
 	std::vector<BoardElement*> available_buildings;
 

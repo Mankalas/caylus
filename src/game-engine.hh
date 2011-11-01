@@ -123,6 +123,8 @@ namespace controller
 		boost::condition_variable *disconnectViews();
 		void operator()();
 
+		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;
+
 	private:
 		/// The order in which the player are "called".
 		std::vector<Player *> order_;

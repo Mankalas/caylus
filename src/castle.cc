@@ -1,11 +1,9 @@
 /**
  * @file   castle.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Feb 12 12:58:11 2009
  *
- * @brief
- *
- *
+ * @brief  Implementation of the castle class.
  */
 
 #include <cassert>
@@ -78,7 +76,8 @@ void CastlePart::score(std::vector<Player *>& players)
 	}
 }
 
-Castle::Castle()
+Castle::Castle() :
+	BoardElement("Castle")
 {
 	players_ = std::vector<Player *>(5);
 	parts_ = std::vector<CastlePart *>(3);

@@ -22,7 +22,8 @@ Player::Player():
 	name_("Chiche"),
 	prestige_(0),
 	resources_(Resource::denier * 5 + Resource::food * 2 + Resource::wood),
-	residences_(0)
+	residences_(0),
+	view_(NULL)
 {
 }
 
@@ -56,16 +57,19 @@ Player::Player(const Player &player):
 void Player::setView(View *view)
 {
 	view_ = view;
+
 	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
+	assert(!ask_provost_shift_signal_.empty());
+
 	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
+	assert(!ask_worker_placement_signal_.empty());
 }
 
 BoardElement*
 Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
-	if (ask_worker_placement_signal_.empty())
-		{
-			throw new SignalNotConnected();
-		}
+	assert(!ask_worker_placement_signal_.empty());
+
 	return ask_worker_placement_signal_(buildings);
 }
+

@@ -132,7 +132,7 @@ int Player::askProvostShift() const
 {
 	if (ask_provost_shift_signal_.empty())
 		{
-			throw new SignalNotConnected();
+			throw new SignalNotConnected("ask_provost_shift_signal_");
 		}
 	return ask_provost_shift_signal_();
 }

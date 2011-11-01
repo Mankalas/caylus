@@ -1,10 +1,10 @@
-/*!
-  \file   building.cc
-  \brief  Implementation of Building
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   building.cc
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun  6 21:22:56 2009
+ *
+ * @brief  Declaration of the building class.
+ */
 
 #include <cassert>
 #include "building.hh"
@@ -15,8 +15,9 @@
 Building::Building (const std::string &name,
                     const BuildingType &type,
                     const std::vector<ResourceMap>& cost,
-                    const ResourceMap  &gain)
-	: name_(name), type_(type), gain_(gain), cost_(cost), owner_(0), worker_(0)
+                    const ResourceMap  &gain) :
+	BoardElement(name),
+	type_(type), gain_(gain), cost_(cost), owner_(0), worker_(0)
 {
 }
 

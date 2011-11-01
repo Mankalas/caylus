@@ -30,14 +30,13 @@ Logger * Logger::instance()
 	if (instance_ == NULL)
 	{
 		instance_ = new Logger();
-		}
+	}
 	return instance_;
 }
 
 void Logger::log(const std::string &msg)
 {
-	file_ << "<p style=\"" << (int)actors_stack_.top() << "\">"
-		<< msg << "</p>\n";
+	std::cout << msg << std::endl;
 }
 
 void Logger::stack(eGameActor actor)

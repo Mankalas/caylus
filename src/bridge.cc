@@ -9,6 +9,10 @@
 #include "bridge.hh"
 #include "player.hh"
 
+Bridge::Bridge() :
+	BoardElement("Bridge")
+{}
+
 void Bridge::add(Player * p)
 {
 	if (players_.size() == 0)

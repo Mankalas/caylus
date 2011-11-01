@@ -20,6 +20,8 @@ namespace controller
   {
 	public :
 
+		Bridge();
+
 		virtual bool isBridge() const;
 
 		void clear();

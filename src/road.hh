@@ -61,12 +61,14 @@ namespace controller
 		void clearWorkers ();
 
 		/**
-		 * Get a list of buildings that a player can pick to place his
-		 * worker. This list contains also the Bridge and the Castle.
+		 * Get a list of buildings that a given player can pick to place his
+		 * worker.
 		 *
-		 * @return Buildings vector.
+		 * @param worker The player who is to place his worker.
+		 *
+		 * @return The available buildings
 		 */
-		std::vector<BoardElement*> getAvailableBuildingsForPlayer() const;
+		std::vector<BoardElement*> getAvailableBuildings(const Player * worker) const;
 
 	private:
 		/**

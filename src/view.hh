@@ -20,7 +20,7 @@ namespace controller
 }
 
 typedef boost::signal<int (void)>::slot_function_type ProvostShiftSlot;
-typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*>)>::slot_function_type WorkerPlacementSlot;
+typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*> &)>::slot_function_type WorkerPlacementSlot;
 
 namespace view
 {

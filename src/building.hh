@@ -47,7 +47,6 @@ namespace controller
 		virtual bool isBuilding() const;
 
 		// Accessors.
-		const std::string &name() const;
 		const BuildingType &type() const;
 		const ResourceMap &gain() const;
 		const std::vector<ResourceMap>& cost() const;
@@ -66,7 +65,6 @@ namespace controller
 							const std::vector<ResourceMap>& cost,
 							const ResourceMap  &gain);
 
-		const std::string name_;
 		const BuildingType type_;
 		const ResourceMap gain_;
 		const std::vector<ResourceMap> cost_;
