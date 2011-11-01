@@ -10,6 +10,7 @@
 #include "console-ui.hh"
 #include "player.hh"
 #include "road.hh"
+#include "game-engine.hh"
 
 using namespace std;
 using namespace controller;
@@ -147,4 +148,9 @@ int ConsoleUI::getInputInt_(int min, int max) const
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 	return in - 1;
+}
+
+void ConsoleUI::updateBoard(const GameEngine * ge) const
+{
+	std::cout << *ge << std::endl;
 }

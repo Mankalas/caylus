@@ -61,7 +61,7 @@ void GameEngine::initialize()
 	}
 	else
 	{
-		assert(nb_ais_ > 0);
+		//assert(nb_ais_ > 0);
 	}
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
@@ -101,7 +101,6 @@ void GameEngine::initialize()
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
-	board_updated_();
 }
 
 GameEngine::GameEngine()
@@ -310,6 +309,7 @@ void GameEngine::_startOfTurn()
 	{
 		inn->host()->workers() -= 1;
 	}
+	board_updated_();
 }
 
 bool GameEngine::_canPlayerPlay(Player *p)

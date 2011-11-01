@@ -1,13 +1,10 @@
-/*!
-  \file   trade-building.cc
-  \brief  Implementation of TradeBuilding.
-
-  <long description>
-
-  \author
-  \date   2009-01-06
-*/
-
+/**
+ * @file   trade-building.cc
+ * @author Nicuvëo <crucuny@gmail.com>
+ * @date   Jun 6 22:15:11 2011
+ *
+ * @brief  Declaration of the trade-building class.
+ */
 #include "trade-building.hh"
 
 TradeBuilding::~TradeBuilding()

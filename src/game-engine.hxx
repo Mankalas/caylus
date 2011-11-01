@@ -1,11 +1,9 @@
 /**
  * @file   game-engine.hxx
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Sat Jan 10 18:27:58 2009
  *
- * @brief  Inline implementation for GameEngine
- *
- *
+ * @brief  Inline implementation of the game-engine class.
  */
 
 #ifndef GAME_ENGINE_HXX

@@ -28,7 +28,7 @@ namespace view
 		virtual std::string getString() const;
 		virtual std::string askName() const;
 		virtual bool askYesNo() const;
-		virtual void updateBoard(/*GameEngine &ge*/) const {};
+		virtual void updateBoard(const controller::GameEngine * ge) const;
 		virtual controller::BoardElement* askBuilding(const std::vector<controller::BoardElement*> & choices) const;
 	private:
 		int getInputInt_(int min, int max) const;

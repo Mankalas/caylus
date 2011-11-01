@@ -1,13 +1,14 @@
-/*!
-  \file   production-building.cc
-  \brief  Implementation of ProductionBuilding
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   production-building.cc
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun 6 22:22:22 2011
+ *
+ * @brief  Declaration of the production-building class.
+ */
 
 #include "production-building.hh"
 #include "console-ui.hh"
+#include "logger.hh"
 
 ProductionBuilding::~ProductionBuilding()
 {
@@ -24,6 +25,7 @@ ProductionBuilding::ProductionBuilding (const std::vector<ResourceMap>& wchc,
 void
 ProductionBuilding::on_activate ()
 {
+	Logger::instance()->log("Activating Trading post.");
 	if (worker_choices_.size() == 1)
 	{
 		worker_->resources() += worker_choices_[0];

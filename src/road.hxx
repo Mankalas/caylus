@@ -54,17 +54,14 @@ Road::operator [] (const std::string& name) const
 inline std::ostream&
 operator<<(std::ostream& o, const Road& r)
 {
-  unsigned rank = 0;
-
-  foreach (BuildingSmartPtr ptr, r.get())
+	foreach (BuildingSmartPtr ptr, r.get())
   {
+		o << " * ";
     if (ptr)
-    {
-      o << rank << ". " << *ptr << std::endl;
-    }
+      o << *ptr;
     else
-      o << "<empty>" << std::endl;
-    ++rank;
+			o << "<empty>";
+		o << std::endl;
   }
   return o;
 }

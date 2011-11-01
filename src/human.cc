@@ -88,7 +88,7 @@ unsigned Human::askNbAIs(unsigned min, unsigned max) const
 
 void Human::updateBoard() const
 {
-	user_interface_->updateBoard();
+	user_interface_->updateBoard(ge_);
 }
 
 

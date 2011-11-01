@@ -5,6 +5,11 @@
 # include <vector>
 # include "board-element.hh"
 
+namespace controller
+{
+	class GameEngine;
+}
+
 namespace view
 {
 	class UserInterface
@@ -21,7 +26,7 @@ namespace view
 		virtual int askProvostShift() const = 0;
 		virtual int askChoice(int, int) const = 0;
 		virtual int askChoice(std::vector<int>&) const = 0;
-		virtual void updateBoard(/*GameEngine &ge*/) const = 0;
+		virtual void updateBoard(const controller::GameEngine * ge) const = 0;
 	};
 
 }
