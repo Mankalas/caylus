@@ -1,6 +1,6 @@
 /**
  * @file   merchant_guild.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Jan 15 14:20:15 2009
  *
  * @brief Implementation of the MerchantGuild.
@@ -22,7 +22,6 @@ MerchantGuild::MerchantGuild(GameEngine *ge)
 void MerchantGuild::on_activate()
 {
 	assert(worker_);
-	std::cout << *game_ << std::endl;
 	int s = worker_->askProvostShift();
 	while (s < -3 || s > 3 || s + game_->provost() < 6 ||
 	       s + game_->provost() > 33)

@@ -23,6 +23,26 @@
 
 using namespace controller;
 
+GameEngine::GameEngine()
+	: road_(this), nb_turns_(0)
+{
+	initialize();
+}
+
+GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
+	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0)
+{
+	initialize();
+}
+
+GameEngine::~GameEngine()
+{
+	foreach(Player * p, players_)
+	{
+		delete p;
+	}
+}
+
 void GameEngine::operator() ()
 {
 	// Waiting for the view subscription to release the mutex.
@@ -32,8 +52,9 @@ void GameEngine::operator() ()
 
 void GameEngine::_run()
 {
-	while (true)
+	while (nb_turns_ < nb_turns_max_)
 	{
+		++nb_turns_;
 		_startOfTurn();
 		collectIncome();
 		placeWorkers();
@@ -43,6 +64,7 @@ void GameEngine::_run()
 		activateCastle();
 		endOfTurn();
 	}
+	Logger::instance()->log("End of the game.");
 }
 
 void GameEngine::initialize()
@@ -101,26 +123,6 @@ void GameEngine::initialize()
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
-}
-
-GameEngine::GameEngine()
-	: road_(this)
-{
-	initialize();
-}
-
-GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
-	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais)
-{
-	initialize();
-}
-
-GameEngine::~GameEngine()
-{
-	foreach(Player * p, players_)
-	{
-		delete p;
-	}
 }
 
 void GameEngine::activateBuildings()

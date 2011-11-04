@@ -1,13 +1,13 @@
-/*!
-  \file   all-buildings.hh
-  \brief  This file contains all "normal" buildings.
-
-  As those building classes do not contain anything besides their
-  constructor, they're all listed in one file.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   all-buildings.hh
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun 6 23:58:43 2011
+ *
+ * @brief  This file contains all "normal" buildings.
+ *
+ * As those building classes do not contain anything besides their
+ * constructor, they're all listed in one file.
+ */
 
 #ifndef ALL_BUILDINGS_HH_
 # define ALL_BUILDINGS_HH_
@@ -285,4 +285,5 @@ namespace controller
 	};
 
 }
+
 #endif /* !ALL_BUILDINGS_HH_ */

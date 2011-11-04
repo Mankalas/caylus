@@ -1,10 +1,10 @@
-/*!
-  \file   all-buildings.cc
-  \brief  Implementation of buildings' constructors
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   all-buildings.cc
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun 6 23:58:02 2011
+ *
+ * @brief  Implementation of the all-buildings class.
+ */
 
 #include "all-buildings.hh"
 

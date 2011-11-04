@@ -117,6 +117,8 @@ namespace controller
 		const unsigned &provost() const;
 		unsigned &provost();
 
+		unsigned &nbTurnsMax();
+
 		boost::mutex &mutex();
 		boost::condition_variable *waitingPlayers();
 		boost::condition_variable *waitingViews();
@@ -144,6 +146,8 @@ namespace controller
 		unsigned bailiff_;
 		unsigned nb_humans_;
 		unsigned nb_ais_;
+		unsigned nb_turns_;
+		unsigned nb_turns_max_;
 
 		/// Used to wait until a view subscribes.
 		boost::mutex mutex_;

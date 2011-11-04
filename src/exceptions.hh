@@ -50,6 +50,10 @@ namespace controller
 
 	};
 
+	class GameOverException : public GameException
+	{
+	};
+
 	class NotEnoughDenierEx : public GameException
 	{
 	};

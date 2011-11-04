@@ -98,6 +98,12 @@ GameEngine::provost()
   return provost_;
 }
 
+inline unsigned&
+GameEngine::nbTurnsMax()
+{
+	return nb_turns_max_;
+}
+
 inline boost::mutex&
 GameEngine::mutex()
 {

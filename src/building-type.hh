@@ -1,10 +1,10 @@
-/*!
-  \file   building-type.hh
-  \brief  This file contains BuildingType class.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   building-type.hh
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun 6 00:00:52 2011
+ *
+ * @brief  Declaration of the building-type class.
+ */
 
 #ifndef BUILDING_TYPE_HH_
 # define BUILDING_TYPE_HH_
