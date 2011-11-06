@@ -22,7 +22,6 @@
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
 {
-	Logger::instance()->log("Initializing Road... ");
 	std::vector<Building *> neutral = boost::assign::list_of<Building *>
 	                                  (new NFarm ())
 	                                  (new Forest ())

@@ -19,7 +19,7 @@ namespace gfx
 	{
 	public:
 
-		void draw(Sprite & sprite)
+		void draw(Sprite & sprite) const
 		{
 			window_->Draw(sprite.sfmlSprite());
 		}

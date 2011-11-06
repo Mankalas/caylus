@@ -30,11 +30,13 @@ namespace view
 		virtual int askProvostShift() const{return 1;};
 		virtual int askChoice(int, int) const{return 4;};
 		virtual int askChoice(std::vector<int>&) const{return 3;};
-		virtual void updateBoard(const controller::GameEngine *) const {};
+		virtual void updateBoard(const controller::GameEngine *) const;
 
 	private:
 		gfx::Window window_;
 		gfx::LimitedEditionBoard board_;
+
+		void drawBoard_() const;
 	};
 }
 

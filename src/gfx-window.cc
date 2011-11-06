@@ -12,7 +12,7 @@
 
 using namespace gfx;
 
-sf::RenderWindow *Window::window_ =	new sf::RenderWindow(sf::VideoMode(1200, 800, 32),
+sf::RenderWindow *Window::window_ =	new sf::RenderWindow(sf::VideoMode(1300, 950, 32),
 																												 std::string("Caylus"),
 																												 sf::Style::Resize | sf::Style::Close);
 
@@ -30,7 +30,7 @@ std::pair<float, float> Window::getClick() const
 						}
 					if (Event.Type == sf::Event::MouseButtonPressed)
 						{
-							std::cout << Event.MouseButton.X << ", " << Event.MouseButton.Y << std::endl;
+							//std::cout << Event.MouseButton.X << ", " << Event.MouseButton.Y << std::endl;
 							return std::pair<float, float>(Event.MouseButton.X, Event.MouseButton.Y);
 						}
 				}

@@ -21,9 +21,8 @@ const std::string * Board::getBuildingName(float x, float y) const
 		{
 			unsigned int a = it.first.first;
 			unsigned int b = it.first.second;
-			std::cout << "Check if (" << x << ", " << y << ") in (" << a << ", " << b << ").\n";
-			if (x >= a && x <= a + case_width_ &&
-					y >= b && y <= b + case_height_)
+			//std::cout << "Check if (" << x << ", " << y << ") in (" << a << ", " << b << ").\n";
+			if (x >= a && x <= a + case_width_ && y >= b && y <= b + case_height_)
 				{
 					return &it.second;
 				}
