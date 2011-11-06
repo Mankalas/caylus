@@ -1,17 +1,16 @@
 /**
  * @file   joust-field.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Wed Feb  4 11:40:25 2009
  *
- * @brief
- *
- *
+ * @brief  Declaration of the joust-field class.
  */
 
 #include "joust-field.hh"
+#include "const.hh"
 
 JoustField::JoustField()
-	: Building("Joust field",
+	: Building(JOUST_FIELD,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0))

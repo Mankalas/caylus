@@ -17,47 +17,7 @@
 # include "trade-building.hh"
 # include "favor-building.hh"
 # include "construction-building.hh"
-
-enum e_building
-{
-	STATUE,
-	THEATER,
-	COLLEGE,
-	MONUMENT,
-	GRANARY,
-	WEAVER,
-	CATHEDRAL,
-	GOLDMINE,
-	NQUARRY,
-	WQUARRY,
-	WORKSHOP,
-	NFARM,
-	WFFARM,
-	WCFARM,
-	SFARM,
-	FOREST,
-	PARK,
-	NSAWMILL,
-	WSAWMILL,
-	RESIDENCE,
-	LIBRARY,
-	HOTEL,
-	CHURCH,
-	FPEDDLER,
-	WPEDDLER,
-	JEWELLER,
-	TAILOR,
-	ALCHEMIST,
-	BANK,
-	TRADING_POST,
-	NCARPENTER,
-	FCARPENTER,
-	LAWYER,
-	ARCHITECT,
-	MASON,
-	NMARKETPLACE,
-	WMARKETPLACE
-};
+# include "const.hh"
 
 namespace controller
 {

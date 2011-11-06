@@ -1,17 +1,16 @@
 /**
  * @file   inn.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Jan 15 14:21:00 2009
  *
- * @brief
- *
- *
+ * @brief  Declaration of the inn class.
  */
 
 #include "inn.hh"
+#include "const.hh"
 
 Inn::Inn()
-	: Building("Inn",
+	: Building(INN,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),

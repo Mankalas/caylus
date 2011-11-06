@@ -13,9 +13,10 @@
 #include "board-element.hh"
 #include "logger.hh"
 #include "castle.hh"
+#include "const.hh"
 
 Gate::Gate(GameEngine *ge)
-	: Building("Gate",
+	: Building(GATE,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),

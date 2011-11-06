@@ -11,6 +11,7 @@
 #include "player.hh"
 #include "castle.hh"
 #include "resource-map.hh"
+#include "const.hh"
 
 using namespace controller;
 
@@ -77,7 +78,7 @@ void CastlePart::score(std::vector<Player *>& players)
 }
 
 Castle::Castle() :
-	BoardElement("Castle")
+	BoardElement(CASTLE)
 {
 	players_ = std::vector<Player *>(5);
 	parts_ = std::vector<CastlePart *>(3);

@@ -14,6 +14,7 @@ namespace gfx
 	{
 	public:
 		Sprite * board_;
+		const std::string * getBuildingName(float x, float y) const;
 
 	protected:
 		unsigned int height_;
@@ -22,16 +23,6 @@ namespace gfx
 		// All cases
 		unsigned int case_height_;
 		unsigned int case_width_;
-		// Fixed cases
-		coordinates_t gate_coord_;
-		coordinates_t trading_post_coord_;
-		coordinates_t merchant_guild_coord_;
-		coordinates_t joust_field_coord_;
-		coordinates_t stables_coord_;
-		coordinates_t inn_coord_;
-		coordinates_t fixed_peddler_coord_;
-		coordinates_t fixed_carpenter_coord_;
-		coordinates_t goldmine_coord_;
 		// Neutral cases
 		std::vector<coordinates_t> neutral_cases_;
 		std::vector<coordinates_t> empty_cases_;
@@ -55,6 +46,9 @@ namespace gfx
 		// Bridge
 		coordinates_t first_bridge_slot_coord_;
 		int bridge_slots_gap_;
+
+		typedef std::map<coordinates_t, const std::string> road_t;
+		road_t buildings_placement_;
 
 	};
 

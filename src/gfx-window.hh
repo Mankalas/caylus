@@ -21,27 +21,29 @@ namespace gfx
 
 		void draw(Sprite & sprite)
 		{
-			window->Draw(sprite.sfmlSprite());
+			window_->Draw(sprite.sfmlSprite());
 		}
 
 		void clear() const
 		{
-			window->Clear();
+			window_->Clear();
 		}
 
 		void display() const
 		{
-			window->Display();
+			window_->Display();
 		}
 
 		void resize(float width, float height)
 		{
-			window->SetSize(width, height);
+			window_->SetSize(width, height);
 		}
+
+		std::pair<float, float> getClick() const;
 
 	private:
 		/** The SFML instance of a window. */
-		static sf::RenderWindow * window;
+		static sf::RenderWindow * window_;
 	};
 
 }

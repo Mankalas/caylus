@@ -7,11 +7,12 @@
  */
 
 #include "all-buildings.hh"
+#include "const.hh"
 
 using namespace controller;
 
 Statue::Statue ()
-	: Building("Statue",
+	: Building(STATUE,
 	           BuildingType::prestige,
 	           Resource::stone * 2 + Resource::gold,
 	           Resource::prestige * 7 + Resource::favor)
@@ -19,7 +20,7 @@ Statue::Statue ()
 }
 
 Theater::Theater ()
-	: Building("Theater",
+	: Building(THEATER,
 	           BuildingType::prestige,
 	           Resource::wood * 3 + Resource::gold * 2,
 	           Resource::prestige * 14 + Resource::favor)
@@ -27,7 +28,7 @@ Theater::Theater ()
 }
 
 College::College ()
-	: Building("College",
+	: Building(COLLEGE,
 	           BuildingType::prestige,
 	           Resource::stone * 3 + Resource::gold * 2,
 	           Resource::prestige * 14 + Resource::favor)
@@ -35,7 +36,7 @@ College::College ()
 }
 
 Monument::Monument ()
-	: Building("Monument",
+	: Building(MONUMENT,
 	           BuildingType::prestige,
 	           Resource::stone * 4 + Resource::gold * 2,
 	           Resource::prestige * 14 + Resource::favor * 2)
@@ -43,7 +44,7 @@ Monument::Monument ()
 }
 
 Granary::Granary ()
-	: Building ("Granary",
+	: Building (GRANARY,
 	            BuildingType::prestige,
 	            Resource::food * 3 + Resource::gold,
 	            Resource::prestige * 10)
@@ -51,7 +52,7 @@ Granary::Granary ()
 }
 
 Weaver::Weaver ()
-	: Building ("Weaver",
+	: Building (WEAVER,
 	            BuildingType::prestige,
 	            Resource::cloth * 3 + Resource::gold,
 	            Resource::prestige * 12)
@@ -59,7 +60,7 @@ Weaver::Weaver ()
 }
 
 Cathedral::Cathedral ()
-	: Building ("Cathedral",
+	: Building (CATHEDRAL,
 	            BuildingType::prestige,
 	            Resource::stone * 5 + Resource::gold * 3,
 	            Resource::prestige * 25)
@@ -67,7 +68,7 @@ Cathedral::Cathedral ()
 }
 
 GoldMine::GoldMine ()
-	: Building("Gold mine",
+	: Building(GOLD_MINE,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -77,7 +78,7 @@ GoldMine::GoldMine ()
 }
 
 NQuarry::NQuarry ()
-	: Building("Neutral Quarry",
+	: Building(NEUTRAL_QUARRY,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -87,7 +88,7 @@ NQuarry::NQuarry ()
 }
 
 WQuarry::WQuarry ()
-	: Building("Wood Quarry",
+	: Building(WOOD_QUARRY,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),
@@ -97,7 +98,7 @@ WQuarry::WQuarry ()
 }
 
 Workshop::Workshop ()
-	: Building("Workshop",
+	: Building(WORKSHOP,
 	           BuildingType::stone,
 	           Resource::food + Resource::stone,
 	           Resource::prestige * 3),
@@ -110,7 +111,7 @@ Workshop::Workshop ()
 }
 
 NFarm::NFarm ()
-	: Building("Neutral Farm",
+	: Building(NEUTRAL_FARM,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -122,7 +123,7 @@ NFarm::NFarm ()
 }
 
 WFFarm::WFFarm ()
-	: Building("Wood food Farm",
+	: Building(WOOD_FOOD_FARM,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),
@@ -134,7 +135,7 @@ WFFarm::WFFarm ()
 }
 
 WCFarm::WCFarm ()
-	: Building("Wood cloth Farm",
+	: Building(WOOD_CLOTH_FARM,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),
@@ -146,7 +147,7 @@ WCFarm::WCFarm ()
 }
 
 SFarm::SFarm ()
-	: Building("Stone Farm",
+	: Building(STONE_FARM,
 	           BuildingType::stone,
 	           Resource::food + Resource::stone,
 	           Resource::prestige * 3),
@@ -159,7 +160,7 @@ SFarm::SFarm ()
 }
 
 Forest::Forest ()
-	: Building("Forest",
+	: Building(FOREST,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -171,7 +172,7 @@ Forest::Forest ()
 }
 
 Park::Park ()
-	: Building("Park",
+	: Building(PARK,
 	           BuildingType::stone,
 	           Resource::food + Resource::stone,
 	           Resource::prestige * 3),
@@ -184,7 +185,7 @@ Park::Park ()
 }
 
 NSawmill::NSawmill ()
-	: Building("Neutral Sawmill",
+	: Building(NEUTRAL_SAWMILL,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -195,7 +196,7 @@ NSawmill::NSawmill ()
 }
 
 WSawmill::WSawmill ()
-	: Building("Wood Sawmill",
+	: Building(WOOD_SAWMILL,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),
@@ -206,7 +207,7 @@ WSawmill::WSawmill ()
 }
 
 Residence::Residence ()
-	: Building("Residence",
+	: Building(RESIDENCE,
 	           BuildingType::residential,
 	           Resource::cloth + Resource::denier,
 	           Resource::prestige * 2)
@@ -214,7 +215,7 @@ Residence::Residence ()
 }
 
 Library::Library ()
-	: Building("Library",
+	: Building(LIBRARY,
 	           BuildingType::prestige,
 	           Resource::wood * 3 + Resource::gold,
 	           Resource::prestige * 10)
@@ -222,7 +223,7 @@ Library::Library ()
 }
 
 Hotel::Hotel ()
-	: Building("Hotel",
+	: Building(HOTEL,
 	           BuildingType::prestige,
 	           Resource::stone * 3 + Resource::gold * 2,
 	           Resource::prestige * 16),
@@ -231,7 +232,7 @@ Hotel::Hotel ()
 }
 
 Church::Church ()
-	: Building("Church",
+	: Building(CHURCH,
 	           BuildingType::stone,
 	           Resource::stone + Resource::cloth,
 	           Resource::favor + Resource::prestige * 3),
@@ -244,7 +245,7 @@ Church::Church ()
 }
 
 FPeddler::FPeddler ()
-	: Building("Fixed Peddler",
+	: Building(FIXED_PEDDLER,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -259,7 +260,7 @@ FPeddler::FPeddler ()
 }
 
 WPeddler::WPeddler ()
-	: Building("Wood Peddler",
+	: Building(WOOD_PEDDLER,
 	           BuildingType::wood,
 	           boost::assign::list_of
 	           (Resource::wood + Resource::food)
@@ -280,7 +281,7 @@ WPeddler::WPeddler ()
 }
 
 Jeweller::Jeweller ()
-	: Building("Jeweller",
+	: Building(JEWELLER,
 	           BuildingType::stone,
 	           Resource::stone + Resource::cloth,
 	           Resource::prestige * 6),
@@ -293,7 +294,7 @@ Jeweller::Jeweller ()
 }
 
 Tailor::Tailor ()
-	: Building("Tailor",
+	: Building(TAILOR,
 	           BuildingType::stone,
 	           Resource::stone + Resource::cloth,
 	           Resource::prestige * 6),
@@ -306,7 +307,7 @@ Tailor::Tailor ()
 }
 
 Alchemist::Alchemist ()
-	: Building("Alchemist",
+	: Building(ALCHEMIST,
 	           BuildingType::stone,
 	           Resource::food + Resource::stone,
 	           Resource::prestige * 6),
@@ -322,7 +323,7 @@ Alchemist::Alchemist ()
 }
 
 Bank::Bank ()
-	: Building("Bank",
+	: Building(BANK,
 	           BuildingType::stone,
 	           Resource::wood + Resource::stone,
 	           Resource::prestige * 6),
@@ -335,7 +336,7 @@ Bank::Bank ()
 }
 
 TradingPost::TradingPost ()
-	: Building("Trading post",
+	: Building(TRADING_POST,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -345,7 +346,7 @@ TradingPost::TradingPost ()
 }
 
 NCarpenter::NCarpenter(GameEngine *ge)
-	: Building("Neutral Carpenter",
+	: Building(NEUTRAL_CARPENTER,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -354,7 +355,7 @@ NCarpenter::NCarpenter(GameEngine *ge)
 }
 
 FCarpenter::FCarpenter(GameEngine *ge)
-	: Building("Fixed Carpenter",
+	: Building(FIXED_CARPENTER,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -363,7 +364,7 @@ FCarpenter::FCarpenter(GameEngine *ge)
 }
 
 Lawyer::Lawyer(GameEngine *ge)
-	: Building("Lawyer",
+	: Building(LAWYER,
 	           BuildingType::wood,
 	           Resource::wood + Resource::cloth,
 	           Resource::prestige * 4),
@@ -372,7 +373,7 @@ Lawyer::Lawyer(GameEngine *ge)
 }
 
 Architect::Architect(GameEngine *ge)
-	: Building("Architect",
+	: Building(ARCHITECT,
 	           BuildingType::stone,
 	           Resource::food + Resource::stone,
 	           Resource::prestige * 6),
@@ -381,7 +382,7 @@ Architect::Architect(GameEngine *ge)
 }
 
 Mason::Mason(GameEngine *ge)
-	: Building("Mason",
+	: Building(MASON,
 	           BuildingType::wood,
 	           Resource::wood + Resource::food,
 	           Resource::prestige * 4),
@@ -390,7 +391,7 @@ Mason::Mason(GameEngine *ge)
 }
 
 NMarketplace::NMarketplace ()
-	: Building("Neutral Marketplace",
+	: Building(NEUTRAL_MARKETPLACE,
 	           BuildingType::neutral,
 	           ResourceMap(0),
 	           ResourceMap(0)),
@@ -406,7 +407,7 @@ NMarketplace::NMarketplace ()
 }
 
 WMarketplace::WMarketplace ()
-	: Building("Wood Marketplace",
+	: Building(WOOD_MARKETPLACE,
 	           BuildingType::wood,
 	           boost::assign::list_of
 	           (Resource::wood + Resource::food)

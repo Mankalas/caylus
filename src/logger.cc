@@ -46,16 +46,6 @@ void Logger::log(const std::string &msg)
 	std::cout << msg << std::endl;
 }
 
-void Logger::stack(eGameActor actor)
-{
-	actors_stack_.push(actor);
-}
-
-void Logger::pop()
-{
-	actors_stack_.pop();
-}
-
 void Logger::gameInfo(const GameEngine * ge)
 {
 	assert(ge);

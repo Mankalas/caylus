@@ -11,6 +11,7 @@
 
 # include <stack>
 # include <fstream>
+# include "const.hh"
 
 namespace controller
 {
@@ -30,18 +31,6 @@ public:
 	template <class T>
 	std::string to_string(const T &t) const;
 
-	enum eGameActor
-	{
-		GAME_ENGINE,
-		BUILDNIG,
-		CASTLE,
-		GATE,
-		PRODUCTION_BUILDING,
-		ROAD
-	};
-
-	void stack(eGameActor actor);
-	void pop();
 	void close();
 
 	void gameInfo(const controller::GameEngine *);
@@ -57,7 +46,6 @@ private:
 
 	unsigned int turn_count_;
 	std::ofstream file_;
-	std::stack<eGameActor> actors_stack_;
 };
 
 # include "logger.hxx"

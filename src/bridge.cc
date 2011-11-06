@@ -8,9 +8,10 @@
 
 #include "bridge.hh"
 #include "player.hh"
+#include "const.hh"
 
 Bridge::Bridge() :
-	BoardElement("Bridge")
+	BoardElement(BRIDGE)
 {}
 
 void Bridge::add(Player * p)

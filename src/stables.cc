@@ -1,6 +1,6 @@
 /**
  * @file   stables.cc
- * @author  <mankalas@localhost,>
+ * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Thu Jan 15 14:17:13 2009
  *
  * @brief Implementation of the Stables.
@@ -12,9 +12,10 @@
 #include "player.hh"
 #include "exceptions.hh"
 #include "game-engine.hh"
+#include "const.hh"
 
 Stables::Stables(GameEngine *ge)
-	: Building("Stables",
+	: Building(STABLES,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),

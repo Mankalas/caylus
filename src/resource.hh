@@ -1,10 +1,10 @@
-/*!
-  \file   resource.hh
-  \brief  This file contains Resource class.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   resource.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Jan 6 20:07:15 2011
+ *
+ * @brief  Declaration of the resource class.
+ */
 
 #ifndef RESOURCE_HH_
 # define RESOURCE_HH_
@@ -12,8 +12,7 @@
 # include <vector>
 # include <boost/foreach.hpp>
 # include "enum-object.hh"
-
-# define foreach BOOST_FOREACH
+# include "const.hh"
 
 namespace controller
 {

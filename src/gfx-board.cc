@@ -1,16 +1,38 @@
+/**
+ * @file   gfx-board.cc
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Sun Nov  6 20:11:52 2011
+ *
+ * @brief  Implementation of the gfx-board class.
+ */
+
 #include "gfx-board.hh"
 #include "gfx-sprite-library.hh"
+#include "const.hh"
+#include <boost/foreach.hpp>
+#include <iostream>
 
 using namespace std;
 using namespace gfx;
 
-LimitedEditionBoard::LimitedEditionBoard()
-
+const std::string * Board::getBuildingName(float x, float y) const
 {
-	path_to_images_ = "../share/img/";
+	foreach (const road_t::value_type & it, buildings_placement_)
+		{
+			unsigned int a = it.first.first;
+			unsigned int b = it.first.second;
+			std::cout << "Check if (" << x << ", " << y << ") in (" << a << ", " << b << ").\n";
+			if (x >= a && x <= a + case_width_ &&
+					y >= b && y <= b + case_height_)
+				{
+					return &it.second;
+				}
+		}
+	return NULL;
+}
 
-	board_ = SpriteLibrary::instance()->sprite("board");
-
+LimitedEditionBoard::LimitedEditionBoard()
+{
 	height_ = 904;
 	width_ = 1282;
 	case_height_ = case_width_ = 100;
@@ -58,15 +80,15 @@ LimitedEditionBoard::LimitedEditionBoard()
 	const unsigned int BRIDGE_COL_4 = 1143;
 	const unsigned int BRIDGE_COL_5 = 1187;*/
 
-	gate_coord_ = make_pair(COL_8, ROW_5);
-	trading_post_coord_ = make_pair(COL_8, ROW_6);
-	merchant_guild_coord_ = make_pair(COL_9, ROW_6);
-	joust_field_coord_ = make_pair(COL_10, ROW_6);
-	stables_coord_ = make_pair(COL_11, ROW_6);
-	inn_coord_ = make_pair(COL_11, ROW_7);
-	fixed_peddler_coord_ = make_pair(COL_2, ROW_8);
-	fixed_carpenter_coord_ = make_pair(COL_1, ROW_8);
-	goldmine_coord_ = make_pair(COL_2, ROW_1);
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_8, ROW_5), GATE));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_8, ROW_6), TRADING_POST));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_9, ROW_6), MERCHANT_GUILD));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_10, ROW_6), JOUST_FIELD));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_11, ROW_6), STABLES));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_11, ROW_7), INN));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_2, ROW_8), FIXED_PEDDLER));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_1, ROW_8), FIXED_CARPENTER));
+	buildings_placement_.insert(std::pair<coordinates_t, const std::string>(make_pair(COL_2, ROW_1), GOLD_MINE));
 
 	neutral_cases_.push_back(make_pair(COL_3, ROW_8));
 	neutral_cases_.push_back(make_pair(COL_4, ROW_8));
@@ -97,6 +119,4 @@ LimitedEditionBoard::LimitedEditionBoard()
 
 	house_height_ = 26;
 	house_width_ = 39;
-
-
 }
