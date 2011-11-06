@@ -23,16 +23,63 @@
 
 using namespace controller;
 
-GameEngine::GameEngine()
-	: road_(this), nb_turns_(0)
-{
-	initialize();
-}
-
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0)
 {
-	initialize();
+	Logger::instance()->gameInfo(this);
+	mutex_.lock();
+	assert(nb_humans_ <= 5);
+	for (unsigned i = 0; i < nb_humans_; ++i)
+	{
+		Player *p = new Player();
+		Logger::instance()->log("Adding new human player.");
+		players_.push_back(p);
+	}
+	if (nb_humans_ > 1)
+	{
+		assert(nb_ais_ <= 5 - nb_humans_);
+	}
+	else
+	{
+		//assert(nb_ais_ > 0);
+	}
+	while (players_.size() < nb_ais_ + nb_humans_)
+	{
+		Player *p = new Player();
+		Logger::instance()->log("Adding new AI player.");
+		p->setName("HAL");
+		players_.push_back(p);
+	}
+
+	provost_ = PROVOST_INIT_CASE;
+	bailiff_ = BAILIFF_INIT_CASE;
+
+	buildings_.push_back(BuildingSmartPtr(new Statue()));
+	buildings_.push_back(BuildingSmartPtr(new Theater()));
+	buildings_.push_back(BuildingSmartPtr(new College()));
+	buildings_.push_back(BuildingSmartPtr(new Monument()));
+	buildings_.push_back(BuildingSmartPtr(new Granary()));
+	buildings_.push_back(BuildingSmartPtr(new Weaver()));
+	buildings_.push_back(BuildingSmartPtr(new Cathedral()));
+	buildings_.push_back(BuildingSmartPtr(new WQuarry()));
+	buildings_.push_back(BuildingSmartPtr(new Workshop()));
+	buildings_.push_back(BuildingSmartPtr(new WFFarm()));
+	buildings_.push_back(BuildingSmartPtr(new WCFarm()));
+	buildings_.push_back(BuildingSmartPtr(new SFarm()));
+	buildings_.push_back(BuildingSmartPtr(new Park()));
+	buildings_.push_back(BuildingSmartPtr(new WSawmill()));
+	buildings_.push_back(BuildingSmartPtr(new Library()));
+	buildings_.push_back(BuildingSmartPtr(new Hotel()));
+	buildings_.push_back(BuildingSmartPtr(new Church()));
+	buildings_.push_back(BuildingSmartPtr(new WPeddler()));
+	buildings_.push_back(BuildingSmartPtr(new WMarketplace()));
+	buildings_.push_back(BuildingSmartPtr(new Jeweller()));
+	buildings_.push_back(BuildingSmartPtr(new Tailor()));
+	buildings_.push_back(BuildingSmartPtr(new Alchemist()));
+	buildings_.push_back(BuildingSmartPtr(new Bank()));
+	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
+	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
+	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
 }
 
 GameEngine::~GameEngine()
@@ -66,64 +113,6 @@ void GameEngine::_run()
 		endOfTurn();
 	}
 	Logger::instance()->log("End of the game.");
-}
-
-void GameEngine::initialize()
-{
-	mutex_.lock();
-	assert(nb_humans_ <= 5);
-	for (unsigned i = 0; i < nb_humans_; ++i)
-	{
-		Player *p = new Player();
-		Logger::instance()->log("Adding new human player.");
-		players_.push_back(p);
-	}
-	if (nb_humans_ > 1)
-	{
-		assert(nb_ais_ <= 5 - nb_humans_);
-	}
-	else
-	{
-		//assert(nb_ais_ > 0);
-	}
-	while (players_.size() < nb_ais_ + nb_humans_)
-	{
-		Player *p = new Player();
-		Logger::instance()->log("Adding new AI player.");
-		p->setName("HAL");
-		players_.push_back(p);
-	}
-
-
-	provost_ = PROVOST_INIT_CASE;
-	bailiff_ = BAILIFF_INIT_CASE;
-
-	buildings_.push_back(BuildingSmartPtr(new Statue()));
-	buildings_.push_back(BuildingSmartPtr(new Theater()));
-	buildings_.push_back(BuildingSmartPtr(new College()));
-	buildings_.push_back(BuildingSmartPtr(new Monument()));
-	buildings_.push_back(BuildingSmartPtr(new Granary()));
-	buildings_.push_back(BuildingSmartPtr(new Weaver()));
-	buildings_.push_back(BuildingSmartPtr(new Cathedral()));
-	buildings_.push_back(BuildingSmartPtr(new WQuarry()));
-	buildings_.push_back(BuildingSmartPtr(new Workshop()));
-	buildings_.push_back(BuildingSmartPtr(new WFFarm()));
-	buildings_.push_back(BuildingSmartPtr(new WCFarm()));
-	buildings_.push_back(BuildingSmartPtr(new SFarm()));
-	buildings_.push_back(BuildingSmartPtr(new Park()));
-	buildings_.push_back(BuildingSmartPtr(new WSawmill()));
-	buildings_.push_back(BuildingSmartPtr(new Library()));
-	buildings_.push_back(BuildingSmartPtr(new Hotel()));
-	buildings_.push_back(BuildingSmartPtr(new Church()));
-	buildings_.push_back(BuildingSmartPtr(new WPeddler()));
-	buildings_.push_back(BuildingSmartPtr(new WMarketplace()));
-	buildings_.push_back(BuildingSmartPtr(new Jeweller()));
-	buildings_.push_back(BuildingSmartPtr(new Tailor()));
-	buildings_.push_back(BuildingSmartPtr(new Alchemist()));
-	buildings_.push_back(BuildingSmartPtr(new Bank()));
-	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
-	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
-	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
 }
 
 void GameEngine::activateBuildings()
@@ -179,17 +168,19 @@ void GameEngine::activateCastle()
 
 void GameEngine::collectIncome()
 {
-	Logger::instance()->log("Collecting income... ");
+	Logger::instance()->startSection(2, "Income collection");
 	foreach (Player *p, players_)
 	{
-		p->resources() += Resource::denier * (2 + p->residences());
+		ResourceMap income = Resource::denier * (2 + p->residences());
+		Logger::instance()->playerIncome(p, income);
+		p->resources() += income;
 	}
-	Logger::instance()->log("Done.");
+	Logger::instance()->endSection();
 }
 
 void GameEngine::endOfTurn()
 {
-	Logger::instance()->log("End of turn.");
+	Logger::instance()->endSection();
 	_moveBailiff();
 	if (bailiff_ == 17 || bailiff_ == 18 ||
 	    bailiff_ == 30 || bailiff_ == 31 ||
@@ -206,11 +197,12 @@ void GameEngine::endOfTurn()
 
 void GameEngine::placeWorkers()
 {
+	Logger::instance()->startSection(2, "Worker placement");
 	while (bridge_.players().size() != players_.size())
 	{
 		foreach (Player *p, order_)
 		{
-			assert(p != NULL);
+			assert(p);
 			if (!_canPlayerPlay(p))
 			{
 				continue;
@@ -300,6 +292,7 @@ void GameEngine::_playerMove(Player *p)
 
 void GameEngine::_startOfTurn()
 {
+	Logger::instance()->startOfTurn(this);
 	road_.clearWorkers();
 	bridge_.clear();
 	castle_.clear();

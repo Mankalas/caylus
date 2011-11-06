@@ -12,13 +12,18 @@
 # include <stack>
 # include <fstream>
 
+namespace controller
+{
+	class GameEngine;
+	class Player;
+	class ResourceMap;
+}
+
 class Logger
 {
 public:
 
 	static Logger * instance();
-
-	~Logger();
 
 	void log(const std::string &msg);
 
@@ -37,6 +42,14 @@ public:
 
 	void stack(eGameActor actor);
 	void pop();
+	void close();
+
+	void gameInfo(const controller::GameEngine *);
+	void startOfTurn(const controller::GameEngine *);
+	void playerIncome(const controller::Player *, const controller::ResourceMap &);
+
+	void startSection(int level, const std::string & title);
+	void endSection();
 
 private:
 	static Logger * instance_;

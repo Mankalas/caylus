@@ -9,8 +9,12 @@
 #include "logger.hh"
 
 #include <iostream>
+#include "game-engine.hh"
+#include "player.hh"
+#include "resource-map.hh"
 
 using namespace std;
+using namespace controller;
 
 Logger * Logger::instance_ = NULL;
 
@@ -21,11 +25,11 @@ Logger::Logger()
 	std::cout << "file open\n";
 }
 
-Logger::~Logger()
+void Logger::close()
 {
-	file_ << std::endl;
+	file_ <<  "</body>\n</html>" << std::endl;
 	file_.close();
-	std::cout << "file closed.\n";
+	std::cout <<"file closed.\n";
 }
 
 Logger * Logger::instance()
@@ -50,5 +54,41 @@ void Logger::stack(eGameActor actor)
 void Logger::pop()
 {
 	actors_stack_.pop();
+}
+
+void Logger::gameInfo(const GameEngine * ge)
+{
+	assert(ge);
+
+	file_ << "<h1>Init info</h1>"
+				<< "<ul>\n<li>Number of humans : " << ge->nbHumans() << "</li>"
+				<< "<li>Number of AIs : " << ge->nbAIs() << "</li>"
+				<< "</ul>";
+}
+
+void Logger::startOfTurn(const GameEngine * ge)
+{
+	assert(ge);
+
+	file_ << "<h1>Turn " << ge->nbTurns() << "</h1>"
+				<< "<div style=\"margin-left:50px\">\n";
+}
+
+void Logger::startSection(int level, const std::string & title)
+{
+	file_ << "<h" << level << ">" << title << "</h" << level << ">\n"
+				<< "<div style=\"margin-left:50px\">\n";
+}
+
+void Logger::playerIncome(const Player * p, const ResourceMap & r)
+{
+	assert(p);
+	file_ << "<p>Player " << p->name() << " received " << r << " for he has " << p->residences() << " residences.</p>";
+}
+
+
+void Logger::endSection()
+{
+	file_ << "</div>";
 }
 

@@ -104,10 +104,28 @@ GameEngine::nbTurnsMax()
 	return nb_turns_max_;
 }
 
+inline const unsigned &
+GameEngine::nbTurns() const
+{
+	return nb_turns_;
+}
+
 inline boost::mutex&
 GameEngine::mutex()
 {
   return mutex_;
+}
+
+inline
+const unsigned & GameEngine::nbHumans() const
+{
+	return nb_humans_;
+}
+
+inline
+const unsigned & GameEngine::nbAIs() const
+{
+	return nb_ais_;
 }
 
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)

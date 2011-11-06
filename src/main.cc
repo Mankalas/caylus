@@ -56,9 +56,6 @@ int main(int argc, char **argv)
 
 	try
 	{
-
-		Logger::instance();
-
 		GameEngine g(nb_humans, nb_ais);
 		g.nbTurnsMax() = max_turns;
 		boost::thread controller_thread = boost::thread(boost::ref(g));
@@ -78,5 +75,6 @@ int main(int argc, char **argv)
 	{
 		std::cerr << ex->msg() << std::endl;
 	}
+	Logger::instance()->close();
 	return 0;
 }

@@ -50,16 +50,10 @@ namespace controller
 		void subscribeView(view::Human *human);
 
 		/** Default constructor. */
-		GameEngine();
-
 		GameEngine(unsigned nb_humans, unsigned nb_ais);
 
 		/** Destructor. */
 		~GameEngine();
-
-		/** Initialize the current object. Used for code factorization,
-		 * shared by the constructors. */
-		void initialize();
 
 		/** Step 1. Calculate the income for each player at the
 		 * beginning of each turn. */
@@ -117,7 +111,13 @@ namespace controller
 		const unsigned &provost() const;
 		unsigned &provost();
 
+		const unsigned &nbHumans() const;
+		const unsigned &nbAIs() const;
+
+		const unsigned &nbTurnsMax() const;
 		unsigned &nbTurnsMax();
+
+		const unsigned & nbTurns() const;
 
 		boost::mutex &mutex();
 		boost::condition_variable *waitingPlayers();
