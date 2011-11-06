@@ -37,6 +37,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 
 GameEngine::~GameEngine()
 {
+	mutex_.unlock();
 	foreach(Player * p, players_)
 	{
 		delete p;

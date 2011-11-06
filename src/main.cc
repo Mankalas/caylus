@@ -57,18 +57,12 @@ int main(int argc, char **argv)
 	try
 	{
 
-		Logger logger();
+		Logger::instance();
 
 		GameEngine g(nb_humans, nb_ais);
 		g.nbTurnsMax() = max_turns;
 		boost::thread controller_thread = boost::thread(boost::ref(g));
 		Logger::instance()->log("Game Engine thread launched.");
-
-		//boost::mutex mutex;
-		//boost::unique_lock<boost::mutex> lock(mutex);
-		//Logger::instance().log("GE waiting for init to end.");
-		//g.waitingPlayers()->wait(lock);
-		//Logger::instance().log("Game engine ready.");
 
 		Human human(&g);
 		g.subscribeView(&human);
