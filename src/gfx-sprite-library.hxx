@@ -14,7 +14,7 @@ gfx::SpriteLibrary* gfx::SpriteLibrary::instance()
 }
 
 inline
-std::map<std::string, gfx::Sprite*>& gfx::SpriteLibrary::getSprites()
+std::map<const std::string, gfx::Sprite*>& gfx::SpriteLibrary::getSprites()
 {
   return sprites_;
 }

@@ -20,11 +20,11 @@ gfx::Sprite::Sprite(const std::string file_name)
 	image_ = new sf::Image();
 	if (image_ == NULL)
 	{
-		throw new MemAllocError();
+		//throw new MemAllocError();
 	}
 	if (!image_->LoadFromFile(file_name))
 	{
-		throw new ImageNotFound();
+		//throw new ImageNotFound();
 	}
 	sprite_ = sf::Sprite(*image_);
 }
@@ -32,5 +32,3 @@ gfx::Sprite::Sprite(const std::string file_name)
 gfx::Sprite::Sprite(const gfx::Sprite &copy) :
 	sprite_(copy.sprite_),
 	image_(copy.image_) {}
-
-gfx::Sprite::~Sprite() {}

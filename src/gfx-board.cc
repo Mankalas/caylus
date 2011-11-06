@@ -1,11 +1,62 @@
 #include "gfx-board.hh"
+#include "gfx-sprite-library.hh"
 
-gfx::Board::LimitedEditionBoard()
+using namespace std;
+using namespace gfx;
+
+LimitedEditionBoard::LimitedEditionBoard()
+
 {
-	path_to_images_ = "../share/img/"
-	                  height_ = 904;
+	path_to_images_ = "../share/img/";
+
+	board_ = SpriteLibrary::instance()->sprite("board");
+
+	height_ = 904;
 	width_ = 1282;
 	case_height_ = case_width_ = 100;
+
+	const unsigned int  ROW_1 = 58;
+	const unsigned int  ROW_2 = 159;
+	const unsigned int  ROW_3 = 258;
+	const unsigned int  ROW_4 = 355;
+	const unsigned int  ROW_5 = 456;
+	const unsigned int  ROW_6 = 555;
+	const unsigned int  ROW_7 = 652;
+	const unsigned int  ROW_8 = 753;
+
+	const unsigned int  COL_1 = 57;
+	const unsigned int  COL_2 = 164;
+	const unsigned int  COL_3 = 271;
+	const unsigned int  COL_4 = 377;
+	const unsigned int  COL_5 = 485;
+	const unsigned int  COL_6 = 591;
+	const unsigned int  COL_7 = 697;
+	const unsigned int  COL_8 = 803;
+	const unsigned int  COL_9 = 910;
+	const unsigned int  COL_10 = 1016;
+	const unsigned int  COL_11 = 1122;
+
+	/*const unsigned int HOUSE_ROW_1 = 200;
+	const unsigned int HOUSE_ROW_2 = 229;
+	const unsigned int HOUSE_ROW_3 = 260;
+	const unsigned int HOUSE_ROW_4 = 292;
+	const unsigned int HOUSE_ROW_5 = 322;
+
+	const unsigned int HOUSE_COL_1 = 257;
+	const unsigned int HOUSE_COL_2 = 300;
+	const unsigned int HOUSE_COL_3 = 372;
+	const unsigned int HOUSE_COL_4 = 413;
+	const unsigned int HOUSE_COL_5 = 257;
+	const unsigned int HOUSE_COL_6 = 488;
+	const unsigned int HOUSE_COL_7 = 529;
+	const unsigned int HOUSE_COL_8 = 572;
+
+	const unsigned int BRIDGE_ROW = 494;
+	const unsigned int BRIDGE_COL_1 = 1011;
+	const unsigned int BRIDGE_COL_2 = 1055;
+	const unsigned int BRIDGE_COL_3 = 1099;
+	const unsigned int BRIDGE_COL_4 = 1143;
+	const unsigned int BRIDGE_COL_5 = 1187;*/
 
 	gate_coord_ = make_pair(COL_8, ROW_5);
 	trading_post_coord_ = make_pair(COL_8, ROW_6);
@@ -17,77 +68,35 @@ gfx::Board::LimitedEditionBoard()
 	fixed_carpenter_coord_ = make_pair(COL_1, ROW_8);
 	goldmine_coord_ = make_pair(COL_2, ROW_1);
 
-	neutral_cases_ << make_pair(COL_3, ROW_8)
-	               << make_pair(COL_4, ROW_8)
-	               << make_pair(COL_5, ROW_8)
-	               << make_pair(COL_6, ROW_8)
-	               << make_pair(COL_7, ROW_8)
-	               << make_pair(COL_8, ROW_8);
+	neutral_cases_.push_back(make_pair(COL_3, ROW_8));
+	neutral_cases_.push_back(make_pair(COL_4, ROW_8));
+	neutral_cases_.push_back(make_pair(COL_5, ROW_8));
+	neutral_cases_.push_back(make_pair(COL_6, ROW_8));
+	neutral_cases_.push_back(make_pair(COL_7, ROW_8));
+	neutral_cases_.push_back(make_pair(COL_8, ROW_8));
 
-	empty_cases_ << make_pair(COL_1, ROW_7)
-	             << make_pair(COL_1, ROW_6)
-	             << make_pair(COL_1, ROW_5)
-	             << make_pair(COL_1, ROW_4)
-	             << make_pair(COL_1, ROW_3)
-	             << make_pair(COL_1, ROW_2)
-	             << make_pair(COL_1, ROW_1)
-	             << make_pair(COL_3, ROW_1)
-	             << make_pair(COL_4, ROW_1)
-	             << make_pair(COL_5, ROW_1)
-	             << make_pair(COL_6, ROW_1)
-	             << make_pair(COL_7, ROW_1)
-	             << make_pair(COL_8, ROW_1)
-	             << make_pair(COL_9, ROW_1)
-	             << make_pair(COL_10, ROW_1)
-	             << make_pair(COL_11, ROW_1)
-	             << make_pair(COL_11, ROW_2)
-	             << make_pair(COL_11, ROW_3)
-	             << make_pair(COL_10, ROW_3);
+	empty_cases_.push_back(make_pair(COL_1, ROW_7));
+	empty_cases_.push_back(make_pair(COL_1, ROW_6));
+	empty_cases_.push_back(make_pair(COL_1, ROW_5));
+	empty_cases_.push_back(make_pair(COL_1, ROW_4));
+	empty_cases_.push_back(make_pair(COL_1, ROW_3));
+	empty_cases_.push_back(make_pair(COL_1, ROW_2));
+	empty_cases_.push_back(make_pair(COL_1, ROW_1));
+	empty_cases_.push_back(make_pair(COL_3, ROW_1));
+	empty_cases_.push_back(make_pair(COL_4, ROW_1));
+	empty_cases_.push_back(make_pair(COL_5, ROW_1));
+	empty_cases_.push_back(make_pair(COL_6, ROW_1));
+	empty_cases_.push_back(make_pair(COL_7, ROW_1));
+	empty_cases_.push_back(make_pair(COL_8, ROW_1));
+	empty_cases_.push_back(make_pair(COL_9, ROW_1));
+	empty_cases_.push_back(make_pair(COL_10, ROW_1));
+	empty_cases_.push_back(make_pair(COL_11, ROW_1));
+	empty_cases_.push_back(make_pair(COL_11, ROW_2));
+	empty_cases_.push_back(make_pair(COL_11, ROW_3));
+	empty_cases_.push_back(make_pair(COL_10, ROW_3));
 
 	house_height_ = 26;
 	house_width_ = 39;
 
-	board_img_ = "board_limited_edition.jpg";
-	alchemist_img_ = "alchemist.png";
-	architect_img_ = "architect.png";
-	bank_img_ = "bank.png";
-	cathedral_img_ = "cathedral.png";
-	church_img_ = "church.png";
-	college_img_ = "college.png";
-	farm_cloth_img_ = "farm_cloth.png";
-	farm_food_img_ = "farm_food.png";
-	farm_stone_img_ = "farm_stone.png";
-	fixed_carpenter_img_ = "fixed_carpenter.png";
-	fixed_peddler_img_ = "fixed_peddler.png";
-	gate_img_ = "gate.png";
-	gold_mine_img_ = "gold_mine.png";
-	granary_img_ = "granary.png";
-	hotel_img_ = "hotel.png";
-	inn_img_ = "inn.png";
-	jeweller_img_ = "jeweller.png";
-	joust_field_img_ = "joust_field.png";
-	lawyer_img_ = "lawyer.png";
-	library_img_ = "library.png";
-	marketplace_img_ = "marketplace.png";
-	mason_img_ = "mason.png";
-	merchant_guild_img_ = "merchant_guild.png";
-	monument_img_ = "monument.png";
-	neutral_carpenter_img_ = "neutral_carpenter.png";
-	neutral_farm_img_ = "neutral_farm.png";
-	neutral_forest_img_ = "neutral_forest.png";
-	neutral_marketplace_img_ = "neutral_marketplace.png";
-	neutral_quarry_img_ = "neutral_quarry.png";
-	neutral_sawmill_img_ = "neutral_sawmill.png";
-	park_img_ = "park.png";
-	peddler_img_ = "peddler.png";
-	quarry_img_ = "quarry.png";
-	residence_img_ = "residence.png";
-	sawmill_img_ = "sawmill.png";
-	stables_img_ = "stables.png";
-	statue_img_ = "statue.png";
-	tailor_img_ = "tailor.png";
-	theater_img_ = "theater.png";
-	trading_post_img_ = "trading_post.png";
-	weaver_img_ = "weaver.png";
-	workshop_img_ = "workshop.png";
+
 }

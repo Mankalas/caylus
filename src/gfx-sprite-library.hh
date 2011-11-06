@@ -1,10 +1,10 @@
-/*!
-  \file   SpriteLibrary.hh
-  \brief  Declaration of SpriteLibrary.
-
-  \author Mankalas
-  \date   2008-02-09
-*/
+/**
+ * @file   gfx-sprite-library.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Feb  9 17:45:03 2009
+ *
+ * @brief  Declaration of the gfx-sprite-library class.
+ */
 
 #ifndef SPRITELIBRARY_HH
 # define SPRITELIBRARY_HH
@@ -23,27 +23,30 @@ namespace gfx
 	 */
 	class SpriteLibrary
 	{
-		private:
-			/** Default constructor. */
-			SpriteLibrary();
+	public:
+		/** \brief Get the unique instance of the class.
+		 *	\return The instance of SpriteLibrary.
+		 */
+		static SpriteLibrary *instance();
 
-			/** The unique instance of the class. */
-			static SpriteLibrary *instance_;
+		/** \brief Get the images dictionnary.
+		 *
+		 *  \return The images dictionnary.
+		 */
+		std::map<const std::string, gfx::Sprite *>& getSprites();
 
-			/** The images dictionnary. */
-			std::map<std::string, gfx::Sprite *>	sprites_;
+		Sprite * sprite(const std::string & name) ;
 
-		public:
-			/** \brief Get the unique instance of the class.
-			 *	\return The instance of SpriteLibrary.
-			 */
-			static SpriteLibrary *instance();
+	private:
+		/** Default constructor. */
+		SpriteLibrary();
 
-			/** \brief Get the images dictionnary.
-			 *
-			 *  \return The images dictionnary.
-			 */
-			std::map<std::string, gfx::Sprite *>& getSprites();
+		/** The unique instance of the class. */
+		static SpriteLibrary *instance_;
+
+		/** The images dictionnary. */
+		std::map<const std::string, gfx::Sprite *>sprites_;
+
 	};
 
 }

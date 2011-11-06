@@ -20,8 +20,8 @@ resource-map.hxx resource.cc resource.hh resource.hxx road.cc road.hh	\
 road.hxx stables.cc stables.hh trade-building.cc trade-building.hh	\
 console-ui.hh console-ui.cc joust-field.hh joust-field.cc castle.hh	\
 castle.cc castle.hxx human.hh human.cc ai.hh ai.cc logger.hh		\
-logger.hxx logger.cc bridge.hh bridge.hxx bridge.cc
-
-#gfx-window.cc gfx-window.hxx gfx-window.hh gfx-sprite.hh
-#gfx-sprite.cc \ gfx-sprite.hxx gfx-sprite-library.cc
-#gfx-sprite-library.hxx \ gfx-sprite-library.hh
+logger.hxx logger.cc bridge.hh bridge.hxx bridge.cc gfx-window.cc	\
+gfx-window.hxx gfx-window.hh gfx-sprite.hh gfx-sprite.cc		\
+gfx-sprite.hxx gfx-sprite-library.cc gfx-sprite-library.hxx		\
+gfx-sprite-library.hh graphical-ui.cc graphical-ui.hh gfx-board.hh	\
+gfx-board.cc

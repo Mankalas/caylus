@@ -1,13 +1,21 @@
+/**
+ * @file   user-interface.hh
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Sun Nov  6 17:17:59 2011
+ *
+ * @brief  Declaration of the user-interface class.
+ */
+
 #ifndef USER_INTERFACE_HH
 # define USER_INTERFACE_HH
 
 # include <string>
 # include <vector>
-# include "board-element.hh"
 
 namespace controller
 {
 	class GameEngine;
+	class BoardElement;
 }
 
 namespace view
