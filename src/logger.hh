@@ -26,7 +26,6 @@ class Logger
 {
 public:
 	Logger();
-	Logger(const controller::GameEngine * ge);
 
 	void setGE(const controller::GameEngine * ge);
 

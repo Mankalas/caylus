@@ -19,7 +19,8 @@
 #include "inn.hh"
 #include "human.hh"
 #include "ai.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
+#include "debug-logger.hh"
 
 using namespace controller;
 
@@ -31,7 +32,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
 		Player *p = new Player();
-		Logger::debug("Adding new human player.");
+		DebugLogger::log("Adding new human player.");
 		players_.push_back(p);
 	}
 	if (nb_humans_ > 1)
@@ -45,7 +46,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
-		Logger::debug("Adding new AI player.");
+		DebugLogger::log("Adding new AI player.");
 		p->setName("HAL");
 		players_.push_back(p);
 	}
@@ -107,7 +108,7 @@ void GameEngine::operator() ()
 		activateCastle_();
 		endOfTurn_();
 	}
-	Logger::debug("End of the game.");
+	DebugLogger::log("End of the game.");
 }
 
 void GameEngine::activateSpecialBuildings_()
@@ -187,7 +188,7 @@ void GameEngine::endOfTurn_()
 	{
 		std::swap(order_.front(), order_.back());
 	}
-	Logger::debug("Done.");
+	DebugLogger::log("Done.");
 }
 
 void GameEngine::placeWorkers_()
@@ -260,26 +261,26 @@ void GameEngine::playerMove_(Player *p)
 			try
 			{
 				b->worker_set(*p);
-				/*Logger::debug("BEFORE: " << p->resources() << std::endl
+				/*DebugLogger::log("BEFORE: " << p->resources() << std::endl
 					<< "     -= " << (Resource::denier * (b->owner() == p ? 1 : worker_cost)) << std::endl;*/
 				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
-				//Logger::debug("AFTER:  " << p->resources() << std::endl;
+				//DebugLogger::log("AFTER:  " << p->resources() << std::endl;
 				has_played = true;
 			}
 			catch (OccupiedBuildingEx *)
 			{
-				Logger::debug("Already occupied.");
+				DebugLogger::log("Already occupied.");
 				return;
 			}
 			catch (UnactivableBuildingEx *)
 			{
-				Logger::debug("Does not accept workers.");
+				DebugLogger::log("Does not accept workers.");
 				return;
 			}
 		}
 		else
 		{
-			Logger::debug("Not enough denier to play ");
+			DebugLogger::log("Not enough denier to play ");
 			return;
 		}
 	}
@@ -364,7 +365,7 @@ void GameEngine::subscribeView(Human *human)
 	}
 	for (unsigned i = 0; i < nb_ais_; ++i)
 	{
-		Logger::debug("Subcribing AI view.");
+		DebugLogger::log("Subcribing AI view.");
 		p = players_[nb_humans_ + i];
 		p->setView(new view::AI(this));
 	}

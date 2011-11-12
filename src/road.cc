@@ -17,7 +17,7 @@
 #include "inn.hh"
 #include "merchant-guild.hh"
 #include "board-element.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 Road::Road (GameEngine *ge)
 	: buildings_ (34)
@@ -60,7 +60,7 @@ Road::Road (GameEngine *ge)
 
 	free_slot_ = 14;
 
-	Logger::debug("Done.");
+	DebugLogger::log("Done.");
 }
 
 void

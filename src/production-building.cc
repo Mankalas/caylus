@@ -8,7 +8,7 @@
 
 #include "production-building.hh"
 #include "console-ui.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 ProductionBuilding::~ProductionBuilding()
 {
@@ -25,7 +25,7 @@ ProductionBuilding::ProductionBuilding (const std::vector<ResourceMap>& wchc,
 void
 ProductionBuilding::on_activate ()
 {
-	Logger::debug("Activating Trading post.");
+	DebugLogger::log("Activating Trading post.");
 	if (worker_choices_.size() == 1)
 	{
 		worker_->resources() += worker_choices_[0];

@@ -8,7 +8,7 @@
 
 #include "player.hh"
 #include "view.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 using namespace view;
 using namespace controller;

@@ -6,7 +6,7 @@
  * @brief  Implementation of the logger class.
  */
 
-#include "logger.hh"
+#include "debug-logger.hh"
 
 #include <iostream>
 #include "game-engine.hh"
@@ -22,27 +22,11 @@ Logger::Logger()
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
 }
 
-Logger::Logger(const GameEngine * ge) :
-	ge_(ge)
-{
-
-}
-
 void Logger::close()
 {
 	file_ <<  "</body>\n</html>" << std::endl;
 	file_.close();
 }
-
-#ifdef DEBUG
-void Logger::debug(const std::string &msg)
-{
-	std::cout << msg << std::endl;
-}
-#else
-void Logger::debug(const std::string &){
-}
-#endif
 
 void Logger::startOfTurn(const GameEngine * ge)
 {

@@ -13,7 +13,7 @@
 #include "board-element.hh"
 #include <boost/foreach.hpp>
 #include "const.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 using namespace gfx;
 using namespace view;
@@ -35,10 +35,10 @@ BoardElement* GraphicalUI::askBuilding(const std::vector<BoardElement*> & choice
 			const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
 			if (building_name == NULL)
 				{
-					Logger::debug("Bad click.");
+					DebugLogger::log("Bad click.");
 					continue;
 				}
-			Logger::debug(*building_name);
+			DebugLogger::log(*building_name);
 			foreach (BoardElement * board_elt, choices)
 				{
 					if (board_elt->name() == *building_name)

@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "game-engine.hh"
 #include "human.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 #include "exceptions.hh"
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 
 		g.nbTurnsMax() = max_turns;
 		boost::thread controller_thread = boost::thread(boost::ref(g));
-		Logger::debug("Game Engine thread launched.");
+		DebugLogger::log("Game Engine thread launched.");
 
 		Human human(&g);
 		g.subscribeView(&human);

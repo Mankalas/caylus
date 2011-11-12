@@ -1,6 +1,6 @@
 #include "ai.hh"
 #include "game-engine.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "building.hh"
 #include <time.h>
 #include <stdlib.h>
