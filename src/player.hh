@@ -16,6 +16,7 @@
 # include <boost/signal.hpp>
 # include "resource-map.hh"
 # include "board-element.hh"
+# include "signals.hh"
 
 # define NB_WORKERS 1
 
@@ -70,8 +71,6 @@ namespace controller
 
 	private:
 
-		void _initialize(void);
-
 		int favor_building_;
 		int favor_resource_;
 		int favor_denier_;
@@ -85,7 +84,11 @@ namespace controller
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;
-		boost::signal<BoardElement* (const std::vector<BoardElement*> &)> ask_worker_placement_signal_;
+
+		/// Submit a list of BoardElements to the player, who must chose
+		/// one of them. The elements are not const because the chosen one
+		/// will be modified later on the game.
+		ask_board_element_signal_t sig_ask_worker_placement_;
 	};
 
 }

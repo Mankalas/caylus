@@ -102,10 +102,17 @@ namespace controller
 		/** Add a player to the castle. Check the player's presence.
 		 *
 		 * @param p The player to add.
-		 *
-		 * @return Whether the player has been added or not.
 		 */
-		bool add(Player *p);
+		void add(Player *p);
+
+		/**
+		 * Whether a player has already a worker in the caslte or not.
+		 *
+		 * @param p The player.
+		 *
+		 * @return True or false.
+		 */
+		bool has(const Player * p);
 
 		/** Resolve the Castle's activation. */
 		void activate();

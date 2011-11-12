@@ -115,25 +115,22 @@ inline std::ostream& operator<<(std::ostream& o, const Player& player)
   return o;
 }
 
-inline
-const View *Player::view() const
+inline const View *Player::view() const
 {
 	return view_;
 }
 
-inline
-View *Player::view()
+inline View *Player::view()
 {
 	return view_;
 }
 
-inline
-int Player::askProvostShift() const
+inline int Player::askProvostShift() const
 {
 	if (ask_provost_shift_signal_.empty())
-		{
-			throw new SignalNotConnected("ask_provost_shift_signal_");
-		}
+	{
+		throw new SignalNotConnected("ask_provost_shift_signal_");
+	}
 	return ask_provost_shift_signal_();
 }
 
