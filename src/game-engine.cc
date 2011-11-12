@@ -26,13 +26,12 @@ using namespace controller;
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0)
 {
-	Logger::instance()->gameInfo(this);
 	mutex_.lock();
 	assert(nb_humans_ <= 5);
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
 		Player *p = new Player();
-		Logger::instance()->log("Adding new human player.");
+		Logger::debug("Adding new human player.");
 		players_.push_back(p);
 	}
 	if (nb_humans_ > 1)
@@ -46,7 +45,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
-		Logger::instance()->log("Adding new AI player.");
+		Logger::debug("Adding new AI player.");
 		p->setName("HAL");
 		players_.push_back(p);
 	}
@@ -80,8 +79,6 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
-
-	sigs_.game_engine_ready();
 }
 
 GameEngine::~GameEngine()
@@ -97,6 +94,7 @@ void GameEngine::operator() ()
 {
 	// Waiting for the view subscription to release the mutex.
 	mutex_.lock();
+	sigs_.game_engine_ready();
 	while (nb_turns_ < nb_turns_max_)
 	{
 		++nb_turns_;
@@ -109,7 +107,7 @@ void GameEngine::operator() ()
 		activateCastle_();
 		endOfTurn_();
 	}
-	Logger::instance()->log("End of the game.");
+	Logger::debug("End of the game.");
 }
 
 void GameEngine::activateSpecialBuildings_()
@@ -178,7 +176,6 @@ void GameEngine::collectIncome_()
 
 void GameEngine::endOfTurn_()
 {
-	Logger::instance()->endSection();
 	moveBailiff_();
 	if (bailiff_ == 17 || bailiff_ == 18 ||
 	    bailiff_ == 30 || bailiff_ == 31 ||
@@ -190,7 +187,7 @@ void GameEngine::endOfTurn_()
 	{
 		std::swap(order_.front(), order_.back());
 	}
-	Logger::instance()->log("Done.");
+	Logger::debug("Done.");
 }
 
 void GameEngine::placeWorkers_()
@@ -263,26 +260,26 @@ void GameEngine::playerMove_(Player *p)
 			try
 			{
 				b->worker_set(*p);
-				/*Logger::instance()->log("BEFORE: " << p->resources() << std::endl
+				/*Logger::debug("BEFORE: " << p->resources() << std::endl
 					<< "     -= " << (Resource::denier * (b->owner() == p ? 1 : worker_cost)) << std::endl;*/
 				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
-				//Logger::instance()->log("AFTER:  " << p->resources() << std::endl;
+				//Logger::debug("AFTER:  " << p->resources() << std::endl;
 				has_played = true;
 			}
 			catch (OccupiedBuildingEx *)
 			{
-				Logger::instance()->log("Already occupied.");
+				Logger::debug("Already occupied.");
 				return;
 			}
 			catch (UnactivableBuildingEx *)
 			{
-				Logger::instance()->log("Does not accept workers.");
+				Logger::debug("Does not accept workers.");
 				return;
 			}
 		}
 		else
 		{
-			Logger::instance()->log("Not enough denier to play ");
+			Logger::debug("Not enough denier to play ");
 			return;
 		}
 	}
@@ -367,7 +364,7 @@ void GameEngine::subscribeView(Human *human)
 	}
 	for (unsigned i = 0; i < nb_ais_; ++i)
 	{
-		Logger::instance()->log("Subcribing AI view.");
+		Logger::debug("Subcribing AI view.");
 		p = players_[nb_humans_ + i];
 		p->setView(new view::AI(this));
 	}
@@ -384,6 +381,11 @@ void GameEngine::subscribeView(Human *human)
 	}
 
 	mutex_.unlock();
+}
+
+void GameEngine::subscribeView(Logger * log)
+{
+	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
 }
 
 const std::vector<BoardElement*>

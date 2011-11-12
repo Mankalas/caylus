@@ -16,12 +16,16 @@
 using namespace std;
 using namespace controller;
 
-Logger * Logger::instance_ = NULL;
-
 Logger::Logger()
 {
 	file_.open("caylus.log", ios::trunc);
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
+}
+
+Logger::Logger(const GameEngine * ge) :
+	ge_(ge)
+{
+
 }
 
 void Logger::close()
@@ -30,29 +34,15 @@ void Logger::close()
 	file_.close();
 }
 
-Logger * Logger::instance()
-{
-	if (instance_ == NULL)
-	{
-		instance_ = new Logger();
-	}
-	return instance_;
-}
-
-void Logger::log(const std::string &msg)
+#ifdef DEBUG
+void Logger::debug(const std::string &msg)
 {
 	std::cout << msg << std::endl;
 }
-
-void Logger::gameInfo(const GameEngine * ge)
-{
-	assert(ge);
-
-	file_ << "<h1>Init info</h1>"
-				<< "<ul>\n<li>Number of humans : " << ge->nbHumans() << "</li>"
-				<< "<li>Number of AIs : " << ge->nbAIs() << "</li>"
-				<< "</ul>";
+#else
+void Logger::debug(const std::string &){
 }
+#endif
 
 void Logger::startOfTurn(const GameEngine * ge)
 {
@@ -80,3 +70,22 @@ void Logger::endSection()
 	file_ << "</div>";
 }
 
+void Logger::gameEngineReady()
+{
+	assert(ge_);
+
+	file_ << "<h1>Init info</h1>"
+				<< "<ul>\n<li>Number of humans : " << ge_->nbHumans() << "</li>"
+				<< "<li>Number of AIs : " << ge_->nbAIs() << "</li>"
+				<< "</ul>";
+}
+
+v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()
+{
+	return boost::bind(&Logger::gameEngineReady, this);
+}
+
+void Logger::setGE(const GameEngine * ge)
+{
+	ge_ = ge;
+}

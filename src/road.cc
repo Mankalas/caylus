@@ -60,7 +60,7 @@ Road::Road (GameEngine *ge)
 
 	free_slot_ = 14;
 
-	Logger::instance()->log("Done.");
+	Logger::debug("Done.");
 }
 
 void

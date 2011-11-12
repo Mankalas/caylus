@@ -35,10 +35,10 @@ BoardElement* GraphicalUI::askBuilding(const std::vector<BoardElement*> & choice
 			const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
 			if (building_name == NULL)
 				{
-					Logger::instance()->log("Bad click.");
+					Logger::debug("Bad click.");
 					continue;
 				}
-			Logger::instance()->log(*building_name);
+			Logger::debug(*building_name);
 			foreach (BoardElement * board_elt, choices)
 				{
 					if (board_elt->name() == *building_name)
@@ -54,8 +54,6 @@ BoardElement* GraphicalUI::askBuilding(const std::vector<BoardElement*> & choice
 void GraphicalUI::updateBoard(const GameEngine * ) const
 {
 	window_.clear();
-
-
 	window_.display();
 }
 

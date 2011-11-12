@@ -11,7 +11,9 @@
 
 # include <stack>
 # include <fstream>
+# include <boost/bind.hpp>
 # include "const.hh"
+# include "signals.hh"
 
 namespace controller
 {
@@ -23,29 +25,31 @@ namespace controller
 class Logger
 {
 public:
+	Logger();
+	Logger(const controller::GameEngine * ge);
 
-	static Logger * instance();
+	void setGE(const controller::GameEngine * ge);
 
-	void log(const std::string &msg);
+	static void debug(const std::string &msg);
 
 	template <class T>
 	std::string to_string(const T &t) const;
 
 	void close();
 
-	void gameInfo(const controller::GameEngine *);
 	void startOfTurn(const controller::GameEngine *);
 	void playerIncome(const controller::Player *, const controller::ResourceMap &);
 
 	void startSection(int level, const std::string & title);
 	void endSection();
 
-private:
-	static Logger * instance_;
-	Logger();
+	void gameEngineReady();
+	v_v_signal_t::slot_function_type gameEngineReadySlot();
 
+private:
 	unsigned int turn_count_;
 	std::ofstream file_;
+	const controller::GameEngine * ge_;
 };
 
 # include "logger.hxx"

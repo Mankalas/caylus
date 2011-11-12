@@ -20,7 +20,7 @@ using namespace controller;
 Human::Human(GameEngine *ge)
 	: View(ge)
 {
-	user_interface_ = new GraphicalUI();
+	user_interface_ = new ConsoleUI();
 }
 
 Human::~Human()
@@ -62,7 +62,7 @@ boost::signal<unsigned (unsigned, unsigned)>::slot_function_type Human::getAskNb
 
 unsigned Human::askNbHumans(unsigned max) const
 {
-	Logger::instance()->log("Asking nb humans.");
+	Logger::debug("Asking nb humans.");
 	unsigned nb_humans = 0;
 	while ((cout << "How many humans? (" << max << " max)\n") &&
 	       (!(cin >> nb_humans) || (nb_humans > max)))

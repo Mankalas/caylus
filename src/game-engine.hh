@@ -13,12 +13,11 @@
 # include <boost/smart_ptr.hpp>
 # include <boost/signal.hpp>
 # include <boost/thread.hpp>
-# include "building.hh"
-# include "player.hh"
 # include "road.hh"
 # include "castle.hh"
 # include "bridge.hh"
 # include "signals.hh"
+# include "logger.hh"
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11
@@ -31,24 +30,13 @@ namespace view
 
 namespace controller
 {
+	class Building;
+	class Player;
+
 	/** Handles the global processus of the game. */
 	class GameEngine
 	{
 	public:
-
-		typedef boost::signals::connection connection_t;
-
-		typedef boost::signal<unsigned (unsigned)> nb_humans_signal_t;
-		typedef boost::signal<unsigned (unsigned, unsigned)> nb_ais_signal_t;
-		typedef boost::signal<void (void)> board_updated_signal_t;
-
-	public:
-
-		void connectNbHumansSignal(nb_humans_signal_t::slot_function_type subscriber);
-		void connectNbAIsSignal(nb_ais_signal_t::slot_function_type subscriber);
-		void connectBoardUpdatedSignal(board_updated_signal_t::slot_function_type subscriber);
-
-		void subscribeView(view::Human *human);
 
 		/** Default constructor. */
 		GameEngine(unsigned nb_humans, unsigned nb_ais);
@@ -95,12 +83,14 @@ namespace controller
 		const unsigned & nbTurns() const;
 
 		boost::mutex &mutex();
-		boost::condition_variable *waitingPlayers();
-		boost::condition_variable *waitingViews();
-		boost::condition_variable *disconnectViews();
+
 		void operator()();
 
 		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;
+
+		void subscribeView(view::Human *human);
+		void subscribeView(Logger * log);
+
 
 	private:
 		/** Step 1. Calculate the income for each player at the

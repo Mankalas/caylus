@@ -12,9 +12,12 @@
 
 using namespace gfx;
 
-sf::RenderWindow *Window::window_ =	new sf::RenderWindow(sf::VideoMode(1300, 950, 32),
-																												 std::string("Caylus"),
-																												 sf::Style::Resize | sf::Style::Close);
+Window::Window()
+{
+	window_ =	new sf::RenderWindow(sf::VideoMode(1300, 950, 32),
+																 std::string("Caylus"),
+																 sf::Style::Resize | sf::Style::Close);
+}
 
 std::pair<float, float> Window::getClick() const
 {
