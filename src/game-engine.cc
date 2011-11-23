@@ -19,20 +19,20 @@
 #include "inn.hh"
 #include "human.hh"
 #include "ai.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
+#include "debug-logger.hh"
 
 using namespace controller;
 
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0)
 {
-	Logger::instance()->gameInfo(this);
 	mutex_.lock();
 	assert(nb_humans_ <= 5);
 	for (unsigned i = 0; i < nb_humans_; ++i)
 	{
 		Player *p = new Player();
-		Logger::instance()->log("Adding new human player.");
+		DebugLogger::log("Adding new human player.");
 		players_.push_back(p);
 	}
 	if (nb_humans_ > 1)
@@ -46,7 +46,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	while (players_.size() < nb_ais_ + nb_humans_)
 	{
 		Player *p = new Player();
-		Logger::instance()->log("Adding new AI player.");
+		DebugLogger::log("Adding new AI player.");
 		p->setName("HAL");
 		players_.push_back(p);
 	}
@@ -95,27 +95,31 @@ void GameEngine::operator() ()
 {
 	// Waiting for the view subscription to release the mutex.
 	mutex_.lock();
-	_run();
-}
-
-void GameEngine::_run()
-{
+	sigs_.game_engine_ready();
 	while (nb_turns_ < nb_turns_max_)
 	{
 		++nb_turns_;
-		_startOfTurn();
-		collectIncome();
-		placeWorkers();
-		activateSpecialBuildings();
-		activateBridge();
-		activateBuildings();
-		activateCastle();
-		endOfTurn();
+		startOfTurn_();
+		collectIncome_();
+		placeWorkers_();
+		activateSpecialBuildings_();
+		activateBridge_();
+		activateBuildings_();
+		activateCastle_();
+		endOfTurn_();
 	}
-	Logger::instance()->log("End of the game.");
+	DebugLogger::log("End of the game.");
 }
 
-void GameEngine::activateBuildings()
+void GameEngine::activateSpecialBuildings_()
+{
+	for (unsigned i = 0; i < 6; ++i)
+	{
+		road_.get()[i]->activate();
+	}
+}
+
+void GameEngine::activateBuildings_()
 {
 	for (unsigned i = 6; i <= provost_ + 1; ++i)
 	{
@@ -126,7 +130,7 @@ void GameEngine::activateBuildings()
 	}
 }
 
-void GameEngine::activateBridge()
+void GameEngine::activateBridge_()
 {
 	int deniers = 0;
 	int shift = 0;
@@ -153,35 +157,27 @@ void GameEngine::activateBridge()
 	}
 }
 
-void GameEngine::activateSpecialBuildings()
-{
-	for (unsigned i = 0; i < 6; ++i)
-	{
-		road_.get()[i]->activate();
-	}
-}
 
-void GameEngine::activateCastle()
+void GameEngine::activateCastle_()
 {
 	castle_.activate();
 }
 
-void GameEngine::collectIncome()
+void GameEngine::collectIncome_()
 {
-	Logger::instance()->startSection(2, "Income collection");
+	sigs_.income_collecting_begin();
 	foreach (Player *p, players_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
-		Logger::instance()->playerIncome(p, income);
+		sigs_.income_collecting_for_player(p);
 		p->resources() += income;
 	}
-	Logger::instance()->endSection();
+	sigs_.income_collecting_end();
 }
 
-void GameEngine::endOfTurn()
+void GameEngine::endOfTurn_()
 {
-	Logger::instance()->endSection();
-	_moveBailiff();
+	moveBailiff_();
 	if (bailiff_ == 17 || bailiff_ == 18 ||
 	    bailiff_ == 30 || bailiff_ == 31 ||
 	    castle_.isActivePartComplete())
@@ -194,49 +190,49 @@ void GameEngine::endOfTurn()
 	}
 }
 
-void GameEngine::placeWorkers()
+void GameEngine::placeWorkers_()
 {
-	Logger::instance()->startSection(2, "Worker placement");
+	sigs_.worker_placement_begin();
 	while (bridge_.players().size() != players_.size())
 	{
 		foreach (Player *p, order_)
 		{
 			assert(p);
-			if (!_canPlayerPlay(p))
+			if (!canPlayerPlay_(p))
 			{
 				continue;
 			}
-			_playerMove(p);
+			playerMove_(p);
 		}
 	}
-	Logger::instance()->endSection();
+	sigs_.worker_placement_end();
 }
 
-void GameEngine::_moveBailiff()
+void GameEngine::moveBailiff_()
 {
 	bailiff_ += (provost_ > bailiff_ ? 2 : 1);
 	provost_ = bailiff_;
 }
 
-bool GameEngine::addToCastle(Player *p)
+void GameEngine::addToCastle(Player *p)
 {
 	assert(p);
-	return castle_.add(p);
+	castle_.add(p);
 }
 
-void GameEngine::_playerMove(Player *p)
+void GameEngine::playerMove_(Player *p)
 {
 	bool has_played = false;
 	const BoardElement * player_choice;
 	unsigned worker_cost = 0;
 
+	sigs_.worker_placement_for_player(p);
 	while (!has_played)
 	{
 		const std::vector<BoardElement*> choices = getAvailableBoardElements(p);
-
-		Logger::instance()->placementChoices(p, choices);
+		sigs_.player_choices(choices);
 		player_choice = p->askWorkerPlacement(choices);
-		Logger::instance()->playerBoardChoice(p, player_choice);
+		sigs_.player_has_chosen(player_choice);
 
 		if (player_choice->isBridge())
 		{
@@ -245,23 +241,16 @@ void GameEngine::_playerMove(Player *p)
 			continue;
 		}
 
-		worker_cost = _getWorkerCost(p);
+		worker_cost = getWorkerCost_(p);
 
-		if (player_choice->isCastle() &&
-				p->resources()[Resource::denier] >= worker_cost)
-			{
-				if (!castle_.add(p))
-					{
-						Logger::instance()->playerLog(p, " has already a worker at the castle.");
-						continue;
-					}
-				else
-					{
-						p->resources() -= Resource::denier * worker_cost;
-						p->workers() -= 1;
-						continue;
-					}
-			}
+		if (player_choice->isCastle() && p->resources()[Resource::denier] >= worker_cost)
+		{
+			castle_.add(p);
+			p->resources() -= Resource::denier * worker_cost;
+			p->workers() -= 1;
+			has_played = true;
+			continue;
+		}
 
 		assert(player_choice->isBuilding());
 		Building *b = (Building*)player_choice;
@@ -276,26 +265,27 @@ void GameEngine::_playerMove(Player *p)
 			}
 			catch (OccupiedBuildingEx *)
 			{
-				Logger::instance()->log("Already occupied.");
+				DebugLogger::log("Already occupied.");
 				return;
 			}
 			catch (UnactivableBuildingEx *)
 			{
-				Logger::instance()->log("Does not accept workers.");
+				DebugLogger::log("Does not accept workers.");
 				return;
 			}
 		}
 		else
 		{
-			Logger::instance()->log("Not enough denier to play ");
+			DebugLogger::log("Not enough denier to play ");
 			return;
 		}
 	}
 }
 
-void GameEngine::_startOfTurn()
+void GameEngine::startOfTurn_()
 {
-	Logger::instance()->startOfTurn(this);
+	sigs_.new_turn(nb_turns_);
+
 	road_.clearWorkers();
 	bridge_.clear();
 	castle_.clear();
@@ -308,32 +298,32 @@ void GameEngine::_startOfTurn()
 	{
 		inn->host()->workers() -= 1;
 	}
-	board_updated_();
+	sigs_.board_updated();
 }
 
-bool GameEngine::_canPlayerPlay(Player *p)
+bool GameEngine::canPlayerPlay_(Player *p)
 {
 	if (bridge_.has(p))
 	{
-		Logger::instance()->playerLog(p, " is on the bridge and cannot place worker anymore.");
+		sigs_.already_on_bridge(p);
 		return false;
 	}
 	if (p->resources()[Resource::denier] == 0)
 	{
-		Logger::instance()->playerLog(p, " does not havbe any denier left. Automatically placed on the Bridge.");
+		sigs_.not_enough_deniers(p);
 		bridge_.add(p);
 		return false;
 	}
 	if (p->workers() == 0)
 	{
-		Logger::instance()->playerLog(p, " does not havbe any worker left. Automatically placed on the Bridge.");
+		sigs_.no_worker_left(p);
 		bridge_.add(p);
 		return false;
 	}
 	return true;
 }
 
-unsigned GameEngine::_getWorkerCost(const Player *p) const
+unsigned GameEngine::getWorkerCost_(const Player *p) const
 {
 	const Inn *inn = (const Inn *)(road_.get()[5].get());
 	assert(inn);
@@ -361,16 +351,16 @@ void GameEngine::subscribeView(Human *human)
 		if (p->view() == NULL)
 		{
 			p->setView(human);
-			this->board_updated_.connect(human->getUpdateBoardSlot());
+			sigs_.board_updated.connect(human->getUpdateBoardSlot());
 		}
 	}
 	for (unsigned i = 0; i < nb_ais_; ++i)
 	{
-		Logger::instance()->log("Subcribing AI view.");
+		DebugLogger::log("Subcribing AI view.");
 		p = players_[nb_humans_ + i];
 		p->setView(new view::AI(this));
 	}
-	 	// Shuffle players order.
+	// Shuffle players order.
 	foreach (Player * p, players_)
 	{
 		order_.push_back(p);
@@ -383,6 +373,11 @@ void GameEngine::subscribeView(Human *human)
 	}
 
 	mutex_.unlock();
+}
+
+void GameEngine::subscribeView(Logger * log)
+{
+	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
 }
 
 const std::vector<BoardElement*>

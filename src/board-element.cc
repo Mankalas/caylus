@@ -7,7 +7,7 @@
  */
 
 #include "board-element.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 using namespace controller;
 

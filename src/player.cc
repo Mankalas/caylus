@@ -8,7 +8,7 @@
 
 #include "player.hh"
 #include "view.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 
 using namespace view;
 using namespace controller;
@@ -61,15 +61,15 @@ void Player::setView(View *view)
 	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
 	assert(!ask_provost_shift_signal_.empty());
 
-	ask_worker_placement_signal_.connect(view->getAskWorkerPlacementSlot());
-	assert(!ask_worker_placement_signal_.empty());
+	sig_ask_worker_placement_.connect(view->getAskWorkerPlacementSlot());
+	assert(!sig_ask_worker_placement_.empty());
 }
 
 BoardElement*
 Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
-	assert(!ask_worker_placement_signal_.empty());
+	assert(!sig_ask_worker_placement_.empty());
 
-	return ask_worker_placement_signal_(buildings);
+	return sig_ask_worker_placement_(buildings);
 }
 

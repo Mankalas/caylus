@@ -11,7 +11,7 @@
 #include "console-ui.hh"
 #include "game-engine.hh"
 #include "board-element.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "castle.hh"
 #include "const.hh"
 
@@ -26,20 +26,20 @@ Gate::Gate(GameEngine *ge)
 
 void Gate::on_activate()
 {
-	Logger::instance()->log("Activating Gate.");
+	DebugLogger::log("Activating Gate.");
 	BoardElement * player_choice = NULL;
 	std::vector<BoardElement *> choices = game_->road().getAvailableBuildings(worker_);
 	choices.insert(choices.begin(), (BoardElement*)&game_->castle());
 	player_choice = worker_->askWorkerPlacement(choices);
 	if (player_choice->isBuilding())
 	{
-		Logger::instance()->log("Gate activated for Building.\n");
+		DebugLogger::log("Gate activated for Building.\n");
 		Building * building = dynamic_cast<Building*>(player_choice);
-		Logger::instance()->log(building->name());
+		DebugLogger::log(building->name());
 	}
 	else
 	{
-		Logger::instance()->log("Gate activated for Castle.\n");
+		DebugLogger::log("Gate activated for Castle.\n");
 		Castle * castle = dynamic_cast<Castle*>(player_choice);
 		castle->add(worker_);
 	}

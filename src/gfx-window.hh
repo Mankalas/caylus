@@ -19,6 +19,8 @@ namespace gfx
 	{
 	public:
 
+		Window();
+
 		void draw(Sprite & sprite) const
 		{
 			window_->Draw(sprite.sfmlSprite());
@@ -43,7 +45,7 @@ namespace gfx
 
 	private:
 		/** The SFML instance of a window. */
-		static sf::RenderWindow * window_;
+		sf::RenderWindow * window_;
 	};
 
 }

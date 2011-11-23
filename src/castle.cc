@@ -154,14 +154,14 @@ void Castle::activate()
 	}
 }
 
-bool Castle::add(Player *p)
+bool Castle::has(const Player * p)
 {
-	if (std::find(players_.begin(), players_.end(), p) == players_.end())
-	{
-		players_.push_back(p);
-		return true;
-	}
-	return false;
+	return std::find(players_.begin(), players_.end(), p) != players_.end();
+}
+
+void Castle::add(Player *p)
+{
+	players_.push_back(p);
 }
 
 void Castle::clear()

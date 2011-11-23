@@ -1,6 +1,6 @@
 #include "ai.hh"
 #include "game-engine.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "building.hh"
 #include <time.h>
 #include <stdlib.h>
@@ -24,7 +24,6 @@ BoardElement*
 AI::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	int choice = rand() % buildings.size();
-	Logger::instance()->log(Logger::instance()->to_string<int>(choice));
 	return buildings[choice];
 }
 

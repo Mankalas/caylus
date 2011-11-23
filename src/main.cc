@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "game-engine.hh"
 #include "human.hh"
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 #include "exceptions.hh"
@@ -54,12 +54,18 @@ int main(int argc, char **argv)
 		}
 	}
 
+	Logger log;
 	try
 	{
 		GameEngine g(nb_humans, nb_ais);
+
+		log.setGE(&g);
+
+		g.subscribeView(&log);
+
 		g.nbTurnsMax() = max_turns;
 		boost::thread controller_thread = boost::thread(boost::ref(g));
-		Logger::instance()->log("Game Engine thread launched.");
+		DebugLogger::log("Game Engine thread launched.");
 
 		Human human(&g);
 		g.subscribeView(&human);
@@ -75,6 +81,6 @@ int main(int argc, char **argv)
 	{
 		std::cerr << ex->msg() << std::endl;
 	}
-	Logger::instance()->close();
+	log.close();
 	return 0;
 }

@@ -9,7 +9,7 @@
 #include "human.hh"
 
 #include <iostream>
-#include "logger.hh"
+#include "debug-logger.hh"
 #include "console-ui.hh"
 //#include "graphical-ui.hh"
 
@@ -62,7 +62,7 @@ boost::signal<unsigned (unsigned, unsigned)>::slot_function_type Human::getAskNb
 
 unsigned Human::askNbHumans(unsigned max) const
 {
-	Logger::instance()->log("Asking nb humans.");
+	DebugLogger::log("Asking nb humans.");
 	unsigned nb_humans = 0;
 	while ((cout << "How many humans? (" << max << " max)\n") &&
 	       (!(cin >> nb_humans) || (nb_humans > max)))
