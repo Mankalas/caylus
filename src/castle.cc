@@ -156,11 +156,7 @@ void Castle::activate()
 
 bool Castle::add(Player *p)
 {
-	if (std::find(players_.begin(), players_.end(), p) != players_.end())
-	{
-		//ConsoleUI::inst()->printMessage("You already have a worker in the castle.");
-	}
-	else
+	if (std::find(players_.begin(), players_.end(), p) == players_.end())
 	{
 		players_.push_back(p);
 		return true;

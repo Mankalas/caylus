@@ -11,7 +11,7 @@
 #include <iostream>
 #include "logger.hh"
 #include "console-ui.hh"
-#include "graphical-ui.hh"
+//#include "graphical-ui.hh"
 
 using namespace std;
 using namespace view;
@@ -20,7 +20,7 @@ using namespace controller;
 Human::Human(GameEngine *ge)
 	: View(ge)
 {
-	user_interface_ = new GraphicalUI();
+	user_interface_ = new ConsoleUI();
 }
 
 Human::~Human()

@@ -192,7 +192,6 @@ void GameEngine::endOfTurn()
 	{
 		std::swap(order_.front(), order_.back());
 	}
-	Logger::instance()->log("Done.");
 }
 
 void GameEngine::placeWorkers()
@@ -210,6 +209,7 @@ void GameEngine::placeWorkers()
 			_playerMove(p);
 		}
 	}
+	Logger::instance()->endSection();
 }
 
 void GameEngine::_moveBailiff()
@@ -233,29 +233,35 @@ void GameEngine::_playerMove(Player *p)
 	while (!has_played)
 	{
 		const std::vector<BoardElement*> choices = getAvailableBoardElements(p);
+
+		Logger::instance()->placementChoices(p, choices);
 		player_choice = p->askWorkerPlacement(choices);
+		Logger::instance()->playerBoardChoice(p, player_choice);
 
 		if (player_choice->isBridge())
 		{
 			bridge_.add(p);
 			has_played = true;
-			return;
+			continue;
 		}
 
 		worker_cost = _getWorkerCost(p);
 
-		if (player_choice->isCastle())
-		{
-			if (p->resources()[Resource::denier] >= worker_cost)
+		if (player_choice->isCastle() &&
+				p->resources()[Resource::denier] >= worker_cost)
 			{
-				if (has_played == castle_.add(p))
-				{
-					p->resources() -= Resource::denier * worker_cost;
-					p->workers() -= 1;
-					continue;
-				}
+				if (!castle_.add(p))
+					{
+						Logger::instance()->playerLog(p, " has already a worker at the castle.");
+						continue;
+					}
+				else
+					{
+						p->resources() -= Resource::denier * worker_cost;
+						p->workers() -= 1;
+						continue;
+					}
 			}
-		}
 
 		assert(player_choice->isBuilding());
 		Building *b = (Building*)player_choice;
@@ -265,10 +271,7 @@ void GameEngine::_playerMove(Player *p)
 			try
 			{
 				b->worker_set(*p);
-				/*Logger::instance()->log("BEFORE: " << p->resources() << std::endl
-				  << "     -= " << (Resource::denier * (b->owner() == p ? 1 : worker_cost)) << std::endl;*/
 				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
-				//Logger::instance()->log("AFTER:  " << p->resources() << std::endl;
 				has_played = true;
 			}
 			catch (OccupiedBuildingEx *)
@@ -310,15 +313,20 @@ void GameEngine::_startOfTurn()
 
 bool GameEngine::_canPlayerPlay(Player *p)
 {
-	// If the player is already on the bridge, he cannot play.
 	if (bridge_.has(p))
 	{
+		Logger::instance()->playerLog(p, " is on the bridge and cannot place worker anymore.");
 		return false;
 	}
-	if (p->resources()[Resource::denier] == 0 || // The player doesn't have any denier
-	    p->workers() == 0) 	// No worker left for the player
+	if (p->resources()[Resource::denier] == 0)
 	{
-		// Add him to the bridge.
+		Logger::instance()->playerLog(p, " does not havbe any denier left. Automatically placed on the Bridge.");
+		bridge_.add(p);
+		return false;
+	}
+	if (p->workers() == 0)
+	{
+		Logger::instance()->playerLog(p, " does not havbe any worker left. Automatically placed on the Bridge.");
 		bridge_.add(p);
 		return false;
 	}
@@ -328,11 +336,7 @@ bool GameEngine::_canPlayerPlay(Player *p)
 unsigned GameEngine::_getWorkerCost(const Player *p) const
 {
 	const Inn *inn = (const Inn *)(road_.get()[5].get());
-	if (inn == NULL)
-	{
-		std::cerr << "The Inn isn't in the right case... returning a cost of 1 by default" << std::endl;
-		return 1;
-	}
+	assert(inn);
 	return (inn->host() == p) ? 1 : bridge_.players().size() + 1;
 }
 

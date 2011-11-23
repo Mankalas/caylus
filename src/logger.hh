@@ -11,6 +11,7 @@
 
 # include <stack>
 # include <fstream>
+# include <vector>
 # include "const.hh"
 
 namespace controller
@@ -18,6 +19,7 @@ namespace controller
 	class GameEngine;
 	class Player;
 	class ResourceMap;
+	class BoardElement;
 }
 
 class Logger
@@ -39,6 +41,10 @@ public:
 
 	void startSection(int level, const std::string & title);
 	void endSection();
+
+	void placementChoices(const controller::Player * p, const std::vector<controller::BoardElement*> & choices);
+	void playerLog(const controller::Player * p, const std::string & msg);
+	void playerBoardChoice(const controller::Player * p, const controller::BoardElement * board_element);
 
 private:
 	static Logger * instance_;
