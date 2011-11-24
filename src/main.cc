@@ -81,6 +81,5 @@ int main(int argc, char **argv)
 	{
 		std::cerr << ex->msg() << std::endl;
 	}
-	log.close();
 	return 0;
 }

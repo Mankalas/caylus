@@ -79,7 +79,7 @@ void Logger::incomeCollectionBegin()
 void Logger::incomeCollectionEnd()
 {
 }
-void Logger::incomeCollectionForPlayer(const controller::Player * player)
+void Logger::incomeCollectionForPlayer(const controller::Player *)
 {
 }
 void Logger::workerPlacementBegin()
@@ -88,75 +88,75 @@ void Logger::workerPlacementBegin()
 void Logger::workerPlacementEnd()
 {
 }
-void Logger::workerPlacementForPlayer(const controller::Player * player)
+void Logger::workerPlacementForPlayer(const controller::Player *)
 {
 }
-void Logger::alreadyOnBridge(const controller::Player * player)
+void Logger::alreadyOnBridge(const controller::Player * )
 {
 }
-void Logger::notEnoughDeniers(const controller::Player * player)
+void Logger::notEnoughDeniers(const controller::Player * )
 {
 }
-void Logger::noWorkerLeft(const controller::Player * player)
+void Logger::noWorkerLeft(const controller::Player * )
 {
 }
-void Logger::playerChoice(const controller::BoardElement * board_elt)
+void Logger::playerChoice(const controller::BoardElement * )
 {
 }
-void Logger::playerChoices(const std::vector<const controller::BoardElement *> & choices)
+void Logger::playerChoices(const std::vector<controller::BoardElement *> & )
 {
 }
 
-v_v_signal_t::slot_function_type gameEngineReadySlot() const
+v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()
 {
-	return boos::bind(&Logger::gameEngineReady, this);
+	return boost::bind(&Logger::gameEngineReady, this);
 }
 
-v_u_signal_t::slot_function_type newTurnSlot() const
+v_u_signal_t::slot_function_type Logger::newTurnSlot()
 {
-	return boost::bind(&Logger::newTurn, this, _1);
+	return boost::bind(&Logger::newTurn, this);
 }
-v_v_signal_t::slot_function_type incomeCollectionBeginSlot() const
+v_v_signal_t::slot_function_type Logger::incomeCollectionBeginSlot()
 {
 	return boost::bind(&Logger::incomeCollectionBegin, this);
 }
-v_v_signal_t::slot_function_type incomeCollectionEndSlot() const
+v_v_signal_t::slot_function_type Logger::incomeCollectionEndSlot()
 {
 	return boost::bind(&Logger::incomeCollectionEnd, this);
 }
-v_cp_signal_t::slot_function_type incomeCollectionForPlayerSlot() const
+v_cp_signal_t::slot_function_type Logger::incomeCollectionForPlayerSlot()
 {
 	return boost::bind(&Logger::incomeCollectionForPlayer, this, _1);
 }
-v_v_signal_t::slot_function_type workerPlacementBeginSlot() const
+v_v_signal_t::slot_function_type Logger::workerPlacementBeginSlot()
 {
 	return boost::bind(&Logger::workerPlacementBegin, this);
 }
-v_v_signal_t::slot_function_type workerPlacementEndSlot() const
+v_v_signal_t::slot_function_type Logger::workerPlacementEndSlot()
 {
 	return boost::bind(&Logger::workerPlacementEnd, this);
 }
-v_cp_signal_t::slot_function_type workerPlacementForPlayerSlot() const
+v_cp_signal_t::slot_function_type Logger::workerPlacementForPlayerSlot()
 {
-	return boost::bind(&Logger::workerPlacementForPlayerSlot, this, _1);
+	return boost::bind(&Logger::workerPlacementForPlayer, this, _1);
 }
-v_cp_signal_t::slot_function_type alreadyOnBridgeSlot() const
+v_cp_signal_t::slot_function_type Logger::alreadyOnBridgeSlot()
 {
 	return boost::bind(&Logger::alreadyOnBridge, this, _1);
 }
-v_cp_signal_t::slot_function_type notEnoughDeniersSlot() const
+v_cp_signal_t::slot_function_type Logger::notEnoughDeniersSlot()
 {
 	return boost::bind(&Logger::notEnoughDeniers, this, _1);
 }
-v_cp_signal_t::slot_function_type noWorkerLeftSlot() const
+v_cp_signal_t::slot_function_type Logger::noWorkerLeftSlot()
 {
 	return boost::bind(&Logger::noWorkerLeft, this, _1);
 }
-player_choice_signal_t::slot_function_type playerChoiceSlot() const
+player_choice_signal_t::slot_function_type Logger::playerChoiceSlot()
 {
 	return boost::bind(&Logger::playerChoice, this, _1);
 }
-player_choices_signal_t::slot_function_type playerChoicesSlot() const
+player_choices_signal_t::slot_function_type Logger::playerChoicesSlot()
 {
 	return boost::bind(&Logger::playerChoices, this, _1);
 }

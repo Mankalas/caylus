@@ -104,6 +104,12 @@ GameEngine::nbTurnsMax()
 	return nb_turns_max_;
 }
 
+inline const unsigned&
+GameEngine::nbTurnsMax() const
+{
+	return nb_turns_max_;
+}
+
 inline const unsigned &
 GameEngine::nbTurns() const
 {
