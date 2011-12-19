@@ -166,10 +166,12 @@ void GameEngine::activateCastle_()
 void GameEngine::collectIncome_()
 {
 	sigs_.income_collecting_begin();
+	assert(players_.size() > 0);
+	std::cout << players_.size() << " + " << players_[0];
 	foreach (Player *p, players_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
-		sigs_.income_collecting_for_player(p);
+		sigs_.income_collecting_for_player(p, income);
 		p->resources() += income;
 	}
 	sigs_.income_collecting_end();
@@ -378,6 +380,8 @@ void GameEngine::subscribeView(Human *human)
 void GameEngine::subscribeView(Logger * log)
 {
 	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
+	sigs_.income_collecting_begin.connect(log->incomeCollectionBeginSlot());
+	sigs_.income_collecting_end.connect(log->incomeCollectionEndSlot());
 }
 
 const std::vector<BoardElement*>
@@ -389,4 +393,3 @@ GameEngine::getAvailableBoardElements(const Player * worker) const
 	available_buildings.push_back((BoardElement*)&bridge_);
 	return available_buildings;
 }
-

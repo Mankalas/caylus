@@ -41,7 +41,7 @@ public:
 	void newTurn();
 	void incomeCollectionBegin();
 	void incomeCollectionEnd();
-	void incomeCollectionForPlayer(const controller::Player * player);
+	void incomeCollectionForPlayer(const controller::Player * player, const controller::ResourceMap & income);
 	void workerPlacementBegin();
 	void workerPlacementEnd();
 	void workerPlacementForPlayer(const controller::Player * player);
@@ -55,7 +55,7 @@ public:
 	v_u_signal_t::slot_function_type newTurnSlot() ;
 	v_v_signal_t::slot_function_type incomeCollectionBeginSlot() ;
 	v_v_signal_t::slot_function_type incomeCollectionEndSlot() ;
-	v_cp_signal_t::slot_function_type incomeCollectionForPlayerSlot() ;
+	v_cp_cr_signal_t::slot_function_type incomeCollectionForPlayerSlot() ;
 	v_v_signal_t::slot_function_type workerPlacementBeginSlot() ;
 	v_v_signal_t::slot_function_type workerPlacementEndSlot() ;
 	v_cp_signal_t::slot_function_type workerPlacementForPlayerSlot() ;

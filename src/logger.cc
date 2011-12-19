@@ -31,8 +31,7 @@ Logger::~Logger()
 void Logger::startOfTurn(const GameEngine * ge)
 {
 	assert(ge);
-
-
+	newTurn();
 }
 
 void Logger::startSection(int level, const std::string & title)
@@ -73,14 +72,20 @@ void Logger::newTurn()
 	file_ << "<h1>Turn " << ge_->nbTurns() << " / " << ge_->nbTurnsMax() << "</h1>"
 				<< "<div style=\"margin-left:50px\">\n";
 }
+
 void Logger::incomeCollectionBegin()
 {
+	file_ << "<h1>Income collection</h1>";
 }
+
 void Logger::incomeCollectionEnd()
 {
+	file_ << "<p>End of collecting income.";
 }
-void Logger::incomeCollectionForPlayer(const controller::Player *)
+
+void Logger::incomeCollectionForPlayer(const controller::Player * p, const controller::ResourceMap & income)
 {
+	file_ << p << " receives" << income;
 }
 void Logger::workerPlacementBegin()
 {
@@ -124,9 +129,9 @@ v_v_signal_t::slot_function_type Logger::incomeCollectionEndSlot()
 {
 	return boost::bind(&Logger::incomeCollectionEnd, this);
 }
-v_cp_signal_t::slot_function_type Logger::incomeCollectionForPlayerSlot()
+v_cp_cr_signal_t::slot_function_type Logger::incomeCollectionForPlayerSlot()
 {
-	return boost::bind(&Logger::incomeCollectionForPlayer, this, _1);
+	return boost::bind(&Logger::incomeCollectionForPlayer, this, _1, _2);
 }
 v_v_signal_t::slot_function_type Logger::workerPlacementBeginSlot()
 {

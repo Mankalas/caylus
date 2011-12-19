@@ -205,7 +205,7 @@ namespace controller
 			/// Income collecting phase has begun.
 			v_v_signal_t income_collecting_begin;
 			/// Income collecting for a player.
-			v_cp_signal_t income_collecting_for_player;
+			v_cp_cr_signal_t income_collecting_for_player;
 			/// Income collecting phase has ended.
 			v_v_signal_t income_collecting_end;
 			/// Worker placement phase has begun.

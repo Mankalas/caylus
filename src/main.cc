@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	int nb_ais = 0;
 	int max_turns = 42;
 
-	while ((option = getopt(argc, argv, "a:h:m:")) != -1)
+	while ((option = getopt(argc, argv, "a:hu:m:")) != -1)
 	{
 		switch (option)
 		{
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		case 's' :
 			std::cout << "Server game." << std::endl;
 			break;
-		case 'h' :
+		case 'u' :
 			nb_humans = atoi(optarg);
 			break;
 		case 'm' :
