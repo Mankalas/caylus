@@ -50,6 +50,7 @@ public:
 	void noWorkerLeft(const controller::Player * player);
 	void playerChoice(const controller::BoardElement * board_elt);
 	void playerChoices(const std::vector<controller::BoardElement *> & choices);
+	void resourceMove(const ResourceMap *);
 
 	v_v_signal_t::slot_function_type gameEngineReadySlot();
 	v_u_signal_t::slot_function_type newTurnSlot() ;
@@ -64,6 +65,7 @@ public:
 	v_cp_signal_t::slot_function_type noWorkerLeftSlot() ;
 	player_choice_signal_t::slot_function_type playerChoiceSlot() ;
 	player_choices_signal_t::slot_function_type playerChoicesSlot() ;
+	boost::signal<void (const controller::ResourceMap *)>::slot_function_type resourceMoveSlot();
 
 private:
 	unsigned int turn_count_;

@@ -17,6 +17,7 @@
 # include "resource-map.hh"
 # include "board-element.hh"
 # include "signals.hh"
+# include "logger.hh"
 
 # define NB_WORKERS 1
 
@@ -55,8 +56,12 @@ namespace controller
 		void setName(const std::string name);
 		void setPrestige(int);
 		int getPrestige() const;
+
 		const ResourceMap &resources() const;
 		ResourceMap &resources();
+		void addResources(const ResourceMap &r);
+		void substractResources(const ResourceMap &r);
+
 		const unsigned &workers() const;
 		unsigned &workers();
 		const unsigned &residences() const;
@@ -68,6 +73,8 @@ namespace controller
 		/// Actions.
 		int askProvostShift() const;
 		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> & buildings) const;
+
+		void subscribeView(Logger * log);
 
 	private:
 
@@ -84,6 +91,8 @@ namespace controller
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;
+		boost::signal<void (const ResourceMap *)> resource_move_;
+
 
 		/// Submit a list of BoardElements to the player, who must chose
 		/// one of them. The elements are not const because the chosen one

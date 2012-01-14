@@ -43,7 +43,7 @@ void Logger::startSection(int level, const std::string & title)
 void Logger::playerIncome(const Player * p, const ResourceMap & r)
 {
 	assert(p);
-	file_ << "<p>Player " << p->name() << " received " << r << " for he has " << p->residences() << " residences.</p>";
+	file_ << "<p>Player " << p->name() << " received " << r << " for he has " << p->residences() << " residences.</p>" << std::endl;
 }
 
 
@@ -80,22 +80,28 @@ void Logger::incomeCollectionBegin()
 
 void Logger::incomeCollectionEnd()
 {
-	file_ << "<p>End of collecting income.";
+	file_ << "<p>End of collecting income.</p>";
 }
 
 void Logger::incomeCollectionForPlayer(const controller::Player * p, const controller::ResourceMap & income)
 {
-	file_ << p << " receives" << income;
+	file_ << "<p>" << p->name() << " receives " << income << ".</p>";
 }
 void Logger::workerPlacementBegin()
 {
+	file_ << "<h1>Worker placement</h1>" << std::endl;
 }
+
 void Logger::workerPlacementEnd()
 {
+	file_ << "<p>End of worler placement.</p>";
 }
-void Logger::workerPlacementForPlayer(const controller::Player *)
+
+void Logger::workerPlacementForPlayer(const controller::Player * p)
 {
+	file_ << "<p>" << p->name() << "'s turn.</p>";
 }
+
 void Logger::alreadyOnBridge(const controller::Player * )
 {
 }
@@ -105,11 +111,18 @@ void Logger::notEnoughDeniers(const controller::Player * )
 void Logger::noWorkerLeft(const controller::Player * )
 {
 }
-void Logger::playerChoice(const controller::BoardElement * )
+void Logger::playerChoice(const controller::BoardElement * b)
 {
+	file_ << "<p>" << b->name() << " is chosen.</p>";
 }
-void Logger::playerChoices(const std::vector<controller::BoardElement *> & )
+
+void Logger::playerChoices(const std::vector<controller::BoardElement *> & choices)
 {
+	file_ << "<p>" << "Choices are ";
+	foreach(const controller::BoardElement * elt, choices)
+	{
+		file_ << elt->name() << ", ";
+	}
 }
 
 v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()

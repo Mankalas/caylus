@@ -73,3 +73,20 @@ Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 	return sig_ask_worker_placement_(buildings);
 }
 
+void Player::subscribeView(Logger * log)
+{
+	resource_move_.connect(log->resourceMoveSlot());
+}
+
+void Player::addResources(const ResourceMap &r)
+{
+	resources_ += r;
+	resource_move_(&r);
+}
+
+void Player::substractResources(const ResourceMap &r)
+{
+	resources_ -= r;
+	resource_move(r * -1);
+}
+

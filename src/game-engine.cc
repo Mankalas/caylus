@@ -167,7 +167,6 @@ void GameEngine::collectIncome_()
 {
 	sigs_.income_collecting_begin();
 	assert(players_.size() > 0);
-	std::cout << players_.size() << " + " << players_[0];
 	foreach (Player *p, players_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
@@ -381,7 +380,14 @@ void GameEngine::subscribeView(Logger * log)
 {
 	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
 	sigs_.income_collecting_begin.connect(log->incomeCollectionBeginSlot());
+	sigs_.income_collecting_for_player.connect(log->incomeCollectionForPlayerSlot());
 	sigs_.income_collecting_end.connect(log->incomeCollectionEndSlot());
+	sigs_.worker_placement_begin.connect(log->workerPlacementBeginSlot());
+	sigs_.worker_placement_end.connect(log->workerPlacementEndSlot());
+	sigs_.worker_placement_for_player.connect(log->workerPlacementForPlayerSlot());
+
+	sigs_.player_choices.connect(log->playerChoicesSlot());
+	sigs_.player_has_chosen.connect(log->playerChoiceSlot());
 }
 
 const std::vector<BoardElement*>
