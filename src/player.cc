@@ -87,6 +87,6 @@ void Player::addResources(const ResourceMap &r)
 void Player::substractResources(const ResourceMap &r)
 {
 	resources_ -= r;
-	resource_move(r * -1);
+	//resource_move_(r * -1);
 }
 

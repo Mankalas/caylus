@@ -178,3 +178,12 @@ player_choices_signal_t::slot_function_type Logger::playerChoicesSlot()
 {
 	return boost::bind(&Logger::playerChoices, this, _1);
 }
+
+boost::signal<void (const controller::ResourceMap *)>::slot_function_type Logger::resourceMoveSlot()
+{
+	return boost::bind(&Logger::resourceMove, this, _1);
+}
+
+void Logger::resourceMove(const ResourceMap *)
+{
+}
