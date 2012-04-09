@@ -172,7 +172,7 @@ void GameEngine::activateBridge_()
 
 void GameEngine::activateCastle_()
 {
-	board_.castle().activate();
+	board_.castle().on_activate();
 }
 
 void GameEngine::collectIncome_()

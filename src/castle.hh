@@ -115,7 +115,7 @@ namespace controller
 		bool has(const Player * p);
 
 		/** Resolve the Castle's activation. */
-		void activate();
+		virtual void on_activate();
 
 		/** Clear the Castle of the workers. */
 		void clear();

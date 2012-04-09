@@ -32,6 +32,8 @@ namespace controller
 
 		virtual void subscribe(view::View * view);
 
+		virtual void on_activate();
+
 	protected:
 		const std::string name_;
 		board_element_activation_signal_t activation_sig_;

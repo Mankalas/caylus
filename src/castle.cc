@@ -97,7 +97,7 @@ Castle::~Castle()
 	delete p;
 }
 
-void Castle::activate()
+void Castle::on_activate()
 {
 	bool can_pay = false;
 	unsigned current_build = 0;

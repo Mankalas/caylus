@@ -42,3 +42,8 @@ void BoardElement::subscribe(View * view)
 {
 	activation_sig_.connect(view->boardElementActivationSlot());
 }
+
+void BoardElement::on_activate()
+{
+	activation_sig_(this);
+}
