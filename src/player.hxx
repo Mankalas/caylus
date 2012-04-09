@@ -115,12 +115,12 @@ inline std::ostream& operator<<(std::ostream& o, const Player& player)
   return o;
 }
 
-inline const View *Player::view() const
+inline const PlayerView *Player::view() const
 {
 	return view_;
 }
 
-inline View *Player::view()
+inline PlayerView *Player::view()
 {
 	return view_;
 }

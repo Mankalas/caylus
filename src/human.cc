@@ -11,6 +11,7 @@
 #include <iostream>
 #include "debug-logger.hh"
 #include "console-ui.hh"
+#include "board-element.hh"
 //#include "graphical-ui.hh"
 
 using namespace std;
@@ -18,7 +19,7 @@ using namespace view;
 using namespace controller;
 
 Human::Human(GameEngine *ge)
-	: View(ge)
+	: PlayerView(ge)
 {
 	user_interface_ = new ConsoleUI();
 }
@@ -87,7 +88,7 @@ unsigned Human::askNbAIs(unsigned min, unsigned max) const
 	return nb_ai;
 }
 
-void Human::updateBoard() const
+void Human::updateBoard()
 {
 	user_interface_->updateBoard(ge_);
 }
@@ -101,11 +102,6 @@ int Human::askProvostShift() const
 bool Human::isHuman() const
 {
 	return true;
-}
-
-boost::signal<void (void)>::slot_function_type Human::getUpdateBoardSlot() const
-{
-	return boost::bind(&Human::updateBoard, this);
 }
 
 BoardElement*
@@ -124,3 +120,7 @@ unsigned Human::askResourceChoice() const
 	return 0;
 }
 
+void Human::boardElementActivation(const controller::BoardElement * board_elt)
+{
+	user_interface_->showMessage(board_elt->name() + " activated.");
+}

@@ -10,12 +10,12 @@
 #ifndef HUMAN_HH
 # define HUMAN_HH
 
-# include "view.hh"
+# include "player-view.hh"
 # include "user-interface.hh"
 
 namespace view
 {
-	class Human : public View
+	class Human : public PlayerView
 	{
 	public:
 		Human(controller::GameEngine *ge);
@@ -28,15 +28,14 @@ namespace view
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
 		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
-
+		virtual void boardElementActivation(const controller::BoardElement * board_elt);
+		virtual void updateBoard();
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
 
 		unsigned askNbHumans(unsigned max) const;
 		unsigned askNbAIs(unsigned min, unsigned max) const;
 
-		void updateBoard() const;
-		boost::signal<void (void)>::slot_function_type getUpdateBoardSlot() const;
 		boost::signal<unsigned (unsigned)>::slot_function_type getAskNbHumansSlot() const;
 		boost::signal<unsigned (unsigned, unsigned)>::slot_function_type getAskNbAIsSlot() const;
 

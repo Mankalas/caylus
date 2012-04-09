@@ -58,7 +58,6 @@ namespace controller
 		const Player *worker() const;
 		void worker(Player *);
 
-
 	protected:
 		Building (const std::string &name,
 							const BuildingType &type,

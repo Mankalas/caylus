@@ -15,6 +15,7 @@
 
 using namespace std;
 using namespace controller;
+using namespace view;
 
 Logger::Logger()
 {
@@ -40,10 +41,10 @@ void Logger::startSection(int level, const std::string & title)
 				<< "<div style=\"margin-left:50px\">\n";
 }
 
-void Logger::playerIncome(const Player * p, const ResourceMap & r)
+void Logger::playerIncome(const Player * p, const ResourceMap * r)
 {
 	assert(p);
-	file_ << "<p>Player " << p->name() << " received " << r << " for he has " << p->residences() << " residences.</p>" << std::endl;
+	file_ << "<p>Player " << p->name() << " received " << *r << " for he has " << p->residences() << " residences.</p>" << std::endl;
 }
 
 
@@ -83,9 +84,9 @@ void Logger::incomeCollectionEnd()
 	file_ << "<p>End of collecting income.</p>";
 }
 
-void Logger::incomeCollectionForPlayer(const controller::Player * p, const controller::ResourceMap & income)
+void Logger::incomeCollectionForPlayer(const controller::Player * p, const controller::ResourceMap * income)
 {
-	file_ << "<p>" << p->name() << " receives " << income << ".</p>";
+	file_ << "<p>" << p->name() << " receives " << *income << ".</p>";
 }
 void Logger::workerPlacementBegin()
 {
@@ -123,6 +124,16 @@ void Logger::playerChoices(const std::vector<controller::BoardElement *> & choic
 	{
 		file_ << elt->name() << ", ";
 	}
+}
+
+void Logger::boardElementActivation(const controller::BoardElement * board_elt)
+{
+	file_ << "<p>" << board_elt->name() << " activated." << "</p>";
+}
+
+void Logger::updateBoard()
+{
+	file_ << "<p>Board was updated.</p>";
 }
 
 v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()

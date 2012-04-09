@@ -16,36 +16,24 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-View::View(GameEngine *ge)
-	: ge_(ge)
+View::View()
 {
 }
 
-View::View(View &v)
-	: ge_(v.ge_)
+View::View(View &)
 {
 }
 
 View::~View() {}
 
-ProvostShiftSlot View::getAskProvostShiftSlot() const
+board_element_activation_signal_t::slot_function_type View::boardElementActivationSlot()
 {
-	return boost::bind(&View::askProvostShift, this);
+	return boost::bind(&View::boardElementActivation, this, _1);
 }
 
-WorkerPlacementSlot View::getAskWorkerPlacementSlot() const
+v_v_signal_t::slot_function_type View::updateBoardSlot()
 {
-	return boost::bind(&View::askWorkerPlacement, this, _1);
-}
-
-boost::signal<unsigned (void)>::slot_function_type View::getAskBuildingSlot() const
-{
-	return boost::bind(&View::askBuilding, this);
-}
-
-boost::signal<unsigned (void)>::slot_function_type View::getResourceChoice() const
-{
-	return boost::bind(&View::askResourceChoice, this);
+	return boost::bind(&View::updateBoard, this);
 }
 
 boost::condition_variable *View::disconnected()

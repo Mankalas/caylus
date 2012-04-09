@@ -12,15 +12,7 @@
 # include <vector>
 # include <boost/signal.hpp>
 # include <boost/thread.hpp>
-
-namespace controller
-{
-	class GameEngine;
-	class BoardElement;
-}
-
-typedef boost::signal<int (void)>::slot_function_type ProvostShiftSlot;
-typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*> &)>::slot_function_type WorkerPlacementSlot;
+# include "signals.hh"
 
 namespace view
 {
@@ -28,7 +20,7 @@ namespace view
 	class View
 	{
 	public:
-		View(controller::GameEngine *ge);
+		View();
 		/**
 		 * Copy contructor, in order to avoir compilation errors due to
 		 * the non-copyable propertie of the View's condition_variable.
@@ -38,27 +30,15 @@ namespace view
 		View(View &v);
 		virtual ~View();
 
-		virtual std::string askName() const = 0;
-		virtual bool isHuman() const = 0;
+		virtual void boardElementActivation(const controller::BoardElement * board_elt) = 0;
+		virtual void updateBoard() = 0;
 
-		virtual int askProvostShift() const = 0;
-		virtual bool askYesNo() const = 0;
-		virtual bool askJoustField() const = 0;
-		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement*> & tbuildings) const = 0;
-		virtual unsigned askBuilding() const = 0;
-		virtual unsigned askResourceChoice() const = 0;
-
-		virtual void operator()() = 0;
-
-		ProvostShiftSlot getAskProvostShiftSlot() const;
-		WorkerPlacementSlot getAskWorkerPlacementSlot() const;
-		boost::signal<unsigned (void)>::slot_function_type getAskBuildingSlot() const;
-		boost::signal<unsigned (void)>::slot_function_type getResourceChoice() const;
+		boost::signal<void (void)>::slot_function_type updateBoardSlot();
+		board_element_activation_signal_t::slot_function_type boardElementActivationSlot();
 
 		boost::condition_variable *disconnected();
 
 	protected:
-		const controller::GameEngine *ge_;
 		boost::condition_variable disconnected_;
 	};
 

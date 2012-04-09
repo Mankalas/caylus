@@ -11,6 +11,12 @@
 
 # include <vector>
 # include <string>
+# include "signals.hh"
+
+namespace view
+{
+	class View;
+}
 
 namespace controller
 {
@@ -24,8 +30,11 @@ namespace controller
 		virtual bool isBridge() const;
 		virtual const std::string & name() const;
 
+		virtual void subscribe(view::View * view);
+
 	protected:
 		const std::string name_;
+		board_element_activation_signal_t activation_sig_;
 	};
 }
 

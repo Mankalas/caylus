@@ -23,7 +23,8 @@
 
 namespace view
 {
-	class View;
+	class PlayerView;
+	class Logger;
 }
 
 namespace controller
@@ -66,15 +67,15 @@ namespace controller
 		unsigned &workers();
 		const unsigned &residences() const;
 		unsigned &residences();
-		const view::View *view() const;
-		view::View *view();
-		void setView(view::View *view);
+		const view::PlayerView *view() const;
+		view::PlayerView *view();
+		void setView(view::PlayerView *view);
 
 		/// Actions.
 		int askProvostShift() const;
 		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> & buildings) const;
 
-		void subscribeView(Logger * log);
+		void subscribeView(view::Logger * log);
 
 	private:
 
@@ -87,7 +88,7 @@ namespace controller
 		int prestige_;
 		ResourceMap resources_;
 		unsigned int residences_;
-		view::View *view_;
+		view::PlayerView *view_;
 
 		// Signals.
 		boost::signal<int (void)> ask_provost_shift_signal_;

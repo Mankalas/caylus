@@ -8,8 +8,10 @@
 
 #include "board-element.hh"
 #include "debug-logger.hh"
+#include "view.hh"
 
 using namespace controller;
+using namespace view;
 
 BoardElement::BoardElement(const std::string &name) :
 	name_(name)
@@ -34,4 +36,9 @@ bool BoardElement::isBuilding() const
 const std::string & BoardElement::name() const
 {
 	return name_;
+}
+
+void BoardElement::subscribe(View * view)
+{
+	activation_sig_.connect(view->boardElementActivationSlot());
 }

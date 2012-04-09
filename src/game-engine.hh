@@ -13,9 +13,7 @@
 # include <boost/smart_ptr.hpp>
 # include <boost/signal.hpp>
 # include <boost/thread.hpp>
-# include "road.hh"
-# include "castle.hh"
-# include "bridge.hh"
+# include "board.hh"
 # include "logger.hh"
 # include "game-signals.hh"
 
@@ -25,7 +23,7 @@
 
 namespace view
 {
-	class Human;
+	class PlayerView;
 }
 
 namespace controller
@@ -53,26 +51,14 @@ namespace controller
 		const std::vector<BuildingSmartPtr>& buildings() const;
 		std::vector<BuildingSmartPtr>& buildings();
 
-		const Road &road() const;
-		Road &road();
-
 		const std::vector<Player *>& players() const;
 		std::vector<Player *>& players();
 
 		const std::vector<Player *>& order() const;
 		std::vector<Player *>& order();
 
-		const Bridge& bridge() const;
-		Bridge& bridge();
-
-		const Castle &castle() const;
-		Castle &castle();
-
-		const unsigned &bailiff() const;
-		unsigned &bailiff();
-
-		const unsigned &provost() const;
-		unsigned &provost();
+		const Board & board() const;
+		Board & board();
 
 		const unsigned &nbHumans() const;
 		const unsigned &nbAIs() const;
@@ -88,8 +74,10 @@ namespace controller
 
 		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;
 
-		void subscribeView(view::Human *human);
-		void subscribeView(Logger * log);
+		void subscribeView(view::PlayerView *view);
+		void subscribeView(view::Logger * log);
+
+		void launch();
 
 
 	private:
@@ -152,30 +140,28 @@ namespace controller
 				Prevost.*/
 		void moveBailiff_();
 
+		void init_();
+
 		/// The order in which the player are "called".
 		std::vector<Player *> order_;
 		/// List of the players.
 		std::vector<Player *> players_;
+		/// List of the views.
+		std::vector<view::View *> views_;
+
 		/// List of the buildings left to build.
 		std::vector<BuildingSmartPtr> buildings_;
-		/// The "road" on the board of the game.
-		Road road_;
-		/// List of players at the castle.
-		Castle castle_;
-		/// Bridge
-		Bridge bridge_;
-		/// Road's index of the building the provost is in.
-		unsigned provost_;
-		/// Road's index of the building the bailiff is in.
-		unsigned bailiff_;
-					/// Number of humans currently playing.
+
+		/// Number of humans currently playing.
 		unsigned nb_humans_;
-					/// Number of ais currently playing.
+		/// Number of ais currently playing.
 		unsigned nb_ais_;
-					/// Number of the current turn.
+		/// Number of the current turn.
 		unsigned nb_turns_;
-					/// Max number of turns before the game ends.
+		/// Max number of turns before the game ends.
 		unsigned nb_turns_max_;
+
+		Board board_;
 
 		/// Used to wait until a view subscribes.
 		boost::mutex mutex_;

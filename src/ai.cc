@@ -1,16 +1,26 @@
-#include "ai.hh"
-#include "game-engine.hh"
-#include "debug-logger.hh"
-#include "building.hh"
+/**
+ * @file   ai.cc
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Mon Apr  9 23:06:12 2012
+ *
+ * @brief  Declaration of the ai class.
+ */
+
 #include <time.h>
 #include <stdlib.h>
+
+#include "ai.hh"
+
+#include "game-engine.hh"
+#include "debug-logger.hh"
+#include "board-element.hh"
 
 using namespace std;
 using namespace view;
 using namespace controller;
 
 AI::AI(GameEngine *ge)
-	: View(ge)
+	: PlayerView(ge)
 {
 	srand(time(NULL));
 }
@@ -55,4 +65,12 @@ int AI::askProvostShift() const
 bool AI::isHuman() const
 {
 	return false;
+}
+
+void AI::boardElementActivation(const controller::BoardElement *)
+{
+}
+
+void AI::updateBoard()
+{
 }

@@ -24,10 +24,10 @@ void MerchantGuild::on_activate()
 {
 	assert(worker_);
 	int s = worker_->askProvostShift();
-	while (s < -3 || s > 3 || s + game_->provost() < 6 ||
-	       s + game_->provost() > 33)
+	while (s < -3 || s > 3 || s + game_->board().provost() < 6 ||
+	       s + game_->board().provost() > 33)
 	{
 		s = worker_->askProvostShift();
 	}
-	game_->provost() += s;
+	game_->board().provost() += s;
 }

@@ -7,7 +7,7 @@
  */
 
 #include "player.hh"
-#include "view.hh"
+#include "player-view.hh"
 #include "debug-logger.hh"
 
 using namespace view;
@@ -54,14 +54,14 @@ Player::Player(const Player &player):
 {
 }
 
-void Player::setView(View *view)
+void Player::setView(PlayerView *view)
 {
 	view_ = view;
 
-	ask_provost_shift_signal_.connect(view->getAskProvostShiftSlot());
+	ask_provost_shift_signal_.connect(view->askProvostShiftSlot());
 	assert(!ask_provost_shift_signal_.empty());
 
-	sig_ask_worker_placement_.connect(view->getAskWorkerPlacementSlot());
+	sig_ask_worker_placement_.connect(view->askWorkerPlacementSlot());
 	assert(!sig_ask_worker_placement_.empty());
 }
 

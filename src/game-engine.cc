@@ -17,43 +17,28 @@
 #include "all-buildings.hh"
 #include "exceptions.hh"
 #include "inn.hh"
-#include "human.hh"
-#include "ai.hh"
+#include "player-view.hh"
 #include "debug-logger.hh"
 #include "debug-logger.hh"
 
 using namespace controller;
 
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
-	: road_(this), nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0)
+	:nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0), board_(this)
 {
-	mutex_.lock();
-	assert(nb_humans_ <= 5);
-	for (unsigned i = 0; i < nb_humans_; ++i)
-	{
-		Player *p = new Player();
-		DebugLogger::log("Adding new human player.");
-		players_.push_back(p);
-	}
-	if (nb_humans_ > 1)
-	{
-		assert(nb_ais_ <= 5 - nb_humans_);
-	}
-	else
-	{
-		//assert(nb_ais_ > 0);
-	}
-	while (players_.size() < nb_ais_ + nb_humans_)
-	{
-		Player *p = new Player();
-		DebugLogger::log("Adding new AI player.");
-		p->setName("HAL");
-		players_.push_back(p);
-	}
+}
 
-	provost_ = PROVOST_INIT_CASE;
-	bailiff_ = BAILIFF_INIT_CASE;
+GameEngine::~GameEngine()
+{
+	mutex_.unlock();
+	foreach(Player * p, players_)
+	{
+		delete p;
+	}
+}
 
+void GameEngine::init_()
+{
 	buildings_.push_back(BuildingSmartPtr(new Statue()));
 	buildings_.push_back(BuildingSmartPtr(new Theater()));
 	buildings_.push_back(BuildingSmartPtr(new College()));
@@ -80,15 +65,29 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
+	foreach (BuildingSmartPtr b, buildings_)
+	{
+		foreach (View * v, views_)
+		{
+			b->subscribe(v);
+		}
+	}
+		// Shuffle players order.
+	foreach (Player * p, players_)
+	{
+		order_.push_back(p);
+	}
+	std::random_shuffle(order_.begin(), order_.end());
+	// Give each player his initial denier amount.
+	for (unsigned i = 1; i < players_.size(); i++)
+	{
+		players_[i]->resources() += Resource::denier * ((i < 3) ? 1 : 2);
+	}
 }
 
-GameEngine::~GameEngine()
+void GameEngine::launch()
 {
 	mutex_.unlock();
-	foreach(Player * p, players_)
-	{
-		delete p;
-	}
 }
 
 void GameEngine::operator() ()
@@ -96,6 +95,7 @@ void GameEngine::operator() ()
 	// Waiting for the view subscription to release the mutex.
 	mutex_.lock();
 	sigs_.game_engine_ready();
+	init_();
 	while (nb_turns_ < nb_turns_max_)
 	{
 		++nb_turns_;
@@ -115,17 +115,17 @@ void GameEngine::activateSpecialBuildings_()
 {
 	for (unsigned i = 0; i < 6; ++i)
 	{
-		road_.get()[i]->activate();
+		board_.road().get()[i]->activate();
 	}
 }
 
 void GameEngine::activateBuildings_()
 {
-	for (unsigned i = 6; i <= provost_ + 1; ++i)
+	for (unsigned i = 6; i <= board_.provost() + 1; ++i)
 	{
-		if (road_.get()[i] != NULL)
+		if (board_.road().get()[i] != NULL)
 		{
-			road_.get()[i]->activate();
+			board_.road().get()[i]->activate();
 		}
 	}
 }
@@ -135,7 +135,7 @@ void GameEngine::activateBridge_()
 	int deniers = 0;
 	int shift = 0;
 
-	foreach (Player * p, bridge_.players())
+	foreach (Player * p, board_.bridge().players())
 	{
 		assert(p);
 		deniers = p->resources()[Resource::denier];
@@ -147,12 +147,12 @@ void GameEngine::activateBridge_()
 		shift = p->askProvostShift();
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
-		while (shift + provost_ < 6 || shift + provost_ > 33 ||
+		while (shift + board_.provost() < 6 || shift + board_.provost() > 33 ||
 		       std::abs(shift) > deniers)
 		{
 			shift = p->askProvostShift();
 		}
-		provost_ += shift;
+		board_.provost() += shift;
 		p->resources() -= Resource::denier * std::abs(shift);
 	}
 }
@@ -160,7 +160,7 @@ void GameEngine::activateBridge_()
 
 void GameEngine::activateCastle_()
 {
-	castle_.activate();
+	board_.castle().activate();
 }
 
 void GameEngine::collectIncome_()
@@ -170,7 +170,7 @@ void GameEngine::collectIncome_()
 	foreach (Player *p, players_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
-		sigs_.income_collecting_for_player(p, income);
+		sigs_.income_collecting_for_player(p, &income);
 		p->resources() += income;
 	}
 	sigs_.income_collecting_end();
@@ -179,11 +179,11 @@ void GameEngine::collectIncome_()
 void GameEngine::endOfTurn_()
 {
 	moveBailiff_();
-	if (bailiff_ == 17 || bailiff_ == 18 ||
-	    bailiff_ == 30 || bailiff_ == 31 ||
-	    castle_.isActivePartComplete())
+	if (board_.bailiff() == 17 || board_.bailiff() == 18 ||
+	    board_.bailiff() == 30 || board_.bailiff() == 31 ||
+	    board_.castle().isActivePartComplete())
 	{
-		castle_.score(players_);
+		board_.castle().score(players_);
 	}
 	if (players_.size() == 2)
 	{
@@ -194,7 +194,7 @@ void GameEngine::endOfTurn_()
 void GameEngine::placeWorkers_()
 {
 	sigs_.worker_placement_begin();
-	while (bridge_.players().size() != players_.size())
+	while (board_.bridge().players().size() != players_.size())
 	{
 		foreach (Player *p, order_)
 		{
@@ -211,14 +211,14 @@ void GameEngine::placeWorkers_()
 
 void GameEngine::moveBailiff_()
 {
-	bailiff_ += (provost_ > bailiff_ ? 2 : 1);
-	provost_ = bailiff_;
+	board_.bailiff() += (board_.provost() > board_.bailiff() ? 2 : 1);
+	board_.provost() = board_.bailiff();
 }
 
 void GameEngine::addToCastle(Player *p)
 {
 	assert(p);
-	castle_.add(p);
+	board_.castle().add(p);
 }
 
 void GameEngine::playerMove_(Player *p)
@@ -237,7 +237,7 @@ void GameEngine::playerMove_(Player *p)
 
 		if (player_choice->isBridge())
 		{
-			bridge_.add(p);
+			board_.bridge().add(p);
 			has_played = true;
 			continue;
 		}
@@ -246,7 +246,7 @@ void GameEngine::playerMove_(Player *p)
 
 		if (player_choice->isCastle() && p->resources()[Resource::denier] >= worker_cost)
 		{
-			castle_.add(p);
+			board_.castle().add(p);
 			p->resources() -= Resource::denier * worker_cost;
 			p->workers() -= 1;
 			has_played = true;
@@ -287,14 +287,14 @@ void GameEngine::startOfTurn_()
 {
 	sigs_.new_turn();
 
-	road_.clearWorkers();
-	bridge_.clear();
-	castle_.clear();
+	board_.road().clearWorkers();
+	board_.bridge().clear();
+	board_.castle().clear();
 	foreach (Player * p, players_)
 	{
 		p->workers() = NB_WORKERS;
 	}
-	Inn *inn = (Inn *)(road_.get()[INN_CASE].get());
+	Inn *inn = (Inn *)(board_.road().get()[INN_CASE].get());
 	if (inn->host())
 	{
 		inn->host()->workers() -= 1;
@@ -304,7 +304,7 @@ void GameEngine::startOfTurn_()
 
 bool GameEngine::canPlayerPlay_(Player *p)
 {
-	if (bridge_.has(p))
+	if (board_.bridge().has(p))
 	{
 		sigs_.already_on_bridge(p);
 		return false;
@@ -312,13 +312,13 @@ bool GameEngine::canPlayerPlay_(Player *p)
 	if (p->resources()[Resource::denier] == 0)
 	{
 		sigs_.not_enough_deniers(p);
-		bridge_.add(p);
+		board_.bridge().add(p);
 		return false;
 	}
 	if (p->workers() == 0)
 	{
 		sigs_.no_worker_left(p);
-		bridge_.add(p);
+		board_.bridge().add(p);
 		return false;
 	}
 	return true;
@@ -326,9 +326,9 @@ bool GameEngine::canPlayerPlay_(Player *p)
 
 unsigned GameEngine::getWorkerCost_(const Player *p) const
 {
-	const Inn *inn = (const Inn *)(road_.get()[5].get());
+	const Inn *inn = (const Inn *)(board_.road().get()[5].get());
 	assert(inn);
-	return (inn->host() == p) ? 1 : bridge_.players().size() + 1;
+	return (inn->host() == p) ? 1 : board_.bridge().players().size() + 1;
 }
 
 void GameEngine::build(BuildingSmartPtr &building, Player *p)
@@ -338,42 +338,15 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 	assert(p);
 	assert(building);
 	game_b->build(p);
-	road_.build(game_b);
+	board_.road().build(game_b);
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
-void GameEngine::subscribeView(Human *human)
+void GameEngine::subscribeView(PlayerView *view)
 {
-	Player * p = NULL;
-
-	for (unsigned i = 0; i < nb_humans_; ++i)
-	{
-		p = players_[i];
-		if (p->view() == NULL)
-		{
-			p->setView(human);
-			sigs_.board_updated.connect(human->getUpdateBoardSlot());
-		}
-	}
-	for (unsigned i = 0; i < nb_ais_; ++i)
-	{
-		DebugLogger::log("Subcribing AI view.");
-		p = players_[nb_humans_ + i];
-		p->setView(new view::AI(this));
-	}
-	// Shuffle players order.
-	foreach (Player * p, players_)
-	{
-		order_.push_back(p);
-	}
-	std::random_shuffle(order_.begin(), order_.end());
-	// Give each player his initial denier amount.
-	for (unsigned i = 1; i < players_.size(); i++)
-	{
-		players_[i]->resources() += Resource::denier * ((i < 3) ? 1 : 2);
-	}
-
-	mutex_.unlock();
+	Player * p = new Player();
+	p->setView(view);
+	sigs_.board_updated.connect(view->updateBoardSlot());
 }
 
 void GameEngine::subscribeView(Logger * log)
@@ -393,9 +366,9 @@ void GameEngine::subscribeView(Logger * log)
 const std::vector<BoardElement*>
 GameEngine::getAvailableBoardElements(const Player * worker) const
 {
-	std::vector<BoardElement*> available_buildings(road_.getAvailableBuildings(worker));
+	std::vector<BoardElement*> available_buildings(board_.road().getAvailableBuildings(worker));
 
-	available_buildings.push_back((BoardElement*)&castle_);
-	available_buildings.push_back((BoardElement*)&bridge_);
+	available_buildings.push_back((BoardElement*)&board_.castle());
+	available_buildings.push_back((BoardElement*)&board_.bridge());
 	return available_buildings;
 }

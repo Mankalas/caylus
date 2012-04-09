@@ -8,14 +8,14 @@
 #ifndef AI_HH
 # define AI_HH
 
-# include "view.hh"
+# include "player-view.hh"
 
 namespace view
 {
 	/**
 	 * AI implementation.
 	 */
-	class AI : public View
+	class AI : public PlayerView
 	{
 	public:
 
@@ -31,6 +31,9 @@ namespace view
 		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
+		virtual void boardElementActivation(const controller::BoardElement * board_elt);
+		virtual void updateBoard();
+
 	};
 
 }
