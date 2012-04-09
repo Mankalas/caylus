@@ -30,7 +30,6 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
 
 GameEngine::~GameEngine()
 {
-	mutex_.unlock();
 	foreach(Player * p, players_)
 	{
 		delete p;
@@ -346,6 +345,7 @@ void GameEngine::subscribeView(PlayerView *view)
 {
 	Player * p = new Player();
 	p->setView(view);
+	players_.push_back(p);
 	sigs_.board_updated.connect(view->updateBoardSlot());
 }
 
