@@ -48,7 +48,7 @@ void Stables::worker_unset()
 
 void Stables::on_activate()
 {
-	std::cout << "Activating Stables" << std::endl;
+	Building::on_activate();
 	std::vector<Player *>& order = game_->order();
 	std::vector<Player *>::iterator it;
 	Player *p;

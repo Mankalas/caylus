@@ -108,6 +108,8 @@ Building::on_build ()
 void
 Building::on_activate ()
 {
+	assert(worker_);
+	activation_sig_(this);
 }
 
 void

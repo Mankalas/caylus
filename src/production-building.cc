@@ -25,7 +25,7 @@ ProductionBuilding::ProductionBuilding (const std::vector<ResourceMap>& wchc,
 void
 ProductionBuilding::on_activate ()
 {
-	DebugLogger::log("Activating Trading post.");
+	Building::on_activate();
 	if (worker_choices_.size() == 1)
 	{
 		worker_->resources() += worker_choices_[0];

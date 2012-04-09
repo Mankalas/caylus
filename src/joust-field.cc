@@ -19,6 +19,7 @@ JoustField::JoustField()
 
 void JoustField::on_activate(void)
 {
+	Building::on_activate();
 	if (worker_->resources()[Resource::denier] < 1 ||
 	    worker_->resources()[Resource::cloth] < 1)
 	{

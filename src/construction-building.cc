@@ -28,6 +28,7 @@ ConstructionBuilding::ConstructionBuilding(GameEngine *ge, const BuildingType &c
 
 void ConstructionBuilding::on_activate()
 {
+	Building::on_activate();
 	//  unsigned i = 1;
 	unsigned choice = 0;
 

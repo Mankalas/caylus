@@ -23,6 +23,7 @@ TradeBuilding::TradeBuilding (const ResourceMap  &supply,
 void
 TradeBuilding::on_activate ()
 {
+	Building::on_activate();
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges = createExchangeVector();
 	unsigned choice = 1;
 

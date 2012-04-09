@@ -26,6 +26,7 @@ Gate::Gate(GameEngine *ge)
 
 void Gate::on_activate()
 {
+	Building::on_activate();
 	DebugLogger::log("Activating Gate.");
 	BoardElement * player_choice = NULL;
 	std::vector<BoardElement *> choices = game_->board().road().getAvailableBuildings(worker_);

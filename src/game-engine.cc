@@ -64,6 +64,7 @@ void GameEngine::init_()
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
+
 	foreach (BuildingSmartPtr b, buildings_)
 	{
 		foreach (View * v, views_)
@@ -71,6 +72,18 @@ void GameEngine::init_()
 			b->subscribe(v);
 		}
 	}
+
+	foreach (BuildingSmartPtr b, board().road().get())
+	{
+		if (b != NULL)
+		{
+			foreach (View * v, views_)
+			{
+				b->subscribe(v);
+			}
+		}
+	}
+
 		// Shuffle players order.
 	foreach (Player * p, players_)
 	{
@@ -346,11 +359,13 @@ void GameEngine::subscribeView(PlayerView *view)
 	Player * p = new Player();
 	p->setView(view);
 	players_.push_back(p);
+	views_.push_back(view);
 	sigs_.board_updated.connect(view->updateBoardSlot());
 }
 
 void GameEngine::subscribeView(Logger * log)
 {
+	views_.push_back(log);
 	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
 	sigs_.income_collecting_begin.connect(log->incomeCollectionBeginSlot());
 	sigs_.income_collecting_for_player.connect(log->incomeCollectionForPlayerSlot());

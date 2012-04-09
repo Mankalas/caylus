@@ -22,7 +22,7 @@ MerchantGuild::MerchantGuild(GameEngine *ge)
 
 void MerchantGuild::on_activate()
 {
-	assert(worker_);
+	Building::on_activate();
 	int s = worker_->askProvostShift();
 	while (s < -3 || s > 3 || s + game_->board().provost() < 6 ||
 	       s + game_->board().provost() > 33)

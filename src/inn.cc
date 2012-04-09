@@ -20,6 +20,7 @@ Inn::Inn()
 
 void Inn::on_activate()
 {
+	Building::on_activate();
 	if (worker_)
 	{
 		//ask player if he wants to remove its worker
