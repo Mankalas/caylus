@@ -65,23 +65,21 @@ void GameEngine::init_()
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
 
-	foreach (BuildingSmartPtr b, buildings_)
+	foreach (View * v, views_)
 	{
-		foreach (View * v, views_)
+		foreach (BuildingSmartPtr b, buildings_)
 		{
 			b->subscribe(v);
 		}
-	}
-
-	foreach (BuildingSmartPtr b, board().road().get())
-	{
-		if (b != NULL)
+		foreach (BuildingSmartPtr b, board().road().get())
 		{
-			foreach (View * v, views_)
+			if (b != NULL)
 			{
 				b->subscribe(v);
 			}
 		}
+		board().castle().subscribe(v);
+		board().bridge().subscribe(v);
 	}
 
 		// Shuffle players order.
