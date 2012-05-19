@@ -100,7 +100,6 @@ Castle::~Castle()
 void Castle::on_activate()
 {
 	BoardElement::on_activate();
-	std::cout << "toto\n";
 	bool can_pay = false;
 	unsigned current_build = 0;
 

@@ -45,6 +45,5 @@ void BoardElement::subscribe(View * view)
 
 void BoardElement::on_activate()
 {
-	std::cout << "Tata\n";
 	activation_sig_(this);
 }
