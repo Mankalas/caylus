@@ -38,6 +38,8 @@ namespace controller
 		const unsigned &provost() const;
 		unsigned &provost();
 
+		bool valid_provost_move(int shift) const;
+
 	private:
 		/// The "road" on the board of the game.
 		Road road_;
@@ -50,6 +52,8 @@ namespace controller
 		/// Road's index of the building the bailiff is in.
 		unsigned bailiff_;
 
+		const unsigned FIRST_EMPTY_CASE_;
+		const unsigned LAST_EMPTY_CASE_;
 	};
 }
 

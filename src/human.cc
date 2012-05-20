@@ -96,7 +96,7 @@ void Human::updateBoard()
 
 int Human::askProvostShift() const
 {
-	return 3;
+	return user_interface_->askProvostShift();
 }
 
 bool Human::isHuman() const
@@ -107,7 +107,7 @@ bool Human::isHuman() const
 BoardElement*
 Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
-	return this->user_interface_->askBuilding(buildings);
+	return user_interface_->askBuilding(buildings);
 }
 
 unsigned Human::askBuilding() const

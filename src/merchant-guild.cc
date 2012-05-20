@@ -10,6 +10,7 @@
 #include "merchant-guild.hh"
 #include "game-engine.hh"
 #include "const.hh"
+#include "player-view.hh"
 
 MerchantGuild::MerchantGuild(GameEngine *ge)
 	: Building(MERCHANT_GUILD,
@@ -23,11 +24,22 @@ MerchantGuild::MerchantGuild(GameEngine *ge)
 void MerchantGuild::on_activate()
 {
 	Building::on_activate();
-	int s = worker_->askProvostShift();
-	while (s < -3 || s > 3 || s + game_->board().provost() < 6 ||
-	       s + game_->board().provost() > 33)
+	int s = ask_provost_shift_sig_();
+
+	while (!game_->board().valid_provost_move(s))
 	{
-		s = worker_->askProvostShift();
+		s = ask_provost_shift_sig_();
 	}
 	game_->board().provost() += s;
+}
+
+void MerchantGuild::subscribe(PlayerView * v)
+{
+	if (!v)
+	{
+		return;
+	}
+
+	std::cout << "connect\n";
+	ask_provost_shift_sig_.connect(v->askProvostShiftSlot());
 }

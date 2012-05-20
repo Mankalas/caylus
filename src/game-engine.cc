@@ -67,22 +67,27 @@ void GameEngine::init_()
 
 	foreach (View * v, views_)
 	{
+		PlayerView * pv = dynamic_cast<PlayerView *>(v);
 		foreach (BuildingSmartPtr b, buildings_)
 		{
 			b->subscribe(v);
+			b->subscribe(pv);
 		}
 		foreach (BuildingSmartPtr b, board().road().get())
 		{
 			if (b != NULL)
 			{
 				b->subscribe(v);
+				b->subscribe(pv);
 			}
 		}
 		board().castle().subscribe(v);
 		board().bridge().subscribe(v);
+		board().castle().subscribe(pv);
+		board().bridge().subscribe(pv);
 	}
 
-		// Shuffle players order.
+	// Shuffle players order.
 	foreach (Player * p, players_)
 	{
 		order_.push_back(p);
@@ -154,6 +159,7 @@ void GameEngine::activateBridge_()
 			continue;
 		}
 
+		DebugLogger::log("Bridge activation.");
 		shift = p->askProvostShift();
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */

@@ -16,6 +16,7 @@
 namespace view
 {
 	class View;
+	class PlayerView;
 }
 
 namespace controller
@@ -31,6 +32,7 @@ namespace controller
 		virtual const std::string & name() const;
 
 		virtual void subscribe(view::View * view);
+		virtual void subscribe(view::PlayerView * view);
 
 		virtual void on_activate();
 
