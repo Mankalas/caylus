@@ -128,10 +128,12 @@ void GameEngine::operator() ()
 
 void GameEngine::activateSpecialBuildings_()
 {
+	sigs_.activation_special_buildings_begin();
 	for (unsigned i = 0; i < 6; ++i)
 	{
 		board_.road().get()[i]->activate();
 	}
+	sigs_.activation_special_buildings_end();
 }
 
 void GameEngine::activateBuildings_()
@@ -371,12 +373,17 @@ void GameEngine::subscribeView(Logger * log)
 {
 	views_.push_back(log);
 	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
+
 	sigs_.income_collecting_begin.connect(log->incomeCollectionBeginSlot());
 	sigs_.income_collecting_for_player.connect(log->incomeCollectionForPlayerSlot());
 	sigs_.income_collecting_end.connect(log->incomeCollectionEndSlot());
+
 	sigs_.worker_placement_begin.connect(log->workerPlacementBeginSlot());
 	sigs_.worker_placement_end.connect(log->workerPlacementEndSlot());
 	sigs_.worker_placement_for_player.connect(log->workerPlacementForPlayerSlot());
+
+	sigs_.activation_special_buildings_begin.connect(log->activationSpecialBuildingsBeginSlot());
+	sigs_.activation_special_buildings_end.connect(log->activationSpecialBuildingsEndSlot());
 
 	sigs_.player_choices.connect(log->playerChoicesSlot());
 	sigs_.player_has_chosen.connect(log->playerChoiceSlot());

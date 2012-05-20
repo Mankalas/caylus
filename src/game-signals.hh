@@ -11,10 +11,18 @@
 
 # include "signals.hh"
 
+namespace view
+{
+	class View;
+}
+
 namespace controller
 {
 	struct GameSignals
 	{
+		//void connect(view::View * view);
+
+
 		/* Player interactions. */
 
 		/// Ask how many humans are playing. First param is the max number
@@ -35,18 +43,23 @@ namespace controller
 		v_v_signal_t game_engine_ready;
 		/// A new turn has begun. First param is the current turn number.
 		v_v_signal_t new_turn;
+
 		/// Income collecting phase has begun.
 		v_v_signal_t income_collecting_begin;
 		/// Income collecting for a player.
 		v_cp_cr_signal_t income_collecting_for_player;
 		/// Income collecting phase has ended.
 		v_v_signal_t income_collecting_end;
+
 		/// Worker placement phase has begun.
 		v_v_signal_t worker_placement_begin;
 		/// Worker placement phase has ended.
 		v_v_signal_t worker_placement_end;
 		/// Worker placement for a player.
 		v_cp_signal_t worker_placement_for_player;
+
+		v_v_signal_t activation_special_buildings_begin;
+		v_v_signal_t activation_special_buildings_end;
 
 		/* Errors, messages and log. */
 

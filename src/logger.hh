@@ -42,12 +42,18 @@ namespace view
 
 		void gameEngineReady();
 		void newTurn();
+
 		void incomeCollectionBegin();
 		void incomeCollectionEnd();
 		void incomeCollectionForPlayer(const controller::Player * player, const controller::ResourceMap * income);
+
 		void workerPlacementBegin();
 		void workerPlacementEnd();
 		void workerPlacementForPlayer(const controller::Player * player);
+
+		void activationSpecialBuildingsBegin();
+		void activationSpecialBuildingsEnd();
+
 		void alreadyOnBridge(const controller::Player * player);
 		void notEnoughDeniers(const controller::Player * player);
 		void noWorkerLeft(const controller::Player * player);
@@ -60,12 +66,18 @@ namespace view
 
 		v_v_signal_t::slot_function_type gameEngineReadySlot();
 		v_u_signal_t::slot_function_type newTurnSlot() ;
+
 		v_v_signal_t::slot_function_type incomeCollectionBeginSlot() ;
 		v_v_signal_t::slot_function_type incomeCollectionEndSlot() ;
 		v_cp_cr_signal_t::slot_function_type incomeCollectionForPlayerSlot() ;
+
 		v_v_signal_t::slot_function_type workerPlacementBeginSlot() ;
 		v_v_signal_t::slot_function_type workerPlacementEndSlot() ;
 		v_cp_signal_t::slot_function_type workerPlacementForPlayerSlot() ;
+
+		v_v_signal_t::slot_function_type activationSpecialBuildingsBeginSlot() ;
+		v_v_signal_t::slot_function_type activationSpecialBuildingsEndSlot() ;
+
 		v_cp_signal_t::slot_function_type alreadyOnBridgeSlot() ;
 		v_cp_signal_t::slot_function_type notEnoughDeniersSlot() ;
 		v_cp_signal_t::slot_function_type noWorkerLeftSlot() ;

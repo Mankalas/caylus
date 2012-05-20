@@ -7,8 +7,11 @@
  */
 
 #include "game-signals.hh"
+#include "view.hh"
 
-void GameSignals::connect(View & view)
+using namespace controller;
+
+/*void GameSignals::connect(view::View * view)
 {
 	game_engine_ready.connect(view->gameEngineReadySlot());
 	income_collecting_begin.connect(view->incomeCollectionBeginSlot());
@@ -17,7 +20,10 @@ void GameSignals::connect(View & view)
 	worker_placement_begin.connect(view->workerPlacementBeginSlot());
 	worker_placement_end.connect(view->workerPlacementEndSlot());
 	worker_placement_for_player.connect(view->workerPlacementForPlayerSlot());
+	activation_special_buildings_begin.connect(view->activationSpecialBuildingsBeginSlot());
+	activation_special_buildings_end.connect(view->activationSpecialBuildingsEndSlot());
 
 	player_choices.connect(view->playerChoicesSlot());
 	player_has_chosen.connect(view->playerChoiceSlot());
 }
+*/

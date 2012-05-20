@@ -136,6 +136,16 @@ void Logger::updateBoard()
 	file_ << "<p>Board was updated.</p>";
 }
 
+void Logger::activationSpecialBuildingsBegin()
+{
+	file_ << "<h1>Activation of special buildings</h1>" << std::endl;
+}
+
+void Logger::activationSpecialBuildingsEnd()
+{
+	file_ << "<p>End of special buildings activation.</p>" << std::endl;
+}
+
 v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()
 {
 	return boost::bind(&Logger::gameEngineReady, this);
@@ -194,6 +204,17 @@ boost::signal<void (const controller::ResourceMap *)>::slot_function_type Logger
 {
 	return boost::bind(&Logger::resourceMove, this, _1);
 }
+
+v_v_signal_t::slot_function_type Logger::activationSpecialBuildingsBeginSlot()
+{
+	return boost::bind(&Logger::activationSpecialBuildingsBegin, this);
+}
+
+v_v_signal_t::slot_function_type Logger::activationSpecialBuildingsEndSlot()
+{
+	return boost::bind(&Logger::activationSpecialBuildingsEnd, this);
+}
+
 
 void Logger::resourceMove(const ResourceMap *)
 {
