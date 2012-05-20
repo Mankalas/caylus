@@ -7,10 +7,8 @@
  */
 
 #include "player.hh"
-#include "player-view.hh"
 #include "debug-logger.hh"
 
-using namespace view;
 using namespace controller;
 
 Player::Player():
@@ -22,8 +20,7 @@ Player::Player():
 	name_("Chiche"),
 	prestige_(0),
 	resources_(Resource::denier * 5 + Resource::food * 2 + Resource::wood),
-	residences_(0),
-	view_(NULL)
+	residences_(0)
 {
 }
 
@@ -54,28 +51,12 @@ Player::Player(const Player &player):
 {
 }
 
-void Player::setView(PlayerView *view)
-{
-	view_ = view;
-
-	ask_provost_shift_signal_.connect(view->askProvostShiftSlot());
-	assert(!ask_provost_shift_signal_.empty());
-
-	sig_ask_worker_placement_.connect(view->askWorkerPlacementSlot());
-	assert(!sig_ask_worker_placement_.empty());
-}
-
 BoardElement*
 Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
 	assert(!sig_ask_worker_placement_.empty());
 
 	return sig_ask_worker_placement_(buildings);
-}
-
-void Player::subscribeView(Logger * log)
-{
-	resource_move_.connect(log->resourceMoveSlot());
 }
 
 void Player::addResources(const ResourceMap &r)

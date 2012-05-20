@@ -6,9 +6,8 @@
  * @brief Implementation of the Gate class.
  */
 
-#include "exceptions.hh"
 #include "gate.hh"
-#include "console-ui.hh"
+#include "exceptions.hh"
 #include "game-engine.hh"
 #include "board-element.hh"
 #include "debug-logger.hh"

@@ -65,7 +65,7 @@ void GameEngine::init_()
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
 
-	foreach (View * v, views_)
+	/*foreach (View * v, views_)
 	{
 		PlayerView * pv = dynamic_cast<PlayerView *>(v);
 		foreach (BuildingSmartPtr b, buildings_)
@@ -85,7 +85,7 @@ void GameEngine::init_()
 		board().bridge().subscribe(v);
 		board().castle().subscribe(pv);
 		board().bridge().subscribe(pv);
-	}
+		}*/
 
 	// Shuffle players order.
 	foreach (Player * p, players_)
@@ -359,7 +359,7 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
-void GameEngine::subscribeView(PlayerView *view)
+/*void GameEngine::subscribeView(PlayerView *view)
 {
 	Player * p = new Player();
 	p->setView(view);
@@ -389,7 +389,7 @@ void GameEngine::subscribeView(Logger * log)
 
 	sigs_.player_choices.connect(log->playerChoicesSlot());
 	sigs_.player_has_chosen.connect(log->playerChoiceSlot());
-}
+	}*/
 
 const std::vector<BoardElement*>
 GameEngine::getAvailableBoardElements(const Player * worker) const

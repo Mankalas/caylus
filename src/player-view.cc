@@ -11,16 +11,14 @@
 using namespace view;
 
 PlayerView::PlayerView(const controller::GameEngine * ge)
-	: ge_(ge)
+	: View(ge)
 {
+	game_engine_->signals()->ask_provost_shift_sig_.connect(boost::bind(&PlayerView::askProvostShift, this));
+	//game_engine_->signals()->ask_worker_placement
 }
 
 PlayerView::~PlayerView() {}
 
-ProvostShiftSlot PlayerView::askProvostShiftSlot() const
-{
-	return boost::bind(&PlayerView::askProvostShift, this);
-}
 
 WorkerPlacementSlot PlayerView::askWorkerPlacementSlot() const
 {

@@ -8,14 +8,14 @@
 #ifndef AI_HH
 # define AI_HH
 
-# include "player-view.hh"
+# include "active-view.hh"
 
 namespace view
 {
 	/**
 	 * AI implementation.
 	 */
-	class AI : public PlayerView
+	class AI : public ActiveView
 	{
 	public:
 

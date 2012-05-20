@@ -9,12 +9,12 @@
 #ifndef PLAYBACK_HH
 # define PLAYBACK_HH
 
-# include "player-view.hh"
+# include "active-view.hh"
 # include <fstream>
 
 namespace view
 {
-	class Playback : public PlayerView
+	class Playback : public ActiveView
 	{
 	public:
 		Playback(std::string record_path);

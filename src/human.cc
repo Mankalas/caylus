@@ -10,18 +10,19 @@
 
 #include <iostream>
 #include "debug-logger.hh"
-#include "console-ui.hh"
+#include "display-view.hh"
 #include "board-element.hh"
-//#include "graphical-ui.hh"
+
+#include "console-view.hh" // TODO : decide which GUI the human wants.
 
 using namespace std;
 using namespace view;
 using namespace controller;
 
 Human::Human(GameEngine *ge)
-	: PlayerView(ge)
+	: ActiveView(ge)
 {
-	user_interface_ = new ConsoleUI();
+	gui_ = new ConsoleView(ge);
 }
 
 Human::~Human()
@@ -30,8 +31,8 @@ Human::~Human()
 
 string Human::askName() const
 {
-	user_interface_->showMessage("What name?");
-	return user_interface_->getString();
+	gui_->showMessage("What name?");
+	return gui_->getString();
 }
 
 bool Human::askYesNo() const
@@ -48,7 +49,7 @@ void Human::operator()()
 {
 	boost::mutex mut;
 	boost::unique_lock<boost::mutex> lock(mut);
-	disconnected_.wait(lock);
+	//disconnected_.wait(lock);
 }
 
 boost::signal<unsigned (unsigned)>::slot_function_type Human::getAskNbHumansSlot() const
@@ -90,13 +91,13 @@ unsigned Human::askNbAIs(unsigned min, unsigned max) const
 
 void Human::updateBoard()
 {
-	user_interface_->updateBoard(ge_);
+	gui_->updateBoard(game_engine_);
 }
 
 
 int Human::askProvostShift() const
 {
-	return user_interface_->askProvostShift();
+	return gui_->askProvostShift();
 }
 
 bool Human::isHuman() const
@@ -107,7 +108,7 @@ bool Human::isHuman() const
 BoardElement*
 Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
-	return user_interface_->askBuilding(buildings);
+	return gui_->askBuilding(buildings);
 }
 
 unsigned Human::askBuilding() const
@@ -122,7 +123,7 @@ unsigned Human::askResourceChoice() const
 
 void Human::boardElementActivation(const controller::BoardElement * board_elt)
 {
-	user_interface_->showMessage(board_elt->name() + " activated.");
+	gui_->showMessage(board_elt->name() + " activated.");
 }
 
 bool Human::isInteractive() const

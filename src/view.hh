@@ -14,32 +14,28 @@
 # include <boost/thread.hpp>
 # include "signals.hh"
 
+namespace controller
+{
+	class GameEngine;
+}
+
 namespace view
 {
-
+	/**
+	 * Generic view. Abstract class.
+	 */
 	class View
 	{
 	public:
-		View();
 		/**
-		 * Copy contructor, in order to avoir compilation errors due to
-		 * the non-copyable propertie of the View's condition_variable.
-		 *
-		 * @param v The copied view.
+		 * Constructor.
 		 */
-		View(View &v);
-		virtual ~View();
+		View();
 
-		virtual void boardElementActivation(const controller::BoardElement * board_elt) = 0;
-		virtual void updateBoard() = 0;
-
-		boost::signal<void (void)>::slot_function_type updateBoardSlot();
-		board_element_activation_signal_t::slot_function_type boardElementActivationSlot();
-
-		boost::condition_variable *disconnected();
-
-	protected:
-		boost::condition_variable disconnected_;
+		/**
+		 * Virtual destructor.
+		 */
+		virtual ~View() = 0;
 	};
 
 }

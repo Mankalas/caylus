@@ -17,6 +17,7 @@
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 #include "exceptions.hh"
+#include "logger.hh"
 
 int main(int argc, char **argv)
 {
@@ -53,14 +54,12 @@ int main(int argc, char **argv)
 		}
 	}
 
-	Logger log;
 	try
 	{
 		GameEngine g(nb_humans, nb_ais);
 
-		// Logger
-		log.setGE(&g);
-		g.subscribeView(&log);
+		Logger log(&g);
+		//g.subscribeView(&log);
 
 		boost::thread controller_thread = boost::thread(boost::ref(g));
 		DebugLogger::log("Game Engine thread launched.");
@@ -69,21 +68,21 @@ int main(int argc, char **argv)
 
 		assert(nb_humans <= 5);
 		Human human(&g);
-		g.subscribeView(&human);
+		//g.subscribeView(&human);
 		// -1 because a first human is added the previous line
 		for (unsigned i = 0; i < nb_humans - 1; ++i)
 		{
-			Human * h = new Human(&g);
+			new Human(&g);
 			DebugLogger::log("Adding new human player.");
-			g.subscribeView(h);
+			//g.subscribeView(h);
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
 		for (unsigned i = 0; i < nb_ais; ++i)
 		{
-			AI * ai = new AI(&g);
+			//new AI(&g);
 			DebugLogger::log("Adding new AI player.");
-			g.subscribeView(ai);
+			//g.subscribeView(ai);
 		}
 
 		boost::thread human_thread = boost::thread(human);

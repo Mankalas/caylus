@@ -20,9 +20,6 @@ namespace controller
 {
 	struct GameSignals
 	{
-		//void connect(view::View * view);
-
-
 		/* Player interactions. */
 
 		/// Ask how many humans are playing. First param is the max number

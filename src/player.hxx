@@ -115,16 +115,6 @@ inline std::ostream& operator<<(std::ostream& o, const Player& player)
   return o;
 }
 
-inline const PlayerView *Player::view() const
-{
-	return view_;
-}
-
-inline PlayerView *Player::view()
-{
-	return view_;
-}
-
 inline int Player::askProvostShift() const
 {
 	if (ask_provost_shift_signal_.empty())

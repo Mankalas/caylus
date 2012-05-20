@@ -57,5 +57,5 @@ void ConstructionBuilding::on_activate()
 
 void ConstructionBuilding::on_build()
 {
-	ask_building_signal_.connect(owner_->view()->askBuildingSlot());
+	//ask_building_signal_.connect(owner_->view()->askBuildingSlot());
 }

@@ -1,13 +1,13 @@
 /**
- * @file   console-ui.cc
+ * @file   console-view.cc
  * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Tue Jan 20 21:21:10 2009
  *
- * @brief  Implementation of the console-ui class.
+ * @brief  Implementation of the console-view class.
  */
 
 #include <limits>
-#include "console-ui.hh"
+#include "console-view.hh"
 #include "player.hh"
 #include "road.hh"
 #include "game-engine.hh"
@@ -15,7 +15,11 @@
 using namespace std;
 using namespace controller;
 
-int ConsoleUI::askChoice(int from, int to) const
+ConsoleView::ConsoleView(const GameEngine * game_engine)
+	: DisplayView(game_engine)
+{}
+
+int ConsoleView::askChoice(int from, int to) const
 {
 	int choice = from - 1;
 
@@ -32,7 +36,7 @@ int ConsoleUI::askChoice(int from, int to) const
 	return choice;
 }
 
-int ConsoleUI::askChoice(vector<int>& choices) const
+int ConsoleView::askChoice(vector<int>& choices) const
 {
 	vector<int>::const_iterator it = choices.end();
 	int choice = -42;
@@ -57,27 +61,27 @@ int ConsoleUI::askChoice(vector<int>& choices) const
 	return choice;
 }
 
-void ConsoleUI::showMessage(string message) const
+void ConsoleView::showMessage(string message) const
 {
 	cout << " ----- " << message
 	     << " -----" << endl;
 }
 
-int ConsoleUI::getInt() const
+int ConsoleView::getInt() const
 {
 	int result = 0;
 	cin >> result;
 	return result;
 }
 
-string ConsoleUI::getString() const
+string ConsoleView::getString() const
 {
 	string result;
 	cin >> result;
 	return result;
 }
 
-/*int ConsoleUI::getBuilding(const Road& road, bool bridge) const
+/*int ConsoleView::getBuilding(const Road& road, bool bridge) const
 {
   int i = -1;
   vector<int> choices = vector<int>();
@@ -95,38 +99,38 @@ string ConsoleUI::getString() const
   return askChoice(choices);
   }*/
 
-string ConsoleUI::askName() const
+string ConsoleView::askName() const
 {
 	showMessage("What's the player's name?");
 	return getString();
 }
 
-int ConsoleUI::askProvostShift() const
+int ConsoleView::askProvostShift() const
 {
 	showMessage("Provost Shift");
 	return askChoice(-3, 3);
 }
 
-/*int ConsoleUI::askWorkerPlacement(const Road& road, bool bridge) const
+/*int ConsoleView::askWorkerPlacement(const Road& road, bool bridge) const
 {
   showMessage("Please place worker");
   return getBuilding(road, bridge);
   }
 
-ResourceMap ConsoleUI::askResources(const ResourceMap& choices) const
+ResourceMap ConsoleView::askResources(const ResourceMap& choices) const
 {
   //int i = choices[Resource::gold];
   showMessage("Your must pick in your ressources");
   return ResourceMap(choices);
   }*/
 
-bool ConsoleUI::askYesNo() const
+bool ConsoleView::askYesNo() const
 {
 	showMessage("Yes / No (1 / 0)");
 	return getInt() == 1;
 }
 
-BoardElement* ConsoleUI::askBuilding(const std::vector<BoardElement*> & choices) const
+BoardElement* ConsoleView::askBuilding(const std::vector<BoardElement*> & choices) const
 {
 	for (unsigned int i = 0; i < choices.size(); ++i)
 		{
@@ -137,7 +141,7 @@ BoardElement* ConsoleUI::askBuilding(const std::vector<BoardElement*> & choices)
 	return choices[getInputInt_(1, choices.size())];
 }
 
-int ConsoleUI::getInputInt_(int min, int max) const
+int ConsoleView::getInputInt_(int min, int max) const
 {
 	std::cout << "Enter a number between " << min << " and " << max << "." << std::endl;
 	int in = INT_MAX;
@@ -150,7 +154,7 @@ int ConsoleUI::getInputInt_(int min, int max) const
 	return in - 1;
 }
 
-void ConsoleUI::updateBoard(const GameEngine * ge) const
+void ConsoleView::updateBoard(const GameEngine * ge) const
 {
 	std::cout << *ge << std::endl;
 }

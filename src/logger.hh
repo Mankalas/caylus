@@ -12,13 +12,12 @@
 # include <stack>
 # include <fstream>
 # include <boost/bind.hpp>
-# include "view.hh"
+# include "passive-view.hh"
 # include "const.hh"
 # include "signals.hh"
 
 namespace controller
 {
-	class GameEngine;
 	class Player;
 	class ResourceMap;
 	class BoardElement;
@@ -26,10 +25,10 @@ namespace controller
 
 namespace view
 {
-	class Logger : public View
+	class Logger : public PassiveView
 	{
 	public:
-		Logger();
+		Logger(const controller::GameEngine * ge);
 		~Logger();
 
 		void setGE(const controller::GameEngine * ge);

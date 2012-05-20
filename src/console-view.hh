@@ -1,24 +1,25 @@
 /**
- * @file   graphical-view.hh
+ * @file   console-view.hh
  * @author Vincent Boucheny <mankalas@gmail.com>
- * @date   Sun Nov  6 17:18:07 2011
+ * @date   Tue Jan 20 21:14:58 2009
  *
- * @brief  Declaration of the graphical-view class.
+ * @brief  Declaration of the console-view class.
  */
 
-#ifndef GRAPHICAL_VIEW_HH
-# define GRAPHICAL_VIEW_HH
+#ifndef CONSOLE_VIEW_HH
+# define CONSOLE_VIEW_HH
 
-# include "user-interface.hh"
-# include "gfx-window.hh"
-# include "gfx-board.hh"
+# include <string>
+# include <vector>
+# include "display-view.hh"
 
 namespace view
 {
-	class GraphicalView : public DisplayView
+	class ConsoleView : public DisplayView
 	{
 	public:
-		GraphicalView(controller::GameEngine * game_engine);
+
+		ConsoleView(const controller::GameEngine * ge);
 
 		virtual int askProvostShift() const;
 		virtual void updateBoard(const controller::GameEngine * ge) const;
@@ -33,11 +34,9 @@ namespace view
 		virtual bool askYesNo() const;
 
 	private:
-		gfx::Window window_;
-		gfx::LimitedEditionBoard board_;
-
-		void drawBoard_() const;
+		int getInputInt_(int min, int max) const;
 	};
+
 }
 
-#endif
+#endif //CONSOLE_VIEW_HH

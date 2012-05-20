@@ -32,14 +32,3 @@ void MerchantGuild::on_activate()
 	}
 	game_->board().provost() += s;
 }
-
-void MerchantGuild::subscribe(PlayerView * v)
-{
-	if (!v)
-	{
-		return;
-	}
-
-	std::cout << "connect\n";
-	ask_provost_shift_sig_.connect(v->askProvostShiftSlot());
-}

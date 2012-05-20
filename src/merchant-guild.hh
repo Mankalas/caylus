@@ -28,8 +28,6 @@ namespace controller
 
 		virtual void on_activate(void);
 
-		virtual void subscribe(view::PlayerView * pv);
-
 	private:
 		i_v_signal_t ask_provost_shift_sig_;
 	};

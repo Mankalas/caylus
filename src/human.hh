@@ -10,12 +10,12 @@
 #ifndef HUMAN_HH
 # define HUMAN_HH
 
-# include "player-view.hh"
-# include "user-interface.hh"
+# include "active-view.hh"
+# include "display-view.hh"
 
 namespace view
 {
-	class Human : public PlayerView
+	class Human : public ActiveView
 	{
 	public:
 		Human(controller::GameEngine *ge);
@@ -43,7 +43,7 @@ namespace view
 		void operator()();
 
 	private:
-		UserInterface * user_interface_;
+		DisplayView * gui_;
 	};
 
 }

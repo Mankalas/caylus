@@ -7,7 +7,6 @@
  */
 
 #include "production-building.hh"
-#include "console-ui.hh"
 #include "debug-logger.hh"
 
 ProductionBuilding::~ProductionBuilding()
