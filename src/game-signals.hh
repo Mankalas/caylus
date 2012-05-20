@@ -11,11 +11,6 @@
 
 # include "signals.hh"
 
-namespace view
-{
-	class View;
-}
-
 namespace controller
 {
 	struct GameSignals

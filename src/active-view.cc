@@ -8,6 +8,8 @@
 
 #include "active-view.hh"
 #include "player.hh"
+#include "player-signals.hh"
+#include "game-engine.hh"
 
 using namespace view;
 using namespace controller;
@@ -15,6 +17,6 @@ using namespace controller;
 ActiveView::ActiveView(GameEngine * ge)
 	: game_engine_(ge)
 {
-	Player * new_player = game_engine_->newPlayer();
-	new_player->signals().ask_provost_shift.connect();
+	/*const Player * new_player = */game_engine_->newPlayer();
+	//new_player->signals().ask_provost_shift.connect();
 }

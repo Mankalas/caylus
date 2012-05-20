@@ -18,6 +18,7 @@
 # include "board-element.hh"
 # include "signals.hh"
 # include "logger.hh"
+# include "player-signals.hh"
 
 # define NB_WORKERS 1
 
@@ -72,6 +73,8 @@ namespace controller
 		int askProvostShift() const;
 		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> & buildings) const;
 
+			PlayerSignals * signals() const;
+
 	private:
 
 		int favor_building_;
@@ -93,6 +96,8 @@ namespace controller
 		/// one of them. The elements are not const because the chosen one
 		/// will be modified later on the game.
 		ask_board_element_signal_t sig_ask_worker_placement_;
+
+			mutable PlayerSignals signals_;
 	};
 
 }

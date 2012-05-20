@@ -124,4 +124,10 @@ inline int Player::askProvostShift() const
 	return ask_provost_shift_signal_();
 }
 
+inline
+PlayerSignals * Player::signals() const
+{
+	return &signals_;
+}
+
 #endif //PLAYER_HXX
