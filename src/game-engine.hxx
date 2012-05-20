@@ -92,6 +92,12 @@ Board & GameEngine::board()
 	return board_;
 }
 
+inline
+GameSignals * GameEngine::signals() const
+{
+	return &sigs_;
+}
+
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
 {
   foreach (const Player* p, g.order())

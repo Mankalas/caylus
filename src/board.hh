@@ -38,7 +38,8 @@ namespace controller
 		const unsigned &provost() const;
 		unsigned &provost();
 
-		bool valid_provost_move(int shift) const;
+		bool isProvostShiftValid(int shift) const;
+		void shiftProvost(int shift);
 
 	private:
 		/// The "road" on the board of the game.

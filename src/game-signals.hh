@@ -39,7 +39,7 @@ namespace controller
 		/// The game engine is ready.
 		v_v_signal_t game_engine_ready;
 		/// A new turn has begun. First param is the current turn number.
-		v_v_signal_t new_turn;
+		v_v_signal_t turn_start;
 
 		/// Income collecting phase has begun.
 		v_v_signal_t income_collecting_begin;

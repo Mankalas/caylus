@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "game-engine.hh"
+#include "game-signals.hh"
 #include "player.hh"
 #include "resource-map.hh"
 
@@ -22,6 +23,30 @@ Logger::Logger(const GameEngine * game_engine)
 {
 	file_.open("caylus.html", ios::trunc);
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
+
+	game_engine->signals()->turn_start.connect(boost::bind(&Logger::newTurn, this));
+	/*game_engine->signals()->playerReceivesIncome
+
+		game_engine->signals()->incomeCollectionStart
+		game_engine->signals()->incomeCollectionEnd
+
+		game_engine->signals()->workerPlacementStart
+		game_engine->signals()->workerPlacementEnd
+
+		game_engine->signals()->specialBuildingsActivationStart
+		game_engine->signals()->specialBuildingsActivationEnd
+
+		game_engine->signals()->bridgeActivationStart
+		game_engine->signals()->bridgeActivationEnd
+
+		game_engine->signals()->buildingsActivationStart
+		game_engine->signals()->buildingsActivationEnd
+
+		game_engine->signals()->castleActivationStart
+		game_engine->signals()->castleActivationEnd*/
+
+
+
 }
 
 Logger::~Logger()

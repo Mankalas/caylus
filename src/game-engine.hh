@@ -74,11 +74,12 @@ namespace controller
 
 		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;
 
-			/*void subscribeView(view::PlayerView *view);
-				void subscribeView(view::Logger * log);*/
+		/*void subscribeView(view::PlayerView *view);
+			void subscribeView(view::Logger * log);*/
 
 		void launch();
 
+		GameSignals * signals() const;
 
 	private:
 		/** Step 1. Calculate the income for each player at the
@@ -166,7 +167,7 @@ namespace controller
 		/// Used to wait until a view subscribes.
 		boost::mutex mutex_;
 
-		GameSignals sigs_;
+		mutable GameSignals sigs_;
 
 	};
 

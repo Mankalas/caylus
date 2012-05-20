@@ -165,11 +165,11 @@ void GameEngine::activateBridge_()
 		shift = p->askProvostShift();
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
-		while (!board().valid_provost_move(shift) || std::abs(shift) > deniers)
+		while (!board().isProvostShiftValid(shift) || std::abs(shift) > deniers)
 		{
 			shift = p->askProvostShift();
 		}
-		board_.provost() += shift;
+		board_.shiftProvost(shift);
 		p->resources() -= Resource::denier * std::abs(shift);
 	}
 }
@@ -302,7 +302,7 @@ void GameEngine::playerMove_(Player *p)
 
 void GameEngine::startOfTurn_()
 {
-	sigs_.new_turn();
+	sigs_.turn_start();
 
 	board_.road().clearWorkers();
 	board_.bridge().clear();

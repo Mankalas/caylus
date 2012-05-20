@@ -43,6 +43,8 @@ int main(int argc, char **argv)
 		case 's' :
 			std::cout << "Server game." << std::endl;
 			break;
+		case 'h' :
+			std::cout << "Go DTC." << std::endl;
 		case 'u' :
 			nb_humans = atoi(optarg);
 			break;
@@ -59,7 +61,6 @@ int main(int argc, char **argv)
 		GameEngine g(nb_humans, nb_ais);
 
 		Logger log(&g);
-		//g.subscribeView(&log);
 
 		boost::thread controller_thread = boost::thread(boost::ref(g));
 		DebugLogger::log("Game Engine thread launched.");

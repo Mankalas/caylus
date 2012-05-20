@@ -24,11 +24,14 @@ MerchantGuild::MerchantGuild(GameEngine *ge)
 void MerchantGuild::on_activate()
 {
 	Building::on_activate();
-	int s = ask_provost_shift_sig_();
+	Board & board = game_->board();
+	int s = 0;
 
-	while (!game_->board().valid_provost_move(s))
+	do
 	{
-		s = ask_provost_shift_sig_();
+		s = worker_->askProvostShift();
 	}
-	game_->board().provost() += s;
+	while (!board.isProvostShiftValid(s));
+
+	board.shiftProvost(s);
 }
