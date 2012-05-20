@@ -1,0 +1,32 @@
+Player :
+	askSlot (for construction)
+	askProvostShift
+	askBuilding
+	askName
+
+Engine :
+       startOfTurn
+       playerReceivesIncome(player, resource)
+
+       incomeCollectionStart
+       incomeCollectionEnd
+
+       workerPlacementStart
+       workerPlacementEnd
+
+       specialBuildingsActivationStart
+       specialBuildingsActivationEnd
+
+       bridgeActivationStart
+       bridgeActivationEnd
+
+       buildingsActivationStart
+       buildingsActivationEnd
+
+       castleActivationStart
+       castleActivationEnd
+
+BoardElement (castle, building, bridge) :
+	activated
+
+

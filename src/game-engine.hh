@@ -80,6 +80,7 @@ namespace controller
 		void launch();
 
 		GameSignals * signals() const;
+		const Player * newPlayer();
 
 	private:
 		/** Step 1. Calculate the income for each player at the

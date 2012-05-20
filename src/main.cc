@@ -60,8 +60,6 @@ int main(int argc, char **argv)
 	{
 		GameEngine g(nb_humans, nb_ais);
 
-		Logger log(&g);
-
 		boost::thread controller_thread = boost::thread(boost::ref(g));
 		DebugLogger::log("Game Engine thread launched.");
 
@@ -85,6 +83,8 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new AI player.");
 			//g.subscribeView(ai);
 		}
+
+		Logger log(&g);
 
 		boost::thread human_thread = boost::thread(human);
 
