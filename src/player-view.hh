@@ -28,6 +28,8 @@ namespace view
 		PlayerView(const controller::GameEngine * ge);
 		~PlayerView();
 
+		virtual bool isInteractive() const = 0;
+
 		virtual std::string askName() const = 0;
 		virtual bool isHuman() const = 0;
 

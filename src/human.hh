@@ -23,6 +23,7 @@ namespace view
 
 		virtual std::string askName() const;
 		virtual bool isHuman() const;
+		virtual bool isInteractive() const;
 
 		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;

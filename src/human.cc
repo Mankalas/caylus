@@ -124,3 +124,8 @@ void Human::boardElementActivation(const controller::BoardElement * board_elt)
 {
 	user_interface_->showMessage(board_elt->name() + " activated.");
 }
+
+bool Human::isInteractive() const
+{
+	return true;
+}

@@ -26,4 +26,4 @@ gfx-window.hh gfx-sprite.hh gfx-sprite.cc gfx-sprite.hxx		\
 gfx-sprite-library.cc gfx-sprite-library.hxx gfx-sprite-library.hh	\
 graphical-ui.cc graphical-ui.hh gfx-board.hh gfx-board.cc const.hh	\
 game-signals.hh game-signals.cc board.hh board.hxx board.cc		\
-player-view.hh player-view.cc
+player-view.hh player-view.cc playback.hh playback.cc

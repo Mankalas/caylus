@@ -27,7 +27,7 @@ AI::AI(GameEngine *ge)
 
 string AI::askName() const
 {
-	return "toto";
+	return "HAL";
 }
 
 BoardElement*
@@ -73,4 +73,9 @@ void AI::boardElementActivation(const controller::BoardElement *)
 
 void AI::updateBoard()
 {
+}
+
+bool AI::isInteractive() const
+{
+	return false;
 }

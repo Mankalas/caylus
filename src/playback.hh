@@ -1,29 +1,24 @@
 /**
- * @file   ai.hh
+ * @file   playback.hh
  * @author Vincent Boucheny <mankalas@gmail.com>
- * @date   Fri Dec 12 16:13:39 2008
- * @brief  Declaration of the ai class.
+ * @date   Sun May 20 18:58:10 2012
+ *
+ * @brief  Declaration of the playback class.
  */
 
-#ifndef AI_HH
-# define AI_HH
+#ifndef PLAYBACK_HH
+# define PLAYBACK_HH
 
 # include "player-view.hh"
+# include <fstream>
 
 namespace view
 {
-	/**
-	 * AI implementation.
-	 */
-	class AI : public PlayerView
+	class Playback : public PlayerView
 	{
 	public:
-
-		AI(controller::GameEngine *ge);
-
-		virtual bool isInteractive() const;
-
-		virtual void operator()(){}
+		Playback(std::string record_path);
+		~Playback();
 
 		virtual std::string askName() const;
 		virtual bool isHuman() const;
@@ -34,10 +29,15 @@ namespace view
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
 		virtual void boardElementActivation(const controller::BoardElement * board_elt);
-		virtual void updateBoard();
 
+		template<typedef T>
+		T next() const;
+
+		controller::BoardElement* next(const std::vector<controller::BoardElement *> & buildings) const;
+
+	private:
+		std::ifstream file_;
 	};
-
 }
 
 #endif

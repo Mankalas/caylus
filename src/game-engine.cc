@@ -165,8 +165,7 @@ void GameEngine::activateBridge_()
 		shift = p->askProvostShift();
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
-		while (shift + board_.provost() < 6 || shift + board_.provost() > 33 ||
-		       std::abs(shift) > deniers)
+		while (!board().valid_provost_move(shift) || std::abs(shift) > deniers)
 		{
 			shift = p->askProvostShift();
 		}
@@ -366,7 +365,10 @@ void GameEngine::subscribeView(PlayerView *view)
 	p->setView(view);
 	players_.push_back(p);
 	views_.push_back(view);
-	sigs_.board_updated.connect(view->updateBoardSlot());
+	if (view->isInteractive())
+	{
+		sigs_.board_updated.connect(view->updateBoardSlot());
+	}
 }
 
 void GameEngine::subscribeView(Logger * log)
