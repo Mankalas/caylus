@@ -17,6 +17,6 @@ using namespace controller;
 ActiveView::ActiveView(GameEngine * ge)
 	: game_engine_(ge)
 {
-	/*const Player * new_player = */game_engine_->newPlayer();
-	//new_player->signals().ask_provost_shift.connect();
+	Player * player = game_engine_->newPlayer();
+	player->signals()->ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
 }

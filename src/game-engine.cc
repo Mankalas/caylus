@@ -401,7 +401,7 @@ GameEngine::getAvailableBoardElements(const Player * worker) const
 	return available_buildings;
 }
 
-const Player * GameEngine::newPlayer()
+Player * GameEngine::newPlayer()
 {
 	Player * p = new Player();
 	players_.push_back(p);

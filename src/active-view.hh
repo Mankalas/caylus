@@ -21,6 +21,8 @@ namespace view
 	public:
 		ActiveView(controller::GameEngine * ge);
 
+		virtual int askProvostShift() const = 0;
+
 	protected:
 		controller::GameEngine * game_engine_;
 	};
