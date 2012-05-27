@@ -16,6 +16,7 @@ namespace controller
 	struct PlayerSignals
 	{
 		i_v_signal_t ask_provost_shift;
+		ask_board_element_signal_t ask_worker_placement;
 	};
 }
 

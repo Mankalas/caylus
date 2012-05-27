@@ -17,6 +17,7 @@
 namespace controller
 {
 	class GameEngine;
+	class BoardElement;
 }
 
 namespace view

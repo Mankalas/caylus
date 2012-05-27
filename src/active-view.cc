@@ -19,4 +19,5 @@ ActiveView::ActiveView(GameEngine * ge)
 {
 	Player * player = game_engine_->newPlayer();
 	player->signals()->ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
+	player->signals()->ask_worker_placement.connect(boost::bind(&ActiveView::askWorkerPlacement, this, _1));
 }
