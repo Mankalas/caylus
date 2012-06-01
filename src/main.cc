@@ -67,9 +67,6 @@ int main(int argc, char **argv)
 		g.nbTurnsMax() = max_turns;
 		boost::thread controller_thread = boost::thread(boost::ref(g));
 		DebugLogger::log("Game Engine thread launched.");
-		g.launch();
-
-		while (true){}
 
 		assert(nb_humans <= 5);
 		//Human human(&g);
@@ -100,6 +97,8 @@ int main(int argc, char **argv)
 		Logger log(&g);
 
 		controller_thread.join();
+		g.launch();
+
 	}
 	catch (GameOverException *)
 	{
