@@ -26,6 +26,7 @@ typedef boost::signals::connection connection_t;
 
 typedef boost::signal<unsigned (unsigned)> u_u_signal_t;
 typedef boost::signal<unsigned (unsigned, unsigned)> u_u_u_signal_t;
+typedef boost::signal<void (unsigned, unsigned)> v_u_u_signal_t;
 typedef boost::signal<const std::string (void)> s_v_signal_t;
 typedef boost::signal<void (void)> v_v_signal_t;
 typedef boost::signal<int (void)> i_v_signal_t;

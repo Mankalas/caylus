@@ -40,7 +40,7 @@ namespace view
 		void endSection();
 
 		void gameEngineReady();
-		void newTurn();
+		void newTurn(unsigned current_turn, unsigned max_turn);
 
 		void incomeCollectionBegin();
 		void incomeCollectionEnd();

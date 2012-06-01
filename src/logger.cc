@@ -24,7 +24,7 @@ Logger::Logger(const GameEngine * game_engine)
 	file_.open("caylus.html", ios::trunc);
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
 
-	game_engine->signals()->turn_start.connect(boost::bind(&Logger::newTurn, this));
+	game_engine->signals()->turn_start.connect(boost::bind(&Logger::newTurn, this, _1, _2));
 
 	game_engine->signals()->income_collecting_begin.connect(boost::bind(&Logger::incomeCollectionBegin, this));
 	game_engine->signals()->income_collecting_end.connect(boost::bind(&Logger::incomeCollectionEnd, this));
@@ -54,10 +54,10 @@ Logger::~Logger()
 	file_.close();
 }
 
-void Logger::startOfTurn(const GameEngine * ge)
+void Logger::newTurn(unsigned current_turn, unsigned max_turn)
 {
-	assert(ge);
-	newTurn();
+	file_ << "<h1>Turn " << current_turn << " / " << max_turn << "</h1>"
+				<< "<div style=\"margin-left:50px\">\n";
 }
 
 void Logger::startSection(int level, const std::string & title)
@@ -91,12 +91,6 @@ void Logger::gameEngineReady()
 void Logger::setGE(const GameEngine * ge)
 {
 	ge_ = ge;
-}
-
-void Logger::newTurn()
-{
-	file_ << "<h1>Turn " << ge_->nbTurns() << " / " << ge_->nbTurnsMax() << "</h1>"
-				<< "<div style=\"margin-left:50px\">\n";
 }
 
 void Logger::incomeCollectionBegin()

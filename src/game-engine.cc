@@ -286,7 +286,7 @@ void GameEngine::playerMove_(Player *p)
 
 void GameEngine::startOfTurn_()
 {
-	sigs_.turn_start();
+	sigs_.turn_start(nb_turns_, nb_turns_max_);
 
 	board_.road().clearWorkers();
 	board_.bridge().clear();
