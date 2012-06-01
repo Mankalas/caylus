@@ -46,6 +46,8 @@ Logger::Logger(const GameEngine * game_engine)
 
 	game_engine->signals()->activation_castle_begin.connect(boost::bind(&Logger::activationCastleBegin, this));
 	game_engine->signals()->activation_castle_end.connect(boost::bind(&Logger::activationCastleEnd, this));
+
+	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
 }
 
 Logger::~Logger()
@@ -132,8 +134,9 @@ void Logger::alreadyOnBridge(const controller::Player * )
 void Logger::notEnoughDeniers(const controller::Player * )
 {
 }
-void Logger::noWorkerLeft(const controller::Player * )
+void Logger::noWorkerLeft(const controller::Player * p)
 {
+	file_ << "<p>No more workers for " << p->name() << ".</p>";
 }
 void Logger::playerChoice(const controller::BoardElement * b)
 {
