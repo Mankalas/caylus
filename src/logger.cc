@@ -56,6 +56,10 @@ Logger::~Logger()
 
 void Logger::newTurn(unsigned current_turn, unsigned max_turn)
 {
+	if (current_turn != 1)
+	{
+		file_ << "</div>" << std::endl;
+	}
 	file_ << "<h1>Turn " << current_turn << " / " << max_turn << "</h1>"
 				<< "<div style=\"margin-left:50px\">\n";
 }
