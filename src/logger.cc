@@ -24,6 +24,7 @@ Logger::Logger(const GameEngine * game_engine)
 	file_.open("caylus.html", ios::trunc);
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
 
+	// Phases
 	game_engine->signals()->turn_start.connect(boost::bind(&Logger::newTurn, this, _1, _2));
 
 	game_engine->signals()->income_collecting_begin.connect(boost::bind(&Logger::incomeCollectionBegin, this));
@@ -47,6 +48,8 @@ Logger::Logger(const GameEngine * game_engine)
 	game_engine->signals()->activation_castle_begin.connect(boost::bind(&Logger::activationCastleBegin, this));
 	game_engine->signals()->activation_castle_end.connect(boost::bind(&Logger::activationCastleEnd, this));
 
+	// Controls
+	game_engine->signals()->player_choices.connect(boost::bind(&Logger::playerChoices, this, _1));
 	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
 }
 
