@@ -120,6 +120,7 @@ void GameEngine::activateSpecialBuildings_()
 
 void GameEngine::activateBuildings_()
 {
+	sigs_.activation_buildings_begin();
 	for (unsigned i = 6; i <= board_.provost() + 1; ++i)
 	{
 		if (board_.road().get()[i] != NULL)
@@ -127,6 +128,7 @@ void GameEngine::activateBuildings_()
 			board_.road().get()[i]->activate();
 		}
 	}
+	sigs_.activation_buildings_end();
 }
 
 void GameEngine::activateBridge_()
@@ -342,38 +344,6 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 	board_.road().build(game_b);
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
-
-/*void GameEngine::subscribeView(PlayerView *view)
-{
-	Player * p = new Player();
-	p->setView(view);
-	players_.push_back(p);
-	views_.push_back(view);
-	if (view->isInteractive())
-	{
-		sigs_.board_updated.connect(view->updateBoardSlot());
-	}
-}
-
-void GameEngine::subscribeView(Logger * log)
-{
-	views_.push_back(log);
-	sigs_.game_engine_ready.connect(log->gameEngineReadySlot());
-
-	sigs_.income_collecting_begin.connect(log->incomeCollectionBeginSlot());
-	sigs_.income_collecting_for_player.connect(log->incomeCollectionForPlayerSlot());
-	sigs_.income_collecting_end.connect(log->incomeCollectionEndSlot());
-
-	sigs_.worker_placement_begin.connect(log->workerPlacementBeginSlot());
-	sigs_.worker_placement_end.connect(log->workerPlacementEndSlot());
-	sigs_.worker_placement_for_player.connect(log->workerPlacementForPlayerSlot());
-
-	sigs_.activation_special_buildings_begin.connect(log->activationSpecialBuildingsBeginSlot());
-	sigs_.activation_special_buildings_end.connect(log->activationSpecialBuildingsEndSlot());
-
-	sigs_.player_choices.connect(log->playerChoicesSlot());
-	sigs_.player_has_chosen.connect(log->playerChoiceSlot());
-	}*/
 
 const std::vector<BoardElement*>
 GameEngine::getAvailableBoardElements(const Player * worker) const
