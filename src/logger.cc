@@ -25,28 +25,27 @@ Logger::Logger(const GameEngine * game_engine)
 	file_ << "<html>\n<head>\n\n<style type=\"text/css\">\nbody {\n     font-family: Arial,Helvetica,sans-serif;\n     font-size: x-small;\n     color: #333333;\n     text-align: justify;\n     width:95%\n}\n\n#bridge\n{\n     color:#3a3aff\n}\n\n#castle\n{\n     color:#008000\n}\n\n.building\n{\n     color:#c89baa\n}\n\n.choice\n{\n     background-color:#F1F19B\n}\n</style>\n\n</head>\n<body>";
 
 	game_engine->signals()->turn_start.connect(boost::bind(&Logger::newTurn, this));
-	/*game_engine->signals()->playerReceivesIncome
 
-		game_engine->signals()->incomeCollectionStart
-		game_engine->signals()->incomeCollectionEnd
+	game_engine->signals()->income_collecting_begin.connect(boost::bind(&Logger::incomeCollectionBegin, this));
+	game_engine->signals()->income_collecting_end.connect(boost::bind(&Logger::incomeCollectionEnd, this));
+	game_engine->signals()->income_collecting_for_player.connect(boost::bind(&Logger::incomeCollectionForPlayer, this, _1, _2));
 
-		game_engine->signals()->workerPlacementStart
-		game_engine->signals()->workerPlacementEnd
+	game_engine->signals()->worker_placement_begin.connect(boost::bind(&Logger::workerPlacementBegin, this));
+	game_engine->signals()->worker_placement_end.connect(boost::bind(&Logger::workerPlacementEnd, this));
+	game_engine->signals()->worker_placement_for_player.connect(boost::bind(&Logger::workerPlacementForPlayer, this, _1));
 
-		game_engine->signals()->specialBuildingsActivationStart
-		game_engine->signals()->specialBuildingsActivationEnd
+	game_engine->signals()->activation_special_buildings_begin.connect(boost::bind(&Logger::activationSpecialBuildingsBegin, this));
+	game_engine->signals()->activation_special_buildings_end.connect(boost::bind(&Logger::activationSpecialBuildingsEnd, this));
 
-		game_engine->signals()->bridgeActivationStart
-		game_engine->signals()->bridgeActivationEnd
+	game_engine->signals()->activation_bridge_begin.connect(boost::bind(&Logger::activationBridgeBegin, this));
+	game_engine->signals()->activation_bridge_end.connect(boost::bind(&Logger::activationBridgeEnd, this));
+	//game_engine->signals()->activation_bridge_for_player.connect(boost::bind(&Logger::activationBridgeForPlayer, _1, this));
 
-		game_engine->signals()->buildingsActivationStart
-		game_engine->signals()->buildingsActivationEnd
+	game_engine->signals()->activation_buildings_begin.connect(boost::bind(&Logger::activationBuildingsBegin, this));
+	game_engine->signals()->activation_buildings_end.connect(boost::bind(&Logger::activationBuildingsEnd, this));
 
-		game_engine->signals()->castleActivationStart
-		game_engine->signals()->castleActivationEnd*/
-
-
-
+	game_engine->signals()->activation_castle_begin.connect(boost::bind(&Logger::activationCastleBegin, this));
+	game_engine->signals()->activation_castle_end.connect(boost::bind(&Logger::activationCastleEnd, this));
 }
 
 Logger::~Logger()
@@ -172,75 +171,36 @@ void Logger::activationSpecialBuildingsEnd()
 	file_ << "<p>End of special buildings activation.</p>" << std::endl;
 }
 
-v_v_signal_t::slot_function_type Logger::gameEngineReadySlot()
-{
-	return boost::bind(&Logger::gameEngineReady, this);
-}
-
-v_u_signal_t::slot_function_type Logger::newTurnSlot()
-{
-	return boost::bind(&Logger::newTurn, this);
-}
-v_v_signal_t::slot_function_type Logger::incomeCollectionBeginSlot()
-{
-	return boost::bind(&Logger::incomeCollectionBegin, this);
-}
-v_v_signal_t::slot_function_type Logger::incomeCollectionEndSlot()
-{
-	return boost::bind(&Logger::incomeCollectionEnd, this);
-}
-v_cp_cr_signal_t::slot_function_type Logger::incomeCollectionForPlayerSlot()
-{
-	return boost::bind(&Logger::incomeCollectionForPlayer, this, _1, _2);
-}
-v_v_signal_t::slot_function_type Logger::workerPlacementBeginSlot()
-{
-	return boost::bind(&Logger::workerPlacementBegin, this);
-}
-v_v_signal_t::slot_function_type Logger::workerPlacementEndSlot()
-{
-	return boost::bind(&Logger::workerPlacementEnd, this);
-}
-v_cp_signal_t::slot_function_type Logger::workerPlacementForPlayerSlot()
-{
-	return boost::bind(&Logger::workerPlacementForPlayer, this, _1);
-}
-v_cp_signal_t::slot_function_type Logger::alreadyOnBridgeSlot()
-{
-	return boost::bind(&Logger::alreadyOnBridge, this, _1);
-}
-v_cp_signal_t::slot_function_type Logger::notEnoughDeniersSlot()
-{
-	return boost::bind(&Logger::notEnoughDeniers, this, _1);
-}
-v_cp_signal_t::slot_function_type Logger::noWorkerLeftSlot()
-{
-	return boost::bind(&Logger::noWorkerLeft, this, _1);
-}
-player_choice_signal_t::slot_function_type Logger::playerChoiceSlot()
-{
-	return boost::bind(&Logger::playerChoice, this, _1);
-}
-player_choices_signal_t::slot_function_type Logger::playerChoicesSlot()
-{
-	return boost::bind(&Logger::playerChoices, this, _1);
-}
-
-boost::signal<void (const controller::ResourceMap *)>::slot_function_type Logger::resourceMoveSlot()
-{
-	return boost::bind(&Logger::resourceMove, this, _1);
-}
-
-v_v_signal_t::slot_function_type Logger::activationSpecialBuildingsBeginSlot()
-{
-	return boost::bind(&Logger::activationSpecialBuildingsBegin, this);
-}
-
-v_v_signal_t::slot_function_type Logger::activationSpecialBuildingsEndSlot()
-{
-	return boost::bind(&Logger::activationSpecialBuildingsEnd, this);
-}
-
 void Logger::resourceMove(const ResourceMap *)
 {
+}
+
+void Logger::activationBuildingsBegin()
+{
+	file_ << "<h1>Activation of buildings</h1>" << std::endl;
+}
+
+void Logger::activationBuildingsEnd()
+{
+	file_ << "<p>End of buildings activation.</p>" << std::endl;
+}
+
+void Logger::activationBridgeBegin()
+{
+	file_ << "<h1>Activation of the Bridge</h1>" << std::endl;
+}
+
+void Logger::activationBridgeEnd()
+{
+	file_ << "<p>End of bridge activation.</p>" << std::endl;
+}
+
+void Logger::activationCastleBegin()
+{
+	file_ << "<h1>Activation of the Castle</h1>" << std::endl;
+}
+
+void Logger::activationCastleEnd()
+{
+	file_ << "<p>End of castle activation.</p>" << std::endl;
 }

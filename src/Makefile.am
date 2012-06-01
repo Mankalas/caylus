@@ -22,7 +22,8 @@ resource-map.hxx resource.cc resource.hh resource.hxx road.cc road.hh		\
 road.hxx stables.cc stables.hh trade-building.cc trade-building.hh			\
 joust-field.hh joust-field.cc castle.hh castle.cc castle.hxx bridge.hh	\
 bridge.hxx bridge.cc const.hh game-signals.hh board.hh board.hxx				\
-board.cc debug-logger.hh player-signals.hh
+board.cc debug-logger.hh player-signals.hh playback.hh playback.cc			\
+playback.hxx
 
 view_SOURCES := view.hh view.cc active-view.hh active-view.cc			\
 passive-view.hh passive-view.cc display-view.hh console-view.hh		\
@@ -31,8 +32,5 @@ console-view.cc human.hh human.cc logger.hh logger.hxx logger.cc
 gfx_SOURCES := gfx-window.cc gfx-window.hxx gfx-window.hh								\
 gfx-sprite.hh gfx-sprite.cc gfx-sprite.hxx gfx-sprite-library.cc				\
 gfx-sprite-library.hxx gfx-sprite-library.hh gfx-board.hh gfx-board.cc
-
-
-# playback.hh playback.cc
 
 # ai.hh ai.cc graphical-view.cc graphical-view.hh

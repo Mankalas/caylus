@@ -53,6 +53,15 @@ namespace controller
 		v_v_signal_t activation_special_buildings_begin;
 		v_v_signal_t activation_special_buildings_end;
 
+		v_v_signal_t activation_bridge_begin;
+		v_v_signal_t activation_bridge_end;
+
+		v_v_signal_t activation_buildings_begin;
+		v_v_signal_t activation_buildings_end;
+
+		v_v_signal_t activation_castle_begin;
+		v_v_signal_t activation_castle_end;
+
 		/* Errors, messages and log. */
 
 		/// Player is already on the bridge.

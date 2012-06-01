@@ -65,28 +65,6 @@ void GameEngine::init_()
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
 
-	/*foreach (View * v, views_)
-	{
-		PlayerView * pv = dynamic_cast<PlayerView *>(v);
-		foreach (BuildingSmartPtr b, buildings_)
-		{
-			b->subscribe(v);
-			b->subscribe(pv);
-		}
-		foreach (BuildingSmartPtr b, board().road().get())
-		{
-			if (b != NULL)
-			{
-				b->subscribe(v);
-				b->subscribe(pv);
-			}
-		}
-		board().castle().subscribe(v);
-		board().bridge().subscribe(v);
-		board().castle().subscribe(pv);
-		board().bridge().subscribe(pv);
-		}*/
-
 	// Shuffle players order.
 	foreach (Player * p, players_)
 	{
@@ -102,13 +80,17 @@ void GameEngine::init_()
 
 void GameEngine::launch()
 {
+	DebugLogger::log("Unlocking mutex.");
 	mutex_.unlock();
+	DebugLogger::log("Done.");
 }
 
 void GameEngine::operator() ()
 {
 	// Waiting for the view subscription to release the mutex.
+	DebugLogger::log("Thread locked.");
 	mutex_.lock();
+
 	sigs_.game_engine_ready();
 	init_();
 	while (nb_turns_ < nb_turns_max_)
@@ -152,6 +134,7 @@ void GameEngine::activateBridge_()
 	int deniers = 0;
 	int shift = 0;
 
+	sigs_.activation_bridge_begin();
 	foreach (Player * p, board_.bridge().players())
 	{
 		assert(p);
@@ -160,8 +143,6 @@ void GameEngine::activateBridge_()
 		{
 			continue;
 		}
-
-		DebugLogger::log("Bridge activation.");
 		shift = p->askProvostShift();
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
@@ -172,12 +153,15 @@ void GameEngine::activateBridge_()
 		board_.shiftProvost(shift);
 		p->resources() -= Resource::denier * std::abs(shift);
 	}
+	sigs_.activation_bridge_end();
 }
 
 
 void GameEngine::activateCastle_()
 {
+	sigs_.activation_castle_begin();
 	board_.castle().on_activate();
+	sigs_.activation_castle_end();
 }
 
 void GameEngine::collectIncome_()

@@ -45,8 +45,6 @@ namespace controller
 
 			static const std::list<Resource>& list ();
 
-
-
 			static const Resource food;
 			static const Resource wood;
 			static const Resource cloth;

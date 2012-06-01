@@ -13,6 +13,7 @@
 #include "game-engine.hh"
 #include "human.hh"
 #include "ai.hh"
+#include "playback.hh"
 #include "debug-logger.hh"
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
@@ -25,11 +26,12 @@ int main(int argc, char **argv)
 	std::string host = "";
 	int option = 0;
 
-	unsigned int nb_humans = 1;
+	unsigned int nb_humans = 0;
 	unsigned int nb_ais = 0;
 	unsigned int max_turns = 42;
+	std::string dir = "";
 
-	while ((option = getopt(argc, argv, "a:hu:m:")) != -1)
+	while ((option = getopt(argc, argv, "a:cdhu:m:")) != -1)
 	{
 		switch (option)
 		{
@@ -39,6 +41,9 @@ int main(int argc, char **argv)
 		case 'c' :
 			std::cout << "Command line game." << std::endl;
 			command_line = true;
+			break;
+		case 'd' :
+			std::cin >> dir;
 			break;
 		case 's' :
 			std::cout << "Server game." << std::endl;
@@ -59,18 +64,29 @@ int main(int argc, char **argv)
 	try
 	{
 		GameEngine g(nb_humans, nb_ais);
-
 		g.nbTurnsMax() = max_turns;
+		boost::thread controller_thread = boost::thread(boost::ref(g));
+		DebugLogger::log("Game Engine thread launched.");
+		g.launch();
+
+		while (true){}
 
 		assert(nb_humans <= 5);
-		Human human(&g);
+		//Human human(&g);
 		//g.subscribeView(&human);
 		// -1 because a first human is added the previous line
-		for (unsigned i = 0; i < nb_humans - 1; ++i)
+		for (unsigned i = 0; i < nb_humans; ++i)
 		{
 			new Human(&g);
 			DebugLogger::log("Adding new human player.");
 			//g.subscribeView(h);
+		}
+
+		if (dir != "")
+		{
+			DebugLogger::log("Adding new playback player.");
+			nb_ais -= nb_ais == 0 ? 0 : 1;
+			new Playback(&g, dir);
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
@@ -83,11 +99,6 @@ int main(int argc, char **argv)
 
 		Logger log(&g);
 
-		boost::thread human_thread = boost::thread(human);
-
-		boost::thread controller_thread = boost::thread(boost::ref(g));
-		DebugLogger::log("Game Engine thread launched.");
-		g.launch();
 		controller_thread.join();
 	}
 	catch (GameOverException *)

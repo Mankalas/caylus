@@ -68,8 +68,6 @@ namespace controller
 
 		const unsigned & nbTurns() const;
 
-		boost::mutex &mutex();
-
 		void operator()();
 
 		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;

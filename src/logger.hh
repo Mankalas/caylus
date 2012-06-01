@@ -53,6 +53,15 @@ namespace view
 		void activationSpecialBuildingsBegin();
 		void activationSpecialBuildingsEnd();
 
+		void activationBuildingsBegin();
+		void activationBuildingsEnd();
+
+		void activationBridgeBegin();
+		void activationBridgeEnd();
+
+		void activationCastleBegin();
+		void activationCastleEnd();
+
 		void alreadyOnBridge(const controller::Player * player);
 		void notEnoughDeniers(const controller::Player * player);
 		void noWorkerLeft(const controller::Player * player);
@@ -62,27 +71,6 @@ namespace view
 
 		virtual void boardElementActivation(const controller::BoardElement * board_elt);
 		virtual void updateBoard();
-
-		v_v_signal_t::slot_function_type gameEngineReadySlot();
-		v_u_signal_t::slot_function_type newTurnSlot() ;
-
-		v_v_signal_t::slot_function_type incomeCollectionBeginSlot() ;
-		v_v_signal_t::slot_function_type incomeCollectionEndSlot() ;
-		v_cp_cr_signal_t::slot_function_type incomeCollectionForPlayerSlot() ;
-
-		v_v_signal_t::slot_function_type workerPlacementBeginSlot() ;
-		v_v_signal_t::slot_function_type workerPlacementEndSlot() ;
-		v_cp_signal_t::slot_function_type workerPlacementForPlayerSlot() ;
-
-		v_v_signal_t::slot_function_type activationSpecialBuildingsBeginSlot() ;
-		v_v_signal_t::slot_function_type activationSpecialBuildingsEndSlot() ;
-
-		v_cp_signal_t::slot_function_type alreadyOnBridgeSlot() ;
-		v_cp_signal_t::slot_function_type notEnoughDeniersSlot() ;
-		v_cp_signal_t::slot_function_type noWorkerLeftSlot() ;
-		player_choice_signal_t::slot_function_type playerChoiceSlot() ;
-		player_choices_signal_t::slot_function_type playerChoicesSlot() ;
-		boost::signal<void (const controller::ResourceMap *)>::slot_function_type resourceMoveSlot();
 
 	private:
 		unsigned int turn_count_;

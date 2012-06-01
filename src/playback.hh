@@ -17,27 +17,30 @@ namespace view
 	class Playback : public ActiveView
 	{
 	public:
-		Playback(std::string record_path);
+		Playback(controller::GameEngine * game_engine, std::string record_path);
 		~Playback();
 
 		virtual std::string askName() const;
-		virtual bool isHuman() const;
+
 		virtual int askProvostShift() const;
-		virtual bool askYesNo() const;
-		virtual bool askJoustField() const;
 		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
+
+		/*virtual bool askYesNo() const;
+		virtual bool askJoustField() const;
+
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
-		virtual void boardElementActivation(const controller::BoardElement * board_elt);
-
-		template<typedef T>
-		T next() const;
-
-		controller::BoardElement* next(const std::vector<controller::BoardElement *> & buildings) const;
+		virtual void boardElementActivation(const controller::BoardElement * board_eltx);*/
 
 	private:
 		std::ifstream file_;
+
+		int next_int() const;
+		std::string next_str() const;
 	};
+
 }
+
+#include "playback.hxx"
 
 #endif

@@ -62,12 +62,6 @@ GameEngine::nbTurns() const
 	return nb_turns_;
 }
 
-inline boost::mutex&
-GameEngine::mutex()
-{
-  return mutex_;
-}
-
 inline
 const unsigned & GameEngine::nbHumans() const
 {
