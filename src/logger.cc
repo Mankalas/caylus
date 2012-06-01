@@ -50,6 +50,7 @@ Logger::Logger(const GameEngine * game_engine)
 
 	// Controls
 	game_engine->signals()->player_choices.connect(boost::bind(&Logger::playerChoices, this, _1));
+	game_engine->signals()->player_has_chosen.connect(boost::bind(&Logger::playerChoice, this, _1));
 	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
 }
 
