@@ -30,7 +30,6 @@ namespace view
 
 		virtual bool isInteractive() const = 0;
 
-		virtual std::string askName() const = 0;
 		virtual bool isHuman() const = 0;
 
 		virtual int askProvostShift() const = 0;

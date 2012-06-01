@@ -45,7 +45,7 @@ int ConsoleView::askChoice(vector<int>& choices) const
 	{
 		cout << "Your choices are : ";
 		foreach (int i, choices)
-		cout << i << ", ";
+			cout << i << ", ";
 		cout << endl;
 		cin >> choice;
 		if (!cin)
@@ -76,9 +76,7 @@ int ConsoleView::getInt() const
 
 string ConsoleView::getString() const
 {
-	string result;
-	cin >> result;
-	return result;
+	return "Goldorak";
 }
 
 /*int ConsoleView::getBuilding(const Road& road, bool bridge) const

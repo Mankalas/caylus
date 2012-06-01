@@ -46,18 +46,18 @@ namespace controller
 		bool operator==(const Player &p) const;
 
 		// Accessors.
-		void setFavorBuilding(int);
-		int getFavorBuilding() const;
-		void setFavorResource(int);
-		int getFavorResource() const;
-		void setFavorDenier(int);
-		int getFavorDenier() const;
-		void setFavorPrestige(int);
-		int getFavorPrestige() const;
+		void favorBuilding(int);
+		int favorBuilding() const;
+		void favorResource(int);
+		int favorResource() const;
+		void favorDenier(int);
+		int favorDenier() const;
+		void favorPrestige(int);
+		int favorPrestige() const;
 		const std::string &name() const;
-		void setName(const std::string name);
-		void setPrestige(int);
-		int getPrestige() const;
+		void name(const std::string name);
+		void prestige(int);
+		int prestige() const;
 
 		const ResourceMap &resources() const;
 		ResourceMap &resources();

@@ -23,42 +23,42 @@ inline const ResourceMap& Player::resources() const
   return resources_;
 }
 
-inline void Player::setFavorBuilding(int new_var)
+inline void Player::favorBuilding(int new_var)
 {
   this->favor_building_ = new_var;
 }
 
-inline int Player::getFavorBuilding() const
+inline int Player::favorBuilding() const
 {
   return favor_building_;
 }
 
-inline void Player::setFavorResource(int new_var)
+inline void Player::favorResource(int new_var)
 {
   favor_resource_ = new_var;
 }
 
-inline int Player::getFavorResource() const
+inline int Player::favorResource() const
 {
   return favor_resource_;
 }
 
-inline void Player::setFavorDenier(int new_var)
+inline void Player::favorDenier(int new_var)
 {
   favor_denier_ = new_var;
 }
 
-inline int Player::getFavorDenier() const
+inline int Player::favorDenier() const
 {
   return favor_denier_;
 }
 
-inline void Player::setFavorPrestige(int new_var)
+inline void Player::favorPrestige(int new_var)
 {
   favor_prestige_ = new_var;
 }
 
-inline int Player::getFavorPrestige() const
+inline int Player::favorPrestige() const
 {
   return favor_prestige_;
 }
@@ -68,17 +68,17 @@ inline const std::string& Player::name() const
   return name_;
 }
 
-inline void Player::setName(const std::string name)
+inline void Player::name(const std::string name)
 {
 	name_ = name;
 }
 
-inline void Player::setPrestige(int new_var)
+inline void Player::prestige(int new_var)
 {
   prestige_ = new_var;
 }
 
-inline int Player::getPrestige() const
+inline int Player::prestige() const
 {
   return prestige_;
 }

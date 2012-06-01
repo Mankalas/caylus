@@ -8,6 +8,7 @@
 
 #include "playback.hh"
 #include <iostream>
+#include "player.hh"
 
 using namespace view;
 
@@ -17,8 +18,9 @@ Playback::Playback(controller::GameEngine * game_engine, std::string record_path
 	file_.open(record_path.c_str(), std::ios::in);
 	if (!file_.is_open())
 	{
-		std::cerr << "Monce" << std::endl;
+		std::cerr << "File " << record_path << " does not exists." << std::endl;
 	}
+	player_->name(askName());
 }
 
 Playback::~Playback()

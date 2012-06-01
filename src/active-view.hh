@@ -26,9 +26,12 @@ namespace view
 		///
 		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const = 0;
 		///
+		virtual std::string askName() const = 0;
+		///
 
 	protected:
 		controller::GameEngine * game_engine_;
+		controller::Player * player_;
 	};
 }
 

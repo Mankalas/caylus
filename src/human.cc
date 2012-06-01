@@ -12,7 +12,7 @@
 #include "debug-logger.hh"
 #include "display-view.hh"
 #include "board-element.hh"
-
+#include "player.hh"
 #include "console-view.hh" // TODO : decide which GUI the human wants.
 
 using namespace std;
@@ -23,6 +23,7 @@ Human::Human(GameEngine *ge)
 	: ActiveView(ge)
 {
 	gui_ = new ConsoleView(ge);
+	player_->name(askName());
 }
 
 Human::~Human()
