@@ -60,9 +60,6 @@ int main(int argc, char **argv)
 	{
 		GameEngine g(nb_humans, nb_ais);
 
-		boost::thread controller_thread = boost::thread(boost::ref(g));
-		DebugLogger::log("Game Engine thread launched.");
-
 		g.nbTurnsMax() = max_turns;
 
 		assert(nb_humans <= 5);
@@ -88,6 +85,8 @@ int main(int argc, char **argv)
 
 		boost::thread human_thread = boost::thread(human);
 
+		boost::thread controller_thread = boost::thread(boost::ref(g));
+		DebugLogger::log("Game Engine thread launched.");
 		g.launch();
 		controller_thread.join();
 	}

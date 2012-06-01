@@ -10,6 +10,7 @@
 #include "player.hh"
 #include "player-signals.hh"
 #include "game-engine.hh"
+#include "debug-logger.hh"
 
 using namespace view;
 using namespace controller;

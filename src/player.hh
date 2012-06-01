@@ -73,7 +73,7 @@ namespace controller
 		int askProvostShift() const;
 		BoardElement* askWorkerPlacement(const std::vector<BoardElement*> & buildings) const;
 
-			PlayerSignals * signals() const;
+		PlayerSignals * signals() const;
 
 	private:
 
@@ -86,18 +86,7 @@ namespace controller
 		int prestige_;
 		ResourceMap resources_;
 		unsigned int residences_;
-
-		// Signals.
-		boost::signal<int (void)> ask_provost_shift_signal_;
-		boost::signal<void (const ResourceMap *)> resource_move_;
-
-
-		/// Submit a list of BoardElements to the player, who must chose
-		/// one of them. The elements are not const because the chosen one
-		/// will be modified later on the game.
-		ask_board_element_signal_t sig_ask_worker_placement_;
-
-			mutable PlayerSignals signals_;
+		mutable PlayerSignals signals_;
 	};
 
 }

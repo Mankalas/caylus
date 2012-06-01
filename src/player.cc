@@ -54,15 +54,15 @@ Player::Player(const Player &player):
 BoardElement*
 Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
-	assert(!sig_ask_worker_placement_.empty());
+	assert(!signals_.ask_worker_placement.empty());
 
-	return sig_ask_worker_placement_(buildings);
+	return signals_.ask_worker_placement(buildings);
 }
 
 void Player::addResources(const ResourceMap &r)
 {
 	resources_ += r;
-	resource_move_(&r);
+	//resource_move_(&r);
 }
 
 void Player::substractResources(const ResourceMap &r)

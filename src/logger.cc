@@ -241,7 +241,6 @@ v_v_signal_t::slot_function_type Logger::activationSpecialBuildingsEndSlot()
 	return boost::bind(&Logger::activationSpecialBuildingsEnd, this);
 }
 
-
 void Logger::resourceMove(const ResourceMap *)
 {
 }
