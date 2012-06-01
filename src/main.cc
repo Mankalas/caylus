@@ -94,7 +94,9 @@ int main(int argc, char **argv)
 			//g.subscribeView(ai);
 		}
 
+		DebugLogger::log("PAF");
 		Logger log(&g);
+		DebugLogger::log("PIF");
 
 		controller_thread.join();
 		g.launch();

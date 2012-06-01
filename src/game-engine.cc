@@ -24,19 +24,10 @@
 using namespace controller;
 
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
-	:nb_humans_(nb_humans), nb_ais_(nb_ais), nb_turns_(0), board_(this)
-{
-}
-
-GameEngine::~GameEngine()
-{
-	foreach(Player * p, players_)
-	{
-		delete p;
-	}
-}
-
-void GameEngine::init_()
+	: nb_humans_(nb_humans)
+	, nb_ais_(nb_ais)
+	, nb_turns_(0)
+	, board_(this)
 {
 	buildings_.push_back(BuildingSmartPtr(new Statue()));
 	buildings_.push_back(BuildingSmartPtr(new Theater()));
@@ -64,7 +55,18 @@ void GameEngine::init_()
 	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
 	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
 	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
+}
 
+GameEngine::~GameEngine()
+{
+	foreach(Player * p, players_)
+	{
+		delete p;
+	}
+}
+
+void GameEngine::init_()
+{
 	// Shuffle players order.
 	foreach (Player * p, players_)
 	{

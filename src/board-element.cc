@@ -40,5 +40,5 @@ const std::string & BoardElement::name() const
 
 void BoardElement::on_activate()
 {
-	activation_sig_(this);
+	activation_sig(this);
 }

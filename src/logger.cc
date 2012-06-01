@@ -52,6 +52,17 @@ Logger::Logger(const GameEngine * game_engine)
 	game_engine->signals()->player_choices.connect(boost::bind(&Logger::playerChoices, this, _1));
 	game_engine->signals()->player_has_chosen.connect(boost::bind(&Logger::playerChoice, this, _1));
 	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
+
+	/*game_engine->board().castle().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));
+		game_engine->board().bridge().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));*/
+	foreach (BuildingSmartPtr b, game_engine->board().road().get())
+	{
+		if (b != NULL)
+		{
+			b->activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));
+		}
+	}
+
 }
 
 Logger::~Logger()
@@ -156,7 +167,7 @@ void Logger::playerChoices(const std::vector<controller::BoardElement *> & choic
 	}
 }
 
-void Logger::boardElementActivation(const controller::BoardElement * board_elt)
+void Logger::activationBoardElement(const controller::BoardElement * board_elt)
 {
 	file_ << "<p>" << board_elt->name() << " activated." << "</p>";
 }

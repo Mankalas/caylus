@@ -33,9 +33,10 @@ namespace controller
 
 		virtual void on_activate();
 
+		board_element_activation_signal_t activation_sig;
+
 	protected:
 		const std::string name_;
-		board_element_activation_signal_t activation_sig_;
 	};
 }
 
