@@ -33,7 +33,7 @@ namespace view
 		virtual void boardElementActivation(const controller::BoardElement * board_eltx);*/
 
 	private:
-		std::ifstream file_;
+		mutable std::ifstream file_;
 
 		int next_int() const;
 		std::string next_str() const;

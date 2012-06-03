@@ -8,7 +8,9 @@
 
 #include "playback.hh"
 #include <iostream>
+#include <fstream>
 #include "player.hh"
+#include <stdlib.h>
 
 using namespace view;
 
@@ -52,16 +54,14 @@ controller::BoardElement* Playback::askWorkerPlacement(const std::vector<control
 
 std::string Playback::next_str() const
 {
-	/*std::stringstream line;
-	file_ >> line;
-	return line;*/
-	return "Pedro";
+	std::string line;
+	std::getline(file_, line);
+	return line;
 }
 
 int Playback::next_int() const
 {
-/*	int i;
-	file_ >> i;
-	return i;*/
-	return 1;
+	std::string line;
+	std::getline(file_, line);
+	return atoi(line.c_str());
 }
