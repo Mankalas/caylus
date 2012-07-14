@@ -141,7 +141,7 @@ void Logger::workerPlacementEnd()
 
 void Logger::workerPlacementForPlayer(const controller::Player * p)
 {
-	file_ << "<p>" << p->name() << "'s turn.</p>";
+	file_ << "<p>" << *p << "'s turn.</p>";
 }
 
 void Logger::alreadyOnBridge(const controller::Player * )

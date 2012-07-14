@@ -13,6 +13,7 @@
 # include <boost/smart_ptr.hpp>
 # include <boost/signal.hpp>
 # include <boost/thread.hpp>
+# include <limits.h>
 # include "board.hh"
 # include "logger.hh"
 # include "game-signals.hh"
@@ -37,7 +38,7 @@ namespace controller
 	public:
 
 		/** Default constructor. */
-		GameEngine(unsigned nb_humans, unsigned nb_ais, bool random = true);
+		GameEngine(unsigned nb_humans, unsigned nb_ais, unsigned nb_turn_max = INT_MAX, bool random = true);
 
 		/** Destructor. */
 		~GameEngine();
@@ -62,12 +63,11 @@ namespace controller
 
 		const unsigned &nbHumans() const;
 		const unsigned &nbAIs() const;
-
 		const unsigned &nbTurnsMax() const;
-		unsigned &nbTurnsMax();
+		unsigned &maxWorkers();
+		bool random() const;
 
 		const unsigned & nbTurns() const;
-		bool random() const;
 
 		void operator()();
 
@@ -149,13 +149,15 @@ namespace controller
 		std::vector<BuildingSmartPtr> buildings_;
 
 		/// Number of humans currently playing.
-		unsigned nb_humans_;
+		const unsigned nb_humans_;
 		/// Number of ais currently playing.
-		unsigned nb_ais_;
+		const unsigned nb_ais_;
 		/// Number of the current turn.
 		unsigned nb_turns_;
 		/// Max number of turns before the game ends.
-		unsigned nb_turns_max_;
+		const unsigned nb_turns_max_;
+		/// Max number of workers.
+		unsigned max_workers_;
 		/// Whether random is added to the game. Usefull fo test purpose
 		const bool random_;
 

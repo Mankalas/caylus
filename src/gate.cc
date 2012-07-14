@@ -26,10 +26,12 @@ Gate::Gate(GameEngine *ge)
 void Gate::on_activate()
 {
 	Building::on_activate();
-	DebugLogger::log("Activating Gate.");
 	BoardElement * player_choice = NULL;
 	std::vector<BoardElement *> choices = game_->board().road().getAvailableBuildings(worker_);
-	choices.insert(choices.begin(), (BoardElement*)&game_->board().castle());
+	if (!game_->board().castle().has(worker_))
+	{
+		choices.insert(choices.begin(), (BoardElement*)&game_->board().castle());
+	}
 	player_choice = worker_->askWorkerPlacement(choices);
 	if (player_choice->isBuilding())
 	{

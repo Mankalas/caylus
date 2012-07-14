@@ -44,10 +44,10 @@ inline std::vector<Player*>& GameEngine::players()
   return players_;
 }
 
-inline unsigned&
-GameEngine::nbTurnsMax()
+inline unsigned &
+GameEngine::maxWorkers()
 {
-	return nb_turns_max_;
+	return max_workers_;
 }
 
 inline const unsigned&

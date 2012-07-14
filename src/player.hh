@@ -18,8 +18,6 @@
 # include "signals.hh"
 # include "player-signals.hh"
 
-# define NB_WORKERS 1
-
 namespace view
 {
 	class PlayerView;

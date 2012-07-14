@@ -155,7 +155,7 @@ void Castle::on_activate()
 	}
 }
 
-bool Castle::has(const Player * p)
+bool Castle::has(const Player * p) const
 {
 	return std::find(players_.begin(), players_.end(), p) != players_.end();
 }

@@ -112,7 +112,7 @@ namespace controller
 		 *
 		 * @return True or false.
 		 */
-		bool has(const Player * p);
+		bool has(const Player * p) const;
 
 		/** Resolve the Castle's activation. */
 		virtual void on_activate();

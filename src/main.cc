@@ -10,6 +10,7 @@
 #include <vector>
 #include <boost/thread.hpp>
 #include <stdlib.h>
+#include <limits.h>
 #include "game-engine.hh"
 #include "human.hh"
 #include "ai.hh"
@@ -40,7 +41,7 @@ int main(int argc, char **argv)
 
 	unsigned int nb_humans = 0;
 	unsigned int nb_ais = 0;
-	unsigned int max_turns = 42;
+	unsigned int max_turns = INT_MAX;
 	std::string dir = "";
 	bool random = true;
 
@@ -81,8 +82,7 @@ int main(int argc, char **argv)
 
 	try
 	{
-		GameEngine g(nb_humans, nb_ais, random);
-		g.nbTurnsMax() = max_turns;
+		GameEngine g(nb_humans, nb_ais, max_turns, random);
 
 		DebugLogger::log("Game Engine thread created.");
 
@@ -115,6 +115,7 @@ int main(int argc, char **argv)
 	}
 	catch (GameOverException *)
 	{
+			std::cerr << "Game OVER" << std::endl;
 	}
 	catch(Exception * ex)
 	{

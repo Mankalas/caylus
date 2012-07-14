@@ -17,7 +17,7 @@ Player::Player():
 	favor_resource_(0),
 	favor_denier_(0),
 	favor_prestige_(0),
-	workers_(NB_WORKERS),
+	workers_(0),
 	name_("Chiche"),
 	prestige_(0),
 	resources_(Resource::denier * 5 + Resource::food * 2 + Resource::wood),
@@ -30,7 +30,7 @@ Player::Player(const std::string &name):
 	favor_resource_(0),
 	favor_denier_(0),
 	favor_prestige_(0),
-	workers_(NB_WORKERS),
+	workers_(0),
 	name_(name),
 	prestige_(0),
 	resources_(10 * (Resource::denier * 5 + Resource::food * 2 + Resource::wood +

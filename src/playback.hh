@@ -35,7 +35,10 @@ namespace view
 	private:
 		mutable std::ifstream file_;
 
+		std::string next_line() const;
+
 		int next_int() const;
+		unsigned next_uint() const;
 		std::string next_str() const;
 	};
 
