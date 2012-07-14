@@ -6,13 +6,15 @@
  * @brief  Implementation of the console-view class.
  */
 
-#include <limits>
 #include "console-view.hh"
+
+#include <limits>
 #include "player.hh"
 #include "road.hh"
 #include "game-engine.hh"
 
 using namespace std;
+using namespace view;
 using namespace controller;
 
 ConsoleView::ConsoleView(const GameEngine * game_engine)

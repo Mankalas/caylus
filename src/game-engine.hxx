@@ -12,93 +12,91 @@
 # include "game-engine.hh"
 # include "player.hh"
 
-using namespace controller;
-
-inline const std::vector<BuildingSmartPtr>& GameEngine::buildings() const
+inline const std::vector<BuildingSmartPtr>& controller::GameEngine::buildings() const
 {
   return buildings_;
 }
 
-inline std::vector<BuildingSmartPtr>& GameEngine::buildings()
+inline std::vector<BuildingSmartPtr>& controller::GameEngine::buildings()
 {
   return buildings_;
 }
 
-inline const std::vector<Player*>& GameEngine::order() const
+inline const std::vector<Player*>& controller::GameEngine::order() const
 {
   return order_;
 }
 
-inline std::vector<Player*>& GameEngine::order()
+inline std::vector<Player*>& controller::GameEngine::order()
 {
   return order_;
 }
 
-inline const std::vector<Player*>& GameEngine::players() const
+inline const std::vector<Player*>& controller::GameEngine::players() const
 {
   return players_;
 }
 
-inline std::vector<Player*>& GameEngine::players()
+inline std::vector<Player*>& controller::GameEngine::players()
 {
   return players_;
 }
 
 inline unsigned &
-GameEngine::maxWorkers()
+controller::GameEngine::maxWorkers()
 {
 	return max_workers_;
 }
 
 inline const unsigned&
-GameEngine::nbTurnsMax() const
+controller::GameEngine::nbTurnsMax() const
 {
 	return nb_turns_max_;
 }
 
 inline const unsigned &
-GameEngine::nbTurns() const
+controller::GameEngine::nbTurns() const
 {
 	return nb_turns_;
 }
 
 inline
-const unsigned & GameEngine::nbHumans() const
+const unsigned & controller::GameEngine::nbHumans() const
 {
 	return nb_humans_;
 }
 
 inline
-const unsigned & GameEngine::nbAIs() const
+const unsigned & controller::GameEngine::nbAIs() const
 {
 	return nb_ais_;
 }
 
 inline
-const Board & GameEngine::board() const
+const Board & controller::GameEngine::board() const
 {
 	return board_;
 }
 
 inline
-Board & GameEngine::board()
+Board & controller::GameEngine::board()
 {
 	return board_;
 }
 
 inline
-GameSignals * GameEngine::signals() const
+GameSignals * controller::GameEngine::signals() const
 {
 	return &sigs_;
 }
 
 inline
-bool GameEngine::random() const
+bool controller::GameEngine::random() const
 {
 	return random_;
 }
 
-inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
+inline std::ostream& operator<<(std::ostream& o, const controller::GameEngine& g)
 {
   foreach (const Player* p, g.order())
     o << *p << std::endl;

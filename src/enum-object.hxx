@@ -11,62 +11,60 @@
 
 # include "enum-object.hh"
 
-using namespace controller;
-
 template <typename Exact>
-unsigned EnumObject<Exact>::ids_ = 0;
+unsigned controller::EnumObject<Exact>::ids_ = 0;
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator < (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator < (const controller::EnumObject<Exact>& elt) const
 {
   return id_ < elt.id_;
 }
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator > (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator > (const controller::EnumObject<Exact>& elt) const
 {
   return id_ > elt.id_;
 }
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator <= (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator <= (const controller::EnumObject<Exact>& elt) const
 {
   return id_ <= elt.id_;
 }
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator >= (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator >= (const controller::EnumObject<Exact>& elt) const
 {
   return id_ >= elt.id_;
 }
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator == (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator == (const controller::EnumObject<Exact>& elt) const
 {
   return id_ == elt.id_;
 }
 
 template <typename Exact>
 inline bool
-EnumObject<Exact>::operator != (const EnumObject<Exact>& elt) const
+controller::EnumObject<Exact>::operator != (const controller::EnumObject<Exact>& elt) const
 {
   return id_ != elt.id_;
 }
 
 template <typename Exact>
 inline const std::string&
-EnumObject<Exact>::name () const
+controller::EnumObject<Exact>::name () const
 {
   return name_;
 }
 
 template <typename Exact>
-EnumObject<Exact>::EnumObject (const std::string& name)
+controller::EnumObject<Exact>::EnumObject (const std::string& name)
   : name_ (name)
 {
   id_ = ++ids_;
@@ -74,7 +72,7 @@ EnumObject<Exact>::EnumObject (const std::string& name)
 
 template <typename Exact>
 std::ostream&
-operator << (std::ostream& ostr, const EnumObject<Exact>& r)
+operator << (std::ostream& ostr, const controller::EnumObject<Exact>& r)
 {
   ostr << r.name ();
   return ostr;

@@ -18,7 +18,7 @@ namespace view
 	class Human : public ActiveView
 	{
 	public:
-		Human(controller::GameEngine *ge);
+		Human(controller::GameEngine *ge, bool command_line);
 		virtual ~Human();
 
 		virtual std::string askName() const;

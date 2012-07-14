@@ -10,6 +10,8 @@
 # define DISPLAY_VIEW_HH
 
 # include "passive-view.hh"
+# include <vector>
+# include <string>
 
 namespace view
 {

@@ -8,6 +8,8 @@
 
 #include "building-type.hh"
 
+using namespace controller;
+
 const BuildingType BuildingType::fixed       = BuildingType ("fixed");
 const BuildingType BuildingType::neutral     = BuildingType ("neutral");
 const BuildingType BuildingType::wood        = BuildingType ("wood");

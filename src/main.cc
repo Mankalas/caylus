@@ -21,6 +21,9 @@
 #include "exceptions.hh"
 #include "logger.hh"
 
+using namespace view;
+using namespace controller;
+
 void usage()
 {
 	std::cout << "caylus" << std::endl
@@ -90,7 +93,7 @@ int main(int argc, char **argv)
 		// -1 because a first human is added the previous line
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
-			new Human(&g);
+			new Human(&g, command_line);
 			DebugLogger::log("Adding new human player.");
 		}
 

@@ -9,20 +9,30 @@
 #include "human.hh"
 
 #include <iostream>
+
+#include <boost/bind.hpp>
 #include "debug-logger.hh"
 #include "display-view.hh"
 #include "board-element.hh"
 #include "player.hh"
-#include "console-view.hh" // TODO : decide which GUI the human wants.
+#include "console-view.hh"
+#include "graphic-view.hh"
 
 using namespace std;
 using namespace view;
 using namespace controller;
 
-Human::Human(GameEngine *ge)
+Human::Human(GameEngine *ge, bool console)
 	: ActiveView(ge)
 {
-	gui_ = new ConsoleView(ge);
+	if (console)
+	{
+		gui_ = new ConsoleView(ge);
+	}
+	else
+	{
+		gui_ = new GraphicView(ge);
+	}
 	player_->name(askName());
 }
 
@@ -48,9 +58,6 @@ bool Human::askJoustField() const
 
 void Human::operator()()
 {
-	boost::mutex mut;
-	boost::unique_lock<boost::mutex> lock(mut);
-	//disconnected_.wait(lock);
 }
 
 boost::signal<unsigned (unsigned)>::slot_function_type Human::getAskNbHumansSlot() const

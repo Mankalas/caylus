@@ -1,24 +1,25 @@
 /**
- * @file   graphical-view.hh
+ * @file   graphic-view.hh
  * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Sun Nov  6 17:18:07 2011
  *
- * @brief  Declaration of the graphical-view class.
+ * @brief  Declaration of the graphic-view class.
  */
 
-#ifndef GRAPHICAL_VIEW_HH
-# define GRAPHICAL_VIEW_HH
+#ifndef GRAPHIC_VIEW_HH
+# define GRAPHIC_VIEW_HH
 
-# include "user-interface.hh"
+# include "display-view.hh"
 # include "gfx-window.hh"
 # include "gfx-board.hh"
 
 namespace view
 {
-	class GraphicalView : public DisplayView
+	class GraphicView : public DisplayView
 	{
 	public:
-		GraphicalView(controller::GameEngine * game_engine);
+
+		GraphicView(const controller::GameEngine * game_engine);
 
 		virtual int askProvostShift() const;
 		virtual void updateBoard(const controller::GameEngine * ge) const;

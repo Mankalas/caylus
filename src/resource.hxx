@@ -9,13 +9,10 @@
 #ifndef RESOURCE_HXX_
 # define RESOURCE_HXX_
 
-# include <boost/assign/list_of.hpp>
 # include "resource.hh"
 
-using namespace controller;
-
-inline const std::list<Resource>&
-Resource::list ()
+inline const std::list<controller::Resource>&
+controller::Resource::list ()
 {
   return list_;
 }

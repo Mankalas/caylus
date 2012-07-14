@@ -1,11 +1,9 @@
 /**
  * @file   castle.hxx
- * @author  <mankalas@localhost,>
- * @date   Thu Feb 12 13:07:25 2009
+ * @author Vincent Boucheny <mankalas@gmail.com>
+ * @date   Sat Jul 14 20:01:36 2012
  *
- * @brief
- *
- *
+ * @brief  Declaration of the castle class.
  */
 
 #ifndef CASTLE_HXX
@@ -13,105 +11,103 @@
 
 # include "castle.hh"
 
-using namespace controller;
-
 inline
-const std::vector<Player*>& CastlePart::houses() const
+const std::vector<Player*>& controller::CastlePart::houses() const
 {
   return houses_;
 }
 
 inline
-std::vector<Player*>& CastlePart::houses()
+std::vector<Player*>& controller::CastlePart::houses()
 {
   return houses_;
 }
 
 inline
-const unsigned& CastlePart::prestige() const
+const unsigned& controller::CastlePart::prestige() const
 {
   return prestige_;
 }
 
 inline
-unsigned& CastlePart::prestige()
+unsigned& controller::CastlePart::prestige()
 {
   return prestige_;
 }
 
 inline
-const unsigned& CastlePart::capacity() const
+const unsigned& controller::CastlePart::capacity() const
 {
   return capacity_;
 }
 
 inline
-unsigned& CastlePart::capacity()
+unsigned& controller::CastlePart::capacity()
 {
   return capacity_;
 }
 
 inline
-const std::vector<std::pair<unsigned, int> >& CastlePart::scoreFavor() const
+const std::vector<std::pair<unsigned, int> >& controller::CastlePart::scoreFavor() const
 {
   return score_favor_;
 }
 
 inline
-std::vector<std::pair<unsigned, int> >& CastlePart::scoreFavor()
+std::vector<std::pair<unsigned, int> >& controller::CastlePart::scoreFavor()
 {
   return score_favor_;
 }
 
 inline
-const std::vector<Player*>& Castle::players() const
+const std::vector<Player*>& controller::Castle::players() const
 {
   return players_;
 }
 
 inline
-std::vector<Player*>& Castle::players()
+std::vector<Player*>& controller::Castle::players()
 {
   return players_;
 }
 
 inline
-const CastlePart* Castle::dungeon() const
+const controller::CastlePart* controller::Castle::dungeon() const
 {
   return parts_[0];
 }
 
 inline
-CastlePart* Castle::dungeon()
+controller::CastlePart* controller::Castle::dungeon()
 {
   return parts_[0];
 }
 
 inline
-const CastlePart* Castle::walls() const
+const controller::CastlePart* controller::Castle::walls() const
 {
   return parts_[1];
 }
 
 inline
-CastlePart* Castle::walls()
+controller::CastlePart* controller::Castle::walls()
 {
   return parts_[1];
 }
 
 inline
-const CastlePart* Castle::towers() const
+const controller::CastlePart* controller::Castle::towers() const
 {
   return parts_[2];
 }
 
 inline
-CastlePart* Castle::towers()
+controller::CastlePart* controller::Castle::towers()
 {
   return parts_[2];
 }
 
-inline std::ostream& operator<<(std::ostream& o, const Castle& c)
+inline std::ostream& operator<<(std::ostream& o, const controller::Castle& c)
 {
   o << "Castle : ";
   foreach (const Player* p, c.players())

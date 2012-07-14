@@ -8,6 +8,8 @@
 
 #include "resource.hh"
 
+using namespace controller;
+
 std::list<Resource> Resource::list_;
 
 const Resource Resource::food     = Resource ("food cube");

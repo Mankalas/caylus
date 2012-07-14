@@ -76,7 +76,7 @@ on methods resources() and workers() in file player.hh, lines 51 and
 * Buildings *
 [TEST] Gate
 	[TEST] No worker on residences, prestige, unbuild or occupied
-	[TEST] Castle, Inn, Stables (only one worker per player on these)
+	[DONE] Castle, Inn, Stables (only one worker per player on these)
 	[TEST] 1 prestige if another player's building
 [TEST] Trading Post
 [TEST] Merchant's Guild

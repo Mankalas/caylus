@@ -9,8 +9,6 @@
 #ifndef CONSOLE_VIEW_HH
 # define CONSOLE_VIEW_HH
 
-# include <string>
-# include <vector>
 # include "display-view.hh"
 
 namespace view
@@ -19,7 +17,7 @@ namespace view
 	{
 	public:
 
-		ConsoleView(const controller::GameEngine * ge);
+		ConsoleView(const controller::GameEngine * game_engine);
 
 		virtual int askProvostShift() const;
 		virtual void updateBoard(const controller::GameEngine * ge) const;

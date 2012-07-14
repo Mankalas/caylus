@@ -12,41 +12,39 @@
 # include <boost/assign/list_of.hpp>
 # include "resource-map.hh"
 
-using namespace controller;
-
-inline ResourceMap::operator std::vector<ResourceMap> () const
+inline controller::ResourceMap::operator std::vector<controller::ResourceMap> () const
 {
   return boost::assign::list_of (*this);
 }
 
-inline ResourceMap
-operator + (const Resource& k, const ResourceMap& rmap)
+inline controller::ResourceMap
+operator + (const Resource& k, const controller::ResourceMap& rmap)
 {
   return rmap + k;
 }
 
-inline ResourceMap
-operator - (const Resource& k, const ResourceMap& rmap)
+inline controller::ResourceMap
+operator - (const Resource& k, const controller::ResourceMap& rmap)
 {
-  return ResourceMap (k) - rmap;
+  return controller::ResourceMap (k) - rmap;
 }
 
-inline ResourceMap
-operator * (const unsigned& mul, const ResourceMap& rmap)
+inline controller::ResourceMap
+operator * (const unsigned& mul, const controller::ResourceMap& rmap)
 {
   return rmap * mul;
 }
 
-inline ResourceMap
+inline controller::ResourceMap
 operator * (const Resource& k, unsigned i)
 {
-  return ResourceMap (k) * i;
+  return controller::ResourceMap (k) * i;
 }
 
-inline ResourceMap
+inline controller::ResourceMap
 operator * (unsigned i, const Resource& k)
 {
-  return ResourceMap (k) * i;
+  return controller::ResourceMap (k) * i;
 }
 
 #endif /* !RESOURCE_MAP_HXX_ */

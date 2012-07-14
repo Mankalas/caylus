@@ -44,6 +44,4 @@ namespace view
 
 }
 
-#include "playback.hxx"
-
 #endif

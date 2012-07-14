@@ -1,17 +1,18 @@
 /**
- * @file   graphical-ui.cc
+ * @file   graphic-view.cc
  * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Sun Nov  6 17:18:27 2011
  *
- * @brief  Declaration of the graphical-ui class.
+ * @brief  Declaration of the graphic-view class.
  */
 
+#include "graphic-view.hh"
+
 #include <assert.h>
-#include "graphical-ui.hh"
+#include <boost/foreach.hpp>
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 #include "board-element.hh"
-#include <boost/foreach.hpp>
 #include "const.hh"
 #include "debug-logger.hh"
 
@@ -19,14 +20,15 @@ using namespace gfx;
 using namespace view;
 using namespace controller;
 
-GraphicalUI::GraphicalUI()
+GraphicView::GraphicView(const GameEngine * game_engine)
+	: DisplayView(game_engine)
 {
 	window_.clear();
 	drawBoard_();
 	window_.display();
 }
 
-BoardElement* GraphicalUI::askBuilding(const std::vector<BoardElement*> & choices) const
+BoardElement* GraphicView::askBuilding(const std::vector<BoardElement*> & choices) const
 {
 	BoardElement * chosen_element = NULL;
 	while (chosen_element == NULL)
@@ -51,13 +53,13 @@ BoardElement* GraphicalUI::askBuilding(const std::vector<BoardElement*> & choice
 	return chosen_element;
 }
 
-void GraphicalUI::updateBoard(const GameEngine * ) const
+void GraphicView::updateBoard(const GameEngine * ) const
 {
 	window_.clear();
 	window_.display();
 }
 
-void GraphicalUI::drawBoard_() const
+void GraphicView::drawBoard_() const
 {
 	Sprite * board_sprite = SpriteLibrary::instance()->sprite("board");
 	assert(board_sprite);

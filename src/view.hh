@@ -9,11 +9,6 @@
 #ifndef VIEW_HH
 # define VIEW_HH
 
-# include <vector>
-# include <boost/signal.hpp>
-# include <boost/thread.hpp>
-# include "signals.hh"
-
 namespace controller
 {
 	class GameEngine;
