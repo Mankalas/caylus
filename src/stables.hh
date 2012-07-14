@@ -17,15 +17,17 @@ namespace controller
 
 	class Stables : public OmniscientBuilding
 	{
-		public:
-			Stables(GameEngine *ge);
+	public:
+		Stables(GameEngine *ge);
 
-			virtual void on_activate(void);
-			virtual void worker_set(Player &);
-			virtual void worker_unset();
+		virtual void on_activate(void);
+		virtual void worker_set(Player &);
+		virtual void worker_unset();
 
-		private:
-			std::vector<Player *> players_;
+		virtual bool has(const Player *) const;
+
+	private:
+		std::vector<Player *> players_;
 	};
 
 }

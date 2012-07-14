@@ -28,3 +28,8 @@ void Inn::on_activate()
 	host_ = worker_;
 	worker_ = NULL;
 }
+
+bool Inn::has(const Player *p) const
+{
+	return worker_ == p || host_ == p;
+}

@@ -35,7 +35,7 @@ void Stables::worker_set(Player &current)
 
 	std::cout << "STATE OF STABLES : " << std::endl;
 	foreach(const Player * p, players_)
-	std::cout << "\t" << *p << std::endl;
+		std::cout << "\t" << *p << std::endl;
 
 	// If no worker, Building::activate will not call on_activate.
 	worker_ = &current;
@@ -67,4 +67,9 @@ void Stables::on_activate()
 
 	// See above.
 	worker_ = 0;
+}
+
+bool Stables::has(const Player * p) const
+{
+	return std::find(players_.begin(), players_.end(), p) != players_.end();
 }

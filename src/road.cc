@@ -83,13 +83,13 @@ Road::clearWorkers()
 }
 
 std::vector<BoardElement*>
-Road::getAvailableBuildings(const Player *) const
+Road::getAvailableBuildings(const Player * p) const
 {
 	std::vector<BoardElement*> available_buildings;
 
 	foreach (BuildingSmartPtr b, buildings_)
 	{
-		if (b != NULL && b->worker() == NULL)
+		if (b != NULL && !b->has(p))
 		{
 			BoardElement * board_element = (BoardElement*)b.get();
 			if (board_element != NULL)

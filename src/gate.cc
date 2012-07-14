@@ -35,14 +35,11 @@ void Gate::on_activate()
 	player_choice = worker_->askWorkerPlacement(choices);
 	if (player_choice->isBuilding())
 	{
-		DebugLogger::log("Gate activated for Building.\n");
 		Building * building = dynamic_cast<Building*>(player_choice);
 		building->worker(worker_);
-		DebugLogger::log(building->name());
 	}
 	else
 	{
-		DebugLogger::log("Gate activated for Castle.\n");
 		Castle * castle = dynamic_cast<Castle*>(player_choice);
 		castle->add(worker_);
 	}

@@ -136,3 +136,8 @@ operator<<(std::ostream &o, const Building &b)
 	}
 	return o;
 }
+
+bool Building::has(const Player * p) const
+{
+	return worker_ == p;
+}

@@ -58,6 +58,8 @@ namespace controller
 		const Player *worker() const;
 		void worker(Player *);
 
+		virtual bool has(const Player *) const;
+
 	protected:
 		Building (const std::string &name,
 							const BuildingType &type,
