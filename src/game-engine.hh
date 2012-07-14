@@ -37,7 +37,7 @@ namespace controller
 	public:
 
 		/** Default constructor. */
-		GameEngine(unsigned nb_humans, unsigned nb_ais);
+		GameEngine(unsigned nb_humans, unsigned nb_ais, bool random = true);
 
 		/** Destructor. */
 		~GameEngine();
@@ -67,6 +67,7 @@ namespace controller
 		unsigned &nbTurnsMax();
 
 		const unsigned & nbTurns() const;
+		bool random() const;
 
 		void operator()();
 
@@ -155,6 +156,8 @@ namespace controller
 		unsigned nb_turns_;
 		/// Max number of turns before the game ends.
 		unsigned nb_turns_max_;
+		/// Whether random is added to the game. Usefull fo test purpose
+		const bool random_;
 
 		Board board_;
 

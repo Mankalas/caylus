@@ -92,6 +92,12 @@ GameSignals * GameEngine::signals() const
 	return &sigs_;
 }
 
+inline
+bool GameEngine::random() const
+{
+	return random_;
+}
+
 inline std::ostream& operator<<(std::ostream& o, const GameEngine& g)
 {
   foreach (const Player* p, g.order())

@@ -9,6 +9,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <ctime>
+#include "game-engine.hh"
 #include "road.hh"
 #include "all-buildings.hh"
 #include "stables.hh"
@@ -29,9 +30,11 @@ Road::Road (GameEngine *ge)
 	                                  (new NSawmill ())
 	                                  (new NCarpenter (ge))
 	                                  (new NMarketplace ());
-
-	std::srand(time(0));
-	std::random_shuffle(neutral.begin(), neutral.end());
+	if (ge->random())
+	{
+		std::srand(time(0));
+		std::random_shuffle(neutral.begin(), neutral.end());
+	}
 
 	BuildingSmartPtr gate(new Gate(ge));
 	buildings_[0] = gate;
@@ -48,10 +51,7 @@ Road::Road (GameEngine *ge)
 
 	for (unsigned i = 6; i < 12; ++i)
 	{
-		unsigned tmp = (unsigned) (neutral.size() * (rand() / ((double) RAND_MAX)));
-		BuildingSmartPtr ptr(neutral[tmp]);
-		buildings_[i] = ptr;
-		neutral.erase (neutral.begin () + tmp);
+		buildings_[i] = BuildingSmartPtr(neutral.at(i - 6));
 	}
 
 	buildings_[12] = BuildingSmartPtr(new FPeddler());
@@ -59,8 +59,6 @@ Road::Road (GameEngine *ge)
 	buildings_[21] = BuildingSmartPtr(new GoldMine());
 
 	free_slot_ = 14;
-
-	DebugLogger::log("Done.");
 }
 
 void

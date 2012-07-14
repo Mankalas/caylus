@@ -27,8 +27,9 @@ void usage()
 						<< "\t-c\t\tCommand line game" << std::endl
 						<< "\t-d\t\tLast option : specify a recorded player" << std::endl
 						<< "\t-h\t\tPrint this help" << std::endl
-						<< "\t-u [n]\t\tNumber of humans" << std::endl
-						<< "\t-m [n]\t\tNumber of turns" << std::endl;
+						<< "\t-m [n]\t\tNumber of turns" << std::endl
+						<< "\t-r\t\tNo random at the game init" << std::endl
+						<< "\t-u [n]\t\tNumber of humans" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -41,8 +42,9 @@ int main(int argc, char **argv)
 	unsigned int nb_ais = 0;
 	unsigned int max_turns = 42;
 	std::string dir = "";
+	bool random = true;
 
-	while ((option = getopt(argc, argv, "a:cdhu:m:")) != -1)
+	while ((option = getopt(argc, argv, "a:cdhm:ru:")) != -1)
 	{
 		switch (option)
 		{
@@ -62,6 +64,9 @@ int main(int argc, char **argv)
 		case 'h' :
 			usage();
 			return 0;
+		case 'r':
+			random = false;
+			break;
 		case 'u' :
 			nb_humans = atoi(optarg);
 			break;
@@ -76,7 +81,7 @@ int main(int argc, char **argv)
 
 	try
 	{
-		GameEngine g(nb_humans, nb_ais);
+		GameEngine g(nb_humans, nb_ais, random);
 		g.nbTurnsMax() = max_turns;
 
 		DebugLogger::log("Game Engine thread created.");

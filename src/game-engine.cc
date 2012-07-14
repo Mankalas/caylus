@@ -23,10 +23,11 @@
 
 using namespace controller;
 
-GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais)
+GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais, bool random)
 	: nb_humans_(nb_humans)
 	, nb_ais_(nb_ais)
 	, nb_turns_(0)
+	, random_(random)
 	, board_(this)
 {
 	buildings_.push_back(BuildingSmartPtr(new Statue()));
@@ -72,7 +73,10 @@ void GameEngine::init_()
 	{
 		order_.push_back(p);
 	}
-	std::random_shuffle(order_.begin(), order_.end());
+	if (random_)
+	{
+		std::random_shuffle(order_.begin(), order_.end());
+	}
 	// Give each player his initial denier amount.
 	for (unsigned i = 1; i < players_.size(); i++)
 	{
