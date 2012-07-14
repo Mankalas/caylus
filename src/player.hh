@@ -15,9 +15,7 @@
 # include <iostream>
 # include <boost/signal.hpp>
 # include "resource-map.hh"
-# include "board-element.hh"
 # include "signals.hh"
-# include "logger.hh"
 # include "player-signals.hh"
 
 # define NB_WORKERS 1
@@ -26,6 +24,11 @@ namespace view
 {
 	class PlayerView;
 	class Logger;
+}
+
+namespace controller
+{
+	class BoardElement;
 }
 
 namespace controller

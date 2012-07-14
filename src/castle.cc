@@ -99,12 +99,12 @@ Castle::~Castle()
 
 void Castle::on_activate()
 {
-	BoardElement::on_activate();
 	bool can_pay = false;
 	unsigned current_build = 0;
 
 	foreach (Player * p, players_)
 	{
+		activation_sig(this, p);
 		current_build = 0;
 		do
 		{

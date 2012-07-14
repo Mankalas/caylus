@@ -37,7 +37,7 @@ typedef boost::signal<void (const controller::BoardElement *)> player_choice_sig
 typedef boost::signal<void (const std::vector<controller::BoardElement *> &)> player_choices_signal_t;
 typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*> &)> ask_board_element_signal_t;
 typedef boost::signal<void (const controller::GameEngine *)> v_cge_signal_t;
-typedef boost::signal<void (const controller::BoardElement *)> board_element_activation_signal_t;
+typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> board_element_activation_signal_t;
 
 /* Player interactions.
 

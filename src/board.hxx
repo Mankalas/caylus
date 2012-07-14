@@ -19,7 +19,6 @@ inline Road& Board::road()
   return road_;
 }
 
-
 inline const Bridge& Board::bridge() const
 {
   return bridge_;

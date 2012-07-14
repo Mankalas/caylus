@@ -38,7 +38,3 @@ const std::string & BoardElement::name() const
 	return name_;
 }
 
-void BoardElement::on_activate()
-{
-	activation_sig(this);
-}

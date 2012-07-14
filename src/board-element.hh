@@ -31,9 +31,9 @@ namespace controller
 		virtual bool isBridge() const;
 		virtual const std::string & name() const;
 
-		virtual void on_activate();
+		virtual void on_activate() = 0;
 
-		board_element_activation_signal_t activation_sig;
+		mutable board_element_activation_signal_t activation_sig;
 
 	protected:
 		const std::string name_;

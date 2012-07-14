@@ -13,6 +13,9 @@
 #include "game-signals.hh"
 #include "player.hh"
 #include "resource-map.hh"
+#include "board.hh"
+#include "bridge.hh"
+#include "castle.hh"
 
 using namespace std;
 using namespace controller;
@@ -53,13 +56,13 @@ Logger::Logger(const GameEngine * game_engine)
 	game_engine->signals()->player_has_chosen.connect(boost::bind(&Logger::playerChoice, this, _1));
 	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
 
-	/*game_engine->board().castle().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));*/
-	//game_engine->board().bridge().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));
+	game_engine->board().castle().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
+	game_engine->board().bridge().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
 	foreach (BuildingSmartPtr b, game_engine->board().road().get())
 	{
 		if (b != NULL)
 		{
-			b->activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1));
+			b->activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
 		}
 	}
 
@@ -86,13 +89,6 @@ void Logger::startSection(int level, const std::string & title)
 	file_ << "<h" << level << ">" << title << "</h" << level << ">\n"
 				<< "<div style=\"margin-left:50px\">\n";
 }
-
-void Logger::playerIncome(const Player * p, const ResourceMap * r)
-{
-	assert(p);
-	file_ << "<p>Player " << p->name() << " received " << *r << " for he has " << p->residences() << " residences.</p>" << std::endl;
-}
-
 
 void Logger::endSection()
 {
@@ -126,7 +122,7 @@ void Logger::incomeCollectionEnd()
 
 void Logger::incomeCollectionForPlayer(const controller::Player * p, const controller::ResourceMap * income)
 {
-	file_ << "<p>" << p->name() << " receives " << *income << ".</p>";
+	file_ << "<p>Player " << p->name() << " received " << *income << " for he has " << p->residences() << " residences.</p>" << std::endl;
 }
 void Logger::workerPlacementBegin()
 {
@@ -167,9 +163,9 @@ void Logger::playerChoices(const std::vector<controller::BoardElement *> & choic
 	}
 }
 
-void Logger::activationBoardElement(const controller::BoardElement * board_elt)
+void Logger::activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p)
 {
-	file_ << "<p>" << board_elt->name() << " activated." << "</p>";
+	file_ << "<p>" << board_elt->name() << " activated for player " << *p << "." << "</p>";
 }
 
 void Logger::updateBoard()
@@ -209,6 +205,11 @@ void Logger::activationBridgeBegin()
 void Logger::activationBridgeEnd()
 {
 	file_ << "<p>End of bridge activation.</p>" << std::endl;
+}
+
+void Logger::activationBridgeForPlayer(const controller::Player * player)
+{
+	file_ << "<p>Bridge activation for player " << *player << ".</p>" << std::endl;
 }
 
 void Logger::activationCastleBegin()

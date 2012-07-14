@@ -72,11 +72,6 @@ namespace controller
 
 		const std::vector<BoardElement*> getAvailableBoardElements(const Player * worker) const;
 
-		/*void subscribeView(view::PlayerView *view);
-			void subscribeView(view::Logger * log);*/
-
-		void launch();
-
 		GameSignals * signals() const;
 		Player * newPlayer();
 

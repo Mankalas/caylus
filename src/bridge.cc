@@ -34,3 +34,7 @@ bool Bridge::isBridge() const
 {
 	return true;
 }
+
+void Bridge::on_activate()
+{
+}

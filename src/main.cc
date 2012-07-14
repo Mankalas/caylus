@@ -65,12 +65,10 @@ int main(int argc, char **argv)
 	{
 		GameEngine g(nb_humans, nb_ais);
 		g.nbTurnsMax() = max_turns;
-		boost::thread controller_thread = boost::thread(boost::ref(g));
-		DebugLogger::log("Game Engine thread launched.");
+
+		DebugLogger::log("Game Engine thread created.");
 
 		assert(nb_humans <= 5);
-		//Human human(&g);
-		//g.subscribeView(&human);
 		// -1 because a first human is added the previous line
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
@@ -94,13 +92,11 @@ int main(int argc, char **argv)
 			//g.subscribeView(ai);
 		}
 
-		DebugLogger::log("PAF");
 		Logger log(&g);
-		DebugLogger::log("PIF");
+
+		boost::thread controller_thread = boost::thread(boost::ref(g));
 
 		controller_thread.join();
-		g.launch();
-
 	}
 	catch (GameOverException *)
 	{

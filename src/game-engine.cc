@@ -80,19 +80,8 @@ void GameEngine::init_()
 	}
 }
 
-void GameEngine::launch()
-{
-	DebugLogger::log("Unlocking mutex.");
-	mutex_.unlock();
-	DebugLogger::log("Done.");
-}
-
 void GameEngine::operator() ()
 {
-	// Waiting for the view subscription to release the mutex.
-	DebugLogger::log("Thread locked.");
-	mutex_.lock();
-
 	sigs_.game_engine_ready();
 	init_();
 	while (nb_turns_ < nb_turns_max_)
@@ -140,7 +129,9 @@ void GameEngine::activateBridge_()
 
 	sigs_.activation_bridge_begin();
 	foreach (Player * p, board_.bridge().players())
+		//while (!board_.bridge().players().empty())
 	{
+		board_.bridge().activation_sig(&board_.bridge(), p);
 		assert(p);
 		deniers = p->resources()[Resource::denier];
 		if (deniers == 0)

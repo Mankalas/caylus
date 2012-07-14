@@ -34,7 +34,6 @@ namespace view
 		void setGE(const controller::GameEngine * ge);
 
 		void startOfTurn(const controller::GameEngine *);
-		void playerIncome(const controller::Player *, const controller::ResourceMap *);
 
 		void startSection(int level, const std::string & title);
 		void endSection();
@@ -58,6 +57,7 @@ namespace view
 
 		void activationBridgeBegin();
 		void activationBridgeEnd();
+		void activationBridgeForPlayer(const controller::Player * player);
 
 		void activationCastleBegin();
 		void activationCastleEnd();
@@ -69,7 +69,7 @@ namespace view
 		void playerChoices(const std::vector<controller::BoardElement *> & choices);
 		void resourceMove(const ResourceMap *);
 
-		virtual void activationBoardElement(const controller::BoardElement * board_elt);
+		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
 		virtual void updateBoard();
 
 	private:

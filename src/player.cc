@@ -8,6 +8,7 @@
 
 #include "player.hh"
 #include "debug-logger.hh"
+#include "board-element.hh"
 
 using namespace controller;
 

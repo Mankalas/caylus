@@ -46,6 +46,8 @@ namespace controller
 		const std::vector<Player *>& players() const;
 		std::vector<Player *>& players();
 
+		virtual void on_activate();
+
 	private:
 		std::vector<Player *> players_;
   };
