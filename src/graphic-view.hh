@@ -20,18 +20,19 @@ namespace view
 	public:
 
 		GraphicView(const controller::GameEngine * game_engine);
-
-		virtual int askProvostShift() const;
-		virtual void updateBoard(const controller::GameEngine * ge) const;
 		virtual controller::BoardElement* askBuilding(const std::vector<controller::BoardElement*> & choices) const;
+		virtual void updateBoard(const controller::GameEngine * ge) const;
+		virtual int askProvostShift() const;
 
-		virtual int askChoice(int, int) const;
-		virtual int askChoice(std::vector<int>&) const;
-		virtual void showMessage(const std::string) const;
-		virtual int getInt() const;
-		virtual std::string getString() const;
-		virtual std::string askName() const;
-		virtual bool askYesNo() const;
+
+
+			virtual int askChoice(int, int) const;
+			virtual int askChoice(std::vector<int>&) const;
+			virtual void showMessage(const std::string) const;
+			virtual int getInt() const;
+			virtual std::string getString() const;
+			virtual std::string askName() const;
+			virtual bool askYesNo() const;
 
 	private:
 		gfx::Window window_;

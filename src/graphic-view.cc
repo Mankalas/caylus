@@ -13,8 +13,8 @@
 #include "gfx-window.hh"
 #include "gfx-sprite-library.hh"
 #include "board-element.hh"
-#include "const.hh"
 #include "debug-logger.hh"
+#include "game-engine.hh"
 
 using namespace gfx;
 using namespace view;
@@ -32,24 +32,24 @@ BoardElement* GraphicView::askBuilding(const std::vector<BoardElement*> & choice
 {
 	BoardElement * chosen_element = NULL;
 	while (chosen_element == NULL)
+	{
+		std::pair<float, float> click_coordinates = window_.getClick();
+		const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
+		if (building_name == NULL)
 		{
-			std::pair<float, float> click_coordinates = window_.getClick();
-			const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
-			if (building_name == NULL)
-				{
-					DebugLogger::log("Bad click.");
-					continue;
-				}
-			DebugLogger::log(*building_name);
-			foreach (BoardElement * board_elt, choices)
-				{
-					if (board_elt->name() == *building_name)
-						{
-							chosen_element = board_elt;
-							break;
-						}
-				}
+			DebugLogger::log("Bad click.");
+			continue;
 		}
+		DebugLogger::log(*building_name);
+		foreach (BoardElement * board_elt, choices)
+		{
+			if (board_elt->name() == *building_name)
+			{
+				chosen_element = board_elt;
+				break;
+			}
+		}
+	}
 	return chosen_element;
 }
 
@@ -65,3 +65,15 @@ void GraphicView::drawBoard_() const
 	assert(board_sprite);
 	window_.draw(*board_sprite);
 }
+
+int GraphicView::askProvostShift() const {return 0;}
+
+
+
+int GraphicView::askChoice(int, int) const {return 0;}
+int GraphicView::askChoice(std::vector<int>&) const {return 0;}
+void GraphicView::showMessage(const std::string) const {}
+int GraphicView::getInt() const {return 0;}
+std::string GraphicView::getString() const {return "";}
+std::string GraphicView::askName() const {return "";}
+bool GraphicView::askYesNo() const {return false;}
