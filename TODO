@@ -1,3 +1,5 @@
+A task can only be marked as "DONE" when a test has been written for it.
+
 * Bugs *
 
 [TODO] Check why the project won't compile when returning a reference
@@ -24,9 +26,9 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TODO] If more than one favor during a phase, activation on different lines
        [????] Impossible to gain more than 4 favors in a phase
        [TODO] Use of buildings
-[DONE] Neutral buildings random placement
-[DONE] Random player order
-[DONE] Initial resources
+[TEST] Neutral buildings random placement
+[TEST] Random player order
+[TEST] Initial resources
 [TEST] Scoring
        [TODO] Following the turn order
        [TEST] Counting house in the actual section then bonus/malus
@@ -44,31 +46,31 @@ on methods resources() and workers() in file player.hh, lines 51 and
 	[TEST] No worker on residences, prestige, unbuild or occupied
 	[TEST] Worker cost
 	[TEST] Pass
-	       [DONE] 1 denier for the first to pass
+	       [TEST] 1 denier for the first to pass
 	[TEST] Putting on a special, fixed or neutral
 	[TEST] Putting on another player's building
-	       [DONE] Prestige point gained by the owner
+	       [TEST] Prestige point gained by the owner
 	[TEST] Putting on our own building
 	       [TEST] worker costs 1 denier
-	[DONE] Putting at the castle
-	       [DONE] one worker per player
-[DONE] Phase 3/7 : Activating special buildings
-[DONE] Phase 4/7 : Provost move
-       [DONE] Pass
-       [DONE] 1 denier per space
-       [DONE] Boundary checks (not back the bridge, not after the last space of the board, +/-3)
-[DONE] Phase 5/7 : Activating buildings
-       [DONE] Building activation according to the provost's position
-       [DONE] Building's effect not mandatory except production buildings
+	[TEST] Putting at the castle
+	       [TEST] one worker per player
+[TEST] Phase 3/7 : Activating special buildings
+[TEST] Phase 4/7 : Provost move
+       [TEST] Pass
+       [TEST] 1 denier per space
+       [TEST] Boundary checks (not back the bridge, not after the last space of the board, +/-3)
+[TEST] Phase 5/7 : Activating buildings
+       [TEST] Building activation according to the provost's position
+       [TEST] Building's effect not mandatory except production buildings
 [TEST] Phase 6/7 : Activating the castle
-       [DONE] Three sections
-       [DONE] Batch of three cubes, one must be food
+       [TEST] Three sections
+       [TEST] Batch of three cubes, one must be food
        [TEST] Active part depends on the bailiff
-       [DONE] If no room, begin the following section
+       [TEST] If no room, begin the following section
        [TEST] Penalty if no house built (except if Towers are full)
-       [DONE] Royal favor gain
+       [TEST] Royal favor gain
 [TEST] Phase 7/7 : End of turn
-       [DONE] Bailiff / provost move
+       [TEST] Bailiff / provost move
        [TEST] Scoring (castle section full or bailiff reach end of section)
 
 * Buildings *
@@ -76,10 +78,10 @@ on methods resources() and workers() in file player.hh, lines 51 and
 	[TEST] No worker on residences, prestige, unbuild or occupied
 	[TEST] Castle, Inn, Stables (only one worker per player on these)
 	[TEST] 1 prestige if another player's building
-[DONE] Trading Post
-[DONE] Merchant's Guild
+[TEST] Trading Post
+[TEST] Merchant's Guild
 [TEST] Stables (only one worker per player)
-[DONE] Joust Field
+[TEST] Joust Field
 [TEST] Inn
        [TEST] Activation (move from the left circle to the right)
        [TEST] Effect (worker cost equals 1)
@@ -92,7 +94,7 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TODO] Stone buildings "tax"
 [TEST] Construction buildings
        [TEST] Suppress the building from the game's pile
-       [DONE] Prestige point earned
+       [TEST] Prestige point earned
        [TEST] Residential and prestige buildings' rules (built on neutral or own building)
 [TEST] Trade buildings
 
