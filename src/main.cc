@@ -20,6 +20,17 @@
 #include "exceptions.hh"
 #include "logger.hh"
 
+void usage()
+{
+	std::cout << "caylus" << std::endl
+						<< "\t-a [n]\t\tNumber of AIs" << std::endl
+						<< "\t-c\t\tCommand line game" << std::endl
+						<< "\t-d\t\tLast option : specify a recorded player" << std::endl
+						<< "\t-h\t\tPrint this help" << std::endl
+						<< "\t-u [n]\t\tNumber of humans" << std::endl
+						<< "\t-m [n]\t\tNumber of turns" << std::endl;
+}
+
 int main(int argc, char **argv)
 {
 	bool command_line = false;
@@ -49,7 +60,8 @@ int main(int argc, char **argv)
 			std::cout << "Server game." << std::endl;
 			break;
 		case 'h' :
-			std::cout << "Go DTC." << std::endl;
+			usage();
+			return 0;
 		case 'u' :
 			nb_humans = atoi(optarg);
 			break;
@@ -57,7 +69,8 @@ int main(int argc, char **argv)
 			max_turns = atoi(optarg);
 			break;
 		case '?':
-			std::cerr << "Error" << std::endl;
+			usage();
+			return 1;
 		}
 	}
 
@@ -74,7 +87,6 @@ int main(int argc, char **argv)
 		{
 			new Human(&g);
 			DebugLogger::log("Adding new human player.");
-			//g.subscribeView(h);
 		}
 
 		if (dir != "")
@@ -89,13 +101,11 @@ int main(int argc, char **argv)
 		{
 			//new AI(&g);
 			DebugLogger::log("Adding new AI player.");
-			//g.subscribeView(ai);
 		}
 
 		Logger log(&g);
 
 		boost::thread controller_thread = boost::thread(boost::ref(g));
-
 		controller_thread.join();
 	}
 	catch (GameOverException *)

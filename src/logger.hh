@@ -57,7 +57,6 @@ namespace view
 
 		void activationBridgeBegin();
 		void activationBridgeEnd();
-		void activationBridgeForPlayer(const controller::Player * player);
 
 		void activationCastleBegin();
 		void activationCastleEnd();

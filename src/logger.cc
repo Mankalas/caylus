@@ -43,7 +43,6 @@ Logger::Logger(const GameEngine * game_engine)
 
 	game_engine->signals()->activation_bridge_begin.connect(boost::bind(&Logger::activationBridgeBegin, this));
 	game_engine->signals()->activation_bridge_end.connect(boost::bind(&Logger::activationBridgeEnd, this));
-	//game_engine->signals()->activation_bridge_for_player.connect(boost::bind(&Logger::activationBridgeForPlayer, _1, this));
 
 	game_engine->signals()->activation_buildings_begin.connect(boost::bind(&Logger::activationBuildingsBegin, this));
 	game_engine->signals()->activation_buildings_end.connect(boost::bind(&Logger::activationBuildingsEnd, this));
@@ -65,7 +64,6 @@ Logger::Logger(const GameEngine * game_engine)
 			b->activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
 		}
 	}
-
 }
 
 Logger::~Logger()
@@ -205,11 +203,6 @@ void Logger::activationBridgeBegin()
 void Logger::activationBridgeEnd()
 {
 	file_ << "<p>End of bridge activation.</p>" << std::endl;
-}
-
-void Logger::activationBridgeForPlayer(const controller::Player * player)
-{
-	file_ << "<p>Bridge activation for player " << *player << ".</p>" << std::endl;
 }
 
 void Logger::activationCastleBegin()
