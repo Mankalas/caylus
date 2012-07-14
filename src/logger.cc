@@ -51,17 +51,24 @@ Logger::Logger(const GameEngine * game_engine)
 	game_engine->signals()->activation_castle_end.connect(boost::bind(&Logger::activationCastleEnd, this));
 
 	// Controls
-	game_engine->signals()->player_choices.connect(boost::bind(&Logger::playerChoices, this, _1));
-	game_engine->signals()->player_has_chosen.connect(boost::bind(&Logger::playerChoice, this, _1));
 	game_engine->signals()->no_worker_left.connect(boost::bind(&Logger::noWorkerLeft, this, _1));
 
 	game_engine->board().castle().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
 	game_engine->board().bridge().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
-	foreach (BuildingSmartPtr b, game_engine->board().road().get())
+	foreach (const BuildingSmartPtr b, game_engine->board().road().get())
 	{
 		if (b != NULL)
 		{
 			b->activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
+		}
+	}
+
+	foreach (const Player * p, game_engine->players())
+	{
+		if (p != NULL)
+		{
+			p->signals()->player_choices.connect(boost::bind(&Logger::playerChoices, this, _1));
+			p->signals()->player_has_chosen.connect(boost::bind(&Logger::playerChoice, this, _1));
 		}
 	}
 }

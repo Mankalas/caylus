@@ -56,8 +56,10 @@ BoardElement*
 Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 {
 	assert(!signals_.ask_worker_placement.empty());
-
-	return signals_.ask_worker_placement(buildings);
+	signals_.player_choices(buildings, this);
+	BoardElement * choice = signals_.ask_worker_placement(buildings);
+	signals_.player_has_chosen(choice, this);
+	return choice;
 }
 
 void Player::addResources(const ResourceMap &r)

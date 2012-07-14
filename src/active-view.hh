@@ -10,6 +10,7 @@
 # define ACTIVE_VIEW_HH
 
 # include "view.hh"
+# include "signals.hh"
 
 namespace view
 {
@@ -27,7 +28,6 @@ namespace view
 		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const = 0;
 		///
 		virtual std::string askName() const = 0;
-		///
 
 	protected:
 		controller::GameEngine * game_engine_;

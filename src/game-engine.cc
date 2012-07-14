@@ -227,9 +227,7 @@ void GameEngine::playerMove_(Player *p)
 	while (!has_played)
 	{
 		const std::vector<BoardElement*> choices = getAvailableBoardElements(p);
-		sigs_.player_choices(choices);
 		player_choice = p->askWorkerPlacement(choices);
-		sigs_.player_has_chosen(player_choice);
 
 		if (player_choice->isBridge())
 		{

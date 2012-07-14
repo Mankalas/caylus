@@ -72,10 +72,6 @@ namespace controller
 		v_cp_signal_t no_worker_left;
 		/// A player has been added to the bridge.
 		v_cp_signal_t added_to_bridge;
-		/// Get the board element a player has chosen from a list.
-		player_choice_signal_t player_has_chosen;
-		/// Get the choices a player has between several BoardElements.
-		player_choices_signal_t player_choices;
 
 	};
 }

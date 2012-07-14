@@ -18,6 +18,10 @@ namespace controller
 		i_v_signal_t ask_provost_shift;
 		ask_board_element_signal_t ask_worker_placement;
 
+		/// Get the board element a player has chosen from a list.
+		player_choice_signal_t player_has_chosen;
+		/// Get the choices a player has between several BoardElements.
+		player_choices_signal_t player_choices;
 	};
 }
 
