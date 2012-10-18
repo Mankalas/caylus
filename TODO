@@ -145,3 +145,60 @@ to the bridge
 Mason -> 1 food + ((worker on neutral carpenter or fixed carpenter)
 + 1 wood) or (1+ building favor + building favor) + empty slot
 available and accessible
+
+--
+
+Signals system to avoid threads
+
+GE::launch()
+{
+ while (not_enough_players)
+  cond.wait()
+ go();
+ game_over()
+}
+
+GE::newPlayer
+{
+ addPlayer();
+ cond.notify();
+}
+
+UI::UI(g)
+{
+ g.game_over.connect(UI::game_over)
+ g.board_update.connect(UI::board_update)
+}
+
+UI::board_update
+{
+ update.notify();
+}
+
+UI::game_over
+{
+ game_over_ = true;
+}
+
+UI::launch
+{
+ while (!game_over_)
+ {
+  update.wait()
+	draw()
+ }
+}
+
+main
+{
+ GE();
+ launch.connect(GE::launch);
+ launch();
+ ui = console ? console_view(g) : graphic_view(g);
+ ui.launch();
+}
+
+Player::Player
+{
+ g.newPlayer();
+}
