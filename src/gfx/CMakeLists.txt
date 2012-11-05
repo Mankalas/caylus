@@ -1,6 +1,4 @@
 # Caylus GFX
-project (Caylus_GFX)
-
-set (Caylus_GFX_SRC gfx-window.cc gfx-sprite.cc gfx-sprite-library.cc gfx-board.cc)
-
+source_group (Caylus_GFX_SRC .*.cc)
 add_library (Caylus_GFX SHARED "${Caylus_GFX_SRC}")
+set_target_properties (Caylus_GFX PROPERTIES LINKER_LANGUAGE CXX)

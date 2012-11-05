@@ -11,9 +11,9 @@ set (CAYLUS_SOURCE_DIR "src")
 set (CAYLUS_BINARY_DIR "bin")
 
 # Subdirectories
-add_subdirectory ("${CAYLUS_SOURCE_DIR}"/view)
-add_subdirectory ("${CAYLUS_SOURCE_DIR}"/controller)
-add_subdirectory ("${CAYLUS_SOURCE_DIR}"/gfx)
+add_subdirectory ("${CAYLUS_SOURCE_DIR}/view")
+add_subdirectory ("${CAYLUS_SOURCE_DIR}/controller")
+add_subdirectory ("${CAYLUS_SOURCE_DIR}/gfx")
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -26,5 +26,5 @@ configure_file (
 # so that we will find CaylusConfig.h
 include_directories("${CAYLUS_BINARY_DIR}")
 
-add_executable (Caylus "${CAYLUS_SOURCE_DIR}"/main.cc)
+add_executable (Caylus "${CAYLUS_SOURCE_DIR}/main.cc")
 
