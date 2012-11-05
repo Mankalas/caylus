@@ -36,8 +36,15 @@ void usage()
 						<< "\t-u [n]\t\tNumber of humans" << std::endl;
 }
 
+#include "CaylusConfig.h"
+
 int main(int argc, char **argv)
 {
+
+	std::cout << Caylus_VERSION_MAJOR << "." << Caylus_VERSION_MINOR << std::endl;
+	return 1;
+
+
 	bool command_line = false;
 	std::string host = "";
 	int option = 0;
