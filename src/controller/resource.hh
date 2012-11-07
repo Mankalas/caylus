@@ -12,7 +12,6 @@
 # include <vector>
 # include <boost/foreach.hpp>
 # include "enum-object.hh"
-# include "const.hh"
 
 namespace controller
 {

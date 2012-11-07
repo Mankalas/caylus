@@ -10,13 +10,9 @@
 # define GAMEENGINE_H
 
 # include <vector>
-# include <boost/smart_ptr.hpp>
-# include <boost/signal.hpp>
-# include <boost/thread.hpp>
 # include <limits.h>
 # include "board.hh"
-# include "logger.hh"
-# include "game-signals.hh"
+# include "../game-signals.hh"
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11

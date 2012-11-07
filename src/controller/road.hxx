@@ -12,6 +12,7 @@
 # include "road.hh"
 # include "player.hh"
 # include "exceptions.hh"
+# include "../const.hh"
 
 inline const std::vector<BuildingSmartPtr>&
 Road::get () const

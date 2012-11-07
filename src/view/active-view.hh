@@ -10,7 +10,6 @@
 # define ACTIVE_VIEW_HH
 
 # include "view.hh"
-# include "signals.hh"
 
 namespace view
 {

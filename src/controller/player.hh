@@ -13,10 +13,8 @@
 # include <vector>
 # include <map>
 # include <iostream>
-# include <boost/signal.hpp>
 # include "resource-map.hh"
-# include "signals.hh"
-# include "player-signals.hh"
+# include "../player-signals.hh"
 
 namespace view
 {

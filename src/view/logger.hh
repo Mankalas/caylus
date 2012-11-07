@@ -13,8 +13,6 @@
 # include <fstream>
 # include <boost/bind.hpp>
 # include "passive-view.hh"
-# include "const.hh"
-# include "signals.hh"
 
 namespace controller
 {

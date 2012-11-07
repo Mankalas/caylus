@@ -11,15 +11,15 @@
 #include <boost/thread.hpp>
 #include <stdlib.h>
 #include <limits.h>
-#include "game-engine.hh"
-#include "human.hh"
-#include "ai.hh"
-#include "playback.hh"
-#include "debug-logger.hh"
-#include "gfx-window.hh"
-#include "gfx-sprite-library.hh"
-#include "exceptions.hh"
-#include "logger.hh"
+#include "controller/game-engine.hh"
+#include "view/human.hh"
+#include "view/ai.hh"
+#include "view/playback.hh"
+#include "controller/debug-logger.hh"
+#include "gfx/gfx-window.hh"
+#include "gfx/gfx-sprite-library.hh"
+#include "controller/exceptions.hh"
+#include "view/logger.hh"
 
 using namespace view;
 using namespace controller;

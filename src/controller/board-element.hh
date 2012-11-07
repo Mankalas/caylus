@@ -11,7 +11,7 @@
 
 # include <vector>
 # include <string>
-# include "signals.hh"
+# include "../signals.hh"
 
 namespace view
 {
