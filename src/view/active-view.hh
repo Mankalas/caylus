@@ -9,7 +9,15 @@
 #ifndef ACTIVE_VIEW_HH
 # define ACTIVE_VIEW_HH
 
+# include <vector>
+# include <string>
 # include "view.hh"
+
+namespace controller
+{
+	class Player;
+	class BoardElement;
+}
 
 namespace view
 {

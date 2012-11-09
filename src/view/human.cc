@@ -11,10 +11,10 @@
 #include <iostream>
 
 #include <boost/bind.hpp>
-#include "debug-logger.hh"
+#include "../debug-logger.hh"
 #include "display-view.hh"
-#include "board-element.hh"
-#include "player.hh"
+#include "../controller/board-element.hh"
+#include "../controller/player.hh"
 #include "console-view.hh"
 #include "graphic-view.hh"
 

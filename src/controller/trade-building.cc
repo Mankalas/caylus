@@ -5,7 +5,9 @@
  *
  * @brief  Declaration of the trade-building class.
  */
+
 #include "trade-building.hh"
+#include "../const.hh"
 
 TradeBuilding::~TradeBuilding()
 {

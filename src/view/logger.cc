@@ -6,16 +6,17 @@
  * @brief  Implementation of the logger class.
  */
 
-#include "debug-logger.hh"
+#include "logger.hh"
 
 #include <iostream>
-#include "game-engine.hh"
-#include "game-signals.hh"
-#include "player.hh"
-#include "resource-map.hh"
-#include "board.hh"
-#include "bridge.hh"
-#include "castle.hh"
+#include "../debug-logger.hh"
+#include "../controller/game-engine.hh"
+#include "../game-signals.hh"
+#include "../controller/player.hh"
+#include "../controller/resource-map.hh"
+#include "../controller/board.hh"
+#include "../controller/bridge.hh"
+#include "../controller/castle.hh"
 
 using namespace std;
 using namespace controller;

@@ -6,8 +6,9 @@
   \date   2009-01-06
 */
 
-# include <cassert>
-# include "resource-map.hh"
+#include <cassert>
+#include "resource-map.hh"
+#include "../const.hh"
 
 ResourceMap::ResourceMap (const unsigned &value)
 {
@@ -93,9 +94,11 @@ ResourceMap::operator < (const ResourceMap &rmap) const
 	assert (rmap.map_.size () == Resource::list ().size ());
 
 	foreach (const Resource & r, Resource::list ())
-	if ((*this)[r] >= rmap[r])
 	{
-		return false;
+		if ((*this)[r] >= rmap[r])
+		{
+			return false;
+		}
 	}
 	return true;
 }

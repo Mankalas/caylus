@@ -6,15 +6,9 @@
  * @brief  Implementation of the view class.
  */
 
-#include <boost/bind.hpp>
-#include <iostream>
 #include "view.hh"
-#include "game-engine.hh"
-#include "board-element.hh"
 
-using namespace std;
 using namespace view;
-using namespace controller;
 
 View::View() {}
 

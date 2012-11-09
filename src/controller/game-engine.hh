@@ -159,9 +159,6 @@ namespace controller
 
 		Board board_;
 
-		/// Used to wait until a view subscribes.
-		boost::mutex mutex_;
-
 		mutable GameSignals sigs_;
 
 	};

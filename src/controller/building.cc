@@ -8,9 +8,9 @@
 
 #include <cassert>
 #include "building.hh"
-#include <cassert>
 #include "exceptions.hh"
 #include "player.hh"
+#include "../const.hh"
 
 Building::Building (const std::string &name,
                     const BuildingType &type,

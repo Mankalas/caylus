@@ -10,6 +10,7 @@
 # define CASTLE_HXX
 
 # include "castle.hh"
+# include "../const.hh"
 
 inline
 const std::vector<Player*>& controller::CastlePart::houses() const

@@ -9,12 +9,10 @@
 #include "graphic-view.hh"
 
 #include <assert.h>
-#include <boost/foreach.hpp>
-#include "gfx-window.hh"
-#include "gfx-sprite-library.hh"
-#include "board-element.hh"
-#include "debug-logger.hh"
-#include "game-engine.hh"
+#include "../const.hh"
+#include "../gfx/gfx-sprite-library.hh"
+#include "../debug-logger.hh"
+#include "../controller/game-engine.hh"
 
 using namespace gfx;
 using namespace view;

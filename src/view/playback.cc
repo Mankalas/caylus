@@ -7,12 +7,15 @@
  */
 
 #include "playback.hh"
+
 #include <iostream>
 #include <fstream>
-#include "player.hh"
 #include <stdlib.h>
-#include "exceptions.hh"
-#include "game-engine.hh"
+
+#include "../exceptions.hh"
+#include "../const.hh"
+#include "../controller/player.hh"
+#include "../controller/game-engine.hh"
 
 using namespace view;
 

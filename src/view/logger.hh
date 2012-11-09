@@ -12,6 +12,7 @@
 # include <stack>
 # include <fstream>
 # include <boost/bind.hpp>
+# include <vector>
 # include "passive-view.hh"
 
 namespace controller
@@ -64,7 +65,7 @@ namespace view
 		void noWorkerLeft(const controller::Player * player);
 		void playerChoice(const controller::BoardElement * board_elt);
 		void playerChoices(const std::vector<controller::BoardElement *> & choices);
-		void resourceMove(const ResourceMap *);
+		void resourceMove(const controller::ResourceMap *);
 
 		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
 		virtual void updateBoard();

@@ -10,8 +10,9 @@
 # define GRAPHIC_VIEW_HH
 
 # include "display-view.hh"
-# include "gfx-window.hh"
-# include "gfx-board.hh"
+# include "../gfx/gfx-window.hh"
+# include "../gfx/gfx-board.hh"
+# include <vector>
 
 namespace view
 {

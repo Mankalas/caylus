@@ -7,6 +7,7 @@
 */
 
 #include "gfx-sprite-library.hh"
+#include "../CaylusConfig.h"
 
 using namespace gfx;
 
@@ -15,7 +16,7 @@ SpriteLibrary *SpriteLibrary::instance_ = NULL;
 SpriteLibrary::SpriteLibrary()
 {
 	sprites_ = std::map<const std::string, Sprite *>();
-	std::string img_dir = "../share/img/";
+	std::string img_dir = Caylus_IMAGE_DIR;
 	sprites_["board"] = new Sprite(img_dir + "board_limited_edition.jpg");
 	sprites_["alchemist"] = new Sprite(img_dir + "alchemist.png");
 	sprites_["architect"] = new Sprite(img_dir + "architect.png");

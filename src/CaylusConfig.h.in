@@ -1,0 +1,6 @@
+// the configured options and settings for Caylus
+#define Caylus_VERSION_MAJOR @Caylus_VERSION_MAJOR@
+#define Caylus_VERSION_MINOR @Caylus_VERSION_MINOR@
+
+// the images resource directory
+#define Caylus_IMAGE_DIR "@Caylus_IMAGE_DIR@/"

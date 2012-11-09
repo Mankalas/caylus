@@ -11,15 +11,19 @@
 #include <boost/thread.hpp>
 #include <stdlib.h>
 #include <limits.h>
+
+#include "debug-logger.hh"
+#include "exceptions.hh"
+
 #include "controller/game-engine.hh"
+
 #include "view/human.hh"
 #include "view/ai.hh"
 #include "view/playback.hh"
-#include "controller/debug-logger.hh"
+#include "view/logger.hh"
+
 #include "gfx/gfx-window.hh"
 #include "gfx/gfx-sprite-library.hh"
-#include "controller/exceptions.hh"
-#include "view/logger.hh"
 
 using namespace view;
 using namespace controller;
@@ -40,11 +44,6 @@ void usage()
 
 int main(int argc, char **argv)
 {
-
-	std::cout << Caylus_VERSION_MAJOR << "." << Caylus_VERSION_MINOR << std::endl;
-	return 1;
-
-
 	bool command_line = false;
 	std::string host = "";
 	int option = 0;

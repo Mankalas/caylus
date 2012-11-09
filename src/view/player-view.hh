@@ -10,6 +10,7 @@
 # define PLAYER_VIEW_HH
 
 # include "view.hh"
+# include <boost/signal.hpp>
 
 namespace controller
 {
@@ -48,7 +49,7 @@ namespace view
 		boost::signal<unsigned (void)>::slot_function_type resourceChoiceSlot() const;
 
 	protected:
-		const controller::GameEngine *ge_;
+		const controller::GameEngine *game_engine_;
 	};
 }
 

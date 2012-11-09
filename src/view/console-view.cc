@@ -9,9 +9,7 @@
 #include "console-view.hh"
 
 #include <limits>
-#include "player.hh"
-#include "road.hh"
-#include "game-engine.hh"
+#include "../controller/game-engine.hh"
 
 using namespace std;
 using namespace view;

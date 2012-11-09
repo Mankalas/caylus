@@ -12,7 +12,8 @@
 
 # include "active-view.hh"
 # include "display-view.hh"
-
+# include <vector>
+# include <boost/signal.hpp>
 namespace view
 {
 	class Human : public ActiveView

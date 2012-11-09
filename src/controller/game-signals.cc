@@ -6,11 +6,6 @@
  * @brief  Implementation of the game-signals class.
  */
 
-#include "game-signals.hh"
-#include "view.hh"
-
-using namespace controller;
-
 /*void GameSignals::connect(view::View * view)
 {
 	game_engine_ready.connect(view->gameEngineReadySlot());

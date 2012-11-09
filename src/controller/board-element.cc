@@ -7,11 +7,8 @@
  */
 
 #include "board-element.hh"
-#include "debug-logger.hh"
-#include "view.hh"
 
 using namespace controller;
-using namespace view;
 
 BoardElement::BoardElement(const std::string &name) :
 	name_(name)

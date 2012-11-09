@@ -7,10 +7,9 @@
  */
 
 #include "active-view.hh"
-#include "player.hh"
 #include "player-signals.hh"
-#include "game-engine.hh"
-#include "debug-logger.hh"
+#include <boost/bind.hpp>
+#include "../controller/game-engine.hh"
 
 using namespace view;
 using namespace controller;

@@ -8,12 +8,18 @@
 
 #include "player-view.hh"
 
+#include <boost/bind.hpp>
+
+#include "../controller/game-engine.hh"
+
+
 using namespace view;
 
 PlayerView::PlayerView(const controller::GameEngine * ge)
-	: View(ge)
+	: View()
+	, game_engine_(ge)
 {
-	game_engine_->signals()->ask_provost_shift_sig_.connect(boost::bind(&PlayerView::askProvostShift, this));
+	//	game_engine_->signals()->ask_provost_shift_sig_.connect(boost::bind(&PlayerView::askProvostShift, this));
 	//game_engine_->signals()->ask_worker_placement
 }
 

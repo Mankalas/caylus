@@ -9,8 +9,7 @@
 
 #include "merchant-guild.hh"
 #include "game-engine.hh"
-#include "const.hh"
-#include "player-view.hh"
+#include "../const.hh"
 
 MerchantGuild::MerchantGuild(GameEngine *ge)
 	: Building(MERCHANT_GUILD,

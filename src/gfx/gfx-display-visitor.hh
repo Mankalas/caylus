@@ -12,7 +12,7 @@
 # include <sstream>
 # include <list>
 # include "gfx-sprite.hh"
-# include "game-engine.hh"
+# include "../controller/game-engine.hh"
 
 /** \brief Everything that has to access the graphical library is in
     this namespace. */
@@ -32,9 +32,9 @@ namespace gfx
 			/** \brief Display a Sprite.
 			 *	\param	sprite The sprite to display.
 			 */
-			void operator()(gfx::Sprite &sprite);
+			void operator()(const gfx::Sprite &sprite);
 
-			void operator()(controller::GameEngine &game_engine);
+			void operator()(const controller::GameEngine &game_engine);
 
 	};
 

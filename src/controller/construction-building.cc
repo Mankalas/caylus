@@ -9,7 +9,6 @@
 
 #include <map>
 #include "construction-building.hh"
-#include "player-view.hh"
 #include "game-engine.hh"
 
 using namespace controller;

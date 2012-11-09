@@ -17,8 +17,6 @@
 #include "all-buildings.hh"
 #include "exceptions.hh"
 #include "inn.hh"
-#include "player-view.hh"
-#include "debug-logger.hh"
 #include "debug-logger.hh"
 
 using namespace controller;

@@ -11,16 +11,15 @@
 
 #include "ai.hh"
 
-#include "game-engine.hh"
-#include "debug-logger.hh"
-#include "board-element.hh"
+#include "../controller/game-engine.hh"
+#include "../controller/board-element.hh"
 
 using namespace std;
 using namespace view;
 using namespace controller;
 
 AI::AI(GameEngine *ge)
-	: PlayerView(ge)
+	: ActiveView(ge)
 {
 	srand(time(NULL));
 }
