@@ -19,42 +19,42 @@ namespace controller
 
 	class Board
 	{
-	public:
-		Board(GameEngine * ge);
-		~Board();
+		public:
+			Board(GameEngine * ge);
+			~Board();
 
-		const Road &road() const;
-		Road &road();
+			const Road & road() const;
+			Road & road();
 
-		const Bridge& bridge() const;
-		Bridge& bridge();
+			const Bridge & bridge() const;
+			Bridge & bridge();
 
-		const Castle &castle() const;
-		Castle &castle();
+			const Castle & castle() const;
+			Castle & castle();
 
-		const unsigned &bailiff() const;
-		unsigned &bailiff();
+			const unsigned & bailiff() const;
+			unsigned & bailiff();
 
-		const unsigned &provost() const;
-		unsigned &provost();
+			const unsigned & provost() const;
+			unsigned & provost();
 
-		bool isProvostShiftValid(int shift) const;
-		void shiftProvost(int shift);
+			bool isProvostShiftValid(int shift) const;
+			void shiftProvost(int shift);
 
-	private:
-		/// The "road" on the board of the game.
-		Road road_;
-		/// List of players at the castle.
-		Castle castle_;
-		/// Bridge
-		Bridge bridge_;
-		/// Road's index of the building the provost is in.
-		unsigned provost_;
-		/// Road's index of the building the bailiff is in.
-		unsigned bailiff_;
+		private:
+			/// The "road" on the board of the game.
+			Road road_;
+			/// List of players at the castle.
+			Castle castle_;
+			/// Bridge
+			Bridge bridge_;
+			/// Road's index of the building the provost is in.
+			unsigned provost_;
+			/// Road's index of the building the bailiff is in.
+			unsigned bailiff_;
 
-		const unsigned FIRST_EMPTY_CASE_;
-		const unsigned LAST_EMPTY_CASE_;
+			const unsigned FIRST_EMPTY_CASE_;
+			const unsigned LAST_EMPTY_CASE_;
 	};
 }
 

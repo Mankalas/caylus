@@ -21,7 +21,7 @@ configure_file (
 
 # add the binary tree to the search path for include files
 # so that we will find CaylusConfig.h
-include_directories("${CAYLUS_SOURCE_DIR}")
+include_directories ("${CAYLUS_SOURCE_DIR}")
 
 # Define sources and executable
 set (EXECUTABLE_NAME "Caylus")

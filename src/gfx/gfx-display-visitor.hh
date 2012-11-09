@@ -32,9 +32,9 @@ namespace gfx
 			/** \brief Display a Sprite.
 			 *	\param	sprite The sprite to display.
 			 */
-			void operator()(const gfx::Sprite &sprite);
+			void operator()(const gfx::Sprite & sprite);
 
-			void operator()(const controller::GameEngine &game_engine);
+			void operator()(const controller::GameEngine & game_engine);
 
 	};
 

@@ -23,20 +23,20 @@ namespace controller
 {
 	class BoardElement
 	{
-	public:
-		BoardElement(const std::string & name);
+		public:
+			BoardElement(const std::string & name);
 
-		virtual bool isCastle() const;
-		virtual bool isBuilding() const;
-		virtual bool isBridge() const;
-		virtual const std::string & name() const;
+			virtual bool isCastle() const;
+			virtual bool isBuilding() const;
+			virtual bool isBridge() const;
+			virtual const std::string & name() const;
 
-		virtual void on_activate() = 0;
+			virtual void on_activate() = 0;
 
-		mutable board_element_activation_signal_t activation_sig;
+			mutable board_element_activation_signal_t activation_sig;
 
-	protected:
-		const std::string name_;
+		protected:
+			const std::string name_;
 	};
 }
 

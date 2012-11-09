@@ -7,26 +7,30 @@
 # define INN_HXX_
 
 
-inline Player* Inn::host()
+inline Player * Inn::host()
 {
-  return host_;
+	return host_;
 }
 
-inline const Player* Inn::host() const
+inline const Player * Inn::host() const
 {
-  return host_;
+	return host_;
 }
 
 
-inline std::ostream&
-operator<<(std::ostream& o, const Inn& inn)
+inline std::ostream &
+operator<<(std::ostream & o, const Inn & inn)
 {
-  o << inn.name();
-  if (inn.host())
-    o << " (" << inn.host()->name() << ") ";
-  if (inn.worker())
-    o << " : " << inn.worker()->name();
-  return o;
+	o << inn.name();
+	if (inn.host())
+	{
+		o << " (" << inn.host()->name() << ") ";
+	}
+	if (inn.worker())
+	{
+		o << " : " << inn.worker()->name();
+	}
+	return o;
 }
 
 

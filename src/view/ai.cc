@@ -18,7 +18,7 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-AI::AI(GameEngine *ge)
+AI::AI(GameEngine * ge)
 	: ActiveView(ge)
 {
 	srand(time(NULL));
@@ -29,7 +29,7 @@ string AI::askName() const
 	return "HAL";
 }
 
-BoardElement*
+BoardElement *
 AI::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	int choice = rand() % buildings.size();

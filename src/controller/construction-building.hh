@@ -28,10 +28,10 @@ namespace controller
 			const BuildingType construc_type;
 
 		protected:
-			ConstructionBuilding(GameEngine *ge, const BuildingType &construc_type);
+			ConstructionBuilding(GameEngine * ge, const BuildingType & construc_type);
 
-			virtual void on_activate ();
-			boost::signal<unsigned (void)> ask_building_signal_;
+			virtual void on_activate();
+			boost::signal<unsigned(void)> ask_building_signal_;
 
 		private:
 			virtual void on_build();

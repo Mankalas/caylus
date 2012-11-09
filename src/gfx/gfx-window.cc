@@ -15,28 +15,28 @@ using namespace gfx;
 Window::Window()
 {
 	window_ =	new sf::RenderWindow(sf::VideoMode(1300, 950, 32),
-																 std::string("Caylus"),
-																 sf::Style::Resize | sf::Style::Close);
+	                                 std::string("Caylus"),
+	                                 sf::Style::Resize | sf::Style::Close);
 }
 
 std::pair<float, float> Window::getClick() const
 {
 	bool done = false;
 	while (!done)
+	{
+		sf::Event Event;
+		while (window_->GetEvent(Event))
 		{
-			sf::Event Event;
-			while (window_->GetEvent(Event))
-				{
-					if (Event.Type == sf::Event::KeyPressed)
-						{
-							std::cout << Event.Key.Code << std::endl;
-						}
-					if (Event.Type == sf::Event::MouseButtonPressed)
-						{
-							//std::cout << Event.MouseButton.X << ", " << Event.MouseButton.Y << std::endl;
-							return std::pair<float, float>(Event.MouseButton.X, Event.MouseButton.Y);
-						}
-				}
+			if (Event.Type == sf::Event::KeyPressed)
+			{
+				std::cout << Event.Key.Code << std::endl;
+			}
+			if (Event.Type == sf::Event::MouseButtonPressed)
+			{
+				//std::cout << Event.MouseButton.X << ", " << Event.MouseButton.Y << std::endl;
+				return std::pair<float, float>(Event.MouseButton.X, Event.MouseButton.Y);
+			}
 		}
+	}
 	return std::pair<float, float>(0, 0);
 }

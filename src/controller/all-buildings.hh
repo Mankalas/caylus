@@ -25,223 +25,223 @@ namespace controller
 	class Statue : public FavorBuilding
 	{
 		public:
-			Statue ();
+			Statue();
 	};
 
 	class Theater : public FavorBuilding
 	{
 		public:
-			Theater ();
+			Theater();
 	};
 
 	class College : public FavorBuilding
 	{
 		public:
-			College ();
+			College();
 	};
 
 	class Monument : public FavorBuilding
 	{
 		public:
-			Monument ();
+			Monument();
 	};
 
 	class Granary : public Building
 	{
 		public:
-			Granary ();
+			Granary();
 	};
 
 	class Weaver : public Building
 	{
 		public:
-			Weaver ();
+			Weaver();
 	};
 
 	class Cathedral : public Building
 	{
 		public:
-			Cathedral ();
+			Cathedral();
 	};
 
 	class GoldMine : public ProductionBuilding
 	{
 		public:
-			GoldMine ();
+			GoldMine();
 	};
 
 	class NQuarry : public ProductionBuilding
 	{
 		public:
-			NQuarry ();
+			NQuarry();
 	};
 
 	class WQuarry : public ProductionBuilding
 	{
 		public:
-			WQuarry ();
+			WQuarry();
 	};
 
 	class Workshop : public ProductionBuilding
 	{
 		public:
-			Workshop ();
+			Workshop();
 	};
 
 	class NFarm : public ProductionBuilding
 	{
 		public:
-			NFarm ();
+			NFarm();
 	};
 
 	class WFFarm : public ProductionBuilding
 	{
 		public:
-			WFFarm ();
+			WFFarm();
 	};
 
 	class WCFarm : public ProductionBuilding
 	{
 		public:
-			WCFarm ();
+			WCFarm();
 	};
 
 	class SFarm : public ProductionBuilding
 	{
 		public:
-			SFarm ();
+			SFarm();
 	};
 
 	class Forest : public ProductionBuilding
 	{
 		public:
-			Forest ();
+			Forest();
 	};
 
 	class Park : public ProductionBuilding
 	{
 		public:
-			Park ();
+			Park();
 	};
 
 	class NSawmill : public ProductionBuilding
 	{
 		public:
-			NSawmill ();
+			NSawmill();
 	};
 
 	class WSawmill : public ProductionBuilding
 	{
 		public:
-			WSawmill ();
+			WSawmill();
 	};
 
 	class Residence : public ResidentialBuilding
 	{
 		public:
-			Residence ();
+			Residence();
 	};
 
 	class Library : public ResidentialBuilding
 	{
 		public:
-			Library ();
+			Library();
 	};
 
 	class Hotel : public ResidentialBuilding
 	{
 		public:
-			Hotel ();
+			Hotel();
 	};
 
 	class Church : public TradeBuilding, public FavorBuilding
 	{
 		public:
-			Church ();
+			Church();
 	};
 
 	class FPeddler : public TradeBuilding
 	{
 		public:
-			FPeddler ();
+			FPeddler();
 	};
 
 	class WPeddler : public TradeBuilding
 	{
 		public:
-			WPeddler ();
+			WPeddler();
 	};
 
 	class Jeweller : public TradeBuilding
 	{
 		public:
-			Jeweller ();
+			Jeweller();
 	};
 
 	class Tailor : public TradeBuilding
 	{
 		public:
-			Tailor ();
+			Tailor();
 	};
 
 	class Alchemist : public TradeBuilding
 	{
 		public:
-			Alchemist ();
+			Alchemist();
 	};
 
 	class Bank : public TradeBuilding
 	{
 		public:
-			Bank ();
+			Bank();
 	};
 
 	class TradingPost : public ProductionBuilding
 	{
 		public:
-			TradingPost ();
+			TradingPost();
 	};
 
 	class NCarpenter : public ConstructionBuilding
 	{
 		public:
-			NCarpenter(GameEngine *ge);
+			NCarpenter(GameEngine * ge);
 	};
 
 	class FCarpenter : public ConstructionBuilding
 	{
 		public:
-			FCarpenter(GameEngine *ge);
+			FCarpenter(GameEngine * ge);
 	};
 
 	class Lawyer : public ConstructionBuilding
 	{
 		public:
-			Lawyer(GameEngine *ge);
+			Lawyer(GameEngine * ge);
 	};
 
 	class Architect : public ConstructionBuilding
 	{
 		public:
-			Architect(GameEngine *ge);
+			Architect(GameEngine * ge);
 	};
 
 	class Mason : public ConstructionBuilding
 	{
 		public:
-			Mason(GameEngine *ge);
+			Mason(GameEngine * ge);
 	};
 
 	class NMarketplace : public TradeBuilding
 	{
 		public:
-			NMarketplace ();
+			NMarketplace();
 	};
 
 	class WMarketplace : public TradeBuilding
 	{
 		public:
-			WMarketplace ();
+			WMarketplace();
 	};
 
 }

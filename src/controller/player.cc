@@ -25,7 +25,7 @@ Player::Player():
 {
 }
 
-Player::Player(const std::string &name):
+Player::Player(const std::string & name):
 	favor_building_(0),
 	favor_resource_(0),
 	favor_denier_(0),
@@ -39,7 +39,7 @@ Player::Player(const std::string &name):
 {
 }
 
-Player::Player(const Player &player):
+Player::Player(const Player & player):
 	favor_building_(player.favor_building_),
 	favor_resource_(player.favor_resource_),
 	favor_denier_(player.favor_denier_),
@@ -52,8 +52,8 @@ Player::Player(const Player &player):
 {
 }
 
-BoardElement*
-Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
+BoardElement *
+Player::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	assert(!signals_.ask_worker_placement.empty());
 	signals_.player_choices(buildings, this);
@@ -62,13 +62,13 @@ Player::askWorkerPlacement(const std::vector<BoardElement*> & buildings) const
 	return choice;
 }
 
-void Player::addResources(const ResourceMap &r)
+void Player::addResources(const ResourceMap & r)
 {
 	resources_ += r;
 	//resource_move_(&r);
 }
 
-void Player::substractResources(const ResourceMap &r)
+void Player::substractResources(const ResourceMap & r)
 {
 	resources_ -= r;
 	//resource_move_(r * -1);

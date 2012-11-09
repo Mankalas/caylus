@@ -40,9 +40,9 @@ namespace controller
 	class Resource : public EnumObject<Resource>
 	{
 		public:
-			Resource (const Resource &r = Resource::food);
+			Resource(const Resource & r = Resource::food);
 
-			static const std::list<Resource>& list ();
+			static const std::list<Resource>& list();
 
 			static const Resource food;
 			static const Resource wood;
@@ -54,7 +54,7 @@ namespace controller
 			static const Resource favor;
 
 		private:
-			Resource (const std::string &name);
+			Resource(const std::string & name);
 
 			static std::list<Resource> list_;
 	};

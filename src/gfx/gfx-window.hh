@@ -17,35 +17,35 @@ namespace gfx
 {
 	class Window
 	{
-	public:
+		public:
 
-		Window();
+			Window();
 
-		void draw(Sprite & sprite) const
-		{
-			window_->Draw(sprite.sfmlSprite());
-		}
+			void draw(Sprite & sprite) const
+			{
+				window_->Draw(sprite.sfmlSprite());
+			}
 
-		void clear() const
-		{
-			window_->Clear();
-		}
+			void clear() const
+			{
+				window_->Clear();
+			}
 
-		void display() const
-		{
-			window_->Display();
-		}
+			void display() const
+			{
+				window_->Display();
+			}
 
-		void resize(float width, float height)
-		{
-			window_->SetSize(width, height);
-		}
+			void resize(float width, float height)
+			{
+				window_->SetSize(width, height);
+			}
 
-		std::pair<float, float> getClick() const;
+			std::pair<float, float> getClick() const;
 
-	private:
-		/** The SFML instance of a window. */
-		sf::RenderWindow * window_;
+		private:
+			/** The SFML instance of a window. */
+			sf::RenderWindow * window_;
 	};
 
 }

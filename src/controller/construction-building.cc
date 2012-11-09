@@ -18,7 +18,7 @@ ConstructionBuilding::~ConstructionBuilding()
 }
 
 
-ConstructionBuilding::ConstructionBuilding(GameEngine *ge, const BuildingType &construc_type)
+ConstructionBuilding::ConstructionBuilding(GameEngine * ge, const BuildingType & construc_type)
 	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
 	  OmniscientBuilding(ge),
 	  construc_type(construc_type)

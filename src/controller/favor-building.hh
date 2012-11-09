@@ -27,7 +27,7 @@ namespace controller
 		protected:
 			FavorBuilding();
 
-			virtual void on_build ();
+			virtual void on_build();
 	};
 
 }

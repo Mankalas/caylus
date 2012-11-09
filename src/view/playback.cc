@@ -48,13 +48,13 @@ int Playback::askProvostShift() const
 	return next_int();
 }
 
-controller::BoardElement* Playback::askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const
+controller::BoardElement * Playback::askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const
 {
-	controller::BoardElement* choice = NULL;
+	controller::BoardElement * choice = NULL;
 	while (choice == NULL)
 	{
 		std::string s = next_str();
-		foreach (controller::BoardElement * b, buildings)
+		foreach(controller::BoardElement * b, buildings)
 		{
 			if (b->name() == s)
 			{

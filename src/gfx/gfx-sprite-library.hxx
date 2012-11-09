@@ -6,15 +6,17 @@
 */
 
 inline
-gfx::SpriteLibrary* gfx::SpriteLibrary::instance()
+gfx::SpriteLibrary * gfx::SpriteLibrary::instance()
 {
-  if (gfx::SpriteLibrary::instance_ == NULL)
-    gfx::SpriteLibrary::instance_ = new gfx::SpriteLibrary();
-  return gfx::SpriteLibrary::instance_;
+	if (gfx::SpriteLibrary::instance_ == NULL)
+	{
+		gfx::SpriteLibrary::instance_ = new gfx::SpriteLibrary();
+	}
+	return gfx::SpriteLibrary::instance_;
 }
 
 inline
-std::map<const std::string, gfx::Sprite*>& gfx::SpriteLibrary::getSprites()
+std::map<const std::string, gfx::Sprite *>& gfx::SpriteLibrary::getSprites()
 {
-  return sprites_;
+	return sprites_;
 }

@@ -18,12 +18,12 @@ namespace view
 {
 	class GraphicView : public DisplayView
 	{
-	public:
+		public:
 
-		GraphicView(const controller::GameEngine * game_engine);
-		virtual controller::BoardElement* askBuilding(const std::vector<controller::BoardElement*> & choices) const;
-		virtual void updateBoard(const controller::GameEngine * ge) const;
-		virtual int askProvostShift() const;
+			GraphicView(const controller::GameEngine * game_engine);
+			virtual controller::BoardElement * askBuilding(const std::vector<controller::BoardElement *> & choices) const;
+			virtual void updateBoard(const controller::GameEngine * ge) const;
+			virtual int askProvostShift() const;
 
 
 
@@ -35,11 +35,11 @@ namespace view
 			virtual std::string askName() const;
 			virtual bool askYesNo() const;
 
-	private:
-		gfx::Window window_;
-		gfx::LimitedEditionBoard board_;
+		private:
+			gfx::Window window_;
+			gfx::LimitedEditionBoard board_;
 
-		void drawBoard_() const;
+			void drawBoard_() const;
 	};
 }
 

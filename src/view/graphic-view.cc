@@ -26,7 +26,7 @@ GraphicView::GraphicView(const GameEngine * game_engine)
 	window_.display();
 }
 
-BoardElement* GraphicView::askBuilding(const std::vector<BoardElement*> & choices) const
+BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choices) const
 {
 	BoardElement * chosen_element = NULL;
 	while (chosen_element == NULL)
@@ -39,7 +39,7 @@ BoardElement* GraphicView::askBuilding(const std::vector<BoardElement*> & choice
 			continue;
 		}
 		DebugLogger::log(*building_name);
-		foreach (BoardElement * board_elt, choices)
+		foreach(BoardElement * board_elt, choices)
 		{
 			if (board_elt->name() == *building_name)
 			{
@@ -51,7 +51,7 @@ BoardElement* GraphicView::askBuilding(const std::vector<BoardElement*> & choice
 	return chosen_element;
 }
 
-void GraphicView::updateBoard(const GameEngine * ) const
+void GraphicView::updateBoard(const GameEngine *) const
 {
 	window_.clear();
 	window_.display();
@@ -64,14 +64,35 @@ void GraphicView::drawBoard_() const
 	window_.draw(*board_sprite);
 }
 
-int GraphicView::askProvostShift() const {return 0;}
+int GraphicView::askProvostShift() const
+{
+	return 0;
+}
 
 
 
-int GraphicView::askChoice(int, int) const {return 0;}
-int GraphicView::askChoice(std::vector<int>&) const {return 0;}
+int GraphicView::askChoice(int, int) const
+{
+	return 0;
+}
+int GraphicView::askChoice(std::vector<int>&) const
+{
+	return 0;
+}
 void GraphicView::showMessage(const std::string) const {}
-int GraphicView::getInt() const {return 0;}
-std::string GraphicView::getString() const {return "";}
-std::string GraphicView::askName() const {return "";}
-bool GraphicView::askYesNo() const {return false;}
+int GraphicView::getInt() const
+{
+	return 0;
+}
+std::string GraphicView::getString() const
+{
+	return "";
+}
+std::string GraphicView::askName() const
+{
+	return "";
+}
+bool GraphicView::askYesNo() const
+{
+	return false;
+}

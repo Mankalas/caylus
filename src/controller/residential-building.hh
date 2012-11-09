@@ -28,10 +28,10 @@ namespace controller
 			const unsigned deniers;
 
 		protected:
-			ResidentialBuilding (unsigned deniers = 1);
+			ResidentialBuilding(unsigned deniers = 1);
 
-			virtual void on_build ();
-			virtual void on_demolish ();
+			virtual void on_build();
+			virtual void on_demolish();
 	};
 
 }

@@ -56,7 +56,7 @@ Logger::Logger(const GameEngine * game_engine)
 
 	game_engine->board().castle().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
 	game_engine->board().bridge().activation_sig.connect(boost::bind(&Logger::activationBoardElement, this, _1, _2));
-	foreach (const BuildingSmartPtr b, game_engine->board().road().get())
+	foreach(const BuildingSmartPtr b, game_engine->board().road().get())
 	{
 		if (b != NULL)
 		{
@@ -64,7 +64,7 @@ Logger::Logger(const GameEngine * game_engine)
 		}
 	}
 
-	foreach (const Player * p, game_engine->players())
+	foreach(const Player * p, game_engine->players())
 	{
 		if (p != NULL)
 		{
@@ -87,13 +87,13 @@ void Logger::newTurn(unsigned current_turn, unsigned max_turn)
 		file_ << "</div>" << std::endl;
 	}
 	file_ << "<h1>Turn " << current_turn << " / " << max_turn << "</h1>"
-				<< "<div style=\"margin-left:50px\">\n";
+	      << "<div style=\"margin-left:50px\">\n";
 }
 
 void Logger::startSection(int level, const std::string & title)
 {
 	file_ << "<h" << level << ">" << title << "</h" << level << ">\n"
-				<< "<div style=\"margin-left:50px\">\n";
+	      << "<div style=\"margin-left:50px\">\n";
 }
 
 void Logger::endSection()
@@ -106,9 +106,9 @@ void Logger::gameEngineReady()
 	assert(ge_);
 
 	file_ << "<h1>Init info</h1>"
-				<< "<ul>\n<li>Number of humans : " << ge_->nbHumans() << "</li>"
-				<< "<li>Number of AIs : " << ge_->nbAIs() << "</li>"
-				<< "</ul>";
+	      << "<ul>\n<li>Number of humans : " << ge_->nbHumans() << "</li>"
+	      << "<li>Number of AIs : " << ge_->nbAIs() << "</li>"
+	      << "</ul>";
 }
 
 void Logger::setGE(const GameEngine * ge)
@@ -145,10 +145,10 @@ void Logger::workerPlacementForPlayer(const controller::Player * p)
 	file_ << "<p>" << *p << "'s turn.</p>";
 }
 
-void Logger::alreadyOnBridge(const controller::Player * )
+void Logger::alreadyOnBridge(const controller::Player *)
 {
 }
-void Logger::notEnoughDeniers(const controller::Player * )
+void Logger::notEnoughDeniers(const controller::Player *)
 {
 }
 void Logger::noWorkerLeft(const controller::Player * p)

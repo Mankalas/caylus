@@ -21,9 +21,9 @@ FavorBuilding::FavorBuilding()
 
 
 void
-FavorBuilding::on_build ()
+FavorBuilding::on_build()
 {
-	assert (owner_);
+	assert(owner_);
 
 	// owner_->favor_proceed (); TODO:
 }

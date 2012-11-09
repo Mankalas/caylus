@@ -32,12 +32,12 @@ namespace controller
 			const std::vector<ResourceMap> worker_choices_;
 
 		protected:
-			ProductionBuilding (const std::vector<ResourceMap>& wchoice,
-			                    const std::vector<ResourceMap>& ochoice);
+			ProductionBuilding(const std::vector<ResourceMap>& wchoice,
+			                   const std::vector<ResourceMap>& ochoice);
 
-			virtual void on_activate ();
+			virtual void on_activate();
 
-			boost::signal<unsigned (void)> ask_resource_choice_;
+			boost::signal<unsigned(void)> ask_resource_choice_;
 	};
 
 }

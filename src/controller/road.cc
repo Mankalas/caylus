@@ -20,16 +20,16 @@
 #include "board-element.hh"
 #include "debug-logger.hh"
 
-Road::Road (GameEngine *ge)
-	: buildings_ (34)
+Road::Road(GameEngine * ge)
+	: buildings_(34)
 {
 	std::vector<Building *> neutral = boost::assign::list_of<Building *>
-	                                  (new NFarm ())
-	                                  (new Forest ())
-	                                  (new NQuarry ())
-	                                  (new NSawmill ())
-	                                  (new NCarpenter (ge))
-	                                  (new NMarketplace ());
+	                                  (new NFarm())
+	                                  (new Forest())
+	                                  (new NQuarry())
+	                                  (new NSawmill())
+	                                  (new NCarpenter(ge))
+	                                  (new NMarketplace());
 	if (ge->random())
 	{
 		std::srand(time(0));
@@ -65,7 +65,7 @@ void
 Road::build(BuildingSmartPtr bd)
 {
 	assert(bd);
-	assert(free_slot_ < buildings_.size ());
+	assert(free_slot_ < buildings_.size());
 
 	buildings_[free_slot_++] = bd;
 }
@@ -73,7 +73,7 @@ Road::build(BuildingSmartPtr bd)
 void
 Road::clearWorkers()
 {
-	foreach (BuildingSmartPtr b, buildings_)
+	foreach(BuildingSmartPtr b, buildings_)
 	{
 		if (b)
 		{
@@ -82,16 +82,16 @@ Road::clearWorkers()
 	}
 }
 
-std::vector<BoardElement*>
+std::vector<BoardElement *>
 Road::getAvailableBuildings(const Player * p) const
 {
-	std::vector<BoardElement*> available_buildings;
+	std::vector<BoardElement *> available_buildings;
 
-	foreach (BuildingSmartPtr b, buildings_)
+	foreach(BuildingSmartPtr b, buildings_)
 	{
 		if (b != NULL && !b->has(p))
 		{
-			BoardElement * board_element = (BoardElement*)b.get();
+			BoardElement * board_element = (BoardElement *)b.get();
 			if (board_element != NULL)
 			{
 				available_buildings.push_back(board_element);

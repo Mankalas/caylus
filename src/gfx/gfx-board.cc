@@ -17,16 +17,16 @@ using namespace gfx;
 
 const std::string * Board::getBuildingName(float x, float y) const
 {
-	foreach (const road_t::value_type & it, buildings_placement_)
+	foreach(const road_t::value_type & it, buildings_placement_)
+	{
+		unsigned int a = it.first.first;
+		unsigned int b = it.first.second;
+		//std::cout << "Check if (" << x << ", " << y << ") in (" << a << ", " << b << ").\n";
+		if (x >= a && x <= a + case_width_ && y >= b && y <= b + case_height_)
 		{
-			unsigned int a = it.first.first;
-			unsigned int b = it.first.second;
-			//std::cout << "Check if (" << x << ", " << y << ") in (" << a << ", " << b << ").\n";
-			if (x >= a && x <= a + case_width_ && y >= b && y <= b + case_height_)
-				{
-					return &it.second;
-				}
+			return &it.second;
 		}
+	}
 	return NULL;
 }
 

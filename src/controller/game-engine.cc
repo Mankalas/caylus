@@ -69,7 +69,7 @@ GameEngine::~GameEngine()
 void GameEngine::init_()
 {
 	// Shuffle players order.
-	foreach (Player * p, players_)
+	foreach(Player * p, players_)
 	{
 		order_.push_back(p);
 	}
@@ -85,7 +85,7 @@ void GameEngine::init_()
 	}
 }
 
-void GameEngine::operator() ()
+void GameEngine::operator()()
 {
 	sigs_.game_engine_ready();
 	init_();
@@ -141,8 +141,8 @@ void GameEngine::activateBridge_()
 	int shift = 0;
 
 	sigs_.activation_bridge_begin();
-	foreach (Player * p, board_.bridge().players())
-		//while (!board_.bridge().players().empty())
+	foreach(Player * p, board_.bridge().players())
+	//while (!board_.bridge().players().empty())
 	{
 		board_.bridge().activation_sig(&board_.bridge(), p);
 		assert(p);
@@ -176,7 +176,7 @@ void GameEngine::collectIncome_()
 {
 	sigs_.income_collecting_begin();
 	assert(players_.size() > 0);
-	foreach (Player *p, players_)
+	foreach(Player * p, players_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
 		sigs_.income_collecting_for_player(p, &income);
@@ -205,7 +205,7 @@ void GameEngine::placeWorkers_()
 	sigs_.worker_placement_begin();
 	while (board_.bridge().players().size() != players_.size())
 	{
-		foreach (Player *p, order_)
+		foreach(Player * p, order_)
 		{
 			assert(p);
 			if (!canPlayerPlay_(p))
@@ -224,13 +224,13 @@ void GameEngine::moveBailiff_()
 	board_.provost() = board_.bailiff();
 }
 
-void GameEngine::addToCastle(Player *p)
+void GameEngine::addToCastle(Player * p)
 {
 	assert(p);
 	board_.castle().add(p);
 }
 
-void GameEngine::playerMove_(Player *p)
+void GameEngine::playerMove_(Player * p)
 {
 	bool has_played = false;
 	const BoardElement * player_choice;
@@ -239,7 +239,7 @@ void GameEngine::playerMove_(Player *p)
 	sigs_.worker_placement_for_player(p);
 	while (!has_played)
 	{
-		const std::vector<BoardElement*> choices = getAvailableBoardElements(p);
+		const std::vector<BoardElement *> choices = getAvailableBoardElements(p);
 		player_choice = p->askWorkerPlacement(choices);
 
 		if (player_choice->isBridge())
@@ -262,7 +262,7 @@ void GameEngine::playerMove_(Player *p)
 		}
 
 		assert(player_choice->isBuilding());
-		Building *b = (Building*)player_choice;
+		Building * b = (Building *)player_choice;
 
 		if (p->resources()[Resource::denier] >= (b->owner() == p ? 1 : worker_cost))
 		{
@@ -298,11 +298,11 @@ void GameEngine::startOfTurn_()
 	board_.road().clearWorkers();
 	board_.bridge().clear();
 	board_.castle().clear();
-	foreach (Player * p, players_)
+	foreach(Player * p, players_)
 	{
 		p->workers() = max_workers_;
 	}
-	Inn *inn = (Inn *)(board_.road().get()[INN_CASE].get());
+	Inn * inn = (Inn *)(board_.road().get()[INN_CASE].get());
 	if (inn->host())
 	{
 		inn->host()->workers() -= 1;
@@ -310,7 +310,7 @@ void GameEngine::startOfTurn_()
 	sigs_.board_updated();
 }
 
-bool GameEngine::canPlayerPlay_(Player *p)
+bool GameEngine::canPlayerPlay_(Player * p)
 {
 	if (board_.bridge().has(p))
 	{
@@ -332,14 +332,14 @@ bool GameEngine::canPlayerPlay_(Player *p)
 	return true;
 }
 
-unsigned GameEngine::getWorkerCost_(const Player *p) const
+unsigned GameEngine::getWorkerCost_(const Player * p) const
 {
-	const Inn *inn = (const Inn *)(board_.road().get()[5].get());
+	const Inn * inn = (const Inn *)(board_.road().get()[5].get());
 	assert(inn);
 	return (inn->host() == p) ? 1 : board_.bridge().players().size() + 1;
 }
 
-void GameEngine::build(BuildingSmartPtr &building, Player *p)
+void GameEngine::build(BuildingSmartPtr & building, Player * p)
 {
 	BuildingSmartPtr game_b = *(std::find(buildings_.begin(), buildings_.end(), building));
 
@@ -350,19 +350,19 @@ void GameEngine::build(BuildingSmartPtr &building, Player *p)
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
-const std::vector<BoardElement*>
+const std::vector<BoardElement *>
 GameEngine::getAvailableBoardElements(const Player * worker) const
 {
-	std::vector<BoardElement*> available_buildings(board_.road().getAvailableBuildings(worker));
+	std::vector<BoardElement *> available_buildings(board_.road().getAvailableBuildings(worker));
 
 	if (!board_.castle().has(worker))
 	{
-		available_buildings.push_back((BoardElement*)&board_.castle());
+		available_buildings.push_back((BoardElement *)&board_.castle());
 	}
 
 	if (!board_.bridge().has(worker))
 	{
-		available_buildings.push_back((BoardElement*)&board_.bridge());
+		available_buildings.push_back((BoardElement *)&board_.bridge());
 	}
 	return available_buildings;
 }

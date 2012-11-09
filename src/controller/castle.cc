@@ -45,16 +45,16 @@ void CastlePart::score(std::vector<Player *>& players)
 	unsigned count = 0;
 	std::pair<unsigned, int> score_favor;
 
-	foreach (Player * gp, players)
+	foreach(Player * gp, players)
 	{
 		// Count the player's houses.
-		foreach (Player * cp, houses_)
+		foreach(Player * cp, houses_)
 		if (cp == gp)
 		{
 			++count;
 		}
 
-		foreach (score_favor, score_favor_)
+		foreach(score_favor, score_favor_)
 		{
 			if (score_favor.first <= count)
 			{
@@ -93,7 +93,7 @@ Castle::Castle() :
 
 Castle::~Castle()
 {
-	foreach (CastlePart * p, parts_)
+	foreach(CastlePart * p, parts_)
 	delete p;
 }
 
@@ -102,7 +102,7 @@ void Castle::on_activate()
 	bool can_pay = false;
 	unsigned current_build = 0;
 
-	foreach (Player * p, players_)
+	foreach(Player * p, players_)
 	{
 		activation_sig(this, p);
 		current_build = 0;
@@ -122,7 +122,7 @@ void Castle::on_activate()
 						_createResourcesVector(*p);
 						std::cout << "0. No construction (-2 prestige)" << std::endl;*/
 
-				ResourceMap *choice = ask_payment_();
+				ResourceMap * choice = ask_payment_();
 				/*foreach (pair, pairs)
 						std::cout << choice++ << ". " << pair.first << " + " << pair.second << std::endl;*/
 				if (NULL == choice)
@@ -160,7 +160,7 @@ bool Castle::has(const Player * p) const
 	return std::find(players_.begin(), players_.end(), p) != players_.end();
 }
 
-void Castle::add(Player *p)
+void Castle::add(Player * p)
 {
 	players_.push_back(p);
 }
@@ -185,9 +185,9 @@ bool Castle::isActivePartComplete() const
 	return active_part_->houses().size() == active_part_->capacity();
 }
 
-void Castle::_build(Player *p, ResourceMap *resources)
+void Castle::_build(Player * p, ResourceMap * resources)
 {
-	CastlePart *active_part = active_part_;
+	CastlePart * active_part = active_part_;
 
 	if (isActivePartComplete())
 	{
@@ -216,7 +216,7 @@ Castle::_createResourcesVector(const Player* p) const
   return pairs;
   }*/
 
-bool Castle::_checkResources(const Player *p) const
+bool Castle::_checkResources(const Player * p) const
 {
 	unsigned count = 0;
 

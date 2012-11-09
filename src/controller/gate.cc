@@ -14,12 +14,12 @@
 #include "castle.hh"
 #include "const.hh"
 
-Gate::Gate(GameEngine *ge)
+Gate::Gate(GameEngine * ge)
 	: Building(GATE,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
-		OmniscientBuilding(ge)
+	OmniscientBuilding(ge)
 {
 }
 
@@ -30,17 +30,17 @@ void Gate::on_activate()
 	std::vector<BoardElement *> choices = game_->board().road().getAvailableBuildings(worker_);
 	if (!game_->board().castle().has(worker_))
 	{
-		choices.insert(choices.begin(), (BoardElement*)&game_->board().castle());
+		choices.insert(choices.begin(), (BoardElement *)&game_->board().castle());
 	}
 	player_choice = worker_->askWorkerPlacement(choices);
 	if (player_choice->isBuilding())
 	{
-		Building * building = dynamic_cast<Building*>(player_choice);
+		Building * building = dynamic_cast<Building *>(player_choice);
 		building->worker(worker_);
 	}
 	else
 	{
-		Castle * castle = dynamic_cast<Castle*>(player_choice);
+		Castle * castle = dynamic_cast<Castle *>(player_choice);
 		castle->add(worker_);
 	}
 }

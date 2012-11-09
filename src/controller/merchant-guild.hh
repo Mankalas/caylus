@@ -23,13 +23,13 @@ namespace controller
 
 	class MerchantGuild : public OmniscientBuilding
 	{
-	public:
-		MerchantGuild(GameEngine *ge);
+		public:
+			MerchantGuild(GameEngine * ge);
 
-		virtual void on_activate(void);
+			virtual void on_activate(void);
 
-	private:
-		i_v_signal_t ask_provost_shift_sig_;
+		private:
+			i_v_signal_t ask_provost_shift_sig_;
 	};
 
 }

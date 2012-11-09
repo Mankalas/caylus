@@ -13,22 +13,22 @@
 
 # include "omniscient-building.hh"
 
-inline const GameEngine*
+inline const GameEngine *
 OmniscientBuilding::game() const
 {
-  return game_;
+	return game_;
 }
 
-inline GameEngine*
+inline GameEngine *
 OmniscientBuilding::game()
 {
-  return game_;
+	return game_;
 }
 
 inline void
-OmniscientBuilding::game(GameEngine* g)
+OmniscientBuilding::game(GameEngine * g)
 {
-  game_ = g;
+	game_ = g;
 }
 
 #endif //OMNISCIENT_BUILDING_HXX

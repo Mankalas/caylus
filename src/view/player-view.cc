@@ -31,12 +31,12 @@ WorkerPlacementSlot PlayerView::askWorkerPlacementSlot() const
 	return boost::bind(&PlayerView::askWorkerPlacement, this, _1);
 }
 
-boost::signal<unsigned (void)>::slot_function_type PlayerView::askBuildingSlot() const
+boost::signal<unsigned(void)>::slot_function_type PlayerView::askBuildingSlot() const
 {
 	return boost::bind(&PlayerView::askBuilding, this);
 }
 
-boost::signal<unsigned (void)>::slot_function_type PlayerView::resourceChoiceSlot() const
+boost::signal<unsigned(void)>::slot_function_type PlayerView::resourceChoiceSlot() const
 {
 	return boost::bind(&PlayerView::askResourceChoice, this);
 }

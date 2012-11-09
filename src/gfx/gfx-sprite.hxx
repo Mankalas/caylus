@@ -25,30 +25,31 @@ gfx::Sprite::left() const
 }
 
 inline float
-gfx::Sprite::top() const{
+gfx::Sprite::top() const
+{
 	return sprite_.GetPosition().y;
 }
 
 inline const sf::Sprite &
 gfx::Sprite::sfmlSprite() const
 {
-  return sprite_;
+	return sprite_;
 }
 
 inline
-const sf::Image* gfx::Sprite::getImage() const
+const sf::Image * gfx::Sprite::getImage() const
 {
-  return image_;
+	return image_;
 }
 
 inline
 void gfx::Sprite::setPosition(const float left, const float top)
 {
-  sprite_.SetPosition(sf::Vector2f(left, top));
+	sprite_.SetPosition(sf::Vector2f(left, top));
 }
 
 inline
 void gfx::Sprite::move(const float left, const float top)
 {
-  sprite_.Move(sf::Vector2f(left, top));
+	sprite_.Move(sf::Vector2f(left, top));
 }

@@ -10,59 +10,59 @@
 # include "player.hh"
 # include "exceptions.hh"
 
-inline ResourceMap& controller::Player::resources()
+inline ResourceMap & controller::Player::resources()
 {
-  return resources_;
+	return resources_;
 }
 
-inline const ResourceMap& controller::Player::resources() const
+inline const ResourceMap & controller::Player::resources() const
 {
-  return resources_;
+	return resources_;
 }
 
 inline void controller::Player::favorBuilding(int new_var)
 {
-  this->favor_building_ = new_var;
+	this->favor_building_ = new_var;
 }
 
 inline int controller::Player::favorBuilding() const
 {
-  return favor_building_;
+	return favor_building_;
 }
 
 inline void controller::Player::favorResource(int new_var)
 {
-  favor_resource_ = new_var;
+	favor_resource_ = new_var;
 }
 
 inline int controller::Player::favorResource() const
 {
-  return favor_resource_;
+	return favor_resource_;
 }
 
 inline void controller::Player::favorDenier(int new_var)
 {
-  favor_denier_ = new_var;
+	favor_denier_ = new_var;
 }
 
 inline int controller::Player::favorDenier() const
 {
-  return favor_denier_;
+	return favor_denier_;
 }
 
 inline void controller::Player::favorPrestige(int new_var)
 {
-  favor_prestige_ = new_var;
+	favor_prestige_ = new_var;
 }
 
 inline int controller::Player::favorPrestige() const
 {
-  return favor_prestige_;
+	return favor_prestige_;
 }
 
-inline const std::string& controller::Player::name() const
+inline const std::string & controller::Player::name() const
 {
-  return name_;
+	return name_;
 }
 
 inline void controller::Player::name(const std::string name)
@@ -72,44 +72,44 @@ inline void controller::Player::name(const std::string name)
 
 inline void controller::Player::prestige(int new_var)
 {
-  prestige_ = new_var;
+	prestige_ = new_var;
 }
 
 inline int controller::Player::prestige() const
 {
-  return prestige_;
+	return prestige_;
 }
 
-inline const unsigned& controller::Player::workers() const
+inline const unsigned & controller::Player::workers() const
 {
-  return workers_;
+	return workers_;
 }
 
-inline unsigned int& controller::Player::workers()
+inline unsigned int & controller::Player::workers()
 {
-  return workers_;
+	return workers_;
 }
 
-inline const unsigned& controller::Player::residences() const
+inline const unsigned & controller::Player::residences() const
 {
-  return residences_;
+	return residences_;
 }
 
-inline unsigned int& controller::Player::residences()
+inline unsigned int & controller::Player::residences()
 {
-  return residences_;
+	return residences_;
 }
 
-inline bool controller::Player::operator==(const controller::Player& p) const
+inline bool controller::Player::operator==(const controller::Player & p) const
 {
-  return this == &p;
+	return this == &p;
 }
 
-inline std::ostream& operator<<(std::ostream& o, const controller::Player& player)
+inline std::ostream & operator<<(std::ostream & o, const controller::Player & player)
 {
-  o << "controller::Player " << player.name() << " - " << player.resources()
-    << " - Workers left : " << player.workers();
-  return o;
+	o << "controller::Player " << player.name() << " - " << player.resources()
+	  << " - Workers left : " << player.workers();
+	return o;
 }
 
 inline int controller::Player::askProvostShift() const

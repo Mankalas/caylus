@@ -17,7 +17,7 @@ namespace controller
 	class Gate : public OmniscientBuilding
 	{
 		public:
-			Gate(GameEngine *ge);
+			Gate(GameEngine * ge);
 
 			virtual void on_activate(void);
 	};

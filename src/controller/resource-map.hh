@@ -44,28 +44,28 @@ namespace controller
 	class ResourceMap
 	{
 		public:
-			explicit ResourceMap (const unsigned &value = 0);
-			ResourceMap (const Resource &k);
+			explicit ResourceMap(const unsigned & value = 0);
+			ResourceMap(const Resource & k);
 
 			operator std::vector<ResourceMap> () const;
 
-			unsigned &operator [] (const Resource &r);
-			unsigned  operator [] (const Resource &r) const;
+			unsigned & operator [](const Resource & r);
+			unsigned  operator [](const Resource & r) const;
 
-			bool operator >  (const ResourceMap &rmap) const;
-			bool operator <  (const ResourceMap &rmap) const;
-			bool operator >= (const ResourceMap &rmap) const;
-			bool operator <= (const ResourceMap &rmap) const;
-			bool operator == (const ResourceMap &rmap) const;
-			bool operator != (const ResourceMap &rmap) const;
+			bool operator > (const ResourceMap & rmap) const;
+			bool operator < (const ResourceMap & rmap) const;
+			bool operator >= (const ResourceMap & rmap) const;
+			bool operator <= (const ResourceMap & rmap) const;
+			bool operator == (const ResourceMap & rmap) const;
+			bool operator != (const ResourceMap & rmap) const;
 
-			ResourceMap  operator +  (const ResourceMap &rmap) const;
-			ResourceMap  operator -  (const ResourceMap &rmap) const;
-			ResourceMap &operator += (const ResourceMap &rmap);
-			ResourceMap &operator -= (const ResourceMap &rmap);
+			ResourceMap  operator + (const ResourceMap & rmap) const;
+			ResourceMap  operator - (const ResourceMap & rmap) const;
+			ResourceMap & operator += (const ResourceMap & rmap);
+			ResourceMap & operator -= (const ResourceMap & rmap);
 
-			ResourceMap  operator *  (const unsigned &mul) const;
-			ResourceMap &operator *= (const unsigned &mul);
+			ResourceMap  operator * (const unsigned & mul) const;
+			ResourceMap & operator *= (const unsigned & mul);
 
 		private:
 			std::map<Resource, unsigned> map_;
@@ -75,14 +75,14 @@ namespace controller
 
 using namespace controller;
 
-ResourceMap operator + (const Resource &k,   const ResourceMap &rmap);
-ResourceMap operator - (const Resource &k,   const ResourceMap &rmap);
-ResourceMap operator * (const unsigned &mul, const ResourceMap &rmap);
+ResourceMap operator + (const Resource & k,   const ResourceMap & rmap);
+ResourceMap operator - (const Resource & k,   const ResourceMap & rmap);
+ResourceMap operator * (const unsigned & mul, const ResourceMap & rmap);
 
-ResourceMap operator * (const Resource &k, unsigned i);
-ResourceMap operator * (unsigned i, const Resource &k);
+ResourceMap operator * (const Resource & k, unsigned i);
+ResourceMap operator * (unsigned i, const Resource & k);
 
-std::ostream &operator << (std::ostream &, const ResourceMap &);
+std::ostream & operator << (std::ostream &, const ResourceMap &);
 
 # include "resource-map.hxx"
 

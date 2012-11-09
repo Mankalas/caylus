@@ -14,15 +14,15 @@ ProductionBuilding::~ProductionBuilding()
 }
 
 
-ProductionBuilding::ProductionBuilding (const std::vector<ResourceMap>& wchc,
-                                        const std::vector<ResourceMap>& ochc)
+ProductionBuilding::ProductionBuilding(const std::vector<ResourceMap>& wchc,
+                                       const std::vector<ResourceMap>& ochc)
 	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
-	  owner_choices_ (ochc), worker_choices_ (wchc)
+	  owner_choices_(ochc), worker_choices_(wchc)
 {
 }
 
 void
-ProductionBuilding::on_activate ()
+ProductionBuilding::on_activate()
 {
 	Building::on_activate();
 	if (worker_choices_.size() == 1)

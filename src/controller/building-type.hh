@@ -31,7 +31,7 @@ namespace controller
 	class BuildingType : public EnumObject<BuildingType>
 	{
 		public:
-			BuildingType (const BuildingType &r = BuildingType::neutral);
+			BuildingType(const BuildingType & r = BuildingType::neutral);
 
 			static const BuildingType fixed;
 			static const BuildingType neutral;
@@ -41,7 +41,7 @@ namespace controller
 			static const BuildingType prestige;
 
 		private:
-			BuildingType (const std::string &name);
+			BuildingType(const std::string & name);
 	};
 
 }

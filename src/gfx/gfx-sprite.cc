@@ -29,6 +29,6 @@ gfx::Sprite::Sprite(const std::string file_name)
 	sprite_ = sf::Sprite(*image_);
 }
 
-gfx::Sprite::Sprite(const gfx::Sprite &copy) :
+gfx::Sprite::Sprite(const gfx::Sprite & copy) :
 	sprite_(copy.sprite_),
 	image_(copy.image_) {}

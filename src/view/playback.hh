@@ -16,30 +16,30 @@ namespace view
 {
 	class Playback : public ActiveView
 	{
-	public:
-		Playback(controller::GameEngine * game_engine, std::string record_path);
-		~Playback();
+		public:
+			Playback(controller::GameEngine * game_engine, std::string record_path);
+			~Playback();
 
-		virtual std::string askName() const;
+			virtual std::string askName() const;
 
-		virtual int askProvostShift() const;
-		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
+			virtual int askProvostShift() const;
+			virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
 
-		/*virtual bool askYesNo() const;
-		virtual bool askJoustField() const;
+			/*virtual bool askYesNo() const;
+			virtual bool askJoustField() const;
 
-		virtual unsigned askBuilding() const;
-		virtual unsigned askResourceChoice() const;
-		virtual void boardElementActivation(const controller::BoardElement * board_eltx);*/
+			virtual unsigned askBuilding() const;
+			virtual unsigned askResourceChoice() const;
+			virtual void boardElementActivation(const controller::BoardElement * board_eltx);*/
 
-	private:
-		mutable std::ifstream file_;
+		private:
+			mutable std::ifstream file_;
 
-		std::string next_line() const;
+			std::string next_line() const;
 
-		int next_int() const;
-		unsigned next_uint() const;
-		std::string next_str() const;
+			int next_int() const;
+			unsigned next_uint() const;
+			std::string next_str() const;
 	};
 
 }

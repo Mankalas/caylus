@@ -11,7 +11,7 @@
 #include "game-engine.hh"
 #include "../const.hh"
 
-MerchantGuild::MerchantGuild(GameEngine *ge)
+MerchantGuild::MerchantGuild(GameEngine * ge)
 	: Building(MERCHANT_GUILD,
 	           BuildingType::fixed,
 	           ResourceMap(0),

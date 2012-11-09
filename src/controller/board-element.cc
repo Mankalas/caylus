@@ -10,7 +10,7 @@
 
 using namespace controller;
 
-BoardElement::BoardElement(const std::string &name) :
+BoardElement::BoardElement(const std::string & name) :
 	name_(name)
 {
 }

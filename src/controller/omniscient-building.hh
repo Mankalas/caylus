@@ -20,13 +20,13 @@ namespace controller
 		public:
 			virtual ~OmniscientBuilding() = 0;
 
-			const GameEngine *game() const;
-			GameEngine *game();
+			const GameEngine * game() const;
+			GameEngine * game();
 			void game(GameEngine *);
-	protected:
-		OmniscientBuilding(GameEngine *ge);
+		protected:
+			OmniscientBuilding(GameEngine * ge);
 
-		GameEngine *game_;
+			GameEngine * game_;
 	};
 
 }

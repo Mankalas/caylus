@@ -14,7 +14,7 @@
 #include "game-engine.hh"
 #include "const.hh"
 
-Stables::Stables(GameEngine *ge)
+Stables::Stables(GameEngine * ge)
 	: Building(STABLES,
 	           BuildingType::fixed,
 	           ResourceMap(0),
@@ -23,7 +23,7 @@ Stables::Stables(GameEngine *ge)
 {
 }
 
-void Stables::worker_set(Player &current)
+void Stables::worker_set(Player & current)
 {
 	if (players_.size() == 3)
 	{
@@ -35,7 +35,7 @@ void Stables::worker_set(Player &current)
 
 	std::cout << "STATE OF STABLES : " << std::endl;
 	foreach(const Player * p, players_)
-		std::cout << "\t" << *p << std::endl;
+	std::cout << "\t" << *p << std::endl;
 
 	// If no worker, Building::activate will not call on_activate.
 	worker_ = &current;
@@ -51,7 +51,7 @@ void Stables::on_activate()
 	Building::on_activate();
 	std::vector<Player *>& order = game_->order();
 	std::vector<Player *>::iterator it;
-	Player *p;
+	Player * p;
 
 	for (unsigned i = 0; i < players_.size(); ++i)
 	{

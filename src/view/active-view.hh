@@ -26,19 +26,19 @@ namespace view
 	 */
 	class ActiveView : public View
 	{
-	public:
-		ActiveView(controller::GameEngine * ge);
+		public:
+			ActiveView(controller::GameEngine * ge);
 
-		///
-		virtual int askProvostShift() const = 0;
-		///
-		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const = 0;
-		///
-		virtual std::string askName() const = 0;
+			///
+			virtual int askProvostShift() const = 0;
+			///
+			virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const = 0;
+			///
+			virtual std::string askName() const = 0;
 
-	protected:
-		controller::GameEngine * game_engine_;
-		controller::Player * player_;
+		protected:
+			controller::GameEngine * game_engine_;
+			controller::Player * player_;
 	};
 }
 

@@ -17,24 +17,24 @@ namespace view
 	 */
 	class AI : public ActiveView
 	{
-	public:
+		public:
 
-		AI(controller::GameEngine *ge);
+			AI(controller::GameEngine * ge);
 
-		virtual bool isInteractive() const;
+			virtual bool isInteractive() const;
 
-		virtual void operator()(){}
+			virtual void operator()() {}
 
-		virtual std::string askName() const;
-		virtual bool isHuman() const;
-		virtual int askProvostShift() const;
-		virtual bool askYesNo() const;
-		virtual bool askJoustField() const;
-		virtual controller::BoardElement* askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
-		virtual unsigned askBuilding() const;
-		virtual unsigned askResourceChoice() const;
-		virtual void boardElementActivation(const controller::BoardElement * board_elt);
-		virtual void updateBoard();
+			virtual std::string askName() const;
+			virtual bool isHuman() const;
+			virtual int askProvostShift() const;
+			virtual bool askYesNo() const;
+			virtual bool askJoustField() const;
+			virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
+			virtual unsigned askBuilding() const;
+			virtual unsigned askResourceChoice() const;
+			virtual void boardElementActivation(const controller::BoardElement * board_elt);
+			virtual void updateBoard();
 
 	};
 

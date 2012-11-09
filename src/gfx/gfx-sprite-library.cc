@@ -13,7 +13,7 @@
 
 using namespace gfx;
 
-SpriteLibrary *SpriteLibrary::instance_ = NULL;
+SpriteLibrary * SpriteLibrary::instance_ = NULL;
 
 SpriteLibrary::SpriteLibrary()
 {

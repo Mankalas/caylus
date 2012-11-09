@@ -14,16 +14,16 @@ TradeBuilding::~TradeBuilding()
 }
 
 
-TradeBuilding::TradeBuilding (const ResourceMap  &supply,
-                              const ResourceMap  &demand,
-                              const std::vector<std::pair<unsigned, unsigned> >& ratios)
+TradeBuilding::TradeBuilding(const ResourceMap & supply,
+                             const ResourceMap & demand,
+                             const std::vector<std::pair<unsigned, unsigned> >& ratios)
 	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
-	  supply (supply), demand (demand), ratios (ratios)
+	  supply(supply), demand(demand), ratios(ratios)
 {
 }
 
 void
-TradeBuilding::on_activate ()
+TradeBuilding::on_activate()
 {
 	Building::on_activate();
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges = createExchangeVector();
@@ -34,7 +34,7 @@ TradeBuilding::on_activate ()
 	          << "0. Nothing, I love to waste workers." << std::endl;
 
 	std::pair<ResourceMap, ResourceMap> ex;
-	foreach (ex, exchanges)
+	foreach(ex, exchanges)
 	{
 		std::cout << choice++ << ". " << ex.first << " for "
 		          << ex.second << std::endl;
@@ -65,10 +65,10 @@ TradeBuilding::createExchangeVector() const
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges;
 
 	for (unsigned i = 0; i < ratios.size(); ++i)
-		foreach (const Resource & sr, Resource::list())
+		foreach(const Resource & sr, Resource::list())
 		if (supply[sr] > 0)
 		{
-			foreach (const Resource & dr, Resource::list())
+			foreach(const Resource & dr, Resource::list())
 			if (demand[dr] > 0)
 				exchanges.push_back(std::make_pair(ratios[i].first * sr,
 				                                   ratios[i].second * dr));

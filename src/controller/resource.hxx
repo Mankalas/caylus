@@ -12,9 +12,9 @@
 # include "resource.hh"
 
 inline const std::list<controller::Resource>&
-controller::Resource::list ()
+controller::Resource::list()
 {
-  return list_;
+	return list_;
 }
 
 #endif /* !RESOURCE_HXX_ */

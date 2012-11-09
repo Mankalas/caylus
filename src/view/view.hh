@@ -22,16 +22,16 @@ namespace view
 	 */
 	class View
 	{
-	public:
-		/**
-		 * Constructor.
-		 */
-		View();
+		public:
+			/**
+			 * Constructor.
+			 */
+			View();
 
-		/**
-		 * Virtual destructor.
-		 */
-		virtual ~View() = 0;
+			/**
+			 * Virtual destructor.
+			 */
+			virtual ~View() = 0;
 	};
 
 }

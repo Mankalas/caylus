@@ -22,7 +22,7 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-Human::Human(GameEngine *ge, bool console)
+Human::Human(GameEngine * ge, bool console)
 	: ActiveView(ge)
 {
 	if (console)
@@ -60,12 +60,12 @@ void Human::operator()()
 {
 }
 
-boost::signal<unsigned (unsigned)>::slot_function_type Human::getAskNbHumansSlot() const
+boost::signal<unsigned(unsigned)>::slot_function_type Human::getAskNbHumansSlot() const
 {
 	return boost::bind(&Human::askNbHumans, this, _1);
 }
 
-boost::signal<unsigned (unsigned, unsigned)>::slot_function_type Human::getAskNbAIsSlot() const
+boost::signal<unsigned(unsigned, unsigned)>::slot_function_type Human::getAskNbAIsSlot() const
 {
 	return boost::bind(&Human::askNbAIs, this, _1, _2);
 }
@@ -113,7 +113,7 @@ bool Human::isHuman() const
 	return true;
 }
 
-BoardElement*
+BoardElement *
 Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
 {
 	return gui_->askBuilding(buildings);

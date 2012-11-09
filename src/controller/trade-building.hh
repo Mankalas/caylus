@@ -38,16 +38,16 @@ namespace controller
 			const std::vector<std::pair<unsigned, unsigned> > ratios;
 
 		protected:
-			TradeBuilding (const ResourceMap &supply,
-			               const ResourceMap &demand,
-			               const std::vector<std::pair<unsigned, unsigned> >& ratios);
+			TradeBuilding(const ResourceMap & supply,
+			              const ResourceMap & demand,
+			              const std::vector<std::pair<unsigned, unsigned> >& ratios);
 
-			virtual void on_activate ();
+			virtual void on_activate();
 
 		private:
 			std::vector<std::pair<ResourceMap, ResourceMap> > createExchangeVector() const;
 
-			boost::signal<unsigned (void)> ask_resource_choice_;
+			boost::signal<unsigned(void)> ask_resource_choice_;
 	};
 
 }
