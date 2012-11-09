@@ -22,6 +22,7 @@
 #define WOOD_CLOTH_FARM "Wood/cloth farm"
 #define STONE_FARM "Stone farm"
 #define FOREST "Forest"
+#define NEUTRAL_FOREST "Forest"
 #define PARK "Park"
 #define NEUTRAL_SAWMILL "Neutral sawmill"
 #define WOOD_SAWMILL "Wood sawmill"
@@ -50,5 +51,8 @@
 #define JOUST_FIELD "Joust field"
 #define STABLES "Stables"
 #define INN "Inn"
+#define FARM_CLOTH "Farm cloth"
+#define FARM_FOOD "Farm food"
+#define FARM_STONE "Farm stone"
 
 #define foreach BOOST_FOREACH
