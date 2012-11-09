@@ -19,7 +19,10 @@ SpriteLibrary::SpriteLibrary()
 {
 	sprites_ = std::map<const std::string, Sprite *>();
 	std::string img_dir = Caylus_IMAGE_DIR;
+
 	sprites_["board"] = new Sprite(img_dir + "board_limited_edition.jpg");
+	sprites_["worker"] = new Specify(img_dir + "marker_red.png");
+
 	sprites_[ALCHEMIST] = new Sprite(img_dir + "alchemist.png");
 	sprites_[ARCHITECT] = new Sprite(img_dir + "architect.png");
 	sprites_[BANK] = new Sprite(img_dir + "bank.png");
