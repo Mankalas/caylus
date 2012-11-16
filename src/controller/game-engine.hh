@@ -11,12 +11,16 @@
 
 # include <vector>
 # include <limits.h>
+# include <boost/thread.hpp>
 # include "board.hh"
 # include "../game-signals.hh"
 
 # define PROVOST_INIT_CASE 11
 # define BAILIFF_INIT_CASE 11
 # define INN_CASE 5
+
+class Visitor;
+class ConstVisitor;
 
 namespace view
 {
@@ -65,14 +69,24 @@ namespace controller
 
 			const unsigned & nbTurns() const;
 
-			void operator()();
+			void launch();
+		void operator()();
+		void playerReady();
 
 			const std::vector<BoardElement *> getAvailableBoardElements(const Player * worker) const;
 
 			GameSignals * signals() const;
 			Player * newPlayer();
 
+		void accept(const ConstVisitor &) const;
+		void accept(Visitor &);
+
 		private:
+
+		void play_();
+		void waitForPlayers_();
+		void gameOver_() {};
+
 			/** Step 1. Calculate the income for each player at the
 			 * beginning of each turn. */
 			void collectIncome_();
@@ -156,10 +170,16 @@ namespace controller
 			unsigned max_workers_;
 			/// Whether random is added to the game. Usefull fo test purpose
 			const bool random_;
-
+		/// The game's board.
 			Board board_;
 
+		/// The game engine's signals.
 			mutable GameSignals sigs_;
+
+		/// The condition used while waiting for players.
+		boost::condition_variable wait_for_players_;
+		boost::mutex mutex_;
+
 
 	};
 

@@ -22,7 +22,7 @@ namespace view
 				: PassiveView(ge) {};
 
 			virtual int askProvostShift() const = 0;
-			virtual void updateBoard(const controller::GameEngine * ge) const = 0;
+			virtual void updateBoard() = 0;
 			virtual controller::BoardElement * askBuilding(const std::vector<controller::BoardElement *> & choices) const = 0;
 
 			virtual int askChoice(int, int) const = 0;

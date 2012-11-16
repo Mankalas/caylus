@@ -14,6 +14,7 @@
 
 #include "debug-logger.hh"
 #include "exceptions.hh"
+#include "signals.hh"
 
 #include "controller/game-engine.hh"
 
@@ -21,6 +22,7 @@
 #include "view/ai.hh"
 #include "view/playback.hh"
 #include "view/logger.hh"
+#include "view/graphic-view.hh"
 
 #include "gfx/gfx-window.hh"
 #include "gfx/gfx-sprite-library.hh"
@@ -40,11 +42,9 @@ void usage()
 						<< "\t-u [n]\t\tNumber of humans" << std::endl;
 }
 
-#include "CaylusConfig.h"
-
 int main(int argc, char **argv)
 {
-	bool command_line = false;
+	//	bool command_line = false;
 	std::string host = "";
 	int option = 0;
 
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 			break;
 		case 'c' :
 			std::cout << "Command line game." << std::endl;
-			command_line = true;
+			//	command_line = true;
 			break;
 		case 'd' :
 			std::cin >> dir;
@@ -93,13 +93,18 @@ int main(int argc, char **argv)
 	{
 		GameEngine g(nb_humans, nb_ais, max_turns, random);
 
-		DebugLogger::log("Game Engine thread created.");
+		boost::thread controller_thread(boost::ref(g));
+		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(00);
+		controller_thread.timed_join(timeout);
+
+		GraphicView gui(&g);
 
 		assert(nb_humans <= 5);
 		// -1 because a first human is added the previous line
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
-			new Human(&g, command_line);
+			new Human(&g, &gui);
+			g.playerReady();
 			DebugLogger::log("Adding new human player.");
 		}
 
@@ -108,6 +113,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new playback player.");
 			nb_ais -= nb_ais == 0 ? 0 : 1;
 			new Playback(&g, dir);
+			g.playerReady();
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
@@ -118,9 +124,7 @@ int main(int argc, char **argv)
 		}
 
 		Logger log(&g);
-
-		boost::thread controller_thread = boost::thread(boost::ref(g));
-		controller_thread.join();
+		while(true);
 	}
 	catch (GameOverException *)
 	{

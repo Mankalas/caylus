@@ -66,6 +66,33 @@ GameEngine::~GameEngine()
 	}
 }
 
+void GameEngine::operator()()
+{
+	waitForPlayers_();
+	init_();
+	play_();
+	gameOver_();
+}
+
+void GameEngine::waitForPlayers_()
+{
+	boost::unique_lock<boost::mutex> lock( mutex_ );
+	while (players_.size() < nb_humans_ + nb_ais_)
+	{
+		DebugLogger::log("Wait for players...");
+		wait_for_players_.wait(lock);
+		DebugLogger::log("Everyone's here");
+	}
+}
+
+void GameEngine::launch()
+{
+	waitForPlayers_();
+	init_();
+	play_();
+	gameOver_();
+}
+
 void GameEngine::init_()
 {
 	// Shuffle players order.
@@ -85,7 +112,7 @@ void GameEngine::init_()
 	}
 }
 
-void GameEngine::operator()()
+void GameEngine::play_()
 {
 	sigs_.game_engine_ready();
 	init_();
@@ -271,6 +298,7 @@ void GameEngine::playerMove_(Player * p)
 				b->worker_set(*p);
 				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
 				has_played = true;
+				sigs_.board_updated();
 			}
 			catch (OccupiedBuildingEx *)
 			{
@@ -372,4 +400,10 @@ Player * GameEngine::newPlayer()
 	Player * p = new Player();
 	players_.push_back(p);
 	return p;
+}
+
+void GameEngine::playerReady()
+{
+	boost::lock_guard<boost::mutex> lock( mutex_ );
+	wait_for_players_.notify_one();
 }

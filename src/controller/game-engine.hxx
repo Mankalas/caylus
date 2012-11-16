@@ -11,6 +11,7 @@
 
 # include "game-engine.hh"
 # include "player.hh"
+# include "../visitor.hh"
 
 inline const std::vector<BuildingSmartPtr>& controller::GameEngine::buildings() const
 {
@@ -100,10 +101,20 @@ inline std::ostream & operator<<(std::ostream & o, const controller::GameEngine 
 {
 	foreach(const Player * p, g.order())
 	o << *p << std::endl;
-
 	o << g.board();
-
 	return o;
+}
+
+inline
+void controller::GameEngine::accept(const ConstVisitor & v) const
+{
+	v.operator()(this);
+}
+
+inline
+void controller::GameEngine::accept(Visitor & v)
+{
+	v.operator()(this);
 }
 
 #endif //GAME_ENGINE_HXX

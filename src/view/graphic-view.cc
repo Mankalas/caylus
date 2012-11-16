@@ -9,9 +9,14 @@
 #include "graphic-view.hh"
 
 #include <assert.h>
+
 #include "../const.hh"
-#include "../gfx/gfx-sprite-library.hh"
 #include "../debug-logger.hh"
+
+#include "../gfx/gfx-display-visitor.hh"
+#include "../gfx/gfx-sprite-library.hh"
+#include "../gfx/gfx-window.hh"
+
 #include "../controller/game-engine.hh"
 
 using namespace gfx;
@@ -21,9 +26,7 @@ using namespace controller;
 GraphicView::GraphicView(const GameEngine * game_engine)
 	: DisplayView(game_engine)
 {
-	window_.clear();
-	drawBoard_();
-	window_.display();
+	game_engine_->signals()->board_updated.connect(boost::bind(&GraphicView::updateBoard, this));
 }
 
 BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choices) const
@@ -32,6 +35,7 @@ BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choi
 	while (chosen_element == NULL)
 	{
 		std::pair<float, float> click_coordinates = window_.getClick();
+
 		const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
 		if (building_name == NULL)
 		{
@@ -51,17 +55,10 @@ BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choi
 	return chosen_element;
 }
 
-void GraphicView::updateBoard(const GameEngine *) const
+void GraphicView::updateBoard()
 {
-	window_.clear();
-	window_.display();
-}
-
-void GraphicView::drawBoard_() const
-{
-	Sprite * board_sprite = SpriteLibrary::instance()->sprite("board");
-	assert(board_sprite);
-	window_.draw(*board_sprite);
+	DisplayVisitor visitor(window_);
+	game_engine_->accept(visitor);
 }
 
 int GraphicView::askProvostShift() const

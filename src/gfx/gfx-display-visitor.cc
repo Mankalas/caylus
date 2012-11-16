@@ -6,20 +6,33 @@
   \date   2007-10-05
 */
 
-#include <SFML/Graphics.hpp>
 #include "gfx-display-visitor.hh"
 #include "gfx-window.hh"
+#include "gfx-sprite-library.hh"
+
+#include "../debug-logger.hh"
+
+#include "../controller/game-engine.hh"
 
 using namespace gfx;
 using namespace controller;
 
-void DisplayVisitor::operator()(const Sprite & sprite)
+DisplayVisitor::DisplayVisitor(Window & window)
+	: window_(window)
+{}
+
+void DisplayVisitor::operator()(const Sprite & sprite) const
 {
-	/*sf::Sprite sf_sprite = sprite.getSprite();
-	  Window::window->Draw(sf_sprite);*/
+	/*Sprite sf_sprite = sprite.getSprite();
+	  window->Draw(sf_sprite);*/
 }
 
-void DisplayVisitor::operator()(const GameEngine & ge)
+void DisplayVisitor::operator()(const GameEngine * ge) const
 {
-	std::cout << "DisplayVisitor : " << &ge << std::endl;
+	DebugLogger::log("Draw board");
+	window_.clear();
+	Sprite * board_sprite = SpriteLibrary::instance()->sprite("board");
+	assert(board_sprite);
+	window_.draw(*board_sprite);
+	window_.display();
 }

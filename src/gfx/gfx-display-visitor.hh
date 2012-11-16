@@ -13,11 +13,13 @@
 # include <list>
 # include "gfx-sprite.hh"
 # include "../controller/game-engine.hh"
+# include "../visitor.hh"
 
 /** \brief Everything that has to access the graphical library is in
     this namespace. */
 namespace gfx
 {
+	class Window;
 
 	/** \brief This visitor pattern is used to display graphical
 	 * objects.
@@ -26,15 +28,22 @@ namespace gfx
 	 * configured graphical library to display them on the game's
 	 * screen.
 	 */
-	class DisplayVisitor
+	class DisplayVisitor : public ConstVisitor
 	{
 		public:
+		DisplayVisitor(Window &);
+
+
 			/** \brief Display a Sprite.
 			 *	\param	sprite The sprite to display.
 			 */
-			void operator()(const gfx::Sprite & sprite);
+			void operator()(const gfx::Sprite & sprite) const;
 
-			void operator()(const controller::GameEngine & game_engine);
+			void operator()(const controller::GameEngine * game_engine) const;
+
+	private:
+
+		Window & window_;
 
 	};
 

@@ -22,17 +22,18 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-Human::Human(GameEngine * ge, bool console)
+Human::Human(GameEngine * ge, DisplayView * display)
 	: ActiveView(ge)
+	, gui_(display)
 {
-	if (console)
+	/**-if (console)
 	{
 		gui_ = new ConsoleView(ge);
 	}
 	else
 	{
 		gui_ = new GraphicView(ge);
-	}
+		}-**/
 	player_->name(askName());
 }
 
@@ -99,7 +100,7 @@ unsigned Human::askNbAIs(unsigned min, unsigned max) const
 
 void Human::updateBoard()
 {
-	gui_->updateBoard(game_engine_);
+	gui_->updateBoard();
 }
 
 
