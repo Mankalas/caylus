@@ -42,6 +42,13 @@ void usage()
 	          << "\t-u [n]\t\tNumber of humans" << std::endl;
 }
 
+boost::condition_variable wait_for_gameover;
+
+void waitForGameOver()
+{
+	wait_for_gameover.notify_one();
+}
+
 int main(int argc, char **argv)
 {
 	//	bool command_line = false;
@@ -92,6 +99,7 @@ int main(int argc, char **argv)
 	try
 	{
 		GameEngine g(nb_humans, nb_ais, max_turns, random);
+		g.signals()->game_over.connect(&waitForGameOver);
 
 		boost::thread controller_thread(boost::ref(g));
 		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(00);
@@ -124,10 +132,10 @@ int main(int argc, char **argv)
 		}
 
 		Logger log(&g);
-		while (true)
-		{
-			;
-		}
+
+		boost::mutex gameOverMutex;
+		boost::unique_lock<boost::mutex> lock(gameOverMutex);
+		wait_for_gameover.wait(lock);
 	}
 	catch (GameOverException *)
 	{

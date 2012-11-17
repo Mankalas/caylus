@@ -62,6 +62,8 @@ namespace controller
 		v_v_signal_t activation_castle_begin;
 		v_v_signal_t activation_castle_end;
 
+		v_v_signal_t game_over;
+
 		/* Errors, messages and log. */
 
 		/// Player is already on the bridge.

@@ -72,7 +72,6 @@ namespace controller
 
 		//@}
 
-		void launch();
 		void operator()();
 		void playerReady();
 
@@ -92,7 +91,6 @@ namespace controller
 
 		void play_();
 		void waitForPlayers_();
-		void gameOver_() {};
 
 		/** Step 1. Calculate the income for each player at the
 		 * beginning of each turn. */

@@ -71,7 +71,7 @@ void GameEngine::operator()()
 	waitForPlayers_();
 	init_();
 	play_();
-	gameOver_();
+	sigs_.game_over();
 }
 
 void GameEngine::waitForPlayers_()
@@ -83,14 +83,6 @@ void GameEngine::waitForPlayers_()
 		wait_for_players_.wait(lock);
 		DebugLogger::log("Everyone's here");
 	}
-}
-
-void GameEngine::launch()
-{
-	waitForPlayers_();
-	init_();
-	play_();
-	gameOver_();
 }
 
 void GameEngine::init_()
