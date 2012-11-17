@@ -11,11 +11,14 @@
 #include "gfx-sprite.hh"
 #include "exceptions.hh"
 
-gfx::Sprite::Sprite():
-	sprite_(sf::Sprite()),
-	image_(new sf::Image()) {}
+using namespace gfx;
 
-gfx::Sprite::Sprite(const std::string file_name)
+Sprite::Sprite()
+	: sprite_(sf::Sprite())
+	, image_(new sf::Image())
+{}
+
+Sprite::Sprite(const std::string file_name)
 {
 	image_ = new sf::Image();
 	if (image_ == NULL)
@@ -29,6 +32,14 @@ gfx::Sprite::Sprite(const std::string file_name)
 	sprite_ = sf::Sprite(*image_);
 }
 
-gfx::Sprite::Sprite(const gfx::Sprite & copy) :
-	sprite_(copy.sprite_),
-	image_(copy.image_) {}
+Sprite::Sprite(const Sprite & copy)
+	:	sprite_(copy.sprite_)
+	, image_(copy.image_)
+{}
+
+void Sprite::center(float left, float top, float width, float height)
+{
+	float new_left = left + (width - this->width()) / 2;
+	float new_top= top + (height - this->height()) / 2;
+	setPosition(new_left, new_top);
+}

@@ -13,10 +13,23 @@ namespace gfx
 	class Board
 	{
 	public:
-		Sprite * board_;
-		const std::string * getBuildingName(float x, float y) const;
+		Board();
+		unsigned int getCaseFromCoordinates(float x, float y) const;
+		coordinates_t getCoordinatesOfCase(unsigned int case_idx) const;
+
+		/** @name Accessors. */
+		//@{
+
+		Sprite * sprite() const;
+		unsigned int caseHeight() const;
+		unsigned int caseWidth() const;
+
+		//@}
 
 	protected:
+		// The board's sprite.
+		Sprite * sprite_;
+
 		unsigned int height_;
 		unsigned int width_;
 		std::string path_to_images_;
@@ -24,8 +37,7 @@ namespace gfx
 		unsigned int case_height_;
 		unsigned int case_width_;
 		// Neutral cases
-		std::vector<coordinates_t> neutral_cases_;
-		std::vector<coordinates_t> empty_cases_;
+		std::vector<coordinates_t> cases_;
 
 		// Castle
 		unsigned int house_height_;
@@ -47,9 +59,6 @@ namespace gfx
 		coordinates_t first_bridge_slot_coord_;
 		int bridge_slots_gap_;
 
-		typedef std::map<coordinates_t, const std::string> road_t;
-		road_t buildings_placement_;
-
 	};
 
 	class LimitedEditionBoard : public Board
@@ -58,5 +67,7 @@ namespace gfx
 		LimitedEditionBoard();
 	};
 }
+
+# include "gfx-board.hxx"
 
 #endif

@@ -11,7 +11,9 @@
 
 # include <sstream>
 # include <list>
+
 # include "gfx-sprite.hh"
+
 # include "../controller/game-engine.hh"
 # include "../visitor.hh"
 
@@ -20,6 +22,7 @@
 namespace gfx
 {
 	class Window;
+	class Board;
 
 	/** \brief This visitor pattern is used to display graphical
 	 * objects.
@@ -31,13 +34,13 @@ namespace gfx
 	class DisplayVisitor : public ConstVisitor
 	{
 	public:
-		DisplayVisitor(Window &);
+		DisplayVisitor(Window &, Board &);
 
 
 		/** \brief Display a Sprite.
 		 *	\param	sprite The sprite to display.
 		 */
-		void operator()(const gfx::Sprite & sprite) const;
+		void operator()(const Sprite & sprite) const;
 
 		virtual void operator()(const controller::GameEngine * game_engine) const;
 
@@ -45,8 +48,8 @@ namespace gfx
 		virtual void operator()(const controller::Road *) const;
 
 	private:
-
 		Window & window_;
+		Board & board_;
 
 	};
 

@@ -43,6 +43,7 @@ namespace gfx
 
 		void setPosition(const float left, const float top);
 		void move(const float left, const float top);
+		void center(float left, float top, float width, float height);
 
 		/// Accessors.
 		const sf::Sprite & sfmlSprite() const;

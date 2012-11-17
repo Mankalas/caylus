@@ -35,29 +35,22 @@ BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choi
 	while (chosen_element == NULL)
 	{
 		std::pair<float, float> click_coordinates = window_.getClick();
-
-		const std::string * building_name = board_.getBuildingName(click_coordinates.first, click_coordinates.second);
-		if (building_name == NULL)
+		unsigned int case_number = board_.getCaseFromCoordinates(click_coordinates.first, click_coordinates.second);
+		if (case_number > 0 && case_number < choices.size())
 		{
-			DebugLogger::log("Bad click.");
-			continue;
+			return choices[case_number];
 		}
-		DebugLogger::log(*building_name);
-		foreach(BoardElement * board_elt, choices)
+		else
 		{
-			if (board_elt->name() == *building_name)
-			{
-				chosen_element = board_elt;
-				break;
-			}
+			return choices[0];
 		}
 	}
-	return chosen_element;
+	return NULL;
 }
 
 void GraphicView::updateBoard()
 {
-	DisplayVisitor visitor(window_);
+	DisplayVisitor visitor(window_, board_);
 	game_engine_->accept(visitor);
 }
 
