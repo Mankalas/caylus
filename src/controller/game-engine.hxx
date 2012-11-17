@@ -13,62 +13,68 @@
 # include "player.hh"
 # include "../visitor.hh"
 
-inline const std::vector<BuildingSmartPtr>& controller::GameEngine::buildings() const
+inline
+const std::vector<BuildingSmartPtr>& controller::GameEngine::buildings() const
 {
 	return buildings_;
 }
 
-inline std::vector<BuildingSmartPtr>& controller::GameEngine::buildings()
+inline
+std::vector<BuildingSmartPtr>& controller::GameEngine::buildings()
 {
 	return buildings_;
 }
 
-inline const std::vector<Player *>& controller::GameEngine::order() const
+inline
+const std::vector<Player *>& controller::GameEngine::order() const
 {
 	return order_;
 }
 
-inline std::vector<Player *>& controller::GameEngine::order()
+inline
+std::vector<Player *>& controller::GameEngine::order()
 {
 	return order_;
 }
 
-inline const std::vector<Player *>& controller::GameEngine::players() const
+inline
+const std::vector<Player *>& controller::GameEngine::players() const
 {
 	return players_;
 }
 
-inline std::vector<Player *>& controller::GameEngine::players()
+inline
+std::vector<Player *>& controller::GameEngine::players()
 {
 	return players_;
 }
 
-inline unsigned &
-controller::GameEngine::maxWorkers()
+inline
+unsigned & controller::GameEngine::maxWorkers()
 {
 	return max_workers_;
 }
 
-inline const unsigned &
-controller::GameEngine::nbTurnsMax() const
+inline
+unsigned controller::GameEngine::nbTurnsMax() const
 {
 	return nb_turns_max_;
 }
 
-inline const unsigned &
-controller::GameEngine::nbTurns() const
+inline
+unsigned controller::GameEngine::nbTurns() const
 {
 	return nb_turns_;
 }
 
 inline
-const unsigned & controller::GameEngine::nbHumans() const
+unsigned controller::GameEngine::nbHumans() const
 {
 	return nb_humans_;
 }
 
 inline
-const unsigned & controller::GameEngine::nbAIs() const
+unsigned controller::GameEngine::nbAIs() const
 {
 	return nb_ais_;
 }
@@ -97,7 +103,8 @@ bool controller::GameEngine::random() const
 	return random_;
 }
 
-inline std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
+inline
+std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
 {
 	foreach(const Player * p, g.order())
 	o << *p << std::endl;

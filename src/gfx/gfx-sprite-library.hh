@@ -23,29 +23,29 @@ namespace gfx
 	 */
 	class SpriteLibrary
 	{
-		public:
-			/** \brief Get the unique instance of the class.
-			 *	\return The instance of SpriteLibrary.
-			 */
-			static SpriteLibrary * instance();
+	public:
+		/** \brief Get the unique instance of the class.
+		 *	\return The instance of SpriteLibrary.
+		 */
+		static SpriteLibrary * instance();
 
-			/** \brief Get the images dictionnary.
-			 *
-			 *  \return The images dictionnary.
-			 */
-			std::map<const std::string, gfx::Sprite *>& getSprites();
+		/** \brief Get the images dictionnary.
+		 *
+		 *  \return The images dictionnary.
+		 */
+		std::map<const std::string, gfx::Sprite *>& getSprites();
 
-			Sprite * sprite(const std::string & name) ;
+		Sprite * sprite(const std::string & name) ;
 
-		private:
-			/** Default constructor. */
-			SpriteLibrary();
+	private:
+		/** Default constructor. */
+		SpriteLibrary();
 
-			/** The unique instance of the class. */
-			static SpriteLibrary * instance_;
+		/** The unique instance of the class. */
+		static SpriteLibrary * instance_;
 
-			/** The images dictionnary. */
-			std::map<const std::string, gfx::Sprite *>sprites_;
+		/** The images dictionnary. */
+		std::map<const std::string, gfx::Sprite *>sprites_;
 
 	};
 

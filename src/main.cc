@@ -33,13 +33,13 @@ using namespace controller;
 void usage()
 {
 	std::cout << "caylus" << std::endl
-						<< "\t-a [n]\t\tNumber of AIs" << std::endl
-						<< "\t-c\t\tCommand line game" << std::endl
-						<< "\t-d\t\tLast option : specify a recorded player" << std::endl
-						<< "\t-h\t\tPrint this help" << std::endl
-						<< "\t-m [n]\t\tNumber of turns" << std::endl
-						<< "\t-r\t\tNo random at the game init" << std::endl
-						<< "\t-u [n]\t\tNumber of humans" << std::endl;
+	          << "\t-a [n]\t\tNumber of AIs" << std::endl
+	          << "\t-c\t\tCommand line game" << std::endl
+	          << "\t-d\t\tLast option : specify a recorded player" << std::endl
+	          << "\t-h\t\tPrint this help" << std::endl
+	          << "\t-m [n]\t\tNumber of turns" << std::endl
+	          << "\t-r\t\tNo random at the game init" << std::endl
+	          << "\t-u [n]\t\tNumber of humans" << std::endl;
 }
 
 int main(int argc, char **argv)
@@ -58,34 +58,34 @@ int main(int argc, char **argv)
 	{
 		switch (option)
 		{
-		case 'a' :
-			nb_ais = atoi(optarg);
-			break;
-		case 'c' :
-			std::cout << "Command line game." << std::endl;
-			//	command_line = true;
-			break;
-		case 'd' :
-			std::cin >> dir;
-			break;
-		case 's' :
-			std::cout << "Server game." << std::endl;
-			break;
-		case 'h' :
-			usage();
-			return 0;
-		case 'r':
-			random = false;
-			break;
-		case 'u' :
-			nb_humans = atoi(optarg);
-			break;
-		case 'm' :
-			max_turns = atoi(optarg);
-			break;
-		case '?':
-			usage();
-			return 1;
+			case 'a' :
+				nb_ais = atoi(optarg);
+				break;
+			case 'c' :
+				std::cout << "Command line game." << std::endl;
+				//	command_line = true;
+				break;
+			case 'd' :
+				std::cin >> dir;
+				break;
+			case 's' :
+				std::cout << "Server game." << std::endl;
+				break;
+			case 'h' :
+				usage();
+				return 0;
+			case 'r':
+				random = false;
+				break;
+			case 'u' :
+				nb_humans = atoi(optarg);
+				break;
+			case 'm' :
+				max_turns = atoi(optarg);
+				break;
+			case '?':
+				usage();
+				return 1;
 		}
 	}
 
@@ -124,13 +124,16 @@ int main(int argc, char **argv)
 		}
 
 		Logger log(&g);
-		while(true);
+		while (true)
+		{
+			;
+		}
 	}
 	catch (GameOverException *)
 	{
-			std::cerr << "Game OVER" << std::endl;
+		std::cerr << "Game OVER" << std::endl;
 	}
-	catch(Exception * ex)
+	catch (Exception * ex)
 	{
 		std::cerr << ex->msg() << std::endl;
 	}

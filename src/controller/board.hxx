@@ -6,8 +6,12 @@
  * @brief  Declaration of the board class.
  */
 
-#include "board.hh"
-#include "player.hh"
+#ifndef BOARD_HXX
+# define BOARD_HXX
+
+# include "board.hh"
+# include "player.hh"
+# include "../visitor.hh"
 
 inline const Road & Board::road() const
 {
@@ -82,3 +86,17 @@ inline std::ostream & operator<<(std::ostream & o, const Board & board)
 
 	return o;
 }
+
+inline
+void controller::Board::accept(const ConstVisitor & v) const
+{
+	v.operator()(this);
+}
+
+inline
+void controller::Board::accept(Visitor & v)
+{
+	v.operator()(this);
+}
+
+#endif

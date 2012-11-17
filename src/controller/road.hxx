@@ -12,7 +12,9 @@
 # include "road.hh"
 # include "player.hh"
 # include "exceptions.hh"
+
 # include "../const.hh"
+# include "../visitor.hh"
 
 inline const std::vector<BuildingSmartPtr>&
 Road::get() const
@@ -73,6 +75,18 @@ operator<<(std::ostream & o, const Road & r)
 		o << std::endl;
 	}
 	return o;
+}
+
+inline
+void controller::Road::accept(const ConstVisitor & v) const
+{
+	v.operator()(this);
+}
+
+inline
+void controller::Road::accept(Visitor & v)
+{
+	v.operator()(this);
 }
 
 #endif /* !ROAD_HXX_ */

@@ -13,6 +13,9 @@
 #include "../debug-logger.hh"
 
 #include "../controller/game-engine.hh"
+#include "../controller/board.hh"
+#include "../controller/road.hh"
+#include "../controller/building.hh"
 
 using namespace gfx;
 using namespace controller;
@@ -29,10 +32,30 @@ void DisplayVisitor::operator()(const Sprite & sprite) const
 
 void DisplayVisitor::operator()(const GameEngine * ge) const
 {
-	DebugLogger::log("Draw board");
 	window_.clear();
+	ge->board().accept(*this);
+	window_.display();
+}
+
+void DisplayVisitor::operator()(const controller::Board * board) const
+{
+	DebugLogger::log("Draw board");
 	Sprite * board_sprite = SpriteLibrary::instance()->sprite("board");
 	assert(board_sprite);
 	window_.draw(*board_sprite);
-	window_.display();
+	board->road().accept(*this);
+}
+
+void DisplayVisitor::operator()(const controller::Road * road) const
+{
+	DebugLogger::log("Draw road");
+	Sprite * worker_sprite = SpriteLibrary::instance()->sprite("worker");
+	assert(worker_sprite);
+	foreach(const BuildingSmartPtr building, road->get())
+	{
+		if (building != NULL && building->worker())
+		{
+			window_.draw(*worker_sprite);
+		}
+	}
 }

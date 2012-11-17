@@ -14,20 +14,20 @@
 
 namespace controller
 {
-		class BoardElement;
-		class Player;
-		class GameEngine;
-		class ResourceMap;
+	class BoardElement;
+	class Player;
+	class GameEngine;
+	class ResourceMap;
 }
 
 //struct Signals
 /// A connection between a signal and a slot.
 typedef boost::signals::connection connection_t;
 
-typedef boost::signal<unsigned (unsigned)> u_u_signal_t;
-typedef boost::signal<unsigned (unsigned, unsigned)> u_u_u_signal_t;
+typedef boost::signal<unsigned(unsigned)> u_u_signal_t;
+typedef boost::signal<unsigned(unsigned, unsigned)> u_u_u_signal_t;
 typedef boost::signal<void (unsigned, unsigned)> v_u_u_signal_t;
-typedef boost::signal<const std::string (void)> s_v_signal_t;
+typedef boost::signal<const std::string(void)> s_v_signal_t;
 typedef boost::signal<void (void)> v_v_signal_t;
 typedef boost::signal<int (void)> i_v_signal_t;
 typedef boost::signal<void (unsigned)> v_u_signal_t;
@@ -35,7 +35,7 @@ typedef boost::signal<void (const controller::Player *)> v_cp_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap *)> v_cp_cr_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> player_choice_signal_t;
 typedef boost::signal<void (const std::vector<controller::BoardElement *> &, const controller::Player *)> player_choices_signal_t;
-typedef boost::signal<controller::BoardElement* (const std::vector<controller::BoardElement*> &)> ask_board_element_signal_t;
+typedef boost::signal<controller::BoardElement * (const std::vector<controller::BoardElement*> &)> ask_board_element_signal_t;
 typedef boost::signal<void (const controller::GameEngine *)> v_cge_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> board_element_activation_signal_t;
 

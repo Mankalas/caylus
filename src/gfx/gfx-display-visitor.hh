@@ -30,16 +30,19 @@ namespace gfx
 	 */
 	class DisplayVisitor : public ConstVisitor
 	{
-		public:
+	public:
 		DisplayVisitor(Window &);
 
 
-			/** \brief Display a Sprite.
-			 *	\param	sprite The sprite to display.
-			 */
-			void operator()(const gfx::Sprite & sprite) const;
+		/** \brief Display a Sprite.
+		 *	\param	sprite The sprite to display.
+		 */
+		void operator()(const gfx::Sprite & sprite) const;
 
-			void operator()(const controller::GameEngine * game_engine) const;
+		virtual void operator()(const controller::GameEngine * game_engine) const;
+
+		virtual void operator()(const controller::Board *) const;
+		virtual void operator()(const controller::Road *) const;
 
 	private:
 

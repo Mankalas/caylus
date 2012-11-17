@@ -22,16 +22,16 @@ namespace controller
 	 */
 	class ResidentialBuilding : public virtual Building
 	{
-		public:
-			~ResidentialBuilding();
+	public:
+		~ResidentialBuilding();
 
-			const unsigned deniers;
+		const unsigned deniers;
 
-		protected:
-			ResidentialBuilding(unsigned deniers = 1);
+	protected:
+		ResidentialBuilding(unsigned deniers = 1);
 
-			virtual void on_build();
-			virtual void on_demolish();
+		virtual void on_build();
+		virtual void on_demolish();
 	};
 
 }

@@ -76,7 +76,7 @@ void GameEngine::operator()()
 
 void GameEngine::waitForPlayers_()
 {
-	boost::unique_lock<boost::mutex> lock( mutex_ );
+	boost::unique_lock<boost::mutex> lock(mutex_);
 	while (players_.size() < nb_humans_ + nb_ais_)
 	{
 		DebugLogger::log("Wait for players...");
@@ -330,7 +330,7 @@ void GameEngine::startOfTurn_()
 	{
 		p->workers() = max_workers_;
 	}
-	Inn * inn = (Inn *)(board_.road().get()[INN_CASE].get());
+	Inn * inn = dynamic_cast<Inn *>(board_.road().get()[INN_CASE].get());
 	if (inn->host())
 	{
 		inn->host()->workers() -= 1;
@@ -362,7 +362,7 @@ bool GameEngine::canPlayerPlay_(Player * p)
 
 unsigned GameEngine::getWorkerCost_(const Player * p) const
 {
-	const Inn * inn = (const Inn *)(board_.road().get()[5].get());
+	const Inn * inn = dynamic_cast<const Inn *>(board_.road().get()[5].get());
 	assert(inn);
 	return (inn->host() == p) ? 1 : board_.bridge().players().size() + 1;
 }
@@ -404,6 +404,6 @@ Player * GameEngine::newPlayer()
 
 void GameEngine::playerReady()
 {
-	boost::lock_guard<boost::mutex> lock( mutex_ );
+	boost::lock_guard<boost::mutex> lock(mutex_);
 	wait_for_players_.notify_one();
 }

@@ -39,24 +39,24 @@ namespace controller
 	 */
 	class Resource : public EnumObject<Resource>
 	{
-		public:
-			Resource(const Resource & r = Resource::food);
+	public:
+		Resource(const Resource & r = Resource::food);
 
-			static const std::list<Resource>& list();
+		static const std::list<Resource>& list();
 
-			static const Resource food;
-			static const Resource wood;
-			static const Resource cloth;
-			static const Resource stone;
-			static const Resource gold;
-			static const Resource denier;
-			static const Resource prestige;
-			static const Resource favor;
+		static const Resource food;
+		static const Resource wood;
+		static const Resource cloth;
+		static const Resource stone;
+		static const Resource gold;
+		static const Resource denier;
+		static const Resource prestige;
+		static const Resource favor;
 
-		private:
-			Resource(const std::string & name);
+	private:
+		Resource(const std::string & name);
 
-			static std::list<Resource> list_;
+		static std::list<Resource> list_;
 	};
 
 }

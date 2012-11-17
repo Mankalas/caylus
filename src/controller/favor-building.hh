@@ -21,13 +21,13 @@ namespace controller
 	 */
 	class FavorBuilding : virtual public Building
 	{
-		public:
-			~FavorBuilding();
+	public:
+		~FavorBuilding();
 
-		protected:
-			FavorBuilding();
+	protected:
+		FavorBuilding();
 
-			virtual void on_build();
+		virtual void on_build();
 	};
 
 }

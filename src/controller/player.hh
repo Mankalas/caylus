@@ -36,56 +36,56 @@ namespace controller
 	 */
 	class Player
 	{
-		public:
-			Player();
-			Player(const std::string & name);
-			Player(const Player &);
+	public:
+		Player();
+		Player(const std::string & name);
+		Player(const Player &);
 
-			// Operators.
-			bool operator==(const Player & p) const;
+		// Operators.
+		bool operator==(const Player & p) const;
 
-			// Accessors.
-			void favorBuilding(int);
-			int favorBuilding() const;
-			void favorResource(int);
-			int favorResource() const;
-			void favorDenier(int);
-			int favorDenier() const;
-			void favorPrestige(int);
-			int favorPrestige() const;
-			const std::string & name() const;
-			void name(const std::string name);
-			void prestige(int);
-			int prestige() const;
+		// Accessors.
+		void favorBuilding(int);
+		int favorBuilding() const;
+		void favorResource(int);
+		int favorResource() const;
+		void favorDenier(int);
+		int favorDenier() const;
+		void favorPrestige(int);
+		int favorPrestige() const;
+		const std::string & name() const;
+		void name(const std::string name);
+		void prestige(int);
+		int prestige() const;
 
-			const ResourceMap & resources() const;
-			ResourceMap & resources();
-			void addResources(const ResourceMap & r);
-			void substractResources(const ResourceMap & r);
+		const ResourceMap & resources() const;
+		ResourceMap & resources();
+		void addResources(const ResourceMap & r);
+		void substractResources(const ResourceMap & r);
 
-			const unsigned & workers() const;
-			unsigned & workers();
-			const unsigned & residences() const;
-			unsigned & residences();
+		const unsigned & workers() const;
+		unsigned & workers();
+		const unsigned & residences() const;
+		unsigned & residences();
 
-			/// Actions.
-			int askProvostShift() const;
-			BoardElement * askWorkerPlacement(const std::vector<BoardElement *> & buildings) const;
+		/// Actions.
+		int askProvostShift() const;
+		BoardElement * askWorkerPlacement(const std::vector<BoardElement *> & buildings) const;
 
-			PlayerSignals * signals() const;
+		PlayerSignals * signals() const;
 
-		private:
+	private:
 
-			int favor_building_;
-			int favor_resource_;
-			int favor_denier_;
-			int favor_prestige_;
-			unsigned int workers_;
-			std::string name_;
-			int prestige_;
-			ResourceMap resources_;
-			unsigned int residences_;
-			mutable PlayerSignals signals_;
+		int favor_building_;
+		int favor_resource_;
+		int favor_denier_;
+		int favor_prestige_;
+		unsigned int workers_;
+		std::string name_;
+		int prestige_;
+		ResourceMap resources_;
+		unsigned int residences_;
+		mutable PlayerSignals signals_;
 	};
 
 }

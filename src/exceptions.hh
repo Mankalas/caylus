@@ -17,12 +17,15 @@ namespace controller
 	class Exception
 	{
 	public:
-		Exception(){}
+		Exception() {}
 		Exception(const std::string & msg) :
 			msg_(msg)
 		{}
 
-		const std::string msg() const { return msg_; }
+		const std::string msg() const
+		{
+			return msg_;
+		}
 	protected:
 		const std::string msg_;
 	};

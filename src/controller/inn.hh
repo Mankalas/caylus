@@ -13,17 +13,17 @@ namespace controller
 
 	class Inn : public Building
 	{
-		public:
-			Inn();
+	public:
+		Inn();
 
-			virtual void on_activate(void);
-			Player * host();
-			const Player * host() const;
+		virtual void on_activate(void);
+		Player * host();
+		const Player * host() const;
 
-			virtual bool has(const Player *) const;
+		virtual bool has(const Player *) const;
 
-		private:
-			Player * host_;
+	private:
+		Player * host_;
 	};
 
 }

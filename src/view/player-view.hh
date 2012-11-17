@@ -25,31 +25,31 @@ namespace view
 {
 	class PlayerView : public View
 	{
-		public:
-			PlayerView(const controller::GameEngine * ge);
-			~PlayerView();
+	public:
+		PlayerView(const controller::GameEngine * ge);
+		~PlayerView();
 
-			virtual bool isInteractive() const = 0;
+		virtual bool isInteractive() const = 0;
 
-			virtual bool isHuman() const = 0;
+		virtual bool isHuman() const = 0;
 
-			virtual int askProvostShift() const = 0;
-			virtual bool askYesNo() const = 0;
-			virtual bool askJoustField() const = 0;
-			virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & tbuildings) const = 0;
-			virtual unsigned askBuilding() const = 0;
-			virtual unsigned askResourceChoice() const = 0;
-			virtual void updateBoard() = 0;
+		virtual int askProvostShift() const = 0;
+		virtual bool askYesNo() const = 0;
+		virtual bool askJoustField() const = 0;
+		virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & tbuildings) const = 0;
+		virtual unsigned askBuilding() const = 0;
+		virtual unsigned askResourceChoice() const = 0;
+		virtual void updateBoard() = 0;
 
-			virtual void operator()() = 0;
+		virtual void operator()() = 0;
 
-			ProvostShiftSlot askProvostShiftSlot() const;
-			WorkerPlacementSlot askWorkerPlacementSlot() const;
-			boost::signal<unsigned(void)>::slot_function_type askBuildingSlot() const;
-			boost::signal<unsigned(void)>::slot_function_type resourceChoiceSlot() const;
+		ProvostShiftSlot askProvostShiftSlot() const;
+		WorkerPlacementSlot askWorkerPlacementSlot() const;
+		boost::signal<unsigned(void)>::slot_function_type askBuildingSlot() const;
+		boost::signal<unsigned(void)>::slot_function_type resourceChoiceSlot() const;
 
-		protected:
-			const controller::GameEngine * game_engine_;
+	protected:
+		const controller::GameEngine * game_engine_;
 	};
 }
 

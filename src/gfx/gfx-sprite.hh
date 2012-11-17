@@ -24,29 +24,29 @@ namespace gfx
 	 */
 	class Sprite
 	{
-		private:
+	private:
 
-			sf::Sprite sprite_;
-			sf::Image * image_;
+		sf::Sprite sprite_;
+		sf::Image * image_;
 
-		public:
+	public:
 
-			Sprite();
-			Sprite(const std::string file_name);
-			Sprite(const Sprite & copy);
+		Sprite();
+		Sprite(const std::string file_name);
+		Sprite(const Sprite & copy);
 
-			float width() const;
-			float height() const;
+		float width() const;
+		float height() const;
 
-			float left() const;
-			float top() const;
+		float left() const;
+		float top() const;
 
-			void setPosition(const float left, const float top);
-			void move(const float left, const float top);
+		void setPosition(const float left, const float top);
+		void move(const float left, const float top);
 
-			/// Accessors.
-			const sf::Sprite & sfmlSprite() const;
-			const sf::Image * getImage() const;
+		/// Accessors.
+		const sf::Sprite & sfmlSprite() const;
+		const sf::Image * getImage() const;
 
 	};
 

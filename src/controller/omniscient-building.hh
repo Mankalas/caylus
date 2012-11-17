@@ -17,16 +17,16 @@ namespace controller
 
 	class OmniscientBuilding : virtual public Building
 	{
-		public:
-			virtual ~OmniscientBuilding() = 0;
+	public:
+		virtual ~OmniscientBuilding() = 0;
 
-			const GameEngine * game() const;
-			GameEngine * game();
-			void game(GameEngine *);
-		protected:
-			OmniscientBuilding(GameEngine * ge);
+		const GameEngine * game() const;
+		GameEngine * game();
+		void game(GameEngine *);
+	protected:
+		OmniscientBuilding(GameEngine * ge);
 
-			GameEngine * game_;
+		GameEngine * game_;
 	};
 
 }

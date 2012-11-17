@@ -37,44 +37,44 @@ namespace controller
 	 */
 	class Building : public BoardElement
 	{
-		public:
-			virtual ~Building();
-			void build(Player * current = 0);
-			virtual void worker_set(Player & current);
-			void activate();
-			virtual void worker_unset();
-			void demolish();
-			virtual bool isBuilding() const;
+	public:
+		virtual ~Building();
+		void build(Player * current = 0);
+		virtual void worker_set(Player & current);
+		void activate();
+		virtual void worker_unset();
+		void demolish();
+		virtual bool isBuilding() const;
 
-			// Accessors.
-			const BuildingType & type() const;
-			const ResourceMap & gain() const;
-			const std::vector<ResourceMap>& cost() const;
+		// Accessors.
+		const BuildingType & type() const;
+		const ResourceMap & gain() const;
+		const std::vector<ResourceMap>& cost() const;
 
-			Player * owner();
-			const Player * owner() const;
+		Player * owner();
+		const Player * owner() const;
 
-			Player * worker();
-			const Player * worker() const;
-			void worker(Player *);
+		Player * worker();
+		const Player * worker() const;
+		void worker(Player *);
 
-			virtual bool has(const Player *) const;
+		virtual bool has(const Player *) const;
 
-		protected:
-			Building(const std::string & name,
-			         const BuildingType & type,
-			         const std::vector<ResourceMap>& cost,
-			         const ResourceMap & gain);
+	protected:
+		Building(const std::string & name,
+		         const BuildingType & type,
+		         const std::vector<ResourceMap>& cost,
+		         const ResourceMap & gain);
 
-			const BuildingType type_;
-			const ResourceMap gain_;
-			const std::vector<ResourceMap> cost_;
-			Player * owner_;
-			Player * worker_;
+		const BuildingType type_;
+		const ResourceMap gain_;
+		const std::vector<ResourceMap> cost_;
+		Player * owner_;
+		Player * worker_;
 
-			virtual void on_build();
-			virtual void on_activate();
-			virtual void on_demolish();
+		virtual void on_build();
+		virtual void on_activate();
+		virtual void on_demolish();
 	};
 
 }

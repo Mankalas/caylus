@@ -43,32 +43,32 @@ namespace controller
 	 */
 	class ResourceMap
 	{
-		public:
-			explicit ResourceMap(const unsigned & value = 0);
-			ResourceMap(const Resource & k);
+	public:
+		explicit ResourceMap(const unsigned & value = 0);
+		ResourceMap(const Resource & k);
 
-			operator std::vector<ResourceMap> () const;
+		operator std::vector<ResourceMap> () const;
 
-			unsigned & operator [](const Resource & r);
-			unsigned  operator [](const Resource & r) const;
+		unsigned & operator [](const Resource & r);
+		unsigned  operator [](const Resource & r) const;
 
-			bool operator > (const ResourceMap & rmap) const;
-			bool operator < (const ResourceMap & rmap) const;
-			bool operator >= (const ResourceMap & rmap) const;
-			bool operator <= (const ResourceMap & rmap) const;
-			bool operator == (const ResourceMap & rmap) const;
-			bool operator != (const ResourceMap & rmap) const;
+		bool operator > (const ResourceMap & rmap) const;
+		bool operator < (const ResourceMap & rmap) const;
+		bool operator >= (const ResourceMap & rmap) const;
+		bool operator <= (const ResourceMap & rmap) const;
+		bool operator == (const ResourceMap & rmap) const;
+		bool operator != (const ResourceMap & rmap) const;
 
-			ResourceMap  operator + (const ResourceMap & rmap) const;
-			ResourceMap  operator - (const ResourceMap & rmap) const;
-			ResourceMap & operator += (const ResourceMap & rmap);
-			ResourceMap & operator -= (const ResourceMap & rmap);
+		ResourceMap  operator + (const ResourceMap & rmap) const;
+		ResourceMap  operator - (const ResourceMap & rmap) const;
+		ResourceMap & operator += (const ResourceMap & rmap);
+		ResourceMap & operator -= (const ResourceMap & rmap);
 
-			ResourceMap  operator * (const unsigned & mul) const;
-			ResourceMap & operator *= (const unsigned & mul);
+		ResourceMap  operator * (const unsigned & mul) const;
+		ResourceMap & operator *= (const unsigned & mul);
 
-		private:
-			std::map<Resource, unsigned> map_;
+	private:
+		std::map<Resource, unsigned> map_;
 	};
 
 }

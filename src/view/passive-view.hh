@@ -18,11 +18,11 @@ namespace view
 	 */
 	class PassiveView : public View
 	{
-		public:
-			PassiveView(const controller::GameEngine * ge);
+	public:
+		PassiveView(const controller::GameEngine * ge);
 
-		protected:
-			const controller::GameEngine * game_engine_;
+	protected:
+		const controller::GameEngine * game_engine_;
 	};
 }
 

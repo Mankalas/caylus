@@ -25,19 +25,19 @@ namespace controller
 	 */
 	class ProductionBuilding : public virtual Building
 	{
-		public:
-			virtual ~ProductionBuilding();
+	public:
+		virtual ~ProductionBuilding();
 
-			const std::vector<ResourceMap> owner_choices_;
-			const std::vector<ResourceMap> worker_choices_;
+		const std::vector<ResourceMap> owner_choices_;
+		const std::vector<ResourceMap> worker_choices_;
 
-		protected:
-			ProductionBuilding(const std::vector<ResourceMap>& wchoice,
-			                   const std::vector<ResourceMap>& ochoice);
+	protected:
+		ProductionBuilding(const std::vector<ResourceMap>& wchoice,
+		                   const std::vector<ResourceMap>& ochoice);
 
-			virtual void on_activate();
+		virtual void on_activate();
 
-			boost::signal<unsigned(void)> ask_resource_choice_;
+		boost::signal<unsigned(void)> ask_resource_choice_;
 	};
 
 }

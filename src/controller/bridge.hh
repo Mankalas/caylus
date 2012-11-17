@@ -18,38 +18,38 @@ namespace controller
 
 	class Bridge : public BoardElement
 	{
-		public :
+	public :
 
-			Bridge();
+		Bridge();
 
-			virtual bool isBridge() const;
+		virtual bool isBridge() const;
 
-			void clear();
+		void clear();
 
-			/** Add a player to the bridge. Checks whether he is the first and
-			 * give him the bonus denier accordingly.
-			 *
-			 * @param p The player to add.
-			 */
-			void add(Player * p);
+		/** Add a player to the bridge. Checks whether he is the first and
+		 * give him the bonus denier accordingly.
+		 *
+		 * @param p The player to add.
+		 */
+		void add(Player * p);
 
-			/**
-			 * Check whether a player is already on the bridge or not.
-			 *
-			 * @param p The player to check.
-			 *
-			 * @return
-			 */
-			bool has(const Player * p) const;
+		/**
+		 * Check whether a player is already on the bridge or not.
+		 *
+		 * @param p The player to check.
+		 *
+		 * @return
+		 */
+		bool has(const Player * p) const;
 
-			// Accessors.
-			const std::vector<Player *>& players() const;
-			std::vector<Player *>& players();
+		// Accessors.
+		const std::vector<Player *>& players() const;
+		std::vector<Player *>& players();
 
-			virtual void on_activate();
+		virtual void on_activate();
 
-		private:
-			std::vector<Player *> players_;
+	private:
+		std::vector<Player *> players_;
 	};
 }
 

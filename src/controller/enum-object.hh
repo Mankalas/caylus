@@ -35,23 +35,23 @@ namespace controller
 	template <typename Exact>
 	class EnumObject
 	{
-		public:
-			bool operator < (const EnumObject & elt) const;
-			bool operator > (const EnumObject & elt) const;
-			bool operator <= (const EnumObject & elt) const;
-			bool operator >= (const EnumObject & elt) const;
-			bool operator == (const EnumObject & elt) const;
-			bool operator != (const EnumObject & elt) const;
+	public:
+		bool operator < (const EnumObject & elt) const;
+		bool operator > (const EnumObject & elt) const;
+		bool operator <= (const EnumObject & elt) const;
+		bool operator >= (const EnumObject & elt) const;
+		bool operator == (const EnumObject & elt) const;
+		bool operator != (const EnumObject & elt) const;
 
-			const std::string & name() const;
+		const std::string & name() const;
 
-		protected:
-			EnumObject(const std::string & name);
+	protected:
+		EnumObject(const std::string & name);
 
-			static unsigned ids_;
+		static unsigned ids_;
 
-			std::string name_;
-			unsigned id_;
+		std::string name_;
+		unsigned id_;
 	};
 
 }
