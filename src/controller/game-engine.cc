@@ -138,6 +138,7 @@ void GameEngine::activateSpecialBuildings_()
 	for (unsigned i = 0; i < 6; ++i)
 	{
 		board_.road().get()[i]->activate();
+		sigs_.board_updated();
 	}
 	sigs_.activation_special_buildings_end();
 }
@@ -157,29 +158,32 @@ void GameEngine::activateBuildings_()
 
 void GameEngine::activateBridge_()
 {
-	int deniers = 0;
-	int shift = 0;
-
 	sigs_.activation_bridge_begin();
 	foreach(Player * p, board_.bridge().players())
-	//while (!board_.bridge().players().empty())
 	{
 		board_.bridge().activation_sig(&board_.bridge(), p);
 		assert(p);
-		deniers = p->resources()[Resource::denier];
+		int deniers = p->resources()[Resource::denier];
 		if (deniers == 0)
 		{
 			continue;
 		}
-		shift = p->askProvostShift();
+		int shift = 0;
+		unsigned int selected_case = 0;
+		bool is_shift_valid = false;
+		bool has_enough_denier = false;
+		while (!is_shift_valid || !has_enough_denier)
+		{
+			selected_case = p->askProvostShift();
+			is_shift_valid = board_.isProvostShiftValid(selected_case);
+			shift = selected_case - board_.provost();
+			has_enough_denier = fabs(shift) <= deniers;
+		}
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
-		while (!board().isProvostShiftValid(shift) || std::abs(shift) > deniers)
-		{
-			shift = p->askProvostShift();
-		}
-		board_.shiftProvost(shift);
-		p->resources() -= Resource::denier * std::abs(shift);
+		board_.provost() = selected_case;
+		sigs_.board_updated();
+		p->resources() -= Resource::denier * fabs(shift);
 	}
 	sigs_.activation_bridge_end();
 }

@@ -25,11 +25,12 @@ Board::~Board()
 {
 }
 
-bool Board::isProvostShiftValid(int shift) const
+bool Board::isProvostShiftValid(int proposed_case) const
 {
+	int shift = proposed_case - provost();
 	return shift >= -3 && shift <= 3 &&
-	       shift + provost() <= LAST_EMPTY_CASE_ &&
-	       shift - provost() >= FIRST_EMPTY_CASE_;
+		shift + provost() <= LAST_EMPTY_CASE_ &&
+		shift - provost() >= FIRST_EMPTY_CASE_;
 }
 
 void Board::shiftProvost(int shift)

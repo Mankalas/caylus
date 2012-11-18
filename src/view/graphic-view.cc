@@ -82,7 +82,14 @@ void GraphicView::updateBoard()
 
 int GraphicView::askProvostShift() const
 {
-	return 0;
+	bool is_click_valid = false;
+	unsigned int case_number = 0;
+	while (!is_click_valid)
+	{
+		Vector2<int> click_coordinates = getClick();
+		case_number =	board_.getCaseFromCoordinates(click_coordinates.x, click_coordinates.y, is_click_valid);
+	}
+	return case_number;
 }
 
 int GraphicView::askChoice(int, int) const

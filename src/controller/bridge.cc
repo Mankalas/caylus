@@ -37,4 +37,5 @@ bool Bridge::isBridge() const
 
 void Bridge::on_activate()
 {
+	std::cout << "Activation of bridge." << std::endl;
 }

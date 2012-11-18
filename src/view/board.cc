@@ -14,6 +14,7 @@
 #include "image-library.hh"
 
 #include "../const.hh"
+#include "../debug-logger.hh"
 
 using namespace view;
 using namespace std;

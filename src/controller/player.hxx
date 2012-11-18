@@ -116,10 +116,6 @@ inline std::ostream & operator<<(std::ostream & o, const controller::Player & pl
 
 inline int controller::Player::askProvostShift() const
 {
-	if (signals_.ask_provost_shift.empty())
-	{
-		throw new SignalNotConnected("ask_provost_shift_signal_");
-	}
 	return signals_.ask_provost_shift();
 }
 

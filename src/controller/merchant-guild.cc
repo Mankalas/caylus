@@ -9,7 +9,9 @@
 
 #include "merchant-guild.hh"
 #include "game-engine.hh"
+
 #include "../const.hh"
+#include "../debug-logger.hh"
 
 MerchantGuild::MerchantGuild(GameEngine * ge)
 	: Building(MERCHANT_GUILD,
@@ -31,6 +33,5 @@ void MerchantGuild::on_activate()
 		s = worker_->askProvostShift();
 	}
 	while (!board.isProvostShiftValid(s));
-
-	board.shiftProvost(s);
+	board.provost() = s;
 }
