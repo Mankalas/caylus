@@ -27,7 +27,7 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais, unsigned nb_turns_ma
 	, nb_ais_(nb_ais)
 	, nb_turns_(0)
 	, nb_turns_max_(nb_turns_max)
-	, max_workers_(6)
+	, max_workers_(1)
 	, random_(random)
 	, board_(this)
 {

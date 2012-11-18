@@ -46,6 +46,12 @@ void DisplayVisitor::operator()(const controller::Board & board) const
 	const Sprite & board_sprite = board_.sprite();
 	window_.Draw(board_sprite);
 	board.road().accept(*this);
+
+	unsigned int baillif_case = board.bailiff();
+	Vector2<unsigned int> b_case = board_.getCoordinatesOfCase(baillif_case);
+	Sprite baillif_sprite(ImageLibrary::inst().get("bailiff"));
+	baillif_sprite.SetPosition(b_case.x, b_case.y);
+	window_.Draw(baillif_sprite);
 }
 
 void DisplayVisitor::drawResource(int resource, Color color, int top) const
