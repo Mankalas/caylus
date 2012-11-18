@@ -44,8 +44,13 @@ namespace controller
 		bool isProvostShiftValid(int shift) const;
 		void shiftProvost(int shift);
 
+		/** @name Visitors accept methods */
+		//@{
+
 		void accept(const ConstVisitor &) const;
 		void accept(Visitor &);
+
+		//@}
 
 	private:
 		/// The "road" on the board of the game.

@@ -10,6 +10,8 @@
 # include "player.hh"
 # include "exceptions.hh"
 
+# include "./visitor.hh"
+
 inline ResourceMap & controller::Player::resources()
 {
 	return resources_;
@@ -125,6 +127,18 @@ inline
 controller::PlayerSignals * controller::Player::signals() const
 {
 	return &signals_;
+}
+
+inline
+void controller::Player::accept(const ConstVisitor & v) const
+{
+	v.operator()(*this);
+}
+
+inline
+void controller::Player::accept(Visitor & v)
+{
+	v.operator()(*this);
 }
 
 #endif //PLAYER_HXX

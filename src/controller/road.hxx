@@ -80,13 +80,13 @@ operator<<(std::ostream & o, const Road & r)
 inline
 void controller::Road::accept(const ConstVisitor & v) const
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
 
 inline
 void controller::Road::accept(Visitor & v)
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
 
 #endif /* !ROAD_HXX_ */

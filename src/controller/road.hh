@@ -73,10 +73,13 @@ namespace controller
 		 */
 		std::vector<BoardElement *> getAvailableBuildings(const Player * worker) const;
 
-
+		/** @name Visitors accept methods */
+		//@{
 
 		void accept(const ConstVisitor &) const;
 		void accept(Visitor &);
+
+		//@}
 
 	private:
 		/**

@@ -10,12 +10,19 @@
 # define GRAPHIC_VIEW_HH
 
 # include "display-view.hh"
-# include "../gfx/gfx-window.hh"
-# include "../gfx/gfx-board.hh"
+# include "board.hh"
 # include <vector>
+# include <SFML/System/Vector2.hpp>
+
+namespace sf
+{
+	class RenderWindow;
+}
 
 namespace view
 {
+	class LimitedEditionBoard;
+
 	class GraphicView : public DisplayView
 	{
 	public:
@@ -36,8 +43,10 @@ namespace view
 		void launch() const;
 
 	private:
-		gfx::Window window_;
-		gfx::LimitedEditionBoard board_;
+		sf::Vector2<int> getClick() const;
+
+		sf::RenderWindow * window_;
+		LimitedEditionBoard board_;
 	};
 }
 

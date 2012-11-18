@@ -115,13 +115,13 @@ std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
 inline
 void controller::GameEngine::accept(const ConstVisitor & v) const
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
 
 inline
 void controller::GameEngine::accept(Visitor & v)
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
 
 #endif //GAME_ENGINE_HXX

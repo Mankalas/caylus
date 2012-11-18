@@ -6,10 +6,6 @@
  * @brief  Declaration of the board class.
  */
 
-#ifndef BOARD_HXX
-# define BOARD_HXX
-
-# include "board.hh"
 # include "player.hh"
 # include "../visitor.hh"
 
@@ -90,13 +86,11 @@ inline std::ostream & operator<<(std::ostream & o, const Board & board)
 inline
 void controller::Board::accept(const ConstVisitor & v) const
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
 
 inline
 void controller::Board::accept(Visitor & v)
 {
-	v.operator()(this);
+	v.operator()(*this);
 }
-
-#endif

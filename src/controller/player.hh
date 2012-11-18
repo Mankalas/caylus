@@ -16,6 +16,9 @@
 # include "resource-map.hh"
 # include "../player-signals.hh"
 
+class Visitor;
+class ConstVisitor;
+
 namespace view
 {
 	class PlayerView;
@@ -25,10 +28,6 @@ namespace view
 namespace controller
 {
 	class BoardElement;
-}
-
-namespace controller
-{
 
 	/** \brief A player is an entity that's playing the game. It can be
 	 * either Human or AI.
@@ -73,6 +72,14 @@ namespace controller
 		unsigned int askWorkerPlacement() const;
 
 		PlayerSignals * signals() const;
+
+			/** @name Visitors accept methods */
+		//@{
+
+		void accept(const ConstVisitor &) const;
+		void accept(Visitor &);
+
+		//@}
 
 	private:
 

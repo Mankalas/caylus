@@ -24,9 +24,6 @@
 #include "view/logger.hh"
 #include "view/graphic-view.hh"
 
-#include "gfx/gfx-window.hh"
-#include "gfx/gfx-sprite-library.hh"
-
 using namespace view;
 using namespace controller;
 
