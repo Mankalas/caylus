@@ -43,6 +43,7 @@ ImageLibrary::ImageLibrary()
 	add("board", img_dir + "board_limited_edition.jpg");
 	add("worker", img_dir + "marker_red.png");
 	add("bailiff", img_dir + "baillif_prevost.png");
+	add("provost", img_dir + "baillif_prevost.png");
 
 	add(ALCHEMIST, img_dir + "alchemist.png");
 	add(ARCHITECT, img_dir + "architect.png");

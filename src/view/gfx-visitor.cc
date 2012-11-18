@@ -48,10 +48,17 @@ void DisplayVisitor::operator()(const controller::Board & board) const
 	board.road().accept(*this);
 
 	unsigned int baillif_case = board.bailiff();
-	Vector2<unsigned int> b_case = board_.getCoordinatesOfCase(baillif_case);
+	Vector2<unsigned int> bailiff_coordinates = board_.getCoordinatesOfCase(baillif_case);
 	Sprite baillif_sprite(ImageLibrary::inst().get("bailiff"));
-	baillif_sprite.SetPosition(b_case.x, b_case.y);
+	baillif_sprite.SetPosition(bailiff_coordinates.x, bailiff_coordinates.y);
 	window_.Draw(baillif_sprite);
+
+	unsigned int provost_case = board.provost();
+	Vector2<unsigned int> provost_coordinates = board_.getCoordinatesOfCase(provost_case);
+	Sprite provost_sprite(ImageLibrary::inst().get("provost"));
+	Vector2<unsigned int> case_size = board_.caseSize();
+	centerSprite(provost_sprite, provost_coordinates, case_size);
+	window_.Draw(provost_sprite);
 }
 
 void DisplayVisitor::drawResource(int resource, Color color, int top) const
