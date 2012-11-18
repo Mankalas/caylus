@@ -17,6 +17,7 @@ namespace sf
 	class Sprite;
 	template<class T>
 	class Vector2;
+	class Color;
 }
 
 namespace controller
@@ -58,6 +59,7 @@ namespace view
 		                  sf::Vector2<unsigned int> & position,
 		                  sf::Vector2<unsigned int> & size) const;
 
+		void drawResource(int resource, sf::Color color, int top) const;
 	};
 }
 

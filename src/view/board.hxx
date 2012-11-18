@@ -29,4 +29,10 @@ unsigned int view::Board::caseWidth() const
 	return case_width_;
 }
 
+inline
+unsigned int view::Board::width() const
+{
+	return width_;
+}
+
 #endif

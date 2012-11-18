@@ -44,7 +44,7 @@ Human::~Human()
 string Human::askName() const
 {
 	gui_->showMessage("What name?");
-	return gui_->getString();
+	return "Mankalas";
 }
 
 bool Human::askYesNo() const

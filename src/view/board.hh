@@ -33,6 +33,7 @@ namespace view
 		const sf::Sprite & sprite() const;
 		unsigned int caseHeight() const;
 		unsigned int caseWidth() const;
+		unsigned int width() const;
 
 		//@}
 

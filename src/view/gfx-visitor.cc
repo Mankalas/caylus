@@ -9,6 +9,7 @@
 #include "gfx-visitor.hh"
 
 #include <SFML/Graphics.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "board.hh"
 #include "image-library.hh"
@@ -18,6 +19,7 @@
 #include "../controller/game-engine.hh"
 #include "../controller/board.hh"
 #include "../controller/road.hh"
+#include "../controller/resource.hh"
 #include "../controller/building.hh"
 
 using namespace sf;
@@ -46,10 +48,33 @@ void DisplayVisitor::operator()(const controller::Board & board) const
 	board.road().accept(*this);
 }
 
+void DisplayVisitor::drawResource(int resource, Color color, int top) const
+{
+	using boost::lexical_cast;
+	String food(lexical_cast<std::string>(resource));
+	food.SetColor(color);
+	food.SetPosition(board_.width() + 15, top);
+	window_.Draw(food);
+}
+
 void DisplayVisitor::operator()(const controller::Player & player) const
 {
 	String name(player.name());
 	name.SetColor(Color::White);
+	name.SetPosition(board_.width() + 10, 10);
+	window_.Draw(name);
+
+	drawResource(player.resources()[controller::Resource::food], Color::Magenta, 35);
+	drawResource(player.resources()[controller::Resource::wood], Color::Green, 70);
+	drawResource(player.resources()[controller::Resource::cloth], Color::Blue, 114);
+	drawResource(player.resources()[controller::Resource::stone], Color::White, 140);
+	drawResource(player.resources()[controller::Resource::gold], Color::Yellow, 175);
+
+	using boost::lexical_cast;
+	String food(lexical_cast<std::string>(player.resources()[controller::Resource::denier]) + "$");
+	food.SetColor(Color::Yellow);
+	food.SetPosition(board_.width() + 15, 210);
+	window_.Draw(food);
 }
 
 void DisplayVisitor::operator()(const controller::Road & road) const
