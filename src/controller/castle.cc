@@ -15,6 +15,8 @@
 
 using namespace controller;
 
+const unsigned int Castle::CASE_NUMBER = 42;
+
 CastlePart::CastlePart(unsigned c, unsigned p,
                        std::vector<std::pair<unsigned, int> > s):
 	capacity_(c),

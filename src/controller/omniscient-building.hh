@@ -24,9 +24,9 @@ namespace controller
 		GameEngine * game();
 		void game(GameEngine *);
 	protected:
-		OmniscientBuilding(GameEngine * ge);
+		OmniscientBuilding(GameEngine * game_engine);
 
-		GameEngine * game_;
+		GameEngine * game_engine_;
 	};
 
 }

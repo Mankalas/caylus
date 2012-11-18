@@ -9,6 +9,7 @@
 #include "graphic-view.hh"
 
 #include <assert.h>
+#include <algorithm>
 
 #include "../const.hh"
 #include "../debug-logger.hh"
@@ -18,6 +19,8 @@
 #include "../gfx/gfx-window.hh"
 
 #include "../controller/game-engine.hh"
+#include "../controller/castle.hh"
+#include "../controller/board.hh"
 
 using namespace gfx;
 using namespace view;
@@ -29,23 +32,29 @@ GraphicView::GraphicView(const GameEngine * game_engine)
 	game_engine_->signals()->board_updated.connect(boost::bind(&GraphicView::updateBoard, this));
 }
 
-BoardElement * GraphicView::askBuilding(const std::vector<BoardElement *> & choices) const
+unsigned int GraphicView::askCaseNumber() const
 {
-	BoardElement * chosen_element = NULL;
-	while (chosen_element == NULL)
+	bool is_click_valid = false;
+	unsigned int case_number = 0;
+	while (!is_click_valid)
 	{
 		std::pair<float, float> click_coordinates = window_.getClick();
-		unsigned int case_number = board_.getCaseFromCoordinates(click_coordinates.first, click_coordinates.second);
-		if (case_number > 0 && case_number < choices.size())
+		if (board_.isClickInCastle(click_coordinates.first, click_coordinates.second))
 		{
-			return choices[case_number];
+			case_number = Castle::CASE_NUMBER;
+			is_click_valid = true;
+		}
+		else if (board_.isClickInBridge(click_coordinates.first, click_coordinates.second))
+		{
+			case_number = Bridge::CASE_NUMBER;
+			is_click_valid = true;
 		}
 		else
 		{
-			return choices[0];
+			case_number = board_.getCaseFromCoordinates(click_coordinates.first, click_coordinates.second, is_click_valid);
 		}
 	}
-	return NULL;
+	return case_number;
 }
 
 void GraphicView::updateBoard()
@@ -58,8 +67,6 @@ int GraphicView::askProvostShift() const
 {
 	return 0;
 }
-
-
 
 int GraphicView::askChoice(int, int) const
 {

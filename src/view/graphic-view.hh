@@ -21,7 +21,7 @@ namespace view
 	public:
 
 		GraphicView(const controller::GameEngine * game_engine);
-		virtual controller::BoardElement * askBuilding(const std::vector<controller::BoardElement *> & choices) const;
+		virtual unsigned int askCaseNumber() const;
 		virtual void updateBoard();
 		virtual int askProvostShift() const;
 

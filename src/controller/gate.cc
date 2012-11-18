@@ -13,34 +13,36 @@
 #include "debug-logger.hh"
 #include "castle.hh"
 #include "const.hh"
+#include "player.hh"
 
-Gate::Gate(GameEngine * ge)
+Gate::Gate(GameEngine * game_engine)
 	: Building(GATE,
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
-	OmniscientBuilding(ge)
+	OmniscientBuilding(game_engine)
 {
 }
 
 void Gate::on_activate()
 {
 	Building::on_activate();
-	BoardElement * player_choice = NULL;
-	std::vector<BoardElement *> choices = game_->board().road().getAvailableBuildings(worker_);
-	if (!game_->board().castle().has(worker_))
+
+	bool is_selection_valid = false;
+	unsigned int selected_case;
+	while (!is_selection_valid)
 	{
-		choices.insert(choices.begin(), (BoardElement *)&game_->board().castle());
-	}
-	player_choice = worker_->askWorkerPlacement(choices);
-	if (player_choice->isBuilding())
-	{
-		Building * building = dynamic_cast<Building *>(player_choice);
-		building->worker(worker_);
-	}
-	else
-	{
-		Castle * castle = dynamic_cast<Castle *>(player_choice);
-		castle->add(worker_);
+		selected_case = worker_->askWorkerPlacement();
+		if (selected_case == Castle::CASE_NUMBER)
+		{
+			game_engine_->board().castle().add(worker_);
+			is_selection_valid = true;
+		}
+		else if (selected_case != Bridge::CASE_NUMBER)
+		{
+			BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case];
+			selected_building->worker(worker_);
+			is_selection_valid = true;
+		}
 	}
 }

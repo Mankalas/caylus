@@ -49,9 +49,9 @@ void ConstructionBuilding::on_activate()
 		return;
 	}
 	else
-		game_->build(*(std::find(game_->buildings().begin(),
-		                         game_->buildings().end(),
-		                         building_choice[choice])), worker_);
+		game_engine_->build(*(std::find(game_engine_->buildings().begin(),
+		                                game_engine_->buildings().end(),
+		                                building_choice[choice])), worker_);
 }
 
 void ConstructionBuilding::on_build()

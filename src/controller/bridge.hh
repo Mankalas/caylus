@@ -48,6 +48,10 @@ namespace controller
 
 		virtual void on_activate();
 
+		/// This is the 'case number' of the bridge, used by an active
+		/// view to communicate the player's choice.
+		static const unsigned int CASE_NUMBER = 69;
+
 	private:
 		std::vector<Player *> players_;
 	};

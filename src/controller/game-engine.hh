@@ -31,6 +31,8 @@ namespace controller
 {
 	class Building;
 	class Player;
+	class Castle;
+	class Bridge;
 
 	/** Handles the global processus of the game. */
 	class GameEngine
@@ -75,7 +77,9 @@ namespace controller
 		void operator()();
 		void playerReady();
 
-		const std::vector<BoardElement *> getAvailableBoardElements(const Player * worker) const;
+		BuildingSmartPtr getBuildingAtCase(unsigned int) const;
+		Castle & getCastle();
+		Bridge & getBridge();
 
 		Player * newPlayer();
 

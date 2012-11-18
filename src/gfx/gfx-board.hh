@@ -14,8 +14,10 @@ namespace gfx
 	{
 	public:
 		Board();
-		unsigned int getCaseFromCoordinates(float x, float y) const;
+		unsigned int getCaseFromCoordinates(float x, float y, bool & is_click_valid) const;
 		coordinates_t getCoordinatesOfCase(unsigned int case_idx) const;
+		bool isClickInCastle(float x, float y) const;
+		bool isClickInBridge(float x, float y) const;
 
 		/** @name Accessors. */
 		//@{

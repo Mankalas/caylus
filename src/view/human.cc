@@ -114,10 +114,9 @@ bool Human::isHuman() const
 	return true;
 }
 
-BoardElement *
-Human::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
+unsigned int Human::askWorkerPlacement() const
 {
-	return gui_->askBuilding(buildings);
+	return gui_->askCaseNumber();
 }
 
 unsigned Human::askBuilding() const

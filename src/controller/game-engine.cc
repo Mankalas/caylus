@@ -18,6 +18,7 @@
 #include "exceptions.hh"
 #include "inn.hh"
 #include "debug-logger.hh"
+#include "board-element.hh"
 
 using namespace controller;
 
@@ -252,16 +253,15 @@ void GameEngine::addToCastle(Player * p)
 void GameEngine::playerMove_(Player * p)
 {
 	bool has_played = false;
-	const BoardElement * player_choice;
-	unsigned worker_cost = 0;
+	unsigned int selected_case = 0;
+	unsigned int worker_cost = 0;
 
 	sigs_.worker_placement_for_player(p);
 	while (!has_played)
 	{
-		const std::vector<BoardElement *> choices = getAvailableBoardElements(p);
-		player_choice = p->askWorkerPlacement(choices);
+		selected_case = p->askWorkerPlacement();
 
-		if (player_choice->isBridge())
+		if (selected_case == 	Castle::CASE_NUMBER)
 		{
 			board_.bridge().add(p);
 			has_played = true;
@@ -270,7 +270,7 @@ void GameEngine::playerMove_(Player * p)
 
 		worker_cost = getWorkerCost_(p);
 
-		if (player_choice->isCastle() && p->resources()[Resource::denier] >= worker_cost)
+		if (selected_case == Castle::CASE_NUMBER && p->resources()[Resource::denier] >= worker_cost)
 		{
 			DebugLogger::log("Castle chosen");
 			board_.castle().add(p);
@@ -280,33 +280,40 @@ void GameEngine::playerMove_(Player * p)
 			continue;
 		}
 
-		assert(player_choice->isBuilding());
-		Building * b = (Building *)player_choice;
+		assert(selected_case < board_.road().get().size());
+		BuildingSmartPtr selected_building = board_.road().get()[selected_case];
 
-		if (p->resources()[Resource::denier] >= (b->owner() == p ? 1 : worker_cost))
+		if (selected_building != NULL)
 		{
-			try
+			if (p->resources()[Resource::denier] >= (selected_building->owner() == p ? 1 : worker_cost))
 			{
-				b->worker_set(*p);
-				p->resources() -= Resource::denier * (b->owner() == p ? 1 : worker_cost);
-				has_played = true;
-				sigs_.board_updated();
+				try
+				{
+					selected_building->worker_set(*p);
+					p->resources() -= Resource::denier * (selected_building->owner() == p ? 1 : worker_cost);
+					has_played = true;
+					sigs_.board_updated();
+				}
+				catch (OccupiedBuildingEx *)
+				{
+					DebugLogger::log("Already occupied.");
+					return;
+				}
+				catch (UnactivableBuildingEx *)
+				{
+					DebugLogger::log("Does not accept workers.");
+					return;
+				}
 			}
-			catch (OccupiedBuildingEx *)
+			else
 			{
-				DebugLogger::log("Already occupied.");
-				return;
-			}
-			catch (UnactivableBuildingEx *)
-			{
-				DebugLogger::log("Does not accept workers.");
+				DebugLogger::log("Not enough denier to play ");
 				return;
 			}
 		}
 		else
 		{
-			DebugLogger::log("Not enough denier to play ");
-			return;
+			DebugLogger::log("Empty case.");
 		}
 	}
 }
@@ -370,23 +377,6 @@ void GameEngine::build(BuildingSmartPtr & building, Player * p)
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
-const std::vector<BoardElement *>
-GameEngine::getAvailableBoardElements(const Player * worker) const
-{
-	std::vector<BoardElement *> available_buildings(board_.road().getAvailableBuildings(worker));
-
-	if (!board_.castle().has(worker))
-	{
-		available_buildings.push_back((BoardElement *)&board_.castle());
-	}
-
-	if (!board_.bridge().has(worker))
-	{
-		available_buildings.push_back((BoardElement *)&board_.bridge());
-	}
-	return available_buildings;
-}
-
 Player * GameEngine::newPlayer()
 {
 	Player * p = new Player();
@@ -398,4 +388,21 @@ void GameEngine::playerReady()
 {
 	boost::lock_guard<boost::mutex> lock(mutex_);
 	wait_for_players_.notify_one();
+}
+
+BuildingSmartPtr GameEngine::getBuildingAtCase(unsigned int case_number) const
+{
+	std::vector<BuildingSmartPtr> buildings = board_.road().get();
+	assert(case_number < buildings.size());
+	return buildings[case_number];
+}
+
+Castle & GameEngine::getCastle()
+{
+	return board_.castle();
+}
+
+Bridge & GameEngine::getBridge()
+{
+	return board_.bridge();
 }

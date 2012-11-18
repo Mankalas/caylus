@@ -1,11 +1,11 @@
 # Caylus controller
 
-add_library (Caylus_Controller SHARED game-engine.cc all-buildings.cc
+add_library (Caylus_Controller SHARED all-buildings.cc
 board-element.cc building.cc castle.cc favor-building.cc
 game-signals.cc inn.cc merchant-guild.cc player.cc
 residential-building.cc resource-map.cc stables.cc board.cc bridge.cc
-building-type.cc construction-building.cc gate.cc
-joust-field.cc omniscient-building.cc production-building.cc
-resource.cc road.cc trade-building.cc)
+building-type.cc construction-building.cc gate.cc joust-field.cc
+omniscient-building.cc production-building.cc resource.cc road.cc
+trade-building.cc game-engine.cc)
 
 set_target_properties (Caylus_Controller PROPERTIES LINKER_LANGUAGE CXX)

@@ -23,7 +23,7 @@ namespace view
 
 		virtual int askProvostShift() const = 0;
 		virtual void updateBoard() = 0;
-		virtual controller::BoardElement * askBuilding(const std::vector<controller::BoardElement *> & choices) const = 0;
+		virtual unsigned int askCaseNumber() const = 0;
 
 		virtual int askChoice(int, int) const = 0;
 		virtual int askChoice(std::vector<int>&) const = 0;

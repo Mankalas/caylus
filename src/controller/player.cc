@@ -52,13 +52,10 @@ Player::Player(const Player & player):
 {
 }
 
-BoardElement *
-Player::askWorkerPlacement(const std::vector<BoardElement *> & buildings) const
+unsigned int Player::askWorkerPlacement() const
 {
 	assert(!signals_.ask_worker_placement.empty());
-	signals_.player_choices(buildings, this);
-	BoardElement * choice = signals_.ask_worker_placement(buildings);
-	signals_.player_has_chosen(choice, this);
+	unsigned int choice = signals_.ask_worker_placement();
 	return choice;
 }
 

@@ -147,6 +147,10 @@ namespace controller
 		const CastlePart * towers() const;
 		CastlePart * towers();
 
+		/// This is the 'case number' of the castle, used by an active
+		/// view to communicate the player's choice.
+		static const unsigned int CASE_NUMBER;
+
 	private:
 		/// The players' workers.
 		std::vector<Player *> players_;

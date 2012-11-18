@@ -16,19 +16,19 @@
 inline const GameEngine *
 OmniscientBuilding::game() const
 {
-	return game_;
+	return game_engine_;
 }
 
 inline GameEngine *
 OmniscientBuilding::game()
 {
-	return game_;
+	return game_engine_;
 }
 
 inline void
-OmniscientBuilding::game(GameEngine * g)
+OmniscientBuilding::game(GameEngine * game_engine)
 {
-	game_ = g;
+	game_engine_ = game_engine;
 }
 
 #endif //OMNISCIENT_BUILDING_HXX

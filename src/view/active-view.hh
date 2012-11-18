@@ -32,7 +32,7 @@ namespace view
 		///
 		virtual int askProvostShift() const = 0;
 		///
-		virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const = 0;
+		virtual unsigned int askWorkerPlacement() const = 0;
 		///
 		virtual std::string askName() const = 0;
 

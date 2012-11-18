@@ -70,7 +70,7 @@ namespace controller
 
 		/// Actions.
 		int askProvostShift() const;
-		BoardElement * askWorkerPlacement(const std::vector<BoardElement *> & buildings) const;
+		unsigned int askWorkerPlacement() const;
 
 		PlayerSignals * signals() const;
 

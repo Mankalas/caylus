@@ -28,14 +28,15 @@ set (EXECUTABLE_NAME "Caylus")
 add_executable (${EXECUTABLE_NAME} "${CAYLUS_SOURCE_DIR}/main.cc")
 
 # Subdirectories
+add_subdirectory ("${CAYLUS_SOURCE_DIR}/controller")
+target_link_libraries (${EXECUTABLE_NAME} Caylus_Controller)
+
 add_subdirectory ("${CAYLUS_SOURCE_DIR}/gfx")
 target_link_libraries (${EXECUTABLE_NAME} Caylus_GFX)
 
 add_subdirectory ("${CAYLUS_SOURCE_DIR}/view")
 target_link_libraries (${EXECUTABLE_NAME} Caylus_View)
 
-add_subdirectory ("${CAYLUS_SOURCE_DIR}/controller")
-target_link_libraries (${EXECUTABLE_NAME} Caylus_Controller)
 
 # External libs
 find_package (Boost REQUIRED thread signals)

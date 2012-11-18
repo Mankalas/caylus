@@ -7,15 +7,18 @@
  */
 
 #include "gfx-board.hh"
-#include "gfx-sprite-library.hh"
-#include "const.hh"
+
 #include <boost/foreach.hpp>
 #include <iostream>
+
+#include "gfx-sprite-library.hh"
+
+#include "../const.hh"
 
 using namespace std;
 using namespace gfx;
 
-unsigned int Board::getCaseFromCoordinates(float x, float y) const
+unsigned int Board::getCaseFromCoordinates(float x, float y, bool & is_click_valid) const
 {
 	for (unsigned int case_idx = 0; case_idx < cases_.size(); ++case_idx)
 	{
@@ -23,10 +26,22 @@ unsigned int Board::getCaseFromCoordinates(float x, float y) const
 		unsigned int b = cases_[case_idx].second;
 		if (x >= a && x <= a + case_width_ && y >= b && y <= b + case_height_)
 		{
+			is_click_valid = true;
 			return case_idx;
 		}
 	}
-	return -1;
+	is_click_valid = false;
+	return 0;
+}
+
+bool Board::isClickInCastle(float x, float y) const
+{
+	return x >= 643 && x <= 668 && y >= 199 && y <= 350;
+}
+
+bool Board::isClickInBridge(float x, float y) const
+{
+	return x >= 910 && x <= 1228 && y >= 750 && y <= 848;
 }
 
 coordinates_t Board::getCoordinatesOfCase(unsigned int case_idx) const
