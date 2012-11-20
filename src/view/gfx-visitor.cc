@@ -106,14 +106,23 @@ void DisplayVisitor::operator()(const controller::Road & road)
 	}
 }
 
-void DisplayVisitor::operator()(const controller::Building & building)
+void DisplayVisitor::drawBuildingSprite(const controller::Building & building,
+                                        Vector2<unsigned int> & case_coord,
+                                        Vector2<unsigned int> & case_size) const
 {
 	const std::string building_name = building.name();
 	Sprite building_sprite(ImageLibrary::inst().get(building_name));
-	Vector2<unsigned int> case_coord = board_.getCoordinatesOfCase(road_idx_);
-	Vector2<unsigned int> case_size = board_.caseSize();
+	case_coord = board_.getCoordinatesOfCase(road_idx_);
+	case_size = board_.caseSize();
 	centerSprite(building_sprite, case_coord, case_size);
 	window_.Draw(building_sprite);
+}
+
+void DisplayVisitor::operator()(const controller::Building & building)
+{
+	Vector2<unsigned int> case_coord;
+	Vector2<unsigned int> case_size;
+	drawBuildingSprite(building, case_coord, case_size);
 	if (building.worker())
 	{
 		Sprite worker_sprite(ImageLibrary::inst().get("worker"));
@@ -124,12 +133,9 @@ void DisplayVisitor::operator()(const controller::Building & building)
 
 void DisplayVisitor::operator()(const controller::Stables & stables)
 {
-	const std::string stables_name = stables.name();
-	Sprite building_sprite(ImageLibrary::inst().get(stables_name));
-	Vector2<unsigned int> case_coord = board_.getCoordinatesOfCase(road_idx_);
-	Vector2<unsigned int> case_size = board_.caseSize();
-	centerSprite(building_sprite, case_coord, case_size);
-	window_.Draw(building_sprite);
+	Vector2<unsigned int> case_coord;
+	Vector2<unsigned int> case_size;
+	drawBuildingSprite(stables, case_coord, case_size);
 	const std::vector<Player*> & players = stables.players();
 	for (unsigned int player_idx = 0; player_idx < players.size(); ++player_idx)
 	{

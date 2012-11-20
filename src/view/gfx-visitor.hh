@@ -66,6 +66,10 @@ namespace view
 		                  sf::Vector2<unsigned int> & size) const;
 
 		void drawResource(int resource, sf::Color color, int top) const;
+
+		void drawBuildingSprite(const controller::Building & building,
+		                        sf::Vector2<unsigned int> & case_coord,
+		                        sf::Vector2<unsigned int> & case_size) const;
 	};
 }
 
