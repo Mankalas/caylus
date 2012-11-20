@@ -78,7 +78,7 @@ operator<<(std::ostream & o, const Road & r)
 }
 
 inline
-void controller::Road::accept(const ConstVisitor & v) const
+void controller::Road::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);
 }

@@ -14,6 +14,9 @@
 # include "building-type.hh"
 # include "board-element.hh"
 
+class Visitor;
+class ConstVisitor;
+
 namespace controller
 {
 	class Player;
@@ -59,6 +62,14 @@ namespace controller
 		void worker(Player *);
 
 		virtual bool has(const Player *) const;
+
+		/** @name Visitors accept methods */
+		//@{
+
+		virtual void accept(ConstVisitor &) const;
+		virtual void accept(Visitor &);
+
+		//@}
 
 	protected:
 		Building(const std::string & name,

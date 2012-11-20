@@ -20,6 +20,8 @@
 #include "board-element.hh"
 #include "debug-logger.hh"
 
+const unsigned int Road::STABLES_CASE = 4;
+
 Road::Road(GameEngine * ge)
 	: buildings_(34)
 {
@@ -80,23 +82,4 @@ Road::clearWorkers()
 			b->worker_unset();
 		}
 	}
-}
-
-std::vector<BoardElement *>
-Road::getAvailableBuildings(const Player * p) const
-{
-	std::vector<BoardElement *> available_buildings;
-
-	foreach(BuildingSmartPtr b, buildings_)
-	{
-		if (b != NULL && !b->has(p))
-		{
-			BoardElement * board_element = (BoardElement *)b.get();
-			if (board_element != NULL)
-			{
-				available_buildings.push_back(board_element);
-			}
-		}
-	}
-	return available_buildings;
 }

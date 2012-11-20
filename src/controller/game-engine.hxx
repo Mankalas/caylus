@@ -113,7 +113,7 @@ std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
 }
 
 inline
-void controller::GameEngine::accept(const ConstVisitor & v) const
+void controller::GameEngine::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);
 }

@@ -76,10 +76,12 @@ namespace controller
 		/** @name Visitors accept methods */
 		//@{
 
-		void accept(const ConstVisitor &) const;
+		void accept(ConstVisitor &) const;
 		void accept(Visitor &);
 
 		//@}
+
+		static const unsigned int STABLES_CASE;
 
 	private:
 		/**

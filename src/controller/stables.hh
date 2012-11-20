@@ -12,6 +12,9 @@
 
 # include "omniscient-building.hh"
 
+class Visitor;
+class ConstVisitor;
+
 namespace controller
 {
 
@@ -25,6 +28,15 @@ namespace controller
 		virtual void worker_unset();
 
 		virtual bool has(const Player *) const;
+		const std::vector<Player *> players() const;
+
+		/** @name Visitors accept methods */
+		//@{
+
+		virtual void accept(ConstVisitor &) const;
+		virtual void accept(Visitor &);
+
+		//@}
 
 	private:
 		std::vector<Player *> players_;

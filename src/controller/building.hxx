@@ -11,6 +11,7 @@
 
 # include "building.hh"
 # include "player.hh"
+# include "../visitor.hh"
 
 inline const BuildingType &
 Building::type() const
@@ -58,6 +59,18 @@ inline void
 Building::worker(Player * p)
 {
 	worker_ = p;
+}
+
+inline
+void controller::Building::accept(ConstVisitor & v) const
+{
+	v.operator()(*this);
+}
+
+inline
+void controller::Building::accept(Visitor & v)
+{
+	v.operator()(*this);
 }
 
 #endif /* !BUILDING_HXX_ */

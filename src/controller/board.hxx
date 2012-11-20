@@ -84,7 +84,7 @@ inline std::ostream & operator<<(std::ostream & o, const Board & board)
 }
 
 inline
-void controller::Board::accept(const ConstVisitor & v) const
+void controller::Board::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);
 }

@@ -20,13 +20,15 @@ namespace sf
 	class Color;
 }
 
-namespace controller
+/**-namespace controller
 {
 	class GameEngine;
 	class Road;
 	class Board;
 	class Player;
-}
+	class Building;
+	class Stables;
+	}*/
 
 /** \brief Everything that has to access the graphical library is in
     this namespace. */
@@ -46,14 +48,18 @@ namespace view
 	public:
 		DisplayVisitor(sf::RenderWindow &, Board &);
 
-		virtual void operator()(const controller::GameEngine &) const;
-		virtual void operator()(const controller::Board &) const;
-		virtual void operator()(const controller::Road &) const;
-		virtual void operator()(const controller::Player &) const;
+		virtual void operator()(const controller::GameEngine &);
+		virtual void operator()(const controller::Board &);
+		virtual void operator()(const controller::Road &);
+		virtual void operator()(const controller::Player &);
+		virtual void operator()(const controller::Stables & stables);
+		virtual void operator()(const controller::Building & building);
 
 	private:
 		sf::RenderWindow & window_;
 		Board & board_;
+		/// To remember which case of the road we are visiting.
+		unsigned int road_idx_;
 
 		void centerSprite(sf::Sprite & sprite,
 		                  sf::Vector2<unsigned int> & position,

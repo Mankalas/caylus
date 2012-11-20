@@ -8,11 +8,14 @@
  */
 
 #include "stables.hh"
+
 #include <algorithm>
+
 #include "player.hh"
 #include "exceptions.hh"
 #include "game-engine.hh"
-#include "const.hh"
+
+#include "../visitor.hh"
 
 Stables::Stables(GameEngine * ge)
 	: Building(STABLES,
@@ -32,10 +35,6 @@ void Stables::worker_set(Player & current)
 
 	players_.insert(players_.begin(), &current);
 	current.workers() -= 1;
-
-	std::cout << "STATE OF STABLES : " << std::endl;
-	foreach(const Player * p, players_)
-	std::cout << "\t" << *p << std::endl;
 
 	// If no worker, Building::activate will not call on_activate.
 	worker_ = &current;
@@ -61,7 +60,6 @@ void Stables::on_activate()
 		assert(p);
 		assert(it != order.end());
 
-		std::cout << "Moving " << *p << std::endl;
 		std::swap(*it, order[i]);
 	}
 
@@ -72,4 +70,19 @@ void Stables::on_activate()
 bool Stables::has(const Player * p) const
 {
 	return std::find(players_.begin(), players_.end(), p) != players_.end();
+}
+
+void Stables::accept(ConstVisitor & v) const
+{
+	v.operator()(*this);
+}
+
+void Stables::accept(Visitor & v)
+{
+	v.operator()(*this);
+}
+
+const std::vector<Player *> Stables::players() const
+{
+	return players_;
 }

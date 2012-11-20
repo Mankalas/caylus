@@ -126,7 +126,7 @@ controller::PlayerSignals * controller::Player::signals() const
 }
 
 inline
-void controller::Player::accept(const ConstVisitor & v) const
+void controller::Player::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);
 }
