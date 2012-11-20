@@ -41,7 +41,8 @@ ImageLibrary::ImageLibrary()
 	std::string img_dir = Caylus_IMAGE_DIR;
 
 	add("board", img_dir + "board_limited_edition.jpg");
-	add("worker", img_dir + "marker_red.png");
+	add("worker", img_dir + "worker_red.png");
+	add("marker", img_dir + "marker_red.png");
 	add("bailiff", img_dir + "baillif_prevost.png");
 	add("provost", img_dir + "baillif_prevost.png");
 
