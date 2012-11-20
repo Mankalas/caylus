@@ -172,6 +172,8 @@ void GameEngine::activateBridge_()
 		unsigned int selected_case = 0;
 		bool is_shift_valid = false;
 		bool has_enough_denier = false;
+		/* If the provost is not moved before the bridge, or over the end
+		   of the board, or if the player has enough money, then move. */
 		while (!is_shift_valid || !has_enough_denier)
 		{
 			selected_case = p->askProvostShift();
@@ -179,15 +181,12 @@ void GameEngine::activateBridge_()
 			shift = selected_case - board_.provost();
 			has_enough_denier = fabs(shift) <= deniers;
 		}
-		/* If the provost is not moved before the bridge, or over the end
-		   of the board, or if the player has enough money, then move. */
 		board_.provost() = selected_case;
 		sigs_.board_updated();
 		p->resources() -= Resource::denier * fabs(shift);
 	}
 	sigs_.activation_bridge_end();
 }
-
 
 void GameEngine::activateCastle_()
 {

@@ -52,13 +52,14 @@ int main(int argc, char **argv)
 	std::string host = "";
 	int option = 0;
 
-	unsigned int nb_humans = 0;
+	unsigned int nb_humans = 1;
 	unsigned int nb_ais = 0;
+	unsigned int max_workers = 6;
 	unsigned int max_turns = INT_MAX;
 	std::string dir = "";
 	bool random = true;
 
-	while ((option = getopt(argc, argv, "a:cdhm:ru:")) != -1)
+	while ((option = getopt(argc, argv, "a:cdhm:ru:w:")) != -1)
 	{
 		switch (option)
 		{
@@ -87,6 +88,9 @@ int main(int argc, char **argv)
 			case 'm' :
 				max_turns = atoi(optarg);
 				break;
+			case 'w' :
+				max_workers = atoi(optarg);
+				break;
 			case '?':
 				usage();
 				return 1;
@@ -96,6 +100,7 @@ int main(int argc, char **argv)
 	try
 	{
 		GameEngine g(nb_humans, nb_ais, max_turns, random);
+		g.maxWorkers() = max_workers;
 		g.signals()->game_over.connect(&waitForGameOver);
 
 		boost::thread controller_thread(boost::ref(g));
