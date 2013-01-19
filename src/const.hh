@@ -6,6 +6,9 @@
  * @brief  Declaration of constants, shared by the view and the controller.
  */
 
+#ifndef CONST_HH
+#define CONST_HH
+
 #define STATUE "Statue"
 #define THEATER "Theater"
 #define COLLEGE "College"
@@ -55,4 +58,10 @@
 #define FARM_FOOD "Farm food"
 #define FARM_STONE "Farm stone"
 
-#define foreach BOOST_FOREACH
+
+#ifndef foreach
+# include <boost/foreach.hpp>
+# define foreach BOOST_FOREACH
+#endif
+
+#endif
