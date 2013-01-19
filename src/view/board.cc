@@ -8,7 +8,6 @@
 
 #include "board.hh"
 
-#include <boost/foreach.hpp>
 #include <iostream>
 
 #include "image-library.hh"
@@ -63,12 +62,13 @@ Board::Board()
 	, case_width_(100)
 	, house_height_(26)
 	, house_width_(39)
+	, sprite_(ImageLibrary::inst().get("board"))
 {}
 
 LimitedEditionBoard::LimitedEditionBoard()
 	: Board()
 {
-	sprite_ = sf::Sprite(ImageLibrary::inst().get("board"));
+	//sprite_ = sf::Sprite(ImageLibrary::inst().get("board"));
 
 	const unsigned int  ROW_1 = 58;
 	const unsigned int  ROW_2 = 159;
@@ -148,4 +148,3 @@ LimitedEditionBoard::LimitedEditionBoard()
 	cases_.push_back(Vector2<unsigned int>(COL_11, ROW_3));
 	cases_.push_back(Vector2<unsigned int>(COL_10, ROW_3));
 }
-

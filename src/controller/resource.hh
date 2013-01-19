@@ -10,7 +10,6 @@
 # define RESOURCE_HH_
 
 # include <vector>
-# include <boost/foreach.hpp>
 # include "enum-object.hh"
 
 namespace controller

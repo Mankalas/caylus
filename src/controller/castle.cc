@@ -11,7 +11,7 @@
 #include "player.hh"
 #include "castle.hh"
 #include "resource-map.hh"
-#include "const.hh"
+#include "../const.hh"
 
 using namespace controller;
 
