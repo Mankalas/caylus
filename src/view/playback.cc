@@ -87,3 +87,8 @@ unsigned Playback::next_uint() const
 {
 	return strtoul(next_line().c_str(), NULL, 0);
 }
+
+unsigned int Playback::askChoice(unsigned int range) const
+{
+	return next_uint();
+}

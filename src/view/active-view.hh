@@ -16,7 +16,7 @@
 namespace controller
 {
 	class Player;
-	class BoardElement;
+	class GameEngine;
 }
 
 namespace view
@@ -35,6 +35,8 @@ namespace view
 		virtual unsigned int askWorkerPlacement() const = 0;
 		///
 		virtual std::string askName() const = 0;
+		///
+		virtual unsigned int askChoice(unsigned int range) const = 0;
 
 	protected:
 		controller::GameEngine * game_engine_;

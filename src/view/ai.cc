@@ -41,6 +41,11 @@ unsigned AI::askResourceChoice(/*const ResourceMap& choices*/) const
 	return 3;
 }
 
+unsigned AI::askChoice(unsigned int range) const
+{
+	return range - 1;
+}
+
 bool AI::askYesNo() const
 {
 	return true;

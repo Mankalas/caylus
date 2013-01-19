@@ -21,9 +21,9 @@ namespace view
 		~Playback();
 
 		virtual std::string askName() const;
-
 		virtual int askProvostShift() const;
 		virtual unsigned int askWorkerPlacement() const;
+		virtual unsigned int askChoice(unsigned int range) const;
 
 		/*virtual bool askYesNo() const;
 		virtual bool askJoustField() const;

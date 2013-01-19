@@ -17,6 +17,7 @@ namespace controller
 	{
 		i_v_signal_t ask_provost_shift;
 		u_v_signal_t ask_worker_placement;
+		u_u_signal_t ask_choice;
 
 		/// Get the board element a player has chosen from a list.
 		player_choice_signal_t player_has_chosen;

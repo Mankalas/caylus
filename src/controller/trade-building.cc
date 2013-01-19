@@ -40,7 +40,7 @@ TradeBuilding::on_activate()
 		          << ex.second << std::endl;
 	}
 
-	choice = ask_resource_choice_();
+	choice = worker_->signals()->ask_choice(exchanges.size() + 1);
 	if (0 == choice)
 	{
 		return;

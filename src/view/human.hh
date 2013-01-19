@@ -22,18 +22,23 @@ namespace view
 		Human(controller::GameEngine * ge, DisplayView *);
 		virtual ~Human();
 
-		virtual std::string askName() const;
+
 		virtual bool isHuman() const;
 		virtual bool isInteractive() const;
 
-		virtual int askProvostShift() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
+
+		virtual int askProvostShift() const;
 		virtual unsigned int askWorkerPlacement() const;
+		virtual std::string askName() const;
+		virtual unsigned int askChoice(unsigned int range) const;
+
 		virtual void boardElementActivation(const controller::BoardElement * board_elt);
 		virtual void updateBoard();
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;
+
 
 		unsigned askNbHumans(unsigned max) const;
 		unsigned askNbAIs(unsigned min, unsigned max) const;

@@ -25,11 +25,18 @@ namespace view
 
 		virtual void operator()() {}
 
-		virtual std::string askName() const;
+
 		virtual bool isHuman() const;
+
 		virtual int askProvostShift() const;
+		virtual std::string askName() const;
+		virtual unsigned int askChoice(unsigned int range) const;
+		virtual unsigned int askWorkerPlacement() const { return 0; };
+
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
+
+
 		virtual controller::BoardElement * askWorkerPlacement(const std::vector<controller::BoardElement *> & buildings) const;
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;

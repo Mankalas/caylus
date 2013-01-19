@@ -27,12 +27,12 @@ public:
 	/** Destructor. */
 	~Visitor(){};
 
-	virtual void operator()(controller::GameEngine &);
-	virtual void operator()(controller::Board &);
-	virtual void operator()(controller::Road &);
-	virtual void operator()(controller::Player &);
-	virtual void operator()(controller::Stables &);
-	virtual void operator()(controller::Building &);
+	virtual void operator()(controller::GameEngine &) = 0;
+	virtual void operator()(controller::Board &) = 0;
+	virtual void operator()(controller::Road &) = 0;
+	virtual void operator()(controller::Player &) = 0;
+	virtual void operator()(controller::Stables &) = 0;
+	virtual void operator()(controller::Building &) = 0;
 
 };
 
@@ -45,12 +45,13 @@ public:
 	/** Destructor. */
 	~ConstVisitor(){};
 
-	virtual void operator()(const controller::GameEngine &);
-	virtual void operator()(const controller::Board &);
-	virtual void operator()(const controller::Road &);
-	virtual void operator()(const controller::Player &);
-	virtual void operator()(const controller::Stables &);
-	virtual void operator()(const controller::Building &);
+	virtual void operator()(const controller::GameEngine &) = 0;
+	virtual void operator()(const controller::Board &) = 0;
+	virtual void operator()(const controller::Road &) = 0;
+	virtual void operator()(const controller::Player &) = 0;
+	virtual void operator()(const controller::Stables &) = 0;
+	virtual void operator()(const controller::Building &) = 0;
 
 };
+
 #endif

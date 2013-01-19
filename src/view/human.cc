@@ -126,7 +126,18 @@ unsigned Human::askBuilding() const
 
 unsigned Human::askResourceChoice() const
 {
-	return 0;
+	return 1;
+}
+
+unsigned Human::askChoice(unsigned int range) const
+{
+	unsigned int choice = 0;
+	while (!(cin >> choice) || (choice > range))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+	return choice;
 }
 
 void Human::boardElementActivation(const controller::BoardElement * board_elt)

@@ -20,16 +20,6 @@ namespace sf
 	class Color;
 }
 
-/**-namespace controller
-{
-	class GameEngine;
-	class Road;
-	class Board;
-	class Player;
-	class Building;
-	class Stables;
-	}*/
-
 /** \brief Everything that has to access the graphical library is in
     this namespace. */
 namespace view
@@ -52,8 +42,8 @@ namespace view
 		virtual void operator()(const controller::Board &);
 		virtual void operator()(const controller::Road &);
 		virtual void operator()(const controller::Player &);
-		virtual void operator()(const controller::Stables & stables);
-		virtual void operator()(const controller::Building & building);
+		virtual void operator()(const controller::Stables &);
+		virtual void operator()(const controller::Building &);
 
 	private:
 		sf::RenderWindow & window_;

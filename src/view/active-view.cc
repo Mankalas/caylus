@@ -8,8 +8,8 @@
 
 #include "active-view.hh"
 #include "player-signals.hh"
-#include <boost/bind.hpp>
 #include "../controller/game-engine.hh"
+#include <boost/bind.hpp>
 
 using namespace view;
 using namespace controller;
@@ -20,4 +20,5 @@ ActiveView::ActiveView(GameEngine * ge)
 	player_ = game_engine_->newPlayer();
 	player_->signals()->ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
 	player_->signals()->ask_worker_placement.connect(boost::bind(&ActiveView::askWorkerPlacement, this));
+	player_->signals()->ask_choice.connect(boost::bind(&ActiveView::askChoice, this, _1));
 }
