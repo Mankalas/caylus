@@ -16,7 +16,6 @@
 namespace view
 {
 	class View;
-	class PlayerView;
 }
 
 namespace controller

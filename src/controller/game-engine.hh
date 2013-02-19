@@ -22,11 +22,6 @@
 class Visitor;
 class ConstVisitor;
 
-namespace view
-{
-	class PlayerView;
-}
-
 namespace controller
 {
 	class Building;

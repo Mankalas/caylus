@@ -13,11 +13,6 @@
 # include "omniscient-building.hh"
 # include "signals.hh"
 
-namespace view
-{
-	class PlayerView;
-}
-
 namespace controller
 {
 

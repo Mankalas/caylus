@@ -21,7 +21,6 @@ class ConstVisitor;
 
 namespace view
 {
-	class PlayerView;
 	class Logger;
 }
 
