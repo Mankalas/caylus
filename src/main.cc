@@ -22,7 +22,9 @@
 #include "view/ai.hh"
 #include "view/playback.hh"
 #include "view/html-logger.hh"
+#include "view/test-logger.hh"
 #include "view/graphic-view.hh"
+#include "view/console-view.hh"
 
 using namespace view;
 using namespace controller;
@@ -107,7 +109,7 @@ int main(int argc, char **argv)
 		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(00);
 		controller_thread.timed_join(timeout);
 
-		GraphicView gui(&g);
+		ConsoleView gui(&g);
 
 		assert(nb_humans <= 5);
 		// -1 because a first human is added the previous line
@@ -133,7 +135,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new AI player.");
 		}
 
-		HtmlLogger log(&g);
+		TestLogger log(&g);
 
 		boost::mutex gameOverMutex;
 		boost::unique_lock<boost::mutex> lock(gameOverMutex);

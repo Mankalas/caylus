@@ -30,8 +30,6 @@ namespace view
 		HtmlLogger(const controller::GameEngine * ge);
 		~HtmlLogger();
 
-		void setGE(const controller::GameEngine * ge);
-
 		void startOfTurn(const controller::GameEngine *);
 
 		void startSection(int level, const std::string & title);

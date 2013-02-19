@@ -20,8 +20,9 @@ namespace view
 		ConsoleView(const controller::GameEngine * game_engine);
 
 		virtual int askProvostShift() const;
-		virtual void updateBoard(const controller::GameEngine * ge) const;
+		virtual void updateBoard();
 		virtual controller::BoardElement * askBuilding(const std::vector<controller::BoardElement *> & choices) const;
+		virtual unsigned int askCaseNumber() const;
 
 		virtual int askChoice(int, int) const;
 		virtual int askChoice(std::vector<int>&) const;

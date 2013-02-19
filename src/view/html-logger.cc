@@ -111,11 +111,6 @@ void HtmlLogger::gameEngineReady()
 	      << "</ul>";
 }
 
-void HtmlLogger::setGE(const GameEngine * ge)
-{
-	ge_ = ge;
-}
-
 void HtmlLogger::incomeCollectionBegin()
 {
 	file_ << "<h1>Income collection</h1>";

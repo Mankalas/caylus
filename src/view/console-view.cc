@@ -152,7 +152,12 @@ int ConsoleView::getInputInt_(int min, int max) const
 	return in - 1;
 }
 
-void ConsoleView::updateBoard(const GameEngine * ge) const
+void ConsoleView::updateBoard()
 {
-	std::cout << *ge << std::endl;
+	std::cout << *game_engine_ << std::endl;
+}
+
+unsigned int ConsoleView::askCaseNumber() const
+{
+	return getInt();
 }
