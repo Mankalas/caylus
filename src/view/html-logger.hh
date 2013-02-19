@@ -1,13 +1,13 @@
 /**
- * @file   logger.hh
+ * @file   html-logger.hh
  * @author Vincent Boucheny <mankalas@gmail.com>
  * @date   Sun Sep 25 00:42:58 2011
  *
  * @brief  Declaration of the logger class.
  */
 
-#ifndef LOGGER_HH
-# define LOGGER_HH
+#ifndef HTML_LOGGER_HH
+# define HTML_LOGGER_HH
 
 # include <stack>
 # include <fstream>
@@ -24,11 +24,11 @@ namespace controller
 
 namespace view
 {
-	class Logger : public PassiveView
+	class HtmlLogger : public PassiveView
 	{
 	public:
-		Logger(const controller::GameEngine * ge);
-		~Logger();
+		HtmlLogger(const controller::GameEngine * ge);
+		~HtmlLogger();
 
 		void setGE(const controller::GameEngine * ge);
 

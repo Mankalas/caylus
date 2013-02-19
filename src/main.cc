@@ -21,7 +21,7 @@
 #include "view/human.hh"
 #include "view/ai.hh"
 #include "view/playback.hh"
-#include "view/logger.hh"
+#include "view/html-logger.hh"
 #include "view/graphic-view.hh"
 
 using namespace view;
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new AI player.");
 		}
 
-		Logger log(&g);
+		HtmlLogger log(&g);
 
 		boost::mutex gameOverMutex;
 		boost::unique_lock<boost::mutex> lock(gameOverMutex);
