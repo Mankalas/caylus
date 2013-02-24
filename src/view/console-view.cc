@@ -10,6 +10,7 @@
 
 #include <limits>
 #include "../controller/game-engine.hh"
+#include "../debug-logger.hh"
 
 using namespace std;
 using namespace view;
@@ -143,10 +144,11 @@ int ConsoleView::getInputInt_(int min, int max) const
 
 void ConsoleView::updateBoard()
 {
+	DebugLogger::log("Console view updateBoard\n");
 	std::cout << *game_engine_ << std::endl;
 }
 
 unsigned int ConsoleView::askCaseNumber() const
 {
-	return getInt();
+	return getInputInt_(0, 100);
 }

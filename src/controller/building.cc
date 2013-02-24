@@ -77,8 +77,6 @@ Building::activate()
 		return;
 	}
 
-	std::cout << "Activation of " << name_ << " for player " << *worker_ << std::endl;
-
 	on_activate();
 
 	worker_unset();

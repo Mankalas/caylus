@@ -37,5 +37,8 @@ bool Bridge::isBridge() const
 
 void Bridge::on_activate()
 {
-	std::cout << "Activation of bridge." << std::endl;
+	foreach (Player * player, players_)
+	{
+		activation_sig(this, player);
+	}
 }

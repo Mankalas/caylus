@@ -32,7 +32,6 @@ GraphicView::GraphicView(const GameEngine * game_engine)
 {
 	window_ = new sf::RenderWindow(sf::VideoMode(1500, 900), "Caylus",
 	                               sf::Style::Resize | sf::Style::Close);
-	game_engine_->signals()->board_updated.connect(boost::bind(&GraphicView::updateBoard, this));
 }
 
 Vector2<int> GraphicView::getClick() const

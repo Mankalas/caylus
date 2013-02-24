@@ -28,21 +28,9 @@ ConstructionBuilding::ConstructionBuilding(GameEngine * ge, const BuildingType &
 void ConstructionBuilding::on_activate()
 {
 	Building::on_activate();
-	//  unsigned i = 1;
 	unsigned choice = 0;
 
 	std::map<unsigned, BuildingSmartPtr> building_choice;
-
-	/*std::cout << "0. Pass" << std::endl;
-	foreach (const BuildingSmartPtr& building, game_->buildings())
-	{
-	  if (building->type() == construc_type)
-	  {
-	    std::cout << i << ". " << building->name() << std::endl;
-	    building_choice[i++] = building;
-	  }
-	}
-	choice = ConsoleUI::inst()->askChoice(0, building_choice.size() + 1);*/
 	choice = ask_building_signal_();
 	if (choice == 0)
 	{

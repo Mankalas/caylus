@@ -8,6 +8,7 @@
 
 #include "trade-building.hh"
 #include "../const.hh"
+#include "../debug-logger.hh"
 
 TradeBuilding::~TradeBuilding()
 {
@@ -29,18 +30,8 @@ TradeBuilding::on_activate()
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges = createExchangeVector();
 	unsigned choice = 1;
 
-	std::cout << "Player " << worker_->name()
-	          << ", what would you like to exchange?" << std::endl
-	          << "0. Nothing, I love to waste workers." << std::endl;
-
 	std::pair<ResourceMap, ResourceMap> ex;
-	foreach(ex, exchanges)
-	{
-		std::cout << choice++ << ". " << ex.first << " for "
-		          << ex.second << std::endl;
-	}
-
-	choice = worker_->signals()->ask_choice(exchanges.size() + 1);
+	choice = worker_->signals()->ask_choice(1);
 	if (0 == choice)
 	{
 		return;
@@ -54,7 +45,7 @@ TradeBuilding::on_activate()
 	}
 	else
 	{
-		std::cout << "Not enough resources. Try again." << std::endl;
+		DebugLogger::log("Not enough resources. Try again.");
 		on_activate();
 	}
 }

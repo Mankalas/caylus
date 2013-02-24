@@ -8,6 +8,7 @@
 
 #include "joust-field.hh"
 #include "const.hh"
+#include "../debug-logger.hh"
 
 JoustField::JoustField()
 	: Building(JOUST_FIELD,
@@ -23,8 +24,8 @@ void JoustField::on_activate(void)
 	if (worker_->resources()[Resource::denier] < 1 ||
 	    worker_->resources()[Resource::cloth] < 1)
 	{
-		std::cout << "Not enough resources. Try again." << std::endl;
-		return;
+		DebugLogger::log("Not enough resources. Try again.");
+		on_activate();
 	}
 	if (ask_proceed_())
 	{

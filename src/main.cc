@@ -69,14 +69,14 @@ int main(int argc, char **argv)
 				nb_ais = atoi(optarg);
 				break;
 			case 'c' :
-				std::cout << "Command line game." << std::endl;
+				DebugLogger::log("Command line game.");
 				//	command_line = true;
 				break;
 			case 'd' :
 				dir = optarg;
 				break;
 			case 's' :
-				std::cout << "Server game." << std::endl;
+				DebugLogger::log("Server game.");
 				break;
 			case 'h' :
 				usage();

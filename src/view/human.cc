@@ -27,15 +27,6 @@ Human::Human(const GameEngine * ge, const Player * player, DisplayView * display
 	: ActiveView(ge, player)
 	, gui_(display)
 {
-	/**-if (console)
-	{
-		gui_ = new ConsoleView(ge);
-	}
-	else
-	{
-		gui_ = new GraphicView(ge);
-		}-
-	*/
 }
 
 Human::~Human()

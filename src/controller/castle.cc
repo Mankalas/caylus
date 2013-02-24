@@ -118,15 +118,7 @@ void Castle::on_activate()
 			else
 			{
 				can_pay = true;
-				/*//ConsoleUI::inst()->printMessage("OK for activation");
-						std::pair<Resource, Resource> pair;
-						std::vector<std::pair<Resource, Resource> > pairs =
-						_createResourcesVector(*p);
-						std::cout << "0. No construction (-2 prestige)" << std::endl;*/
-
 				ResourceMap * choice = ask_payment_();
-				/*foreach (pair, pairs)
-						std::cout << choice++ << ". " << pair.first << " + " << pair.second << std::endl;*/
 				if (NULL == choice)
 				{
 					can_pay = false;
@@ -193,7 +185,6 @@ void Castle::_build(Player * p, ResourceMap * resources)
 
 	if (isActivePartComplete())
 	{
-		std::cout << active_part_->houses().size() << " houses" << std::endl;
 		active_part = parts_[part_index_ + 1];
 	}
 	p->resources() -= *resources;
