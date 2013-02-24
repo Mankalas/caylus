@@ -18,7 +18,8 @@ using namespace controller;
 
 ConsoleView::ConsoleView(const GameEngine * game_engine)
 	: DisplayView(game_engine)
-{}
+{
+}
 
 int ConsoleView::askChoice(int from, int to) const
 {
@@ -144,7 +145,6 @@ int ConsoleView::getInputInt_(int min, int max) const
 
 void ConsoleView::updateBoard()
 {
-	DebugLogger::log("Console view updateBoard\n");
 	std::cout << *game_engine_ << std::endl;
 }
 

@@ -231,11 +231,10 @@ void GameEngine::placeWorkers_()
 		foreach(Player * p, order_)
 		{
 			assert(p);
-			if (!canPlayerPlay_(p))
+			if (canPlayerPlay_(p))
 			{
-				continue;
+				playerMove_(p);
 			}
-			playerMove_(p);
 		}
 	}
 	sigs_.worker_placement_end();
@@ -264,7 +263,7 @@ void GameEngine::playerMove_(Player * p)
 	{
 		selected_case = p->askWorkerPlacement();
 
-		if (selected_case == 	Castle::CASE_NUMBER)
+		if (selected_case == Castle::CASE_NUMBER)
 		{
 			board_.bridge().add(p);
 			has_played = true;
@@ -295,7 +294,6 @@ void GameEngine::playerMove_(Player * p)
 					selected_building->worker_set(*p);
 					p->resources() -= Resource::denier * (selected_building->owner() == p ? 1 : worker_cost);
 					has_played = true;
-					sigs_.board_updated();
 				}
 				catch (OccupiedBuildingEx *)
 				{
@@ -319,6 +317,7 @@ void GameEngine::playerMove_(Player * p)
 			DebugLogger::log("Empty case.");
 		}
 	}
+	sigs_.board_updated();
 }
 
 void GameEngine::startOfTurn_()

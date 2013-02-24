@@ -13,13 +13,17 @@
 # include <vector>
 # include <string>
 
+namespace controller
+{
+	class GameEngine;
+}
+
 namespace view
 {
 	class DisplayView : public PassiveView
 	{
 	public:
-		DisplayView(const controller::GameEngine * ge)
-			: PassiveView(ge) {};
+		DisplayView(const controller::GameEngine * ge);
 
 		virtual int askProvostShift() const = 0;
 		virtual void updateBoard() = 0;
