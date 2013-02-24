@@ -9,12 +9,13 @@
 #include "human.hh"
 
 #include <iostream>
-
 #include <boost/bind.hpp>
+
 #include "../debug-logger.hh"
-#include "display-view.hh"
-#include "../controller/board-element.hh"
+
 #include "../controller/player.hh"
+
+#include "display-view.hh"
 #include "console-view.hh"
 #include "graphic-view.hh"
 
@@ -22,8 +23,8 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-Human::Human(GameEngine * ge, DisplayView * display)
-	: ActiveView(ge)
+Human::Human(const GameEngine * ge, const Player * player, DisplayView * display)
+	: ActiveView(ge, player)
 	, gui_(display)
 {
 	/**-if (console)
@@ -33,8 +34,8 @@ Human::Human(GameEngine * ge, DisplayView * display)
 	else
 	{
 		gui_ = new GraphicView(ge);
-		}-**/
-	player_->name(askName());
+		}-
+	*/
 }
 
 Human::~Human()
@@ -138,11 +139,6 @@ unsigned Human::askChoice(unsigned int range) const
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 	return choice;
-}
-
-void Human::boardElementActivation(const controller::BoardElement * board_elt)
-{
-	gui_->showMessage(board_elt->name() + " activated.");
 }
 
 bool Human::isInteractive() const

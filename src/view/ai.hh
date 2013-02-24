@@ -10,6 +10,13 @@
 
 # include "active-view.hh"
 
+namespace controller
+{
+	class GameEngine;
+	class Player;
+	class BoardElement;
+}
+
 namespace view
 {
 	/**
@@ -19,7 +26,7 @@ namespace view
 	{
 	public:
 
-		AI(controller::GameEngine * ge);
+		AI(const controller::GameEngine * ge, const controller::Player * player);
 
 		virtual bool isInteractive() const;
 

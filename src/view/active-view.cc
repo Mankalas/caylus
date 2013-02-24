@@ -14,10 +14,10 @@
 using namespace view;
 using namespace controller;
 
-ActiveView::ActiveView(GameEngine * ge)
-	: game_engine_(ge)
+ActiveView::ActiveView(const GameEngine * ge, const Player * player)
+	: View(ge)
+	, player_(player)
 {
-	player_ = game_engine_->newPlayer();
 	player_->signals()->ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
 	player_->signals()->ask_worker_placement.connect(boost::bind(&ActiveView::askWorkerPlacement, this));
 	player_->signals()->ask_choice.connect(boost::bind(&ActiveView::askChoice, this, _1));

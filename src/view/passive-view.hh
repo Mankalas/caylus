@@ -20,9 +20,6 @@ namespace view
 	{
 	public:
 		PassiveView(const controller::GameEngine * ge);
-
-	protected:
-		const controller::GameEngine * game_engine_;
 	};
 }
 

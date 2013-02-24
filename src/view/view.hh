@@ -12,13 +12,14 @@
 namespace controller
 {
 	class GameEngine;
-	class BoardElement;
 }
 
 namespace view
 {
 	/**
-	 * Generic view. Abstract class.
+	 * Generic view. Abstract class. No constructor with a GameEngine
+	 * parameter for passive views have a const instance, and active
+	 * views have not.
 	 */
 	class View
 	{
@@ -26,12 +27,15 @@ namespace view
 		/**
 		 * Constructor.
 		 */
-		View();
+		View(const controller::GameEngine * ge);
 
 		/**
 		 * Virtual destructor.
 		 */
 		virtual ~View() = 0;
+
+	protected:
+		const controller::GameEngine * game_engine_;
 	};
 
 }

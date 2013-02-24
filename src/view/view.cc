@@ -10,6 +10,8 @@
 
 using namespace view;
 
-View::View() {}
+View::View(const controller::GameEngine * ge)
+	: game_engine_(ge)
+{}
 
 View::~View() {}

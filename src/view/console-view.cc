@@ -128,17 +128,6 @@ bool ConsoleView::askYesNo() const
 	return getInt() == 1;
 }
 
-BoardElement * ConsoleView::askBuilding(const std::vector<BoardElement *> & choices) const
-{
-	for (unsigned int i = 0; i < choices.size(); ++i)
-	{
-		BoardElement * board_element = choices[i];
-		assert(board_element);
-		std::cout << i + 1 << ". " << board_element->name() << std::endl;
-	}
-	return choices[getInputInt_(1, choices.size())];
-}
-
 int ConsoleView::getInputInt_(int min, int max) const
 {
 	std::cout << "Enter a number between " << min << " and " << max << "." << std::endl;

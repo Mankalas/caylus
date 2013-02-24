@@ -17,7 +17,7 @@ namespace view
 	class Playback : public ActiveView
 	{
 	public:
-		Playback(controller::GameEngine * game_engine, std::string record_path);
+		Playback(const controller::GameEngine * game_engine, const controller::Player * player, std::string record_path);
 		~Playback();
 
 		virtual std::string askName() const;
@@ -25,8 +25,8 @@ namespace view
 		virtual unsigned int askWorkerPlacement() const;
 		virtual unsigned int askChoice(unsigned int range) const;
 
-		/*virtual bool askYesNo() const;
-		virtual bool askJoustField() const;
+		virtual bool askYesNo() const;
+		/*virtual bool askJoustField() const;
 
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;

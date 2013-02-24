@@ -67,7 +67,9 @@ inline std::ostream & operator<<(std::ostream & o, const Board & board)
 {
 	o << "Bridge : ";
 	foreach(const Player * p, board.bridge().players())
-	o << p->name() << " - ";
+	{
+		o << p->name() << " - ";
+	}
 
 	o << std::endl << board.castle();
 
@@ -80,6 +82,7 @@ inline std::ostream & operator<<(std::ostream & o, const Board & board)
 	  << (bdg == NULL ? "<empty>" : bdg->name()) << std::endl
 	  << std::endl;
 
+	o << board.road() << std::endl;
 	return o;
 }
 

@@ -18,8 +18,8 @@ using namespace std;
 using namespace view;
 using namespace controller;
 
-AI::AI(GameEngine * ge)
-	: ActiveView(ge)
+AI::AI(const GameEngine * ge, const Player * player)
+	: ActiveView(ge, player)
 {
 	srand(time(NULL));
 }

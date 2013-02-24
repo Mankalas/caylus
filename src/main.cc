@@ -54,14 +54,14 @@ int main(int argc, char **argv)
 	std::string host = "";
 	int option = 0;
 
-	unsigned int nb_humans = 1;
+	unsigned int nb_humans = 0;
 	unsigned int nb_ais = 0;
 	unsigned int max_workers = 6;
 	unsigned int max_turns = INT_MAX;
 	std::string dir = "";
 	bool random = true;
 
-	while ((option = getopt(argc, argv, "a:cdhm:ru:w:")) != -1)
+	while ((option = getopt(argc, argv, "a:cd:hm:ru:w:")) != -1)
 	{
 		switch (option)
 		{
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 				//	command_line = true;
 				break;
 			case 'd' :
-				std::cin >> dir;
+				dir = optarg;
 				break;
 			case 's' :
 				std::cout << "Server game." << std::endl;
@@ -106,26 +106,32 @@ int main(int argc, char **argv)
 		g.signals()->game_over.connect(&waitForGameOver);
 
 		boost::thread controller_thread(boost::ref(g));
-		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(00);
+		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(0);
 		controller_thread.timed_join(timeout);
 
 		ConsoleView gui(&g);
 
 		assert(nb_humans <= 5);
-		// -1 because a first human is added the previous line
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
-			new Human(&g, &gui);
-			g.playerReady();
 			DebugLogger::log("Adding new human player.");
+			Player * player = g.newPlayer();
+			Human * human = new Human(&g, player, &gui);
+			player->name(human->askName());
+			g.playerReady();
 		}
 
 		if (dir != "")
 		{
 			DebugLogger::log("Adding new playback player.");
 			nb_ais -= nb_ais == 0 ? 0 : 1;
-			new Playback(&g, dir);
+			Player * player = g.newPlayer();
+			Playback * playback = new Playback(&g, player, dir);
+			player->name(playback->askName());
 			g.playerReady();
+			unsigned nb_workers = playback->askProvostShift(); // TODO : better
+			g.maxWorkers() = nb_workers;
+			player->workers() = nb_workers;
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
@@ -147,7 +153,7 @@ int main(int argc, char **argv)
 	}
 	catch (Exception * ex)
 	{
-		std::cerr << ex->msg() << std::endl;
+		std::cerr <<"An exception occured (bitch) : " << ex->msg() << std::endl;
 	}
 	return 0;
 }

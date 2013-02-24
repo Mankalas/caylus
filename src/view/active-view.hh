@@ -16,7 +16,6 @@
 namespace controller
 {
 	class Player;
-	class GameEngine;
 }
 
 namespace view
@@ -27,20 +26,27 @@ namespace view
 	class ActiveView : public View
 	{
 	public:
-		ActiveView(controller::GameEngine * ge);
+		ActiveView(const controller::GameEngine * ge, const controller::Player * player);
 
-		///
+		/**
+		 * Ask for the provost's shift. This method assures that the
+		 * returned value in within the range [-3; 3].
+		 *
+		 * @return The provost's shift.
+		 */
 		virtual int askProvostShift() const = 0;
+
 		///
 		virtual unsigned int askWorkerPlacement() const = 0;
 		///
 		virtual std::string askName() const = 0;
 		///
 		virtual unsigned int askChoice(unsigned int range) const = 0;
+		///
+		virtual bool askYesNo() const = 0;
 
 	protected:
-		controller::GameEngine * game_engine_;
-		controller::Player * player_;
+		const controller::Player * player_;
 	};
 }
 

@@ -109,7 +109,7 @@ inline bool controller::Player::operator==(const controller::Player & p) const
 
 inline std::ostream & operator<<(std::ostream & o, const controller::Player & player)
 {
-	o << "controller::Player " << player.name() << " - " << player.resources()
+	o << "Player " << player.name() << " - " << player.resources()
 	  << " - Workers left : " << player.workers();
 	return o;
 }

@@ -12,8 +12,6 @@ using namespace view;
 using namespace controller;
 
 PassiveView::PassiveView(const GameEngine * ge)
-	: game_engine_(ge)
+	: View(ge)
 {
 }
-
-

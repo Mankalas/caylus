@@ -19,18 +19,14 @@
 
 using namespace view;
 
-Playback::Playback(controller::GameEngine * game_engine, std::string record_path)
-	: ActiveView(game_engine)
+Playback::Playback(const controller::GameEngine * game_engine, const controller::Player * player, std::string record_path)
+	: ActiveView(game_engine, player)
 {
 	file_.open(record_path.c_str(), std::ios::in);
 	if (!file_.is_open())
 	{
 		std::cerr << "File " << record_path << " does not exists." << std::endl;
 	}
-	player_->name(askName());
-	unsigned nb_workers = next_uint();
-	game_engine->maxWorkers() = nb_workers;
-	player_->workers() = nb_workers;
 }
 
 Playback::~Playback()
@@ -53,7 +49,11 @@ unsigned int Playback::askWorkerPlacement() const
 	return next_int();
 }
 
-/* bool Playback::askYesNo() const;
+bool Playback::askYesNo() const
+{
+	return true;
+}
+/*
 	 bool Playback::askJoustField() const;
 	 unsigned Playback::askBuilding() const;
 	 unsigned Playback::askResourceChoice() const;

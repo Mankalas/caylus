@@ -14,12 +14,19 @@
 # include "display-view.hh"
 # include <vector>
 # include <boost/signal.hpp>
+
+namespace controller
+{
+	class GameEngine;
+	class Player;
+}
+
 namespace view
 {
 	class Human : public ActiveView
 	{
 	public:
-		Human(controller::GameEngine * ge, DisplayView *);
+		Human(const controller::GameEngine * ge, const controller::Player * player, DisplayView *);
 		virtual ~Human();
 
 
@@ -34,7 +41,6 @@ namespace view
 		virtual std::string askName() const;
 		virtual unsigned int askChoice(unsigned int range) const;
 
-		virtual void boardElementActivation(const controller::BoardElement * board_elt);
 		virtual void updateBoard();
 		virtual unsigned askBuilding() const;
 		virtual unsigned askResourceChoice() const;

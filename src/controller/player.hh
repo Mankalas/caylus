@@ -15,6 +15,7 @@
 # include <iostream>
 # include "resource-map.hh"
 # include "../player-signals.hh"
+# include "../view/playback.hh"
 
 class Visitor;
 class ConstVisitor;
@@ -79,6 +80,9 @@ namespace controller
 		void accept(Visitor &);
 
 		//@}
+
+		// So the playback change change player's name.
+		friend class view::Playback;
 
 	private:
 
