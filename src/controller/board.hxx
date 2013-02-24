@@ -63,29 +63,6 @@ Board::provost()
 	return provost_;
 }
 
-inline std::ostream & operator<<(std::ostream & o, const Board & board)
-{
-	o << "Bridge : ";
-	foreach(const Player * p, board.bridge().players())
-	{
-		o << p->name() << " - ";
-	}
-
-	o << std::endl << board.castle();
-
-	BuildingSmartPtr bdg = board.road()[board.bailiff()];
-	o << std::endl << "Bailiff : " << board.bailiff() + 1 << ": "
-	  << (bdg == NULL ? "<empty>" : bdg->name()) << std::endl;
-
-	bdg = board.road()[board.provost()];
-	o << "Provost : " << board.provost() + 1 << ": "
-	  << (bdg == NULL ? "<empty>" : bdg->name()) << std::endl
-	  << std::endl;
-
-	o << board.road() << std::endl;
-	return o;
-}
-
 inline
 void controller::Board::accept(ConstVisitor & v) const
 {

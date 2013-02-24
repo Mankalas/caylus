@@ -104,17 +104,6 @@ bool controller::GameEngine::random() const
 }
 
 inline
-std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
-{
-	foreach(const Player * p, g.order())
-	{
-		o << *p << std::endl;
-	}
-	o << g.board();
-	return o;
-}
-
-inline
 void controller::GameEngine::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);

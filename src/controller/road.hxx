@@ -58,25 +58,6 @@ Road::operator [](const std::string & name) const
 	throw new NoBuildingEx();
 }
 
-inline std::ostream &
-operator<<(std::ostream & o, const Road & r)
-{
-	foreach(BuildingSmartPtr ptr, r.get())
-	{
-		o << " * ";
-		if (ptr)
-		{
-			o << *ptr;
-		}
-		else
-		{
-			o << "<empty>";
-		}
-		o << std::endl;
-	}
-	return o;
-}
-
 inline
 void controller::Road::accept(ConstVisitor & v) const
 {

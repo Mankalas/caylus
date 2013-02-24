@@ -83,3 +83,23 @@ Road::clearWorkers()
 		}
 	}
 }
+
+std::ostream &
+operator<<(std::ostream & o, const Road & r)
+{
+	unsigned int i = 1;
+	foreach(BuildingSmartPtr ptr, r.get())
+	{
+		o << i++ << ". ";
+		if (ptr)
+		{
+			o << *ptr;
+		}
+		else
+		{
+			o << "<empty>";
+		}
+		o << std::endl;
+	}
+	return o;
+}

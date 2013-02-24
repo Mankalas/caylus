@@ -409,3 +409,13 @@ Bridge & GameEngine::getBridge()
 {
 	return board_.bridge();
 }
+
+std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
+{
+	foreach(const Player * p, g.order())
+	{
+		o << *p << std::endl;
+	}
+	o << g.board();
+	return o;
+}
