@@ -213,7 +213,40 @@ operator << (std::ostream & ostr, const ResourceMap & rm)
 		{
 			continue;
 		}
-		ostr << (first ? "" : ", ") << rm[r] << " " << r << (rm[r] > 1 ? "s" : "");
+		if (r == Resource::food)
+		{
+			ostr << MAGENTA;
+		}
+		else if (r == Resource::wood)
+		{
+			ostr << RED;
+		}
+		else if (r == Resource::stone)
+		{
+			ostr << GRAY;
+		}
+		else if (r == Resource::gold)
+		{
+			ostr << YELLOW;
+		}
+		else if (r == Resource::denier)
+		{
+			ostr << GREEN;
+		}
+		else if (r == Resource::cloth)
+		{
+			ostr << BLUE;
+		}
+		else if (r == Resource::prestige)
+		{
+			ostr << MAGENTA;
+		}
+		else if (r == Resource::favor)
+		{
+			ostr << CYAN;
+		}
+		ostr << (first ? "" : ", ") << rm[r] << " " << r << (rm[r] > 1 ? "s" : "")
+		     << RESET;
 		first = false;
 	}
 

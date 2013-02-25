@@ -10,7 +10,8 @@
 # include "player.hh"
 # include "exceptions.hh"
 
-# include "./visitor.hh"
+# include "../visitor.hh"
+# include "../const.hh"
 
 inline ResourceMap & controller::Player::resources()
 {
@@ -109,7 +110,7 @@ inline bool controller::Player::operator==(const controller::Player & p) const
 
 inline std::ostream & operator<<(std::ostream & o, const controller::Player & player)
 {
-	o << "Player " << player.name() << " - " << player.resources()
+	o << "Player " << GREEN << player.name() << RESET << " - " << player.resources()
 	  << " - Workers left : " << player.workers();
 	return o;
 }

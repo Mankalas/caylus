@@ -126,11 +126,11 @@ operator<<(std::ostream & o, const Building & b)
 	o << b.name();
 	if (b.owner())
 	{
-		o << " (" << b.owner()->name() << ") ";
+		o << " (" << BLUE << b.owner()->name() << RESET << ") ";
 	}
 	if (b.worker())
 	{
-		o << " : " << b.worker()->name();
+		o << " : " << GREEN << b.worker()->name() << RESET;
 	}
 	return o;
 }

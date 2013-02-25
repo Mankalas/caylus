@@ -90,7 +90,7 @@ operator<<(std::ostream & o, const Road & r)
 	unsigned int i = 1;
 	foreach(BuildingSmartPtr ptr, r.get())
 	{
-		o << i++ << ". ";
+		o << YELLOW << i++ << ". " << RESET;
 		if (ptr)
 		{
 			o << *ptr;
