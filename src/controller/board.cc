@@ -8,6 +8,7 @@
 
 #include "board.hh"
 #include "game-engine.hh"
+#include "../debug-logger.hh"
 
 using namespace controller;
 
@@ -25,12 +26,11 @@ Board::~Board()
 {
 }
 
-bool Board::isProvostShiftValid(int proposed_case) const
+bool Board::isProvostShiftValid(int shift) const
 {
-	int shift = proposed_case - provost();
 	return shift >= -3 && shift <= 3 &&
-		shift + provost() <= LAST_EMPTY_CASE_ &&
-		shift - provost() >= FIRST_EMPTY_CASE_;
+		provost() + shift <= LAST_EMPTY_CASE_ &&
+		provost() - shift >= FIRST_EMPTY_CASE_;
 }
 
 void Board::shiftProvost(int shift)
@@ -58,5 +58,7 @@ std::ostream & operator<<(std::ostream & o, const Board & board)
 	  << std::endl;
 
 	o << board.road() << std::endl;
+	o << BOLDYELLOW << Bridge::CASE_NUMBER << ". " << RESET << board.bridge().name() << std::endl
+	  << BOLDYELLOW << Castle::CASE_NUMBER << ". " << RESET << board.castle().name() << std::endl;
 	return o;
 }

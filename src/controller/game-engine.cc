@@ -169,19 +169,17 @@ void GameEngine::activateBridge_()
 			continue;
 		}
 		int shift = 0;
-		unsigned int selected_case = 0;
 		bool is_shift_valid = false;
 		bool has_enough_denier = false;
 		/* If the provost is not moved before the bridge, or over the end
 		   of the board, or if the player has enough money, then move. */
 		while (!is_shift_valid || !has_enough_denier)
 		{
-			selected_case = p->askProvostShift();
-			is_shift_valid = board_.isProvostShiftValid(selected_case);
-			shift = selected_case - board_.provost();
+			shift = p->askProvostShift();
+			is_shift_valid = board_.isProvostShiftValid(shift);
 			has_enough_denier = fabs(shift) <= deniers;
 		}
-		board_.provost() = selected_case;
+		board_.provost() += shift;
 		sigs_.board_updated();
 		p->resources() -= Resource::denier * fabs(shift);
 	}
@@ -263,18 +261,16 @@ void GameEngine::playerMove_(Player * p)
 	{
 		selected_case = p->askWorkerPlacement();
 
-		if (selected_case == Castle::CASE_NUMBER)
+		if (selected_case == Bridge::CASE_NUMBER)
 		{
 			board_.bridge().add(p);
 			has_played = true;
 			continue;
 		}
-
 		worker_cost = getWorkerCost_(p);
 
 		if (selected_case == Castle::CASE_NUMBER && p->resources()[Resource::denier] >= worker_cost)
 		{
-			DebugLogger::log("Castle chosen");
 			board_.castle().add(p);
 			p->resources() -= Resource::denier * worker_cost;
 			p->workers() -= 1;
@@ -282,7 +278,7 @@ void GameEngine::playerMove_(Player * p)
 			continue;
 		}
 
-		assert(selected_case < board_.road().get().size());
+		assert(--selected_case < board_.road().get().size());
 		BuildingSmartPtr selected_building = board_.road().get()[selected_case];
 
 		if (selected_building != NULL)

@@ -140,7 +140,7 @@ int ConsoleView::getInputInt_(int min, int max) const
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-	return in - 1;
+	return in;
 }
 
 void ConsoleView::updateBoard()

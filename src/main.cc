@@ -74,6 +74,7 @@ int main(int argc, char **argv)
 				break;
 			case 'd' :
 				dir = optarg;
+				++nb_ais;
 				break;
 			case 's' :
 				DebugLogger::log("Server game.");
@@ -128,6 +129,7 @@ int main(int argc, char **argv)
 			Player * player = g.newPlayer();
 			Playback * playback = new Playback(&g, player, dir);
 			player->name(playback->askName());
+			std::cout << "Player name is " << player->name() << std::endl;
 			g.playerReady();
 			unsigned nb_workers = playback->askProvostShift(); // TODO : better
 			g.maxWorkers() = nb_workers;
