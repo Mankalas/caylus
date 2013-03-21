@@ -34,4 +34,3 @@ const std::string & BoardElement::name() const
 {
 	return name_;
 }
-

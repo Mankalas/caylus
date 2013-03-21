@@ -43,7 +43,7 @@ void Gate::on_activate()
 			}
 			else
 			{
-				already_occupied(this);
+				already_occupied(&castle);
 			}
 		}
 		else if (selected_case != Bridge::CASE_NUMBER)

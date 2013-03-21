@@ -40,6 +40,7 @@ typedef boost::signal<void (const std::vector<controller::BoardElement *> &, con
 typedef boost::signal<controller::BoardElement * (const std::vector<controller::BoardElement*> &)> ask_board_element_signal_t;
 typedef boost::signal<void (const controller::GameEngine *)> v_cge_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> board_element_activation_signal_t;
+typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> worker_placed_signal_t;
 typedef boost::signal<unsigned int (std::vector<unsigned int>)> u_vu_signal_t;
 
 

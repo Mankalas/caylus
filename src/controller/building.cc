@@ -66,6 +66,7 @@ Building::worker_set(Player & current)
 		owner_->addResources(Resource::prestige);
 	}
 	worker_ = &current;
+	worker_placed(this, worker_);
 	current.workers() -= 1;
 }
 

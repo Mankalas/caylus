@@ -33,6 +33,7 @@ namespace view
 		void newTurn(unsigned current_turn, unsigned max_turn);
 		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
 		void boardElementAlreadyOccupied(const controller::BoardElement * board_elt);
+		void workerPlacement(const controller::BoardElement * board_elt, const controller::Player * player);
 
 		std::ofstream file_;
 	};

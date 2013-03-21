@@ -157,6 +157,7 @@ bool Castle::has(const Player * p) const
 void Castle::add(Player * p)
 {
 	players_.push_back(p);
+	worker_placed(this, p);
 }
 
 void Castle::clear()

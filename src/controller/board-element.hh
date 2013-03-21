@@ -33,6 +33,7 @@ namespace controller
 		virtual void on_activate() = 0;
 
 		mutable board_element_activation_signal_t activation_sig;
+		mutable worker_placed_signal_t worker_placed;
 		mutable v_cbe_signal_t already_occupied;
 
 	protected:

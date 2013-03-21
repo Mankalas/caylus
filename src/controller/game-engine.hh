@@ -59,6 +59,8 @@ namespace controller
 		const Board & board() const;
 		Board & board();
 
+		std::vector<const BoardElement *> getEveryBoardElements() const;
+
 		unsigned nbHumans() const;
 		unsigned nbAIs() const;
 		unsigned nbTurnsMax() const;
@@ -75,6 +77,8 @@ namespace controller
 		BuildingSmartPtr getBuildingAtCase(unsigned int) const;
 		Castle & getCastle();
 		Bridge & getBridge();
+		const Castle & getCastle() const;
+		const Bridge & getBridge() const;
 
 		Player * newPlayer();
 

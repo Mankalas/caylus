@@ -405,6 +405,16 @@ Bridge & GameEngine::getBridge()
 	return board_.bridge();
 }
 
+const Castle & GameEngine::getCastle() const
+{
+	return board_.castle();
+}
+
+const Bridge & GameEngine::getBridge() const
+{
+	return board_.bridge();
+}
+
 std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
 {
 	foreach(const Player * p, g.order())
@@ -413,4 +423,26 @@ std::ostream & operator<<(std::ostream & o, const controller::GameEngine & g)
 	}
 	o << g.board();
 	return o;
+}
+
+std::vector<const BoardElement *> GameEngine::getEveryBoardElements() const
+{
+	std::vector<const BoardElement *> board_elements;
+	board_elements.push_back(&getBridge());
+	board_elements.push_back(&getCastle());
+	foreach (const BuildingSmartPtr building, board().road().get())
+	{
+		if (building != NULL)
+		{
+			board_elements.push_back(&(*building));
+		}
+	}
+	foreach (const BuildingSmartPtr building, buildings_)
+	{
+		if (building != NULL)
+		{
+			board_elements.push_back(&(*building));
+		}
+	}
+	return board_elements;
 }

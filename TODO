@@ -98,6 +98,26 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TEST] Residential and prestige buildings' rules (built on neutral or own building)
 [TEST] Trade buildings
 
+
+* Signals *
+
+Player places worker for x deniers
+Player passes (and gets 1 denier)
+Building activation starts
+Building activation
+Provost move
+Player gets resource
+Player builds a building
+End of turn
+Bailiff moves
+Players get revenue
+New turn
+Player gets a victory point for building used
+Players builds part of castle (part) with (resources)
+Player gets a favor for building most houses
+Player choses favor lines
+Player gets favor bonus
+
 --
 
 Scratch...
