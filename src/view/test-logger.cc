@@ -14,7 +14,7 @@
 using namespace controller;
 using namespace view;
 
-TestLogger::TestLogger(const GameEngine * game_engine)
+TestLogger::TestLogger(const GameEngine * game_engine, std::string output_path)
 	: PassiveView(game_engine)
 {
 	game_engine->signals()->turn_start.connect(boost::bind(&TestLogger::newTurn, this, _1, _2));
@@ -26,11 +26,19 @@ TestLogger::TestLogger(const GameEngine * game_engine)
 		board_element->worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
 	}
 
-	file_.open("output.txt", std::ios::trunc);
+	std::string output_file = output_path.erase(output_path.size() - 6, 6).append("/output");
+	file_.open(output_file.c_str(), std::ios::trunc);
+	if (file_.fail())
+	{
+		std::cerr << "Fail to open " << output_file << std::endl;
+	}
 }
 
 TestLogger::~TestLogger()
-{}
+{
+	file_.flush();
+	file_.close();
+}
 
 void TestLogger::newTurn(unsigned current_turn, unsigned max_turn)
 {

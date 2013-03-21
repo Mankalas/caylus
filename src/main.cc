@@ -111,7 +111,6 @@ int main(int argc, char **argv)
 		controller_thread.timed_join(timeout);
 
 		ConsoleView gui(&g);
-
 		assert(nb_humans <= 5);
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
@@ -143,7 +142,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new AI player.");
 		}
 
-		TestLogger log(&g);
+		TestLogger log(&g, dir);
 
 		boost::mutex gameOverMutex;
 		boost::unique_lock<boost::mutex> lock(gameOverMutex);
