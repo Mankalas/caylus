@@ -35,8 +35,16 @@ void Gate::on_activate()
 		selected_case = worker_->askWorkerPlacement();
 		if (selected_case == Castle::CASE_NUMBER)
 		{
-			game_engine_->board().castle().add(worker_);
-			is_selection_valid = true;
+			Castle & castle = game_engine_->board().castle();
+			if (!castle.has(worker_))
+			{
+				castle.add(worker_);
+				is_selection_valid = true;
+			}
+			else
+			{
+				already_occupied(this);
+			}
 		}
 		else if (selected_case != Bridge::CASE_NUMBER)
 		{

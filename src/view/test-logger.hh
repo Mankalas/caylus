@@ -31,8 +31,10 @@ namespace view
 
 	private:
 		void newTurn(unsigned current_turn, unsigned max_turn);
-		std::ofstream file_;
+		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
+		void boardElementAlreadyOccupied(const controller::BoardElement * board_elt);
 
+		std::ofstream file_;
 	};
 }
 

@@ -130,10 +130,10 @@ int main(int argc, char **argv)
 			Playback * playback = new Playback(&g, player, dir);
 			player->name(playback->askName());
 			std::cout << "Player name is " << player->name() << std::endl;
-			g.playerReady();
 			unsigned nb_workers = playback->askProvostShift(); // TODO : better
 			g.maxWorkers() = nb_workers;
 			player->workers() = nb_workers;
+			g.playerReady();
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
