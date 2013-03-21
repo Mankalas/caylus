@@ -58,7 +58,6 @@ namespace controller
 		int prestige() const;
 
 		const ResourceMap & resources() const;
-		ResourceMap & resources();
 		void addResources(const ResourceMap & r);
 		void substractResources(const ResourceMap & r);
 

@@ -13,11 +13,6 @@
 # include "../visitor.hh"
 # include "../const.hh"
 
-inline ResourceMap & controller::Player::resources()
-{
-	return resources_;
-}
-
 inline const ResourceMap & controller::Player::resources() const
 {
 	return resources_;

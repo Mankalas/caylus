@@ -27,7 +27,7 @@ ProductionBuilding::on_activate()
 	Building::on_activate();
 	if (worker_choices_.size() == 1)
 	{
-		worker_->resources() += worker_choices_[0];
+		worker_->addResources(worker_choices_[0]);
 		return;
 	}
 
@@ -38,5 +38,5 @@ ProductionBuilding::on_activate()
 	}
 	--choice;
 
-	worker_->resources() += worker_choices_[choice];
+	worker_->addResources(worker_choices_[choice]);
 }

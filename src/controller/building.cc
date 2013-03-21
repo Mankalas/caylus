@@ -38,8 +38,8 @@ Building::build(Player * current)
 	{
 		if (current->resources() >= cost)
 		{
-			current->resources() += gain_;
-			current->resources() -= cost;
+			current->addResources(gain_);
+			current->substractResources(cost);
 			on_build();
 		}
 		else
@@ -63,7 +63,7 @@ Building::worker_set(Player & current)
 
 	if (owner_ && owner_ != &current)
 	{
-		owner_->resources()[Resource::prestige] += 1;
+		owner_->addResources(Resource::prestige);
 	}
 	worker_ = &current;
 	current.workers() -= 1;

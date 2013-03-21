@@ -40,8 +40,8 @@ TradeBuilding::on_activate()
 	const std::pair<ResourceMap, ResourceMap>& exchange = exchanges[choice - 1];
 	if (worker_->resources() >= exchange.first)
 	{
-		worker_->resources() -= exchange.first;
-		worker_->resources() += exchange.second;
+		worker_->substractResources(exchange.first);
+		worker_->addResources(exchange.second);
 	}
 	else
 	{

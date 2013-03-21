@@ -70,11 +70,11 @@ void CastlePart::score(std::vector<Player *>& players)
 
 		if (count == 0)
 		{
-			gp->resources() -= score_favor.second * Resource::prestige;
+			gp->substractResources(score_favor.second * Resource::prestige);
 		}
 		else
 		{
-			gp->resources() += score_favor.second * Resource::favor;
+			gp->addResources(score_favor.second * Resource::favor);
 		}
 	}
 }
@@ -133,7 +133,7 @@ void Castle::on_activate()
 		while (can_pay);
 		if (current_build == 0)
 		{
-			p->resources() -= 2 * Resource::prestige;
+			p->substractResources(2 * Resource::prestige);
 		}
 		if (current_build > nb_build_)
 		{
@@ -145,7 +145,7 @@ void Castle::on_activate()
 	// Can be NULL if no player built anything.
 	if (favored_ != NULL)
 	{
-		favored_->resources() += Resource::favor;
+		favored_->addResources(Resource::favor);
 	}
 }
 
@@ -187,8 +187,8 @@ void Castle::_build(Player * p, ResourceMap * resources)
 	{
 		active_part = parts_[part_index_ + 1];
 	}
-	p->resources() -= *resources;
-	p->resources() += active_part->prestige() * Resource::prestige;
+	p->substractResources(*resources);
+	p->addResources(active_part->prestige() * Resource::prestige);
 	active_part->houses().push_back(p);
 }
 

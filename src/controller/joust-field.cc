@@ -29,7 +29,7 @@ void JoustField::on_activate(void)
 	}
 	if (ask_proceed_())
 	{
-		worker_->resources() -= ResourceMap(Resource::denier + Resource::cloth);
-		worker_->resources() += Resource::favor;
+		worker_->addResources(ResourceMap(Resource::denier + Resource::cloth));
+		worker_->substractResources(Resource::favor);
 	}
 }

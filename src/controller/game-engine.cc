@@ -100,7 +100,7 @@ void GameEngine::init_()
 	// Give each player his initial denier amount.
 	for (unsigned i = 1; i < players_.size(); i++)
 	{
-		players_[i]->resources() += Resource::denier * ((i < 3) ? 1 : 2);
+		players_[i]->addResources(Resource::denier * ((i < 3) ? 1 : 2));
 		players_[i]->workers() = max_workers_;
 	}
 }
@@ -181,7 +181,7 @@ void GameEngine::activateBridge_()
 		}
 		board_.provost() += shift;
 		sigs_.board_updated();
-		p->resources() -= Resource::denier * fabs(shift);
+		p->substractResources(Resource::denier * fabs(shift));
 	}
 	sigs_.activation_bridge_end();
 }
@@ -201,7 +201,7 @@ void GameEngine::collectIncome_()
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
 		sigs_.income_collecting_for_player(p, &income);
-		p->resources() += income;
+		p->addResources(income);
 	}
 	sigs_.income_collecting_end();
 }
@@ -272,7 +272,7 @@ void GameEngine::playerMove_(Player * p)
 		if (selected_case == Castle::CASE_NUMBER && p->resources()[Resource::denier] >= worker_cost)
 		{
 			board_.castle().add(p);
-			p->resources() -= Resource::denier * worker_cost;
+			p->substractResources(Resource::denier * worker_cost);
 			p->workers() -= 1;
 			has_played = true;
 			continue;
@@ -288,7 +288,7 @@ void GameEngine::playerMove_(Player * p)
 				try
 				{
 					selected_building->worker_set(*p);
-					p->resources() -= Resource::denier * (selected_building->owner() == p ? 1 : worker_cost);
+					p->substractResources(Resource::denier * (selected_building->owner() == p ? 1 : worker_cost));
 					has_played = true;
 				}
 				catch (OccupiedBuildingEx *)

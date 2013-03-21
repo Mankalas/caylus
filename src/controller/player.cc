@@ -70,4 +70,3 @@ void Player::substractResources(const ResourceMap & r)
 	resources_ -= r;
 	//resource_move_(r * -1);
 }
-
