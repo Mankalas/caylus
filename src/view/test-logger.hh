@@ -24,7 +24,7 @@ namespace view
 	{
 	public:
 		/** Constructor. */
-		TestLogger(const controller::GameEngine * ge, std::string output_path);
+		TestLogger(const controller::GameEngine * ge, const std::string & output_path);
 
 		/** Destructor. */
 		~TestLogger();

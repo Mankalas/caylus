@@ -22,7 +22,7 @@ using namespace view;
 Playback::Playback(const controller::GameEngine * game_engine, const controller::Player * player, std::string record_path)
 	: ActiveView(game_engine, player)
 {
-	file_.open(record_path.c_str(), std::ios::in);
+	file_.open(record_path.append("/input").c_str(), std::ios::in);
 	if (!file_.is_open())
 	{
 		std::cerr << "File " << record_path << " does not exists." << std::endl;

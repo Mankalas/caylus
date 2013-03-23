@@ -69,6 +69,7 @@ GameEngine::~GameEngine()
 
 void GameEngine::operator()()
 {
+	DebugLogger::log("Game Engine launched.");
 	waitForPlayers_();
 	init_();
 	play_();

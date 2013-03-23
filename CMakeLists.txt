@@ -40,3 +40,7 @@ target_link_libraries (${EXECUTABLE_NAME} ${Boost_LIBRARIES})
 
 # Install target
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${CAYLUS_BINARY_DIR})
+
+enable_testing()
+
+add_test(GateWithWorkerOnCastle ./Caylus -d test/buildings/gate/one_worker_on_castle)

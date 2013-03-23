@@ -7,6 +7,7 @@
  */
 
 #include "test-logger.hh"
+#include "../debug-logger.hh"
 
 #include "../controller/game-engine.hh"
 #include "../controller/player.hh"
@@ -14,7 +15,7 @@
 using namespace controller;
 using namespace view;
 
-TestLogger::TestLogger(const GameEngine * game_engine, std::string output_path)
+TestLogger::TestLogger(const GameEngine * game_engine, const std::string & output_path)
 	: PassiveView(game_engine)
 {
 	game_engine->signals()->turn_start.connect(boost::bind(&TestLogger::newTurn, this, _1, _2));
@@ -26,11 +27,10 @@ TestLogger::TestLogger(const GameEngine * game_engine, std::string output_path)
 		board_element->worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
 	}
 
-	std::string output_file = output_path.erase(output_path.size() - 6, 6).append("/output");
-	file_.open(output_file.c_str(), std::ios::trunc);
+	file_.open((output_path + "/output").c_str(), std::ios::trunc);
 	if (file_.fail())
 	{
-		std::cerr << "Fail to open " << output_file << std::endl;
+		std::cerr << "Fail to open " << output_path + "/output" << std::endl;
 	}
 }
 
