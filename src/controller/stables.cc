@@ -28,8 +28,15 @@ Stables::Stables(GameEngine * ge)
 
 void Stables::worker_set(Player & current)
 {
+	if (has(&current))
+	{
+		already_occupied(this);
+		throw new OccupiedBuildingEx();
+	}
+
 	if (players_.size() == 3)
 	{
+		already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 
@@ -38,6 +45,7 @@ void Stables::worker_set(Player & current)
 
 	// If no worker, Building::activate will not call on_activate.
 	worker_ = &current;
+	worker_placed(this, worker_);
 }
 
 void Stables::worker_unset()
