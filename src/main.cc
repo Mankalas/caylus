@@ -112,10 +112,10 @@ int main(int argc, char **argv)
 		boost::posix_time::time_duration timeout = boost::posix_time::milliseconds(0);
 		controller_thread.timed_join(timeout);
 
-		ConsoleView gui(&g);
 		assert(nb_humans <= 5);
 		for (unsigned i = 0; i < nb_humans; ++i)
 		{
+			ConsoleView gui(&g);
 			DebugLogger::log("Adding new human player.");
 			Player * player = g.newPlayer();
 			Human * human = new Human(&g, player, &gui);
