@@ -9,7 +9,6 @@
 #ifndef BOARD_ELEMENT_HH
 # define BOARD_ELEMENT_HH
 
-# include <vector>
 # include <string>
 # include "../signals.hh"
 

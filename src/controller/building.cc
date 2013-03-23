@@ -54,6 +54,7 @@ Building::worker_set(Player & current)
 {
 	if (worker_)
 	{
+		already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 	if (type_ == BuildingType::prestige || type_ == BuildingType::residential)

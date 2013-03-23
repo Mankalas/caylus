@@ -20,7 +20,7 @@ Gate::Gate(GameEngine * game_engine)
 	           BuildingType::fixed,
 	           ResourceMap(0),
 	           ResourceMap(0)),
-	OmniscientBuilding(game_engine)
+	  OmniscientBuilding(game_engine)
 {
 }
 
@@ -33,31 +33,23 @@ void Gate::on_activate()
 	while (!is_selection_valid)
 	{
 		selected_case = worker_->askWorkerPlacement();
-		if (selected_case == Castle::CASE_NUMBER)
+		try
 		{
-			Castle & castle = game_engine_->board().castle();
-			if (!castle.has(worker_))
+			if (selected_case == Castle::CASE_NUMBER)
 			{
+				Castle & castle = game_engine_->board().castle();
 				castle.add(worker_);
-				is_selection_valid = true;
 			}
-			else
+			else if (selected_case != Bridge::CASE_NUMBER)
 			{
-				already_occupied(&castle);
+				BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case - 1];
+				selected_building->worker_set(*worker_);
 			}
+			is_selection_valid = true;
 		}
-		else if (selected_case != Bridge::CASE_NUMBER)
+		catch (OccupiedBuildingEx * e)
 		{
-			BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case - 1];
-			if (selected_building->worker() == NULL)
-			{
-				selected_building->worker(worker_);
-				is_selection_valid = true;
-			}
-			else
-			{
-				already_occupied(&(*selected_building));
-			}
+			is_selection_valid = false;
 		}
 	}
 }

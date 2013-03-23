@@ -7,6 +7,7 @@
  */
 
 #include "board-element.hh"
+#include "player.hh"
 
 using namespace controller;
 

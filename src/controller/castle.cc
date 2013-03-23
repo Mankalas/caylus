@@ -156,6 +156,11 @@ bool Castle::has(const Player * p) const
 
 void Castle::add(Player * p)
 {
+	if (has(p))
+	{
+		already_occupied(this);
+		throw new OccupiedBuildingEx();
+	}
 	players_.push_back(p);
 	worker_placed(this, p);
 }
