@@ -5,9 +5,9 @@
 # significance of the test hasn't (same players' moves, same resources
 # spent...)
 
-REFERENCES=`find . -name ref`
+OUTPUTS=`find . -name output`
 
-for ref in $REFERENCES; do
-		ref_path=`dirname $ref`
-		cp $ref_path/output $ref_path/ref
+for output in $OUTPUTS; do
+		output_path=`dirname $output`
+		cp $output_path/output $output_path/ref
 done
