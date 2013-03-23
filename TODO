@@ -74,10 +74,9 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TEST] Scoring (castle section full or bailiff reach end of section)
 
 * Buildings *
-[TEST] Gate
-	[TEST] No worker on residences, prestige, unbuild or occupied
+[DONE] Gate
 	[DONE] Castle, Inn, Stables (only one worker per player on these)
-	[TEST] 1 prestige if another player's building
+  [DONE] Reject Bridge as valid choice
 [TEST] Trading Post
 [TEST] Merchant's Guild
 [TEST] Stables (only one worker per player)
@@ -97,6 +96,8 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TEST] Prestige point earned
        [TEST] Residential and prestige buildings' rules (built on neutral or own building)
 [TEST] Trade buildings
+[TEST] No worker on residences, prestige, unbuild or occupied
+[TEST] 1 prestige if another player's building
 
 
 * Signals *
