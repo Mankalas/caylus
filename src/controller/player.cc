@@ -62,11 +62,11 @@ unsigned int Player::askWorkerPlacement() const
 void Player::addResources(const ResourceMap & r)
 {
 	resources_ += r;
-	//resource_move_(&r);
+	signals_.gain_resources(this, r);
 }
 
 void Player::substractResources(const ResourceMap & r)
 {
 	resources_ -= r;
-	//resource_move_(r * -1);
+	signals_.lose_resources(this, r);
 }

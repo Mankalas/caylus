@@ -27,6 +27,12 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 		board_element->worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
 	}
 
+	foreach (const Player * player, game_engine->players())
+	{
+		player->signals()->gain_resources.connect(boost::bind(&TestLogger::playerGainsResources, this, _1, _2));
+		player->signals()->lose_resources.connect(boost::bind(&TestLogger::playerLosesResources, this, _1, _2));
+	}
+
 	file_.open((output_path + "/output").c_str(), std::ios::trunc);
 	if (file_.fail())
 	{
@@ -38,6 +44,16 @@ TestLogger::~TestLogger()
 {
 	file_.flush();
 	file_.close();
+}
+
+void TestLogger::playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map)
+{
+	file_ << player->name() << " gains " << resource_map << std::endl;
+}
+
+void TestLogger::playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map)
+{
+	file_ << player->name() << " loses " << resource_map << std::endl;
 }
 
 void TestLogger::newTurn(unsigned current_turn, unsigned max_turn)

@@ -42,6 +42,7 @@ typedef boost::signal<void (const controller::GameEngine *)> v_cge_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> board_element_activation_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> worker_placed_signal_t;
 typedef boost::signal<unsigned int (std::vector<unsigned int>)> u_vu_signal_t;
+typedef boost::signal<void (const controller::Player *, const controller::ResourceMap &)> resources_move_signal_t;
 
 
 /* Player interactions.

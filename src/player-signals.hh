@@ -23,6 +23,11 @@ namespace controller
 		player_choice_signal_t player_has_chosen;
 		/// Get the choices a player has between several BoardElements.
 		player_choices_signal_t player_choices;
+		/// Resources the player gains.
+		resources_move_signal_t gain_resources;
+		/// Resources the player lose.
+		resources_move_signal_t lose_resources;
+
 	};
 }
 

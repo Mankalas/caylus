@@ -255,7 +255,7 @@ void GameEngine::playerMove_(Player * p)
 {
 	bool has_played = false;
 	unsigned int selected_case = 0;
-	unsigned int worker_cost = 0;
+	unsigned int worker_cost = 1;
 
 	sigs_.worker_placement_for_player(p);
 	while (!has_played)

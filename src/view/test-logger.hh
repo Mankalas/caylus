@@ -34,6 +34,8 @@ namespace view
 		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
 		void boardElementAlreadyOccupied(const controller::BoardElement * board_elt);
 		void workerPlacement(const controller::BoardElement * board_elt, const controller::Player * player);
+		void playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map);
+		void playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 
 		std::ofstream file_;
 	};
