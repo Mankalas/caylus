@@ -100,6 +100,8 @@ int main(int argc, char **argv)
 		}
 	}
 
+	TestLogger * test_log;
+
 	try
 	{
 		GameEngine g(nb_humans, nb_ais, max_turns, random);
@@ -118,7 +120,6 @@ int main(int argc, char **argv)
 			Player * player = g.newPlayer();
 			Human * human = new Human(&g, player, &gui);
 			player->name(human->askName());
-			g.playerReady();
 		}
 
 		if (dir != "")
@@ -128,11 +129,10 @@ int main(int argc, char **argv)
 			Player * player = g.newPlayer();
 			Playback * playback = new Playback(&g, player, dir);
 			player->name(playback->askName());
-			std::cout << "Player name is " << player->name() << std::endl;
 			unsigned nb_workers = playback->askProvostShift(); // TODO : better
 			g.maxWorkers() = nb_workers;
 			player->workers() = nb_workers;
-			g.playerReady();
+			test_log = new TestLogger(&g, dir);
 		}
 
 		assert(nb_ais <= 5 - nb_humans);
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new AI player.");
 		}
 
-		TestLogger log(&g, dir);
+		g.playerReady();
 
 		boost::mutex gameOverMutex;
 		boost::unique_lock<boost::mutex> lock(gameOverMutex);
@@ -156,5 +156,7 @@ int main(int argc, char **argv)
 	{
 		std::cerr <<"An exception occured (bitch) : " << ex->msg() << std::endl;
 	}
+	delete test_log;
+	test_log = NULL;
 	return 0;
 }
