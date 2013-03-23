@@ -36,6 +36,7 @@ namespace view
 		void workerPlacement(const controller::BoardElement * board_elt, const controller::Player * player);
 		void playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map);
+		void provostShifted(int shift);
 
 		std::ofstream file_;
 	};

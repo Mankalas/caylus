@@ -36,6 +36,19 @@ bool Board::isProvostShiftValid(int shift) const
 void Board::shiftProvost(int shift)
 {
 	provost_ += shift;
+	signals_.provost_shifted(shift);
+}
+
+void Board::shiftBailiff()
+{
+	unsigned int shift = 1;
+	if (provost_ > bailiff_)
+	{
+		shift = 2;
+	}
+	bailiff_ += shift;
+	provost_ = bailiff_;
+	signals_.bailiff_shifted(shift);
 }
 
 std::ostream & operator<<(std::ostream & o, const Board & board)

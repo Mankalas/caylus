@@ -45,22 +45,16 @@ Board::bailiff() const
 	return bailiff_;
 }
 
-inline unsigned &
-Board::bailiff()
-{
-	return bailiff_;
-}
-
 inline const unsigned &
 Board::provost() const
 {
 	return provost_;
 }
 
-inline unsigned &
-Board::provost()
+inline
+controller::BoardSignals & controller::Board::signals() const
 {
-	return provost_;
+	return signals_;
 }
 
 inline

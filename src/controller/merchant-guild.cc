@@ -33,5 +33,5 @@ void MerchantGuild::on_activate()
 		s = worker_->askProvostShift();
 	}
 	while (!board.isProvostShiftValid(s));
-	board.provost() = s;
+	board.shiftProvost(s);
 }

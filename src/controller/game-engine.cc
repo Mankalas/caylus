@@ -182,7 +182,7 @@ void GameEngine::activateBridge_()
 		}
 		if (shift != 0)
 		{
-			board_.provost() += shift;
+			board_.shiftProvost(shift);
 			sigs_.board_updated();
 			p->substractResources(Resource::denier * fabs(shift));
 		}
@@ -212,7 +212,7 @@ void GameEngine::collectIncome_()
 
 void GameEngine::endOfTurn_()
 {
-	moveBailiff_();
+	board_.shiftBailiff();
 	if (board_.bailiff() == 17 || board_.bailiff() == 18 ||
 	    board_.bailiff() == 30 || board_.bailiff() == 31 ||
 	    board_.castle().isActivePartComplete())
@@ -240,12 +240,6 @@ void GameEngine::placeWorkers_()
 		}
 	}
 	sigs_.worker_placement_end();
-}
-
-void GameEngine::moveBailiff_()
-{
-	board_.bailiff() += (board_.provost() > board_.bailiff() ? 2 : 1);
-	board_.provost() = board_.bailiff();
 }
 
 void GameEngine::addToCastle(Player * p)

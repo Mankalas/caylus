@@ -150,10 +150,6 @@ namespace controller
 		 */
 		unsigned getWorkerCost_(const Player * p) const;
 
-		/** The bailiff moves according to its relative position with the
-		    Prevost.*/
-		void moveBailiff_();
-
 		void init_();
 
 		/// The order in which the player are "called".

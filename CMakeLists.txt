@@ -47,3 +47,5 @@ add_test(GateWithWorkerOnCastle ./Caylus -d test/buildings/gate/one_worker_on_ca
 add_test(GateWithWorkerOnInn ./Caylus -d test/buildings/gate/one_worker_on_inn)
 add_test(GateWithWorkerOnStables ./Caylus -d test/buildings/gate/one_worker_on_stables)
 add_test(GateWithBridgeChoice ./Caylus -d test/buildings/gate/bridge_choice)
+add_test(TradingPost ./Caylus -d test/buildings/trading_post)
+add_test(MerchantGuild ./Caylus -d test/buildings/merchant_guild)

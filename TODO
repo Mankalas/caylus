@@ -77,7 +77,7 @@ on methods resources() and workers() in file player.hh, lines 51 and
 [DONE] Gate
 	[DONE] Castle, Inn, Stables (only one worker per player on these)
   [DONE] Reject Bridge as valid choice
-[TEST] Trading Post
+[DONE] Trading Post
 [TEST] Merchant's Guild
 [TEST] Stables (only one worker per player)
 [TEST] Joust Field

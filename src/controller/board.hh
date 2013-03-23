@@ -12,6 +12,7 @@
 # include "road.hh"
 # include "bridge.hh"
 # include "castle.hh"
+# include "../signals.hh"
 
 class Visitor;
 class ConstVisitor;
@@ -19,6 +20,12 @@ class ConstVisitor;
 namespace controller
 {
 	class GameEngine;
+
+	struct BoardSignals
+	{
+		v_i_signal_t provost_shifted;
+		v_u_signal_t bailiff_shifted;
+	};
 
 	class Board
 	{
@@ -36,13 +43,13 @@ namespace controller
 		Castle & castle();
 
 		const unsigned & bailiff() const;
-		unsigned & bailiff();
-
 		const unsigned & provost() const;
-		unsigned & provost();
 
 		bool isProvostShiftValid(int shift) const;
 		void shiftProvost(int shift);
+		void shiftBailiff();
+
+		BoardSignals & signals() const;
 
 		/** @name Visitors accept methods */
 		//@{
@@ -63,6 +70,8 @@ namespace controller
 		unsigned provost_;
 		/// Road's index of the building the bailiff is in.
 		unsigned bailiff_;
+		/// Board's signals.
+		mutable BoardSignals signals_;
 
 		const unsigned FIRST_EMPTY_CASE_;
 		const unsigned LAST_EMPTY_CASE_;

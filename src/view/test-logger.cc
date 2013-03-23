@@ -20,6 +20,8 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 {
 	game_engine->signals()->turn_start.connect(boost::bind(&TestLogger::newTurn, this, _1, _2));
 
+	game_engine->board().signals().provost_shifted.connect(boost::bind(&TestLogger::provostShifted, this, _1));
+
 	foreach (const BoardElement * board_element, game_engine->getEveryBoardElements())
 	{
 		board_element->activation_sig.connect(boost::bind(&TestLogger::activationBoardElement, this, _1, _2));
@@ -44,6 +46,14 @@ TestLogger::~TestLogger()
 {
 	file_.flush();
 	file_.close();
+}
+
+void TestLogger::provostShifted(int shift)
+{
+	unsigned int abs_shift = fabs(shift);
+	std::string space = (abs_shift <= 1) ? " space " : " spaces ";
+	std::string way = (shift < 0) ? "backward" : "forward";
+	file_ << "Provost moves " << abs_shift << space << way << std::endl;
 }
 
 void TestLogger::playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map)
