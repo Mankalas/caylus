@@ -86,11 +86,13 @@ struct Test
 		if (ref.fail())
 		{
 			DebugLogger::log("Cannot open ref file.");
+			return false;
 		}
 		output.open((test_dir + "/output").c_str(), std::ios::in);
 		if (output.fail())
 		{
 			DebugLogger::log("Cannot open output file.");
+			return false;
 		}
 
 		std::string ref_line;

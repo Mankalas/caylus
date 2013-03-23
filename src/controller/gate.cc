@@ -48,9 +48,16 @@ void Gate::on_activate()
 		}
 		else if (selected_case != Bridge::CASE_NUMBER)
 		{
-			BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case];
-			selected_building->worker(worker_);
-			is_selection_valid = true;
+			BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case - 1];
+			if (selected_building->worker() == NULL)
+			{
+				selected_building->worker(worker_);
+				is_selection_valid = true;
+			}
+			else
+			{
+				already_occupied(&(*selected_building));
+			}
 		}
 	}
 }

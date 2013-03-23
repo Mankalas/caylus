@@ -44,3 +44,4 @@ install(TARGETS ${EXECUTABLE_NAME} DESTINATION ${CAYLUS_BINARY_DIR})
 enable_testing()
 
 add_test(GateWithWorkerOnCastle ./Caylus -d test/buildings/gate/one_worker_on_castle)
+add_test(GateWithWorkerOnInn ./Caylus -d test/buildings/gate/one_worker_on_inn)
