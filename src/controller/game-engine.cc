@@ -180,9 +180,12 @@ void GameEngine::activateBridge_()
 			is_shift_valid = board_.isProvostShiftValid(shift);
 			has_enough_denier = fabs(shift) <= deniers;
 		}
-		board_.provost() += shift;
-		sigs_.board_updated();
-		p->substractResources(Resource::denier * fabs(shift));
+		if (shift != 0)
+		{
+			board_.provost() += shift;
+			sigs_.board_updated();
+			p->substractResources(Resource::denier * fabs(shift));
+		}
 	}
 	sigs_.activation_bridge_end();
 }
