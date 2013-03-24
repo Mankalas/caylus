@@ -18,7 +18,8 @@ ActiveView::ActiveView(const GameEngine * ge, const Player * player)
 	: View(ge)
 	, player_(player)
 {
-	player_->signals()->ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
-	player_->signals()->ask_worker_placement.connect(boost::bind(&ActiveView::askWorkerPlacement, this));
-	player_->signals()->ask_choice.connect(boost::bind(&ActiveView::askChoice, this, _1));
+	player_->signals().ask_provost_shift.connect(boost::bind(&ActiveView::askProvostShift, this));
+	player_->signals().ask_worker_placement.connect(boost::bind(&ActiveView::askWorkerPlacement, this));
+	player_->signals().ask_choice.connect(boost::bind(&ActiveView::askChoice, this, _1));
+	player_->signals().ask_resource.connect(boost::bind(&ActiveView::askResource, this, _1));
 }

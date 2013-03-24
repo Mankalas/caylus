@@ -31,8 +31,8 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 
 	foreach (const Player * player, game_engine->players())
 	{
-		player->signals()->gain_resources.connect(boost::bind(&TestLogger::playerGainsResources, this, _1, _2));
-		player->signals()->lose_resources.connect(boost::bind(&TestLogger::playerLosesResources, this, _1, _2));
+		player->signals().gain_resources.connect(boost::bind(&TestLogger::playerGainsResources, this, _1, _2));
+		player->signals().lose_resources.connect(boost::bind(&TestLogger::playerLosesResources, this, _1, _2));
 	}
 
 	file_.open((output_path + "/output").c_str(), std::ios::trunc);

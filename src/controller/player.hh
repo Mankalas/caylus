@@ -70,7 +70,7 @@ namespace controller
 		int askProvostShift() const;
 		unsigned int askWorkerPlacement() const;
 
-		PlayerSignals * signals() const;
+		PlayerSignals & signals() const;
 
 			/** @name Visitors accept methods */
 		//@{

@@ -111,6 +111,12 @@ unsigned int Human::askWorkerPlacement() const
 	return gui_->askCaseNumber();
 }
 
+controller::ResourceMap Human::askResource(const std::vector<controller::ResourceMap>& resource_choice) const
+{
+	unsigned int choice = askChoice(resource_choice.size() - 1);
+	return resource_choice[choice];
+}
+
 unsigned Human::askBuilding() const
 {
 	return 3;

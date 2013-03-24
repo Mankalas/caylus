@@ -12,10 +12,12 @@
 # include <vector>
 # include <string>
 # include "view.hh"
+# include "../controller/resource-map.hh"
 
 namespace controller
 {
 	class Player;
+	class ResourceMap;
 }
 
 namespace view
@@ -36,6 +38,7 @@ namespace view
 		 */
 		virtual int askProvostShift() const = 0;
 
+		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const = 0;
 		///
 		virtual unsigned int askWorkerPlacement() const = 0;
 		///

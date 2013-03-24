@@ -37,14 +37,14 @@ typedef boost::signal<void (const controller::Player *)> v_cp_signal_t;
 typedef boost::signal<void (const controller::BoardElement *)> v_cbe_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap *)> v_cp_cr_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> player_choice_signal_t;
-typedef boost::signal<void (const std::vector<controller::BoardElement *> &, const controller::Player *)> player_choices_signal_t;
+typedef boost::signal<void (const std::vector<controller::BoardElement *> &, const controller::Player *)> board_element_choice_signal_t;
 typedef boost::signal<controller::BoardElement * (const std::vector<controller::BoardElement*> &)> ask_board_element_signal_t;
 typedef boost::signal<void (const controller::GameEngine *)> v_cge_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> board_element_activation_signal_t;
 typedef boost::signal<void (const controller::BoardElement *, const controller::Player *)> worker_placed_signal_t;
 typedef boost::signal<unsigned int (std::vector<unsigned int>)> u_vu_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap &)> resources_move_signal_t;
-
+typedef boost::signal<controller::ResourceMap (const std::vector<controller::ResourceMap>&)> resource_choice_signal_t;
 
 /* Player interactions.
 

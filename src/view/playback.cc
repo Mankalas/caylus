@@ -34,6 +34,12 @@ Playback::~Playback()
 	file_.close();
 }
 
+controller::ResourceMap Playback::askResource(const std::vector<controller::ResourceMap>& resource_choice) const
+{
+	unsigned int choice = next_uint();
+	return resource_choice[choice];
+}
+
 std::string Playback::askName() const
 {
 	return next_str();

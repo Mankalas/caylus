@@ -68,8 +68,8 @@ HtmlLogger::HtmlLogger(const GameEngine * game_engine)
 	{
 		if (p != NULL)
 		{
-			p->signals()->player_choices.connect(boost::bind(&HtmlLogger::playerChoices, this, _1));
-			p->signals()->player_has_chosen.connect(boost::bind(&HtmlLogger::playerChoice, this, _1));
+			p->signals().ask_board_element.connect(boost::bind(&HtmlLogger::playerChoices, this, _1));
+			p->signals().player_has_chosen.connect(boost::bind(&HtmlLogger::playerChoice, this, _1));
 		}
 	}
 }

@@ -40,6 +40,8 @@ namespace view
 		virtual unsigned int askChoice(unsigned int range) const;
 		virtual unsigned int askWorkerPlacement() const { return 0; };
 
+		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const = 0;
+
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
 

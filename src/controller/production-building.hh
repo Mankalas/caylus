@@ -10,9 +10,11 @@
 # define PRODUCTION_BUILDING_HH_
 
 # include "building.hh"
+# include "../signals.hh"
 
 namespace controller
 {
+	class Player;
 
 	/** \brief It represents all the buildings that, when activated, give
 	 * resources to the worker. The constructor takes two additional
@@ -37,7 +39,7 @@ namespace controller
 
 		virtual void on_activate();
 
-		boost::signal<unsigned(void)> ask_resource_choice_;
+		resource_choice_signal_t ask_resource_choice_;
 	};
 
 }

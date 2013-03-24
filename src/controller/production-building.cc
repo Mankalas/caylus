@@ -8,6 +8,7 @@
 
 #include "production-building.hh"
 #include "debug-logger.hh"
+#include "../player-signals.hh"
 
 ProductionBuilding::~ProductionBuilding()
 {
@@ -31,12 +32,7 @@ ProductionBuilding::on_activate()
 		return;
 	}
 
-	unsigned choice = ask_resource_choice_();
-	if (choice == 0)
-	{
-		return;
-	}
-	--choice;
-
-	worker_->addResources(worker_choices_[choice]);
+	DebugLogger::log( "Here ");
+	const ResourceMap & choice = worker_->signals().ask_resource(worker_choices_);
+	worker_->addResources(choice);
 }

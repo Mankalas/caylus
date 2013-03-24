@@ -116,9 +116,9 @@ inline int controller::Player::askProvostShift() const
 }
 
 inline
-controller::PlayerSignals * controller::Player::signals() const
+controller::PlayerSignals & controller::Player::signals() const
 {
-	return &signals_;
+	return signals_;
 }
 
 inline

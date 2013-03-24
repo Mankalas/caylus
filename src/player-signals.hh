@@ -22,7 +22,9 @@ namespace controller
 		/// Get the board element a player has chosen from a list.
 		player_choice_signal_t player_has_chosen;
 		/// Get the choices a player has between several BoardElements.
-		player_choices_signal_t player_choices;
+		board_element_choice_signal_t ask_board_element;
+		/// Get the player's choice about resources.
+		resource_choice_signal_t ask_resource;
 		/// Resources the player gains.
 		resources_move_signal_t gain_resources;
 		/// Resources the player lose.

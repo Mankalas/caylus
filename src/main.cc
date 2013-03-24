@@ -143,6 +143,7 @@ int main(int argc, char **argv)
 				break;
 			case 'd' :
 				++nb_ais;
+				random = false;
 				test = new Test(optarg);
 				break;
 			case 's' :

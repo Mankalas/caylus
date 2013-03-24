@@ -31,7 +31,7 @@ TradeBuilding::on_activate()
 	unsigned choice = 1;
 
 	std::pair<ResourceMap, ResourceMap> ex;
-	choice = worker_->signals()->ask_choice(1);
+	choice = worker_->signals().ask_choice(1);
 	if (0 == choice)
 	{
 		return;

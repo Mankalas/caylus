@@ -49,3 +49,4 @@ add_test(GateWithWorkerOnStables ./Caylus -d test/buildings/gate/one_worker_on_s
 add_test(GateWithBridgeChoice ./Caylus -d test/buildings/gate/bridge_choice)
 add_test(TradingPost ./Caylus -d test/buildings/trading_post)
 add_test(MerchantGuild ./Caylus -d test/buildings/merchant_guild)
+add_test(NeutralFarm ./Caylus -d test/buildings/neutral_farm)
