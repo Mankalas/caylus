@@ -97,18 +97,27 @@ struct Test
 
 		std::string ref_line;
 		std::string output_line;
-		int line_number = 1;
-		while (std::getline(ref, ref_line) && std::getline(output, output_line))
+		int line_number = 0;
+		bool result = true;
+		do
 		{
+			std::getline(ref, ref_line);
+			std::getline(output, output_line);
+
+			line_number++;
 			if (ref_line != output_line)
 			{
 				std::cerr << "Lines " << line_number << " differ : " << std::endl
 				          << "\t" << ref_line << std::endl
 				          << "\t" << output_line << std::endl;
-				return false;
+				result = false;
+				break;
 			}
 		}
-		return true;
+		while (ref && output);
+		ref.close();
+		output.close();
+		return result;
 	}
 
 	std::string test_dir;
