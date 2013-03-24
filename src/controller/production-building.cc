@@ -29,10 +29,10 @@ ProductionBuilding::on_activate()
 	if (worker_choices_.size() == 1)
 	{
 		worker_->addResources(worker_choices_[0]);
-		return;
 	}
-
-	DebugLogger::log( "Here ");
-	const ResourceMap & choice = worker_->signals().ask_resource(worker_choices_);
-	worker_->addResources(choice);
+	else
+	{
+		const ResourceMap & choice = worker_->signals().ask_resource(worker_choices_);
+		worker_->addResources(choice);
+	}
 }
