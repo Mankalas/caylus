@@ -21,17 +21,18 @@ namespace view
 		~Playback();
 
 		virtual std::string askName() const;
+
+			//* @name Game signals. */
+		// @{
+
 		virtual int askProvostShift() const;
-		virtual unsigned int askWorkerPlacement() const;
-		virtual unsigned int askChoice(unsigned int range) const;
+		virtual unsigned int askBoardElement() const;
 		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const;
 
-		virtual bool askYesNo() const;
-		/*virtual bool askJoustField() const;
+		// @}
 
-		virtual unsigned askBuilding() const;
-		virtual unsigned askResourceChoice() const;
-		virtual void boardElementActivation(const controller::BoardElement * board_eltx);*/
+		virtual unsigned int askChoice(unsigned int range) const;
+		virtual bool askYesNo() const;
 
 	private:
 		mutable std::ifstream file_;

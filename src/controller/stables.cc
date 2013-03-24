@@ -26,36 +26,36 @@ Stables::Stables(GameEngine * ge)
 {
 }
 
-void Stables::worker_set(Player & current)
+void Stables::placeWorker(Player & current)
 {
 	if (has(&current))
 	{
-		already_occupied(this);
+		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 
 	if (players_.size() == 3)
 	{
-		already_occupied(this);
+		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 
 	players_.insert(players_.begin(), &current);
-	current.workers() -= 1;
+	current.decrementWorkers();
 
-	// If no worker, Building::activate will not call on_activate.
+	// If no worker, Building::activate will not call onActivate.
 	worker_ = &current;
-	worker_placed(this, worker_);
+	signals_.worker_placed(&current, this);
 }
 
-void Stables::worker_unset()
+void Stables::removeWorker()
 {
 	players_.clear();
 }
 
-void Stables::on_activate()
+void Stables::onActivate()
 {
-	Building::on_activate();
+	Building::onActivate();
 	std::vector<Player *>& order = game_engine_->order();
 	std::vector<Player *>::iterator it;
 	Player * p;

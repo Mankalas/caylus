@@ -61,6 +61,10 @@ namespace controller
 	{
 	};
 
+	class NotEnoughResourceEx : public GameException
+	{
+	};
+
 	class OccupiedBuildingEx : public GameException
 	{
 	};

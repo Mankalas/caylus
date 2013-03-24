@@ -21,7 +21,7 @@ namespace controller
 	public:
 		MerchantGuild(GameEngine * ge);
 
-		virtual void on_activate(void);
+		virtual void onActivate(void);
 
 	private:
 		i_v_signal_t ask_provost_shift_sig_;

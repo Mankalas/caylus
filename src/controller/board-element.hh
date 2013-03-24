@@ -7,10 +7,10 @@
  */
 
 #ifndef BOARD_ELEMENT_HH
-# define BOARD_ELEMENT_HH
+#define BOARD_ELEMENT_HH
 
-# include <string>
-# include "../signals.hh"
+#include <string>
+#include "../signals.hh"
 
 namespace view
 {
@@ -19,25 +19,67 @@ namespace view
 
 namespace controller
 {
+	class BoardElement;
+	class Player;
+
+	/**
+	 * Signals emitted by the BoardElement class.
+	 */
+	struct BoardElementSignals
+	{
+		/** Emitted when the board element is activated. */
+		v_cbe_signal_t activation_sig;
+
+		/** Emitted when a worker is placed on the board element. */
+		worker_placed_signal_t worker_placed;
+
+		/** Emitted when a player tries to place its worker while the board element is full. */
+		v_cbe_signal_t already_occupied;
+	};
+
+	/**
+	 * Any part of the board that can be acted upon. This includes
+	 * buildings, Castle and Bridge.
+	 */
 	class BoardElement
 	{
 	public:
+		/**
+		 * Constructor.
+		 *
+		 * @param name Element's name
+		 */
 		BoardElement(const std::string & name);
 
-		virtual bool isCastle() const;
-		virtual bool isBuilding() const;
-		virtual bool isBridge() const;
+		/**
+		 * Gets the element's name.
+		 *
+		 * @return The element's name.
+		 */
 		virtual const std::string & name() const;
 
-		virtual void on_activate() = 0;
+		/**
+		 * Callback when the board element is activated during the
+		 * "Building activation" phase.
+		 */
+		virtual void onActivate();
 
-		mutable board_element_activation_signal_t activation_sig;
-		mutable worker_placed_signal_t worker_placed;
-		mutable v_cbe_signal_t already_occupied;
+		/**
+		 * The signals emitted by the element.
+		 *
+		 * @return The signals emitted by the element.
+		 */
+		virtual BoardElementSignals & signals() const;
 
 	protected:
+		/// Element's name.
 		const std::string name_;
+		/// Element's signals.
+		mutable BoardElementSignals signals_;
 	};
+
+#include "board-element.hxx"
+
 }
 
 #endif

@@ -18,9 +18,9 @@ Inn::Inn()
 {
 }
 
-void Inn::on_activate()
+void Inn::onActivate()
 {
-	Building::on_activate();
+	Building::onActivate();
 	if (worker_)
 	{
 		//ask player if he wants to remove its worker

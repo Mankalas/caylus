@@ -102,7 +102,6 @@ void GameEngine::init_()
 	for (unsigned i = 1; i < players_.size(); i++)
 	{
 		players_[i]->addResources(Resource::denier * ((i < 3) ? 1 : 2));
-		players_[i]->workers() = max_workers_;
 	}
 }
 
@@ -146,7 +145,7 @@ void GameEngine::activateSpecialBuildings_()
 
 void GameEngine::activateBuildings_()
 {
-	sigs_.activation_buildings_begin();
+	sigs_.activationBuildings_begin();
 	for (unsigned i = 6; i <= board_.provost() + 1; ++i)
 	{
 		if (board_.road().get()[i] != NULL)
@@ -154,7 +153,7 @@ void GameEngine::activateBuildings_()
 			board_.road().get()[i]->activate();
 		}
 	}
-	sigs_.activation_buildings_end();
+	sigs_.activationBuildings_end();
 }
 
 void GameEngine::activateBridge_()
@@ -162,7 +161,7 @@ void GameEngine::activateBridge_()
 	sigs_.activation_bridge_begin();
 	foreach(Player * p, board_.bridge().players())
 	{
-		board_.bridge().activation_sig(&board_.bridge(), p);
+		board_.bridge().signals().activation_sig(&board_.bridge());
 		assert(p);
 		int deniers = p->resources()[Resource::denier];
 		if (deniers == 0)
@@ -193,7 +192,7 @@ void GameEngine::activateBridge_()
 void GameEngine::activateCastle_()
 {
 	sigs_.activation_castle_begin();
-	board_.castle().on_activate();
+	board_.castle().onActivate();
 	sigs_.activation_castle_end();
 }
 
@@ -257,7 +256,7 @@ void GameEngine::playerMove_(Player * p)
 	sigs_.worker_placement_for_player(p);
 	while (!has_played)
 	{
-		selected_case = p->askWorkerPlacement();
+		selected_case = p->askBoardElement();
 
 		if (selected_case == Bridge::CASE_NUMBER)
 		{
@@ -271,7 +270,7 @@ void GameEngine::playerMove_(Player * p)
 		{
 			board_.castle().add(p);
 			p->substractResources(Resource::denier * worker_cost);
-			p->workers() -= 1;
+			p->decrementWorkers();
 			has_played = true;
 			continue;
 		}
@@ -285,7 +284,7 @@ void GameEngine::playerMove_(Player * p)
 			{
 				try
 				{
-					selected_building->worker_set(*p);
+					selected_building->placeWorker(*p);
 					p->substractResources(Resource::denier * (selected_building->owner() == p ? 1 : worker_cost));
 					has_played = true;
 				}
@@ -321,15 +320,6 @@ void GameEngine::startOfTurn_()
 	board_.road().clearWorkers();
 	board_.bridge().clear();
 	board_.castle().clear();
-	foreach(Player * p, players_)
-	{
-		p->workers() = max_workers_;
-	}
-	Inn * inn = dynamic_cast<Inn *>(board_.road().get()[INN_CASE].get());
-	if (inn->host())
-	{
-		inn->host()->workers() -= 1;
-	}
 	sigs_.board_updated();
 }
 
@@ -368,14 +358,14 @@ void GameEngine::build(BuildingSmartPtr & building, Player * p)
 
 	assert(p);
 	assert(building);
-	game_b->build(p);
+	game_b->build(*p);
 	board_.road().build(game_b);
 	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
 }
 
 Player * GameEngine::newPlayer()
 {
-	Player * p = new Player();
+	Player * p = new Player(max_workers_);
 	players_.push_back(p);
 	return p;
 }
@@ -443,4 +433,13 @@ std::vector<const BoardElement *> GameEngine::getEveryBoardElements() const
 		}
 	}
 	return board_elements;
+}
+
+void GameEngine::setMaxWorkers(unsigned int nb)
+{
+	max_workers_ = nb;
+	foreach (Player * player, players_)
+	{
+		player->setWorkers(nb);
+	}
 }

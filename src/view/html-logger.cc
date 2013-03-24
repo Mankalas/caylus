@@ -45,8 +45,8 @@ HtmlLogger::HtmlLogger(const GameEngine * game_engine)
 	game_engine->signals()->activation_bridge_begin.connect(boost::bind(&HtmlLogger::activationBridgeBegin, this));
 	game_engine->signals()->activation_bridge_end.connect(boost::bind(&HtmlLogger::activationBridgeEnd, this));
 
-	game_engine->signals()->activation_buildings_begin.connect(boost::bind(&HtmlLogger::activationBuildingsBegin, this));
-	game_engine->signals()->activation_buildings_end.connect(boost::bind(&HtmlLogger::activationBuildingsEnd, this));
+	game_engine->signals()->activationBuildings_begin.connect(boost::bind(&HtmlLogger::activationBuildingsBegin, this));
+	game_engine->signals()->activationBuildings_end.connect(boost::bind(&HtmlLogger::activationBuildingsEnd, this));
 
 	game_engine->signals()->activation_castle_begin.connect(boost::bind(&HtmlLogger::activationCastleBegin, this));
 	game_engine->signals()->activation_castle_end.connect(boost::bind(&HtmlLogger::activationCastleEnd, this));
@@ -54,22 +54,13 @@ HtmlLogger::HtmlLogger(const GameEngine * game_engine)
 	// Controls
 	game_engine->signals()->no_worker_left.connect(boost::bind(&HtmlLogger::noWorkerLeft, this, _1));
 
-	game_engine->board().castle().activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1, _2));
-	game_engine->board().bridge().activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1, _2));
+	game_engine->board().castle().signals().activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1));
+	game_engine->board().bridge().signals().activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1));
 	foreach(const BuildingSmartPtr b, game_engine->board().road().get())
 	{
 		if (b != NULL)
 		{
-			b->activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1, _2));
-		}
-	}
-
-	foreach(const Player * p, game_engine->players())
-	{
-		if (p != NULL)
-		{
-			p->signals().ask_board_element.connect(boost::bind(&HtmlLogger::playerChoices, this, _1));
-			p->signals().player_has_chosen.connect(boost::bind(&HtmlLogger::playerChoice, this, _1));
+			b->signals().activation_sig.connect(boost::bind(&HtmlLogger::activationBoardElement, this, _1));
 		}
 	}
 }
@@ -164,9 +155,9 @@ void HtmlLogger::playerChoices(const std::vector<controller::BoardElement *> & c
 	}
 }
 
-void HtmlLogger::activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p)
+void HtmlLogger::activationBoardElement(const controller::BoardElement * board_elt)
 {
-	file_ << "<p>" << board_elt->name() << " activated for player " << *p << "." << "</p>";
+	file_ << "<p>" << board_elt->name() << " activated." << "</p>";
 }
 
 void HtmlLogger::updateBoard()

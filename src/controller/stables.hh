@@ -23,9 +23,9 @@ namespace controller
 	public:
 		Stables(GameEngine * ge);
 
-		virtual void on_activate(void);
-		virtual void worker_set(Player &);
-		virtual void worker_unset();
+		virtual void onActivate(void);
+		virtual void placeWorker(Player &);
+		virtual void removeWorker();
 
 		virtual bool has(const Player *) const;
 		const std::vector<Player *> players() const;

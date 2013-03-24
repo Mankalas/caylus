@@ -8,16 +8,20 @@
 
 #include <cassert>
 #include "building.hh"
-#include "exceptions.hh"
+#include "../exceptions.hh"
 #include "player.hh"
 #include "../const.hh"
 
 Building::Building(const std::string & name,
                    const BuildingType & type,
                    const std::vector<ResourceMap>& cost,
-                   const ResourceMap & gain) :
-	BoardElement(name),
-	type_(type), gain_(gain), cost_(cost), owner_(0), worker_(0)
+                   const ResourceMap & gain)
+	: BoardElement(name)
+	, type_(type)
+	, gain_(gain)
+	, cost_(cost)
+	, owner_(NULL)
+	, worker_(NULL)
 {
 }
 
@@ -26,35 +30,34 @@ Building::~Building()
 }
 
 void
-Building::build(Player * current)
+Building::build(Player & current)
 {
 	assert(!owner_);
 	assert(type_ != BuildingType::fixed);
 	assert(type_ != BuildingType::neutral);
-	assert(current);
 
-	owner_ = current;
+	owner_ = &current;
 	foreach(const ResourceMap cost, cost_)
 	{
-		if (current->resources() >= cost)
+		if (current.resources() >= cost)
 		{
-			current->addResources(gain_);
-			current->substractResources(cost);
-			on_build();
+			current.addResources(gain_);
+			current.substractResources(cost);
+			onBuild();
 		}
 		else
 		{
-			assert(false);  // throw exception -> the player does not have enough resources.
+			throw new NotEnoughResourceEx();
 		}
 	}
 }
 
 void
-Building::worker_set(Player & current)
+Building::placeWorker(Player & current)
 {
 	if (worker_)
 	{
-		already_occupied(this);
+		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 	if (type_ == BuildingType::prestige || type_ == BuildingType::residential)
@@ -67,59 +70,53 @@ Building::worker_set(Player & current)
 		owner_->addResources(Resource::prestige);
 	}
 	worker_ = &current;
-	worker_placed(this, worker_);
-	current.workers() -= 1;
+	signals_.worker_placed(worker_, this);
+	current.decrementWorkers();
 }
 
 void
 Building::activate()
 {
-	if (!worker_)
+	if (worker_)
 	{
-		return;
+		onActivate();
+		removeWorker();
 	}
-
-	on_activate();
-
-	worker_unset();
 }
 
 void
-Building::worker_unset()
+Building::removeWorker()
 {
-	worker_ = NULL;
+	if (worker_)
+	{
+		worker_->incrementWorkers();
+		worker_ = NULL;
+	}
 }
 
 void
 Building::demolish()
 {
 	assert(!worker_);
-
-	on_demolish();
-
-	owner_ = 0;
+	onDemolish();
+	owner_ = NULL;
 }
 
 void
-Building::on_build()
+Building::onBuild()
 {
 }
 
 void
-Building::on_activate()
+Building::onActivate()
 {
+	BoardElement::onActivate();
 	assert(worker_);
-	activation_sig(this, worker_);
 }
 
 void
-Building::on_demolish()
+Building::onDemolish()
 {
-}
-
-bool Building::isBuilding() const
-{
-	return true;
 }
 
 std::ostream &

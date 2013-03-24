@@ -50,12 +50,6 @@ std::vector<Player *>& controller::GameEngine::players()
 }
 
 inline
-unsigned & controller::GameEngine::maxWorkers()
-{
-	return max_workers_;
-}
-
-inline
 unsigned controller::GameEngine::nbTurnsMax() const
 {
 	return nb_turns_max_;

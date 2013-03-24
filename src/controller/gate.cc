@@ -24,15 +24,15 @@ Gate::Gate(GameEngine * game_engine)
 {
 }
 
-void Gate::on_activate()
+void Gate::onActivate()
 {
-	Building::on_activate();
+	Building::onActivate();
 
 	bool is_selection_valid = false;
 	unsigned int selected_case;
 	while (!is_selection_valid)
 	{
-		selected_case = worker_->askWorkerPlacement();
+		selected_case = worker_->askBoardElement();
 		try
 		{
 			if (selected_case == Bridge::CASE_NUMBER)
@@ -47,7 +47,7 @@ void Gate::on_activate()
 			else if (selected_case != Bridge::CASE_NUMBER)
 			{
 				BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case - 1];
-				selected_building->worker_set(*worker_);
+				selected_building->placeWorker(*worker_);
 			}
 			is_selection_valid = true;
 		}

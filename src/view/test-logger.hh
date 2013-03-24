@@ -31,14 +31,13 @@ namespace view
 
 	private:
 		void newTurn(unsigned current_turn, unsigned max_turn);
-		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
+		void activationBoardElement(const controller::BoardElement * board_elt);
 		void boardElementAlreadyOccupied(const controller::BoardElement * board_elt);
-		void workerPlacement(const controller::BoardElement * board_elt, const controller::Player * player);
+		void workerPlacement(const controller::Player * player, const controller::BoardElement * board_elt);
 		void playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void provostShifted(int shift);
 		void bailiffShifted(unsigned int shift);
-
 
 		std::ofstream file_;
 	};

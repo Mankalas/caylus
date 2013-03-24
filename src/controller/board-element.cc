@@ -11,27 +11,12 @@
 
 using namespace controller;
 
-BoardElement::BoardElement(const std::string & name) :
-	name_(name)
+BoardElement::BoardElement(const std::string & name)
+	: name_(name)
 {
 }
 
-bool BoardElement::isCastle() const
+void BoardElement::onActivate()
 {
-	return false;
-}
-
-bool BoardElement::isBridge() const
-{
-	return false;
-}
-
-bool BoardElement::isBuilding() const
-{
-	return false;
-}
-
-const std::string & BoardElement::name() const
-{
-	return name_;
+	signals_.activation_sig(this);
 }

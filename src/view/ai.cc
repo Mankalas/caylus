@@ -41,6 +41,11 @@ unsigned AI::askResourceChoice(/*const ResourceMap& choices*/) const
 	return 3;
 }
 
+unsigned AI::askBoardElement() const
+{
+	return 0;
+}
+
 controller::ResourceMap AI::askResource(const std::vector<controller::ResourceMap>& resource_choice) const
 {
 	unsigned int choice = askChoice(resource_choice.size() - 1);

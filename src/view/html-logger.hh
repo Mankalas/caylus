@@ -65,7 +65,7 @@ namespace view
 		void playerChoices(const std::vector<controller::BoardElement *> & choices);
 		void resourceMove(const controller::ResourceMap *);
 
-		void activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p);
+		void activationBoardElement(const controller::BoardElement * board_elt);
 		virtual void updateBoard();
 
 	private:

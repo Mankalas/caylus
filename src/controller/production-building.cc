@@ -23,16 +23,16 @@ ProductionBuilding::ProductionBuilding(const std::vector<ResourceMap>& wchc,
 }
 
 void
-ProductionBuilding::on_activate()
+ProductionBuilding::onActivate()
 {
-	Building::on_activate();
+	Building::onActivate();
 	if (worker_choices_.size() == 1)
 	{
 		worker_->addResources(worker_choices_[0]);
 	}
 	else
 	{
-		const ResourceMap & choice = worker_->signals().ask_resource(worker_choices_);
+		const ResourceMap & choice = worker_->askResource(worker_choices_);
 		worker_->addResources(choice);
 	}
 }

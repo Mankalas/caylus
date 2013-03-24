@@ -21,7 +21,7 @@ FavorBuilding::FavorBuilding()
 
 
 void
-FavorBuilding::on_build()
+FavorBuilding::onBuild()
 {
 	assert(owner_);
 

@@ -31,22 +31,10 @@ Building::cost() const
 	return cost_;
 }
 
-inline Player *
-Building::owner()
-{
-	return owner_;
-}
-
 inline const Player *
 Building::owner() const
 {
 	return owner_;
-}
-
-inline Player *
-Building::worker()
-{
-	return worker_;
 }
 
 inline const Player *
@@ -55,20 +43,14 @@ Building::worker() const
 	return worker_;
 }
 
-inline void
-Building::worker(Player * p)
-{
-	worker_ = p;
-}
-
 inline
-void controller::Building::accept(ConstVisitor & v) const
+void Building::accept(ConstVisitor & v) const
 {
 	v.operator()(*this);
 }
 
 inline
-void controller::Building::accept(Visitor & v)
+void Building::accept(Visitor & v)
 {
 	v.operator()(*this);
 }

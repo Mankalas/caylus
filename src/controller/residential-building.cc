@@ -1,38 +1,35 @@
-/*!
-  \file   residential-building.cc
-  \brief  Implementation of ResidentialBuilding.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   residential-building.cc
+ * @author Nicuvëo <crucuny@gmail.com
+ * @date   Jun 01 19:44:49 2009
+ *
+ * @brief  Declaration of the residential-building class.
+ */
 
 #include <cassert>
 #include "residential-building.hh"
-
 
 ResidentialBuilding::~ResidentialBuilding()
 {
 }
 
-
 ResidentialBuilding::ResidentialBuilding(unsigned deniers)
-	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0)),
-	  deniers(deniers)
+	: Building("void", BuildingType::fixed, ResourceMap(0), ResourceMap(0))
+	, deniers(deniers)
 {
 	assert(deniers > 0);
 }
 
-
 void
-ResidentialBuilding::on_build()
+ResidentialBuilding::onBuild()
 {
 	assert(owner_);
-	owner_->residences() += deniers;
+	owner_->increaseIncome(deniers);
 }
 
 void
-ResidentialBuilding::on_demolish()
+ResidentialBuilding::onDemolish()
 {
 	assert(owner_);
-	owner_->residences() -= deniers;
+	owner_->decreaseIncome(deniers);
 }

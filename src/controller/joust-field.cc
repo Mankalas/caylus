@@ -18,14 +18,14 @@ JoustField::JoustField()
 {
 }
 
-void JoustField::on_activate(void)
+void JoustField::onActivate(void)
 {
-	Building::on_activate();
+	Building::onActivate();
 	if (worker_->resources()[Resource::denier] < 1 ||
 	    worker_->resources()[Resource::cloth] < 1)
 	{
 		DebugLogger::log("Not enough resources. Try again.");
-		on_activate();
+		onActivate();
 	}
 	if (ask_proceed_())
 	{

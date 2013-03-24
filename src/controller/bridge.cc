@@ -35,10 +35,11 @@ bool Bridge::isBridge() const
 	return true;
 }
 
-void Bridge::on_activate()
+void Bridge::onActivate()
 {
+	BoardElement::onActivate();
 	foreach (Player * player, players_)
 	{
-		activation_sig(this, player);
+		player->askProvostShift();
 	}
 }

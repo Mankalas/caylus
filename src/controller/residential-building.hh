@@ -30,8 +30,8 @@ namespace controller
 	protected:
 		ResidentialBuilding(unsigned deniers = 1);
 
-		virtual void on_build();
-		virtual void on_demolish();
+		virtual void onBuild();
+		virtual void onDemolish();
 	};
 
 }

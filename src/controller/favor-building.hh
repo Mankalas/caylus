@@ -15,7 +15,7 @@ namespace controller
 {
 
 	/** \brief It represents the buildings which give the builder royal
-	 * favors. It therefore overrides the on_build method in order to
+	 * favors. It therefore overrides the onBuild method in order to
 	 * trigger the favor selection mechanism.
 	 *
 	 */
@@ -27,7 +27,7 @@ namespace controller
 	protected:
 		FavorBuilding();
 
-		virtual void on_build();
+		virtual void onBuild();
 	};
 
 }

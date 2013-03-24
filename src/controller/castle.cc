@@ -11,6 +11,7 @@
 #include "player.hh"
 #include "castle.hh"
 #include "resource-map.hh"
+#include "../exceptions.hh"
 #include "../const.hh"
 
 using namespace controller;
@@ -99,14 +100,15 @@ Castle::~Castle()
 	delete p;
 }
 
-void Castle::on_activate()
+void Castle::onActivate()
 {
+	BoardElement::onActivate();
+
 	bool can_pay = false;
 	unsigned current_build = 0;
 
 	foreach(Player * p, players_)
 	{
-		activation_sig(this, p);
 		current_build = 0;
 		do
 		{
@@ -158,11 +160,11 @@ void Castle::add(Player * p)
 {
 	if (has(p))
 	{
-		already_occupied(this);
+		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
 	players_.push_back(p);
-	worker_placed(this, p);
+	signals_.worker_placed(p, this);
 }
 
 void Castle::clear()

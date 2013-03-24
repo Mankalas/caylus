@@ -79,7 +79,7 @@ Road::clearWorkers()
 	{
 		if (b)
 		{
-			b->worker_unset();
+			b->removeWorker();
 		}
 	}
 }

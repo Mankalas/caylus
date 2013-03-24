@@ -65,7 +65,7 @@ namespace controller
 		unsigned nbAIs() const;
 		unsigned nbTurnsMax() const;
 		unsigned nbTurns() const;
-		unsigned & maxWorkers();
+		void setMaxWorkers(unsigned int);
 		bool random() const;
 		GameSignals * signals() const;
 

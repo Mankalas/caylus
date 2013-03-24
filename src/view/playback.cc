@@ -50,9 +50,9 @@ int Playback::askProvostShift() const
 	return next_int();
 }
 
-unsigned int Playback::askWorkerPlacement() const
+unsigned int Playback::askBoardElement() const
 {
-	return next_int();
+	return next_uint();
 }
 
 bool Playback::askYesNo() const
@@ -86,12 +86,14 @@ std::string Playback::next_str() const
 
 int Playback::next_int() const
 {
-	return atoi(next_line().c_str());
+	std::string line = next_line();
+	return atoi(line.c_str());
 }
 
 unsigned Playback::next_uint() const
 {
-	return strtoul(next_line().c_str(), NULL, 0);
+	std::string line = next_line();
+	return strtoul(line.c_str(), NULL, 0);
 }
 
 unsigned int Playback::askChoice(unsigned int range) const

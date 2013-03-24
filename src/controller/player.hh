@@ -6,73 +6,90 @@
  * @brief  Declaration of the player class.
  */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef PLAYER_HH
+# define PLAYER_HH
 
 # include <string>
-# include <vector>
-# include <map>
 # include <iostream>
 # include "resource-map.hh"
-# include "../player-signals.hh"
+# include "../signals.hh"
 # include "../view/playback.hh"
 
 class Visitor;
 class ConstVisitor;
 
-namespace view
-{
-	class Logger;
-}
-
 namespace controller
 {
 	class BoardElement;
 
-	/** \brief A player is an entity that's playing the game. It can be
-	 * either Human or AI.
-	 *
+	struct PlayerSignals
+	{
+		/// Ask for an integer for the Provost shift.
+		i_v_signal_t ask_provost_shift;
+		/// Ask for a BoardElement from a list.
+		u_v_signal_t ask_board_element;
+		/// Ask for a Resource from a list.
+		resource_choice_signal_t ask_resource;
+		/// Resource the player gains.
+		resource_move_signal_t gain_resource;
+		/// Resource the player lose.
+		resource_move_signal_t lose_resource;
+	};
+
+	/** \brief A player is the entity that's playing the game. It can
+	 * be controlled by a Human, an AI, a pre-recorded set of moves,
+	 * etc.
 	 */
 	class Player
 	{
 	public:
-		Player();
-		Player(const std::string & name);
+		Player(unsigned int max_worker);
+		Player(const std::string & name, unsigned int max_worker);
 		Player(const Player &);
 
-		// Operators.
-		bool operator==(const Player & p) const;
+		/** @name Accessors. */
+		// @{
 
-		// Accessors.
-		void favorBuilding(int);
 		int favorBuilding() const;
-		void favorResource(int);
 		int favorResource() const;
-		void favorDenier(int);
 		int favorDenier() const;
-		void favorPrestige(int);
 		int favorPrestige() const;
-		const std::string & name() const;
-		void name(const std::string name);
-		void prestige(int);
 		int prestige() const;
 
+		const std::string & name() const;
+		void setName(const std::string name);
+
+		unsigned workers() const;
+		void setWorkers(unsigned int);
+		unsigned residences() const;
 		const ResourceMap & resources() const;
-		void addResources(const ResourceMap & r);
-		void substractResources(const ResourceMap & r);
-
-		const unsigned & workers() const;
-		unsigned & workers();
-		const unsigned & residences() const;
-		unsigned & residences();
-
-		/// Actions.
-		int askProvostShift() const;
-		unsigned int askWorkerPlacement() const;
-
 		PlayerSignals & signals() const;
 
-			/** @name Visitors accept methods */
+		// @}
+
+		/** @name Operators. */
+		// @{
+
+		bool operator==(const Player & p) const;
+		void addResources(const ResourceMap & r);
+		void substractResources(const ResourceMap & r);
+		void decrementWorkers();
+		void incrementWorkers();
+		void increaseIncome(unsigned int);
+		void decreaseIncome(unsigned int);
+
+		// @}
+
+		/** @name Interactions. */
+		// @{
+
+		int askProvostShift() const;
+		unsigned int askBoardElement() const;
+		ResourceMap askResource(const std::vector<ResourceMap> & choice) const;
+
+		// @}
+
+		/** @name Visitors accept methods */
 		//@{
 
 		void accept(ConstVisitor &) const;
@@ -103,4 +120,4 @@ std::ostream & operator<<(std::ostream &, const controller::Player &);
 
 # include "player.hxx"
 
-#endif // PLAYER_H
+#endif // PLAYER_HH

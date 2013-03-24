@@ -16,7 +16,7 @@ namespace controller
 	public:
 		Inn();
 
-		virtual void on_activate(void);
+		virtual void onActivate(void);
 		Player * host();
 		const Player * host() const;
 

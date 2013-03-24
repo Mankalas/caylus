@@ -46,7 +46,7 @@ namespace controller
 		const std::vector<Player *>& players() const;
 		std::vector<Player *>& players();
 
-		virtual void on_activate();
+		virtual void onActivate();
 
 		/// This is the 'case number' of the bridge, used by an active
 		/// view to communicate the player's choice.

@@ -68,10 +68,13 @@ struct Test
 		DebugLogger::log("Adding new playback player.");
 		Player * player = g->newPlayer();
 		playback = new Playback(g, player, test_dir);
-		player->name(playback->askName());
+
+		std::string player_name = playback->askName();
 		unsigned nb_workers = playback->askProvostShift(); // TODO : better
-		g->maxWorkers() = nb_workers;
-		player->workers() = nb_workers;
+
+		player->setName(player_name);
+		g->setMaxWorkers(nb_workers);
+
 		test_log = new TestLogger(g, test_dir);
 	}
 
@@ -182,7 +185,7 @@ int main(int argc, char **argv)
 	try
 	{
 		GameEngine g(nb_humans, nb_ais, max_turns, random);
-		g.maxWorkers() = max_workers;
+		g.setMaxWorkers(max_workers);
 		g.signals()->game_over.connect(&waitForGameOver);
 
 		boost::thread controller_thread(boost::ref(g));
@@ -197,7 +200,7 @@ int main(int argc, char **argv)
 			DebugLogger::log("Adding new human player.");
 			Player * player = g.newPlayer();
 			Human * human = new Human(&g, player, &gui);
-			player->name(human->askName());
+			player->setName(human->askName());
 		}
 
 		if (test)

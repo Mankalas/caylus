@@ -12,12 +12,12 @@
 
 using namespace controller;
 
-Player::Player():
+Player::Player(unsigned int max_worker):
 	favor_building_(0),
 	favor_resource_(0),
 	favor_denier_(0),
 	favor_prestige_(0),
-	workers_(0),
+	workers_(max_worker),
 	name_("Chiche"),
 	prestige_(0),
 	resources_(Resource::denier * 5 + Resource::food * 2 + Resource::wood),
@@ -25,12 +25,12 @@ Player::Player():
 {
 }
 
-Player::Player(const std::string & name):
+Player::Player(const std::string & name, unsigned int max_worker):
 	favor_building_(0),
 	favor_resource_(0),
 	favor_denier_(0),
 	favor_prestige_(0),
-	workers_(0),
+	workers_(max_worker),
 	name_(name),
 	prestige_(0),
 	resources_(10 * (Resource::denier * 5 + Resource::food * 2 + Resource::wood +
@@ -52,21 +52,20 @@ Player::Player(const Player & player):
 {
 }
 
-unsigned int Player::askWorkerPlacement() const
+unsigned int Player::askBoardElement() const
 {
-	assert(!signals_.ask_worker_placement.empty());
-	unsigned int choice = signals_.ask_worker_placement();
+	unsigned int choice = signals_.ask_board_element();
 	return choice;
 }
 
 void Player::addResources(const ResourceMap & r)
 {
 	resources_ += r;
-	signals_.gain_resources(this, r);
+	signals_.gain_resource(this, r);
 }
 
 void Player::substractResources(const ResourceMap & r)
 {
 	resources_ -= r;
-	signals_.lose_resources(this, r);
+	signals_.lose_resource(this, r);
 }

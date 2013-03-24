@@ -106,7 +106,7 @@ bool Human::isHuman() const
 	return true;
 }
 
-unsigned int Human::askWorkerPlacement() const
+unsigned int Human::askBoardElement() const
 {
 	return gui_->askCaseNumber();
 }

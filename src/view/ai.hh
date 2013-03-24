@@ -35,13 +35,17 @@ namespace view
 
 		virtual bool isHuman() const;
 
+		//* @name Game signals. */
+		// @{
+
 		virtual int askProvostShift() const;
-		virtual std::string askName() const;
+		virtual unsigned int askBoardElement() const;
+		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const;
+
+		// @}
+
 		virtual unsigned int askChoice(unsigned int range) const;
-		virtual unsigned int askWorkerPlacement() const { return 0; };
-
-		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const = 0;
-
+		virtual std::string askName() const;
 		virtual bool askYesNo() const;
 		virtual bool askJoustField() const;
 

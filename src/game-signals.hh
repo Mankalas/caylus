@@ -56,8 +56,8 @@ namespace controller
 		v_v_signal_t activation_bridge_begin;
 		v_v_signal_t activation_bridge_end;
 
-		v_v_signal_t activation_buildings_begin;
-		v_v_signal_t activation_buildings_end;
+		v_v_signal_t activationBuildings_begin;
+		v_v_signal_t activationBuildings_end;
 
 		v_v_signal_t activation_castle_begin;
 		v_v_signal_t activation_castle_end;

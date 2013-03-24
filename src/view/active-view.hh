@@ -30,6 +30,9 @@ namespace view
 	public:
 		ActiveView(const controller::GameEngine * ge, const controller::Player * player);
 
+		//* @name Game signals. */
+		// @{
+
 		/**
 		 * Ask for the provost's shift. This method assures that the
 		 * returned value in within the range [-3; 3].
@@ -40,7 +43,10 @@ namespace view
 
 		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const = 0;
 		///
-		virtual unsigned int askWorkerPlacement() const = 0;
+		virtual unsigned int askBoardElement() const = 0;
+
+		// @}
+
 		///
 		virtual std::string askName() const = 0;
 		///

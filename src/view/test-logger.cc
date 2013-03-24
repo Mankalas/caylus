@@ -25,15 +25,15 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 
 	foreach (const BoardElement * board_element, game_engine->getEveryBoardElements())
 	{
-		board_element->activation_sig.connect(boost::bind(&TestLogger::activationBoardElement, this, _1, _2));
-		board_element->already_occupied.connect(boost::bind(&TestLogger::boardElementAlreadyOccupied, this, _1));
-		board_element->worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
+		board_element->signals().activation_sig.connect(boost::bind(&TestLogger::activationBoardElement, this, _1));
+		board_element->signals().already_occupied.connect(boost::bind(&TestLogger::boardElementAlreadyOccupied, this, _1));
+		board_element->signals().worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
 	}
 
 	foreach (const Player * player, game_engine->players())
 	{
-		player->signals().gain_resources.connect(boost::bind(&TestLogger::playerGainsResources, this, _1, _2));
-		player->signals().lose_resources.connect(boost::bind(&TestLogger::playerLosesResources, this, _1, _2));
+		player->signals().gain_resource.connect(boost::bind(&TestLogger::playerGainsResources, this, _1, _2));
+		player->signals().lose_resource.connect(boost::bind(&TestLogger::playerLosesResources, this, _1, _2));
 	}
 
 	file_.open((output_path + "/output").c_str(), std::ios::trunc);
@@ -83,14 +83,14 @@ void TestLogger::newTurn(unsigned current_turn, unsigned max_turn)
   file_ << player->name();
   }*/
 
-void TestLogger::workerPlacement(const controller::BoardElement * board_elt, const controller::Player * player)
+void TestLogger::workerPlacement(const controller::Player * player, const controller::BoardElement * board_elt)
 {
 	file_ << player->name() << " places a worker on " << board_elt->name() << std::endl;
 }
 
-void TestLogger::activationBoardElement(const controller::BoardElement * board_elt, const controller::Player * p)
+void TestLogger::activationBoardElement(const controller::BoardElement * board_elt)
 {
-	file_ <<  board_elt->name() << " activated for " << p->name() << std::endl;
+	file_ <<  board_elt->name() << " activated" << std::endl;
 }
 
 void TestLogger::boardElementAlreadyOccupied(const controller::BoardElement * board_elt)

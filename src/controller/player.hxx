@@ -8,7 +8,6 @@
 # define PLAYER_HXX
 
 # include "player.hh"
-# include "exceptions.hh"
 
 # include "../visitor.hh"
 # include "../const.hh"
@@ -18,19 +17,9 @@ inline const ResourceMap & controller::Player::resources() const
 	return resources_;
 }
 
-inline void controller::Player::favorBuilding(int new_var)
-{
-	this->favor_building_ = new_var;
-}
-
 inline int controller::Player::favorBuilding() const
 {
 	return favor_building_;
-}
-
-inline void controller::Player::favorResource(int new_var)
-{
-	favor_resource_ = new_var;
 }
 
 inline int controller::Player::favorResource() const
@@ -38,19 +27,9 @@ inline int controller::Player::favorResource() const
 	return favor_resource_;
 }
 
-inline void controller::Player::favorDenier(int new_var)
-{
-	favor_denier_ = new_var;
-}
-
 inline int controller::Player::favorDenier() const
 {
 	return favor_denier_;
-}
-
-inline void controller::Player::favorPrestige(int new_var)
-{
-	favor_prestige_ = new_var;
 }
 
 inline int controller::Player::favorPrestige() const
@@ -63,14 +42,9 @@ inline const std::string & controller::Player::name() const
 	return name_;
 }
 
-inline void controller::Player::name(const std::string name)
+inline void controller::Player::setName(const std::string name)
 {
 	name_ = name;
-}
-
-inline void controller::Player::prestige(int new_var)
-{
-	prestige_ = new_var;
 }
 
 inline int controller::Player::prestige() const
@@ -78,22 +52,17 @@ inline int controller::Player::prestige() const
 	return prestige_;
 }
 
-inline const unsigned & controller::Player::workers() const
+inline unsigned int controller::Player::workers() const
 {
 	return workers_;
 }
 
-inline unsigned int & controller::Player::workers()
+inline PlayerSignals & controller::Player::signals() const
 {
-	return workers_;
+	return signals_;
 }
 
-inline const unsigned & controller::Player::residences() const
-{
-	return residences_;
-}
-
-inline unsigned int & controller::Player::residences()
+inline unsigned int controller::Player::residences() const
 {
 	return residences_;
 }
@@ -115,10 +84,19 @@ inline int controller::Player::askProvostShift() const
 	return signals_.ask_provost_shift();
 }
 
-inline
-controller::PlayerSignals & controller::Player::signals() const
+inline ResourceMap controller::Player::askResource(const std::vector<ResourceMap> & choice) const
 {
-	return signals_;
+	return signals_.ask_resource(choice);
+}
+
+inline void controller::Player::decrementWorkers()
+{
+	--workers_;
+}
+
+inline void controller::Player::incrementWorkers()
+{
+	++workers_;
 }
 
 inline
@@ -131,6 +109,24 @@ inline
 void controller::Player::accept(Visitor & v)
 {
 	v.operator()(*this);
+}
+
+inline
+void controller::Player::increaseIncome(unsigned int i)
+{
+	residences_ += i;
+}
+
+inline
+void controller::Player::decreaseIncome(unsigned int i)
+{
+	residences_ -= i;
+}
+
+inline
+void controller::Player::setWorkers(unsigned int nb)
+{
+	workers_ = nb;
 }
 
 #endif //PLAYER_HXX

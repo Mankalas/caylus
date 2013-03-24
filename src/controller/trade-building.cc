@@ -24,20 +24,15 @@ TradeBuilding::TradeBuilding(const ResourceMap & supply,
 }
 
 void
-TradeBuilding::on_activate()
+TradeBuilding::onActivate()
 {
-	Building::on_activate();
+	Building::onActivate();
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges = createExchangeVector();
-	unsigned choice = 1;
 
 	std::pair<ResourceMap, ResourceMap> ex;
-	choice = worker_->signals().ask_choice(1);
-	if (0 == choice)
-	{
-		return;
-	}
+	ResourceMap choice = worker_->askResource(demand);
 
-	const std::pair<ResourceMap, ResourceMap>& exchange = exchanges[choice - 1];
+	/*const std::pair<ResourceMap, ResourceMap>& exchange = exchanges[choice - 1];
 	if (worker_->resources() >= exchange.first)
 	{
 		worker_->substractResources(exchange.first);
@@ -46,8 +41,8 @@ TradeBuilding::on_activate()
 	else
 	{
 		DebugLogger::log("Not enough resources. Try again.");
-		on_activate();
-	}
+		onActivate();
+		}*/
 }
 
 std::vector<std::pair<ResourceMap, ResourceMap> >
