@@ -21,6 +21,7 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 	game_engine->signals()->turn_start.connect(boost::bind(&TestLogger::newTurn, this, _1, _2));
 
 	game_engine->board().signals().provost_shifted.connect(boost::bind(&TestLogger::provostShifted, this, _1));
+	game_engine->board().signals().bailiff_shifted.connect(boost::bind(&TestLogger::bailiffShifted, this, _1));
 
 	foreach (const BoardElement * board_element, game_engine->getEveryBoardElements())
 	{
@@ -54,6 +55,12 @@ void TestLogger::provostShifted(int shift)
 	std::string space = (abs_shift <= 1) ? " space " : " spaces ";
 	std::string way = (shift < 0) ? "backward" : "forward";
 	file_ << "Provost moves " << abs_shift << space << way << std::endl;
+}
+
+void TestLogger::bailiffShifted(unsigned int shift)
+{
+	std::string space = (shift <= 1) ? " space " : " spaces ";
+	file_ << "Bailiff moves " << shift << space << "forward" << std::endl;
 }
 
 void TestLogger::playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map)

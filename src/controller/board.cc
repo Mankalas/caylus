@@ -47,8 +47,8 @@ void Board::shiftBailiff()
 		shift = 2;
 	}
 	bailiff_ += shift;
-	provost_ = bailiff_;
 	signals_.bailiff_shifted(shift);
+	shiftProvost(bailiff_ - provost_);
 }
 
 std::ostream & operator<<(std::ostream & o, const Board & board)

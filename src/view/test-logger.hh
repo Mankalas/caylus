@@ -37,6 +37,8 @@ namespace view
 		void playerGainsResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void provostShifted(int shift);
+		void bailiffShifted(unsigned int shift);
+
 
 		std::ofstream file_;
 	};
