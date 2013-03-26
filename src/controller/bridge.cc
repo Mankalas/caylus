@@ -17,14 +17,14 @@ Bridge::Bridge(Board & board)
 	, board_(board)
 {}
 
-void Bridge::add(Player * p)
+void Bridge::add(Player & p)
 {
 	if (players_.size() == 0)
 	{
 		//Logger::instance()->playerLog(p, " is granted 1 denier for he is the first on the Bridge.");
-		p->addResources(Resource::denier);
+		p.addResources(Resource::denier);
 	}
-	players_.push_back(p);
+	players_.push_back(&p);
 }
 
 bool Bridge::has(const Player * p) const

@@ -63,7 +63,7 @@ namespace controller
 		 *
 		 * @param current The player who placed a worker.
 		 */
-		virtual void placeWorker(Player & current);
+		virtual void add(Player & current);
 
 		/**
 		 * Removes the worker from the building, incrementing the

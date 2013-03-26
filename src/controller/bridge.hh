@@ -30,7 +30,7 @@ namespace controller
 		 *
 		 * @param p The player to add.
 		 */
-		void add(Player * p);
+		void add(Player & p);
 
 		/**
 		 * Check whether a player is already on the bridge or not.

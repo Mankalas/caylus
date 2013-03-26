@@ -18,12 +18,21 @@ class ConstVisitor;
 namespace controller
 {
 
+	/**
+	 * Stables building. Allows the players to change their play order
+	 * in the game. Can holds at most 3 workers.
+	 */
 	class Stables : public OmniscientBuilding
 	{
 	public:
+		/**
+		 * Constructor.
+		 *
+		 * @param ge The Game Engine.
+		 */
 		Stables(GameEngine * ge);
 
-		virtual void placeWorker(Player &);
+		virtual void add(Player &);
 		virtual void removeWorker();
 
 		virtual bool has(const Player *) const;

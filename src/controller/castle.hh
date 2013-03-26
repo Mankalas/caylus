@@ -103,7 +103,7 @@ namespace controller
 		 *
 		 * @param p The player to add.
 		 */
-		void add(Player * p);
+		virtual void add(Player & p);
 
 		/**
 		 * Whether a player has already a worker in the caslte or not.

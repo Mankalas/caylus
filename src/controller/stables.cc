@@ -26,7 +26,7 @@ Stables::Stables(GameEngine * ge)
 {
 }
 
-void Stables::placeWorker(Player & current)
+void Stables::add(Player & current)
 {
 	if (has(&current))
 	{

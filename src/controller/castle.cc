@@ -154,15 +154,15 @@ bool Castle::has(const Player * p) const
 	return std::find(players_.begin(), players_.end(), p) != players_.end();
 }
 
-void Castle::add(Player * p)
+void Castle::add(Player & p)
 {
-	if (has(p))
+	if (has(&p))
 	{
 		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();
 	}
-	players_.push_back(p);
-	signals_.worker_placed(p, this);
+	players_.push_back(&p);
+	signals_.worker_placed(&p, this);
 }
 
 void Castle::clear()

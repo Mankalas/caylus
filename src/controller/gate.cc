@@ -40,12 +40,12 @@ void Gate::onActivate_()
 			if (selected_case == Castle::CASE_NUMBER)
 			{
 				Castle & castle = game_engine_->board().castle();
-				castle.add(worker_);
+				castle.add(*worker_);
 			}
 			else if (selected_case != Bridge::CASE_NUMBER)
 			{
 				BuildingSmartPtr selected_building = game_engine_->board().road().get()[selected_case - 1];
-				selected_building->placeWorker(*worker_);
+				selected_building->add(*worker_);
 			}
 			is_selection_valid = true;
 		}

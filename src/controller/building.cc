@@ -53,7 +53,7 @@ Building::build(Player & current)
 }
 
 void
-Building::placeWorker(Player & current)
+Building::add(Player & current)
 {
 	if (worker_)
 	{

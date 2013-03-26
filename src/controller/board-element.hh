@@ -64,6 +64,13 @@ namespace controller
 		virtual void activate();
 
 		/**
+		 * Add a worker to the board element.
+		 *
+		 * @param worker The worker.
+		 */
+		virtual void add(Player & worker) = 0;
+
+		/**
 		 * The signals emitted by the element.
 		 *
 		 * @return The signals emitted by the element.

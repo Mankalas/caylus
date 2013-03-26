@@ -200,7 +200,7 @@ void GameEngine::placeWorkers_()
 void GameEngine::addToCastle(Player * p)
 {
 	assert(p);
-	board_.castle().add(p);
+	board_.castle().add(*p);
 }
 
 void GameEngine::playerMove_(Player * p)
@@ -216,7 +216,7 @@ void GameEngine::playerMove_(Player * p)
 
 		if (selected_case == Bridge::CASE_NUMBER)
 		{
-			board_.bridge().add(p);
+			board_.bridge().add(*p);
 			has_played = true;
 			continue;
 		}
@@ -224,7 +224,7 @@ void GameEngine::playerMove_(Player * p)
 
 		if (selected_case == Castle::CASE_NUMBER && p->resources()[Resource::denier] >= worker_cost)
 		{
-			board_.castle().add(p);
+			board_.castle().add(*p);
 			p->substractResources(Resource::denier * worker_cost);
 			p->decrementWorkers();
 			has_played = true;
@@ -240,7 +240,7 @@ void GameEngine::playerMove_(Player * p)
 			{
 				try
 				{
-					selected_building->placeWorker(*p);
+					selected_building->add(*p);
 					p->substractResources(Resource::denier * (selected_building->owner() == p ? 1 : worker_cost));
 					has_played = true;
 				}
@@ -289,13 +289,13 @@ bool GameEngine::canPlayerPlay_(Player * p)
 	if (p->resources()[Resource::denier] == 0)
 	{
 		sigs_.not_enough_deniers(p);
-		board_.bridge().add(p);
+		board_.bridge().add(*p);
 		return false;
 	}
 	if (p->workers() == 0)
 	{
 		sigs_.no_worker_left(p);
-		board_.bridge().add(p);
+		board_.bridge().add(*p);
 		return false;
 	}
 	return true;
