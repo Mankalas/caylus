@@ -71,6 +71,16 @@ namespace controller
 		virtual void add(Player & worker) = 0;
 
 		/**
+		 * Whether the current board element already has the given player.
+		 *
+		 * @param player The player.
+		 *
+		 * @return Whether the current board element already has the given
+		 * player.
+		 */
+		virtual bool has(const Player & player) const = 0;
+
+		/**
 		 * The signals emitted by the element.
 		 *
 		 * @return The signals emitted by the element.

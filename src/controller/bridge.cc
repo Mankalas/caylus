@@ -27,9 +27,9 @@ void Bridge::add(Player & p)
 	players_.push_back(&p);
 }
 
-bool Bridge::has(const Player * p) const
+bool Bridge::has(const Player & p) const
 {
-	return std::find(players_.begin(), players_.end(), p) != players_.end();
+	return std::find(players_.begin(), players_.end(), &p) != players_.end();
 }
 
 bool Bridge::canBeActivated_() const

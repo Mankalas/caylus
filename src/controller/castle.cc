@@ -149,14 +149,14 @@ void Castle::onActivate_()
 	}
 }
 
-bool Castle::has(const Player * p) const
+bool Castle::has(const Player & p) const
 {
-	return std::find(players_.begin(), players_.end(), p) != players_.end();
+	return std::find(players_.begin(), players_.end(), &p) != players_.end();
 }
 
 void Castle::add(Player & p)
 {
-	if (has(&p))
+	if (has(p))
 	{
 		signals_.already_occupied(this);
 		throw new OccupiedBuildingEx();

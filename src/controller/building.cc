@@ -117,9 +117,9 @@ operator<<(std::ostream & o, const Building & b)
 	return o;
 }
 
-bool Building::has(const Player * p) const
+bool Building::has(const Player & p) const
 {
-	return worker_ == p;
+	return worker_ == &p;
 }
 
 bool Building::canBeActivated_() const

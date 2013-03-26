@@ -105,14 +105,7 @@ namespace controller
 		 */
 		virtual void add(Player & p);
 
-		/**
-		 * Whether a player has already a worker in the caslte or not.
-		 *
-		 * @param p The player.
-		 *
-		 * @return True or false.
-		 */
-		bool has(const Player * p) const;
+		virtual bool has(const Player & p) const;
 
 		/** Clear the Castle of the workers. */
 		void clear();

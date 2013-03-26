@@ -134,7 +134,7 @@ namespace controller
 		 *
 		 * @return Whether the player can play or not.
 		 */
-		bool canPlayerPlay_(Player * p);
+		bool canPlayerPlay_(Player & p);
 
 		/** Get the worker cost for a player. This method is not concerned
 		 * by the owner of the building the player wants to put his worker

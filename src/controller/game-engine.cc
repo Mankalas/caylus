@@ -188,7 +188,7 @@ void GameEngine::placeWorkers_()
 		foreach(Player * p, order_)
 		{
 			assert(p);
-			if (canPlayerPlay_(p))
+			if (canPlayerPlay_(*p))
 			{
 				playerMove_(p);
 			}
@@ -279,23 +279,23 @@ void GameEngine::startOfTurn_()
 	sigs_.board_updated();
 }
 
-bool GameEngine::canPlayerPlay_(Player * p)
+bool GameEngine::canPlayerPlay_(Player & p)
 {
 	if (board_.bridge().has(p))
 	{
-		sigs_.already_on_bridge(p);
+		sigs_.already_on_bridge(&p);
 		return false;
 	}
-	if (p->resources()[Resource::denier] == 0)
+	if (p.resources()[Resource::denier] == 0)
 	{
-		sigs_.not_enough_deniers(p);
-		board_.bridge().add(*p);
+		sigs_.not_enough_deniers(&p);
+		board_.bridge().add(p);
 		return false;
 	}
-	if (p->workers() == 0)
+	if (p.workers() == 0)
 	{
-		sigs_.no_worker_left(p);
-		board_.bridge().add(*p);
+		sigs_.no_worker_left(&p);
+		board_.bridge().add(p);
 		return false;
 	}
 	return true;

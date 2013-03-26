@@ -32,14 +32,7 @@ namespace controller
 		 */
 		void add(Player & p);
 
-		/**
-		 * Check whether a player is already on the bridge or not.
-		 *
-		 * @param p The player to check.
-		 *
-		 * @return
-		 */
-		bool has(const Player * p) const;
+		virtual bool has(const Player & p) const;
 
 		// Accessors.
 		const std::vector<Player *>& players() const;

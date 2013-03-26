@@ -85,7 +85,7 @@ namespace controller
 		const std::vector<ResourceMap>& cost() const;
 		const Player * owner() const;
 		const Player * worker() const;
-		virtual bool has(const Player *) const;
+		virtual bool has(const Player &) const;
 
 		//@}
 
