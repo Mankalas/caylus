@@ -100,10 +100,8 @@ Castle::~Castle()
 	delete p;
 }
 
-void Castle::onActivate()
+void Castle::onActivate_()
 {
-	BoardElement::onActivate();
-
 	bool can_pay = false;
 	unsigned current_build = 0;
 
@@ -112,7 +110,7 @@ void Castle::onActivate()
 		current_build = 0;
 		do
 		{
-			if (!_checkResources(p))
+			if (!checkResources_(p))
 			{
 				//ConsoleUI::inst()->printMessage("You don't have 3 different resources.");
 				can_pay = false;
@@ -127,7 +125,7 @@ void Castle::onActivate()
 				}
 				else
 				{
-					_build(p, choice);
+					build_(p, choice);
 					++current_build;
 				}
 			}
@@ -187,7 +185,7 @@ bool Castle::isActivePartComplete() const
 	return active_part_->houses().size() == active_part_->capacity();
 }
 
-void Castle::_build(Player * p, ResourceMap * resources)
+void Castle::build_(Player * p, ResourceMap * resources)
 {
 	CastlePart * active_part = active_part_;
 
@@ -217,7 +215,7 @@ Castle::_createResourcesVector(const Player* p) const
   return pairs;
   }*/
 
-bool Castle::_checkResources(const Player * p) const
+bool Castle::checkResources_(const Player * p) const
 {
 	unsigned count = 0;
 
@@ -244,7 +242,7 @@ bool Castle::_checkResources(const Player * p) const
 	return count >= 2;
 }
 
-bool Castle::isCastle() const
+bool Castle::canBeActivated_() const
 {
-	return true;
+	return !players_.empty();
 }

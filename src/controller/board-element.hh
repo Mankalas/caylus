@@ -59,10 +59,9 @@ namespace controller
 		virtual const std::string & name() const;
 
 		/**
-		 * Callback when the board element is activated during the
-		 * "Building activation" phase.
+		 * Activates the board element and performs its effect.
 		 */
-		virtual void onActivate();
+		virtual void activate();
 
 		/**
 		 * The signals emitted by the element.
@@ -76,6 +75,20 @@ namespace controller
 		const std::string name_;
 		/// Element's signals.
 		mutable BoardElementSignals signals_;
+
+		/**
+		 * Callback when the board element is activated during the
+		 * "Building activation" phase.
+		 */
+		virtual void onActivate_() = 0;
+
+		/**
+		 * Whether the current board element can be activated or not,
+		 * globally meaning: is there any worker on the board element?
+		 *
+		 * @return Can be activated or not.
+		 */
+		virtual bool canBeActivated_() const = 0;
 	};
 
 #include "board-element.hxx"

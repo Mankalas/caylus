@@ -15,11 +15,10 @@ using namespace controller;
 
 Board::Board(GameEngine * ge)
 	: road_(ge)
-	, FIRST_EMPTY_CASE_(6)
-	, LAST_EMPTY_CASE_(33)
+	, bridge_(*this)
 {
-	provost_ = PROVOST_INIT_CASE;
-	bailiff_ = BAILIFF_INIT_CASE;
+	provost_ = Road::PROVOST_INIT_CASE;
+	bailiff_ = Road::BAILIFF_INIT_CASE;
 }
 
 Board::~Board()
@@ -29,8 +28,8 @@ Board::~Board()
 bool Board::isProvostShiftValid(int shift) const
 {
 	return shift >= -3 && shift <= 3 &&
-		provost() + shift <= LAST_EMPTY_CASE_ &&
-		provost() - shift >= FIRST_EMPTY_CASE_;
+		provost() + shift <= Road::LAST_CASE &&
+		provost() - shift >= Road::FIRST_NEUTRAL_CASE;
 }
 
 void Board::shiftProvost(int shift)
@@ -44,7 +43,7 @@ void Board::shiftBailiff()
 	unsigned int shift = 1;
 	if (provost_ > bailiff_)
 	{
-		shift = 2;
+			shift = 2;
 	}
 	bailiff_ += shift;
 	signals_.bailiff_shifted(shift);
@@ -74,4 +73,13 @@ std::ostream & operator<<(std::ostream & o, const Board & board)
 	o << BOLDYELLOW << Bridge::CASE_NUMBER << ". " << RESET << board.bridge().name() << std::endl
 	  << BOLDYELLOW << Castle::CASE_NUMBER << ". " << RESET << board.castle().name() << std::endl;
 	return o;
+}
+
+void Board::activateBuildingAtCase(unsigned int i)
+{
+	BuildingSmartPtr building = road_.get()[i];
+	if (building)
+	{
+		building->activate();
+	}
 }

@@ -24,9 +24,8 @@ TradeBuilding::TradeBuilding(const ResourceMap & supply,
 }
 
 void
-TradeBuilding::onActivate()
+TradeBuilding::onActivate_()
 {
-	Building::onActivate();
 	std::vector<std::pair<ResourceMap, ResourceMap> > exchanges = createExchangeVector();
 
 	std::pair<ResourceMap, ResourceMap> ex;

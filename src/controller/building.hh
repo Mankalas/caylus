@@ -66,13 +66,6 @@ namespace controller
 		virtual void placeWorker(Player & current);
 
 		/**
-		 * Activates the building. Checks if the building can be
-		 * activated (if it has a worker), performs the Building's
-		 * effect and unset the worker.
-		 */
-		virtual void activate();
-
-		/**
 		 * Removes the worker from the building, incrementing the
 		 * worker's player workers count.
 		 */
@@ -136,17 +129,21 @@ namespace controller
 		/**
 		 * Specialized actions performed by the building when built.
 		 */
-		virtual void onBuild();
+		virtual void onBuild_();
 
 		/**
-		 * Specialized actions performed by the building when activated.
+		 * Activates the building. Checks if the building can be
+		 * activated (if it has a worker), performs the Building's
+		 * effect and unset the worker.
 		 */
-		virtual void onActivate();
+		virtual void onActivate_();
 
 		/**
 		 * Specialized actions performed by the building when demolished.
 		 */
-		virtual void onDemolish();
+		virtual void onDemolish_();
+
+		virtual bool canBeActivated_() const;
 	};
 
 }

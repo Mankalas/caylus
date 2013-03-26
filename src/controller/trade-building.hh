@@ -42,12 +42,12 @@ namespace controller
 		              const ResourceMap & demand,
 		              const std::vector<std::pair<unsigned, unsigned> >& ratios);
 
-		virtual void onActivate();
-
 	private:
 		std::vector<std::pair<ResourceMap, ResourceMap> > createExchangeVector() const;
 
 		boost::signal<unsigned(void)> ask_resource_choice_;
+
+		virtual void onActivate_();
 	};
 
 }

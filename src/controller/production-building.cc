@@ -23,9 +23,12 @@ ProductionBuilding::ProductionBuilding(const std::vector<ResourceMap>& wchc,
 }
 
 void
-ProductionBuilding::onActivate()
+ProductionBuilding::onActivate_()
 {
-	Building::onActivate();
+	if (worker_ == NULL)
+	{
+		return;
+	}
 	if (worker_choices_.size() == 1)
 	{
 		worker_->addResources(worker_choices_[0]);

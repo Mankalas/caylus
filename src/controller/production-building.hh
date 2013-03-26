@@ -37,7 +37,7 @@ namespace controller
 		ProductionBuilding(const std::vector<ResourceMap>& wchoice,
 		                   const std::vector<ResourceMap>& ochoice);
 
-		virtual void onActivate();
+		virtual void onActivate_();
 
 		resource_choice_signal_t ask_resource_choice_;
 	};

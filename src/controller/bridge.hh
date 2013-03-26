@@ -15,14 +15,13 @@
 namespace controller
 {
 	class Player;
+	class Board;
 
 	class Bridge : public BoardElement
 	{
 	public :
 
-		Bridge();
-
-		virtual bool isBridge() const;
+		Bridge(Board & board);
 
 		void clear();
 
@@ -46,14 +45,17 @@ namespace controller
 		const std::vector<Player *>& players() const;
 		std::vector<Player *>& players();
 
-		virtual void onActivate();
-
 		/// This is the 'case number' of the bridge, used by an active
 		/// view to communicate the player's choice.
 		static const unsigned int CASE_NUMBER = 69;
 
 	private:
 		std::vector<Player *> players_;
+		Board & board_;
+
+		virtual void onActivate_();
+
+		virtual bool canBeActivated_() const;
 	};
 }
 

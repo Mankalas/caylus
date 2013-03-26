@@ -21,9 +21,14 @@ FavorBuilding::FavorBuilding()
 
 
 void
-FavorBuilding::onBuild()
+FavorBuilding::onBuild_()
 {
 	assert(owner_);
 
 	// owner_->favor_proceed (); TODO:
+}
+
+bool FavorBuilding::canBeActivated_() const
+{
+	return false;
 }

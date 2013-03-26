@@ -22,9 +22,8 @@ MerchantGuild::MerchantGuild(GameEngine * ge)
 {
 }
 
-void MerchantGuild::onActivate()
+void MerchantGuild::onActivate_()
 {
-	Building::onActivate();
 	Board & board = game_engine_->board();
 	int s = 0;
 

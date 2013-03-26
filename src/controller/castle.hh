@@ -114,9 +114,6 @@ namespace controller
 		 */
 		bool has(const Player * p) const;
 
-		/** Resolve the Castle's activation. */
-		virtual void onActivate();
-
 		/** Clear the Castle of the workers. */
 		void clear();
 
@@ -130,8 +127,6 @@ namespace controller
 		 * @return Whether the active part is completed or not.
 		 */
 		bool isActivePartComplete() const;
-
-		virtual bool isCastle() const;
 
 		/// Accessors.
 
@@ -175,7 +170,7 @@ namespace controller
 		 *
 		 * @return Whether the player can afford a houses or not.
 		 */
-		bool _checkResources(const Player * p) const;
+		bool checkResources_(const Player * p) const;
 
 		/** To ease the choice of the resources the player will use to build
 		 * a house, this method generates a vector with all the possibles
@@ -193,7 +188,12 @@ namespace controller
 		 * @param p The player who's building.
 		 * @param resources The two resources used to build the house.
 		 */
-		void _build(Player * p, ResourceMap * resources);
+		void build_(Player * p, ResourceMap * resources);
+
+		/** Resolve the Castle's activation. */
+		virtual void onActivate_();
+
+		virtual bool canBeActivated_() const;
 	};
 
 }

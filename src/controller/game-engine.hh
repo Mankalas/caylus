@@ -15,10 +15,6 @@
 # include "board.hh"
 # include "../game-signals.hh"
 
-# define PROVOST_INIT_CASE 11
-# define BAILIFF_INIT_CASE 11
-# define INN_CASE 5
-
 class Visitor;
 class ConstVisitor;
 
@@ -150,7 +146,8 @@ namespace controller
 		 */
 		unsigned getWorkerCost_(const Player * p) const;
 
-		void init_();
+		void initialResource_();
+		void shufflePlayers_();
 
 		/// The order in which the player are "called".
 		std::vector<Player *> order_;

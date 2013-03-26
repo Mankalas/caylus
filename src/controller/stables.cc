@@ -53,9 +53,8 @@ void Stables::removeWorker()
 	players_.clear();
 }
 
-void Stables::onActivate()
+void Stables::onActivate_()
 {
-	Building::onActivate();
 	std::vector<Player *>& order = game_engine_->order();
 	std::vector<Player *>::iterator it;
 	Player * p;

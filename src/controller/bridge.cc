@@ -7,12 +7,14 @@
  */
 
 #include "bridge.hh"
+#include "board.hh"
 #include "player.hh"
 #include "const.hh"
 #include "debug-logger.hh"
 
-Bridge::Bridge() :
-	BoardElement(BRIDGE)
+Bridge::Bridge(Board & board)
+	:	BoardElement(BRIDGE)
+	, board_(board)
 {}
 
 void Bridge::add(Player * p)
@@ -30,16 +32,35 @@ bool Bridge::has(const Player * p) const
 	return std::find(players_.begin(), players_.end(), p) != players_.end();
 }
 
-bool Bridge::isBridge() const
+bool Bridge::canBeActivated_() const
 {
-	return true;
+	return !players_.empty();
 }
 
-void Bridge::onActivate()
+void Bridge::onActivate_()
 {
-	BoardElement::onActivate();
 	foreach (Player * player, players_)
 	{
-		player->askProvostShift();
+		int deniers = player->resources()[Resource::denier];
+		if (deniers == 0)
+		{
+			continue;
+		}
+		int shift = 0;
+		bool is_shift_valid = false;
+		bool has_enough_denier = false;
+		/* If the provost is not moved before the bridge, or over the end
+		   of the board, or if the player has enough money, then move. */
+		while (!is_shift_valid || !has_enough_denier)
+		{
+			shift = player->askProvostShift();
+			is_shift_valid = board_.isProvostShiftValid(shift);
+			has_enough_denier = fabs(shift) <= deniers;
+		}
+		if (shift != 0)
+		{
+			board_.shiftProvost(shift);
+			player->substractResources(Resource::denier * fabs(shift));
+		}
 	}
 }

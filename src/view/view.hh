@@ -17,9 +17,8 @@ namespace controller
 namespace view
 {
 	/**
-	 * Generic view. Abstract class. No constructor with a GameEngine
-	 * parameter for passive views have a const instance, and active
-	 * views have not.
+	 * Generic view. Abstract class. A view CAN NOT act upon the
+	 * GameEngine, hence the 'const'
 	 */
 	class View
 	{
@@ -35,6 +34,7 @@ namespace view
 		virtual ~View() = 0;
 
 	protected:
+		/// The GameEngine.
 		const controller::GameEngine * game_engine_;
 	};
 

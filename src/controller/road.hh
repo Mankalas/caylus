@@ -81,7 +81,10 @@ namespace controller
 
 		//@}
 
-		static const unsigned int STABLES_CASE;
+		static const unsigned int FIRST_NEUTRAL_CASE;
+		static const unsigned int PROVOST_INIT_CASE;
+		static const unsigned int BAILIFF_INIT_CASE;
+		static const unsigned int LAST_CASE;
 
 	private:
 		/**

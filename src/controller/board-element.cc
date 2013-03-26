@@ -16,7 +16,11 @@ BoardElement::BoardElement(const std::string & name)
 {
 }
 
-void BoardElement::onActivate()
+void BoardElement::activate()
 {
-	signals_.activation_sig(this);
+	if (canBeActivated_())
+	{
+		signals_.activation_sig(this);
+		onActivate_();
+	}
 }

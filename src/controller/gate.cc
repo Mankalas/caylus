@@ -24,10 +24,8 @@ Gate::Gate(GameEngine * game_engine)
 {
 }
 
-void Gate::onActivate()
+void Gate::onActivate_()
 {
-	Building::onActivate();
-
 	bool is_selection_valid = false;
 	unsigned int selected_case;
 	while (!is_selection_valid)

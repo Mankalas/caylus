@@ -23,7 +23,6 @@ namespace controller
 	public:
 		Stables(GameEngine * ge);
 
-		virtual void onActivate(void);
 		virtual void placeWorker(Player &);
 		virtual void removeWorker();
 
@@ -40,6 +39,8 @@ namespace controller
 
 	private:
 		std::vector<Player *> players_;
+
+		virtual void onActivate_();
 	};
 
 }

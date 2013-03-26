@@ -43,7 +43,7 @@ Building::build(Player & current)
 		{
 			current.addResources(gain_);
 			current.substractResources(cost);
-			onBuild();
+			onBuild_();
 		}
 		else
 		{
@@ -75,16 +75,6 @@ Building::placeWorker(Player & current)
 }
 
 void
-Building::activate()
-{
-	if (worker_)
-	{
-		onActivate();
-		removeWorker();
-	}
-}
-
-void
 Building::removeWorker()
 {
 	if (worker_)
@@ -98,24 +88,17 @@ void
 Building::demolish()
 {
 	assert(!worker_);
-	onDemolish();
+	onDemolish_();
 	owner_ = NULL;
 }
 
 void
-Building::onBuild()
+Building::onBuild_()
 {
 }
 
 void
-Building::onActivate()
-{
-	BoardElement::onActivate();
-	assert(worker_);
-}
-
-void
-Building::onDemolish()
+Building::onDemolish_()
 {
 }
 
@@ -137,4 +120,14 @@ operator<<(std::ostream & o, const Building & b)
 bool Building::has(const Player * p) const
 {
 	return worker_ == p;
+}
+
+bool Building::canBeActivated_() const
+{
+	return worker_ != NULL;
+}
+
+void Building::onActivate_()
+{
+	assert(false);
 }

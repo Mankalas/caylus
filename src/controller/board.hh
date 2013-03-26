@@ -49,6 +49,8 @@ namespace controller
 		void shiftProvost(int shift);
 		void shiftBailiff();
 
+		void activateBuildingAtCase(unsigned int);
+
 		BoardSignals & signals() const;
 
 		/** @name Visitors accept methods */
@@ -72,9 +74,6 @@ namespace controller
 		unsigned bailiff_;
 		/// Board's signals.
 		mutable BoardSignals signals_;
-
-		const unsigned FIRST_EMPTY_CASE_;
-		const unsigned LAST_EMPTY_CASE_;
 	};
 }
 

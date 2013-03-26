@@ -20,10 +20,10 @@ namespace controller
 	{
 	public:
 		JoustField();
-		virtual void onActivate(void);
 
 	private:
-		boost::signal<bool (void)> ask_proceed_;
+		virtual void onActivate_();
+
 	};
 
 }

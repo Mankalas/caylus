@@ -25,9 +25,8 @@ ConstructionBuilding::ConstructionBuilding(GameEngine * ge, const BuildingType &
 {
 }
 
-void ConstructionBuilding::onActivate()
+void ConstructionBuilding::onActivate_()
 {
-	Building::onActivate();
 	unsigned choice = 0;
 
 	std::map<unsigned, BuildingSmartPtr> building_choice;
@@ -42,7 +41,7 @@ void ConstructionBuilding::onActivate()
 		                                building_choice[choice])), worker_);
 }
 
-void ConstructionBuilding::onBuild()
+void ConstructionBuilding::onBuild_()
 {
 	//ask_building_signal_.connect(owner_->view()->askBuildingSlot());
 }

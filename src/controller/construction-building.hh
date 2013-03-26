@@ -30,12 +30,12 @@ namespace controller
 	protected:
 		ConstructionBuilding(GameEngine * ge, const BuildingType & construc_type);
 
-		virtual void onActivate();
 		boost::signal<unsigned(void)> ask_building_signal_;
 
 	private:
-		virtual void onBuild();
+		virtual void onBuild_();
 
+		virtual void onActivate_();
 	};
 
 }

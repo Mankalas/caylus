@@ -16,7 +16,6 @@ namespace controller
 	public:
 		Inn();
 
-		virtual void onActivate(void);
 		Player * host();
 		const Player * host() const;
 
@@ -24,6 +23,10 @@ namespace controller
 
 	private:
 		Player * host_;
+
+		virtual void onActivate_();
+
+		virtual bool canBeActivated_() const;
 	};
 
 }

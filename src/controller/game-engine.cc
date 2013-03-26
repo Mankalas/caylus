@@ -12,6 +12,7 @@
 #include <cmath>
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <boost/assign/std/vector.hpp>
 #include "game-engine.hh"
 #include "resource.hh"
 #include "all-buildings.hh"
@@ -21,6 +22,7 @@
 #include "board-element.hh"
 
 using namespace controller;
+using namespace boost::assign;
 
 GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais, unsigned nb_turns_max, bool random)
 	: nb_humans_(nb_humans)
@@ -31,32 +33,13 @@ GameEngine::GameEngine(unsigned nb_humans, unsigned nb_ais, unsigned nb_turns_ma
 	, random_(random)
 	, board_(this)
 {
-	buildings_.push_back(BuildingSmartPtr(new Statue()));
-	buildings_.push_back(BuildingSmartPtr(new Theater()));
-	buildings_.push_back(BuildingSmartPtr(new College()));
-	buildings_.push_back(BuildingSmartPtr(new Monument()));
-	buildings_.push_back(BuildingSmartPtr(new Granary()));
-	buildings_.push_back(BuildingSmartPtr(new Weaver()));
-	buildings_.push_back(BuildingSmartPtr(new Cathedral()));
-	buildings_.push_back(BuildingSmartPtr(new WQuarry()));
-	buildings_.push_back(BuildingSmartPtr(new Workshop()));
-	buildings_.push_back(BuildingSmartPtr(new WFFarm()));
-	buildings_.push_back(BuildingSmartPtr(new WCFarm()));
-	buildings_.push_back(BuildingSmartPtr(new SFarm()));
-	buildings_.push_back(BuildingSmartPtr(new Park()));
-	buildings_.push_back(BuildingSmartPtr(new WSawmill()));
-	buildings_.push_back(BuildingSmartPtr(new Library()));
-	buildings_.push_back(BuildingSmartPtr(new Hotel()));
-	buildings_.push_back(BuildingSmartPtr(new Church()));
-	buildings_.push_back(BuildingSmartPtr(new WPeddler()));
-	buildings_.push_back(BuildingSmartPtr(new WMarketplace()));
-	buildings_.push_back(BuildingSmartPtr(new Jeweller()));
-	buildings_.push_back(BuildingSmartPtr(new Tailor()));
-	buildings_.push_back(BuildingSmartPtr(new Alchemist()));
-	buildings_.push_back(BuildingSmartPtr(new Bank()));
-	buildings_.push_back(BuildingSmartPtr(new Lawyer(this)));
-	buildings_.push_back(BuildingSmartPtr(new Architect(this)));
-	buildings_.push_back(BuildingSmartPtr(new Mason(this)));
+	buildings_+= BuildingSmartPtr(new Statue()), BuildingSmartPtr(new Theater()), BuildingSmartPtr(new College()), BuildingSmartPtr(new Monument()),
+		BuildingSmartPtr(new Granary()), BuildingSmartPtr(new Weaver()), BuildingSmartPtr(new Cathedral()), BuildingSmartPtr(new WQuarry()),
+		BuildingSmartPtr(new Workshop()), BuildingSmartPtr(new WFFarm()), BuildingSmartPtr(new WCFarm()), BuildingSmartPtr(new SFarm()),
+		BuildingSmartPtr(new Park()), BuildingSmartPtr(new WSawmill()), BuildingSmartPtr(new Library()), BuildingSmartPtr(new Hotel()),
+		BuildingSmartPtr(new Church()), BuildingSmartPtr(new WPeddler()), BuildingSmartPtr(new WMarketplace()), BuildingSmartPtr(new Jeweller()),
+		BuildingSmartPtr(new Tailor()), BuildingSmartPtr(new Alchemist()), BuildingSmartPtr(new Bank()), BuildingSmartPtr(new Lawyer(this)),
+		BuildingSmartPtr(new Architect(this)), BuildingSmartPtr(new Mason(this));
 }
 
 GameEngine::~GameEngine()
@@ -71,7 +54,6 @@ void GameEngine::operator()()
 {
 	DebugLogger::log("Game Engine launched.");
 	waitForPlayers_();
-	init_();
 	play_();
 	sigs_.game_over();
 }
@@ -87,7 +69,7 @@ void GameEngine::waitForPlayers_()
 	}
 }
 
-void GameEngine::init_()
+void GameEngine::shufflePlayers_()
 {
 	// Shuffle players order.
 	foreach(Player * p, players_)
@@ -98,6 +80,10 @@ void GameEngine::init_()
 	{
 		std::random_shuffle(order_.begin(), order_.end());
 	}
+}
+
+void GameEngine::initialResource_()
+{
 	// Give each player his initial denier amount.
 	for (unsigned i = 1; i < players_.size(); i++)
 	{
@@ -105,10 +91,12 @@ void GameEngine::init_()
 	}
 }
 
+
 void GameEngine::play_()
 {
 	sigs_.game_engine_ready();
-	init_();
+	shufflePlayers_();
+	initialResource_();
 	try
 	{
 		while (nb_turns_ < nb_turns_max_)
@@ -135,10 +123,9 @@ void GameEngine::play_()
 void GameEngine::activateSpecialBuildings_()
 {
 	sigs_.activation_special_buildings_begin();
-	for (unsigned i = 0; i < 6; ++i)
+	for (unsigned i = 0; i < Road::FIRST_NEUTRAL_CASE; ++i)
 	{
-		board_.road().get()[i]->activate();
-		sigs_.board_updated();
+		board_.activateBuildingAtCase(i);
 	}
 	sigs_.activation_special_buildings_end();
 }
@@ -146,53 +133,22 @@ void GameEngine::activateSpecialBuildings_()
 void GameEngine::activateBuildings_()
 {
 	sigs_.activationBuildings_begin();
-	for (unsigned i = 6; i <= board_.provost() + 1; ++i)
+	for (unsigned i = Road::FIRST_NEUTRAL_CASE; i <= board_.provost(); ++i)
 	{
-		if (board_.road().get()[i] != NULL)
-		{
-			board_.road().get()[i]->activate();
-		}
+		board_.activateBuildingAtCase(i);
 	}
 	sigs_.activationBuildings_end();
 }
 
 void GameEngine::activateBridge_()
 {
-	sigs_.activation_bridge_begin();
-	foreach(Player * p, board_.bridge().players())
-	{
-		board_.bridge().signals().activation_sig(&board_.bridge());
-		assert(p);
-		int deniers = p->resources()[Resource::denier];
-		if (deniers == 0)
-		{
-			continue;
-		}
-		int shift = 0;
-		bool is_shift_valid = false;
-		bool has_enough_denier = false;
-		/* If the provost is not moved before the bridge, or over the end
-		   of the board, or if the player has enough money, then move. */
-		while (!is_shift_valid || !has_enough_denier)
-		{
-			shift = p->askProvostShift();
-			is_shift_valid = board_.isProvostShiftValid(shift);
-			has_enough_denier = fabs(shift) <= deniers;
-		}
-		if (shift != 0)
-		{
-			board_.shiftProvost(shift);
-			sigs_.board_updated();
-			p->substractResources(Resource::denier * fabs(shift));
-		}
-	}
-	sigs_.activation_bridge_end();
+	board_.bridge().activate();
 }
 
 void GameEngine::activateCastle_()
 {
 	sigs_.activation_castle_begin();
-	board_.castle().onActivate();
+	board_.castle().activate();
 	sigs_.activation_castle_end();
 }
 

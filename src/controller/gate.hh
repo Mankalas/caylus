@@ -19,7 +19,7 @@ namespace controller
 	public:
 		Gate(GameEngine * ge);
 
-		virtual void onActivate(void);
+		virtual void onActivate_();
 	};
 
 }

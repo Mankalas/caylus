@@ -20,7 +20,10 @@
 #include "board-element.hh"
 #include "debug-logger.hh"
 
-const unsigned int Road::STABLES_CASE = 4;
+const unsigned int Road::FIRST_NEUTRAL_CASE = 6;
+const unsigned int Road::BAILIFF_INIT_CASE = 11;
+const unsigned int Road::PROVOST_INIT_CASE = Road::BAILIFF_INIT_CASE;
+const unsigned int Road::LAST_CASE = 33;
 
 Road::Road(GameEngine * ge)
 	: buildings_(34)

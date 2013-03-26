@@ -18,9 +18,8 @@ Inn::Inn()
 {
 }
 
-void Inn::onActivate()
+void Inn::onActivate_()
 {
-	Building::onActivate();
 	if (worker_)
 	{
 		//ask player if he wants to remove its worker
@@ -32,4 +31,9 @@ void Inn::onActivate()
 bool Inn::has(const Player * p) const
 {
 	return worker_ == p || host_ == p;
+}
+
+bool Inn::canBeActivated_() const
+{
+	return worker_ || host_;
 }
