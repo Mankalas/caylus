@@ -20,12 +20,10 @@ JoustField::JoustField()
 
 void JoustField::onActivate_()
 {
-	if (worker_->resources()[Resource::denier] < 1 ||
-	    worker_->resources()[Resource::cloth] < 1)
+	if (worker_->resources()[Resource::denier] >= 1 &&
+	    worker_->resources()[Resource::cloth] >= 1)
 	{
-		DebugLogger::log("Not enough resources. Try again.");
-		onActivate_();
+		worker_->substractResources(ResourceMap(Resource::denier + Resource::cloth));
+		worker_->addResources(Resource::favor);
 	}
-	worker_->addResources(ResourceMap(Resource::denier + Resource::cloth));
-	worker_->substractResources(Resource::favor);
 }
