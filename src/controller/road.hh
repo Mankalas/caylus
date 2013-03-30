@@ -85,6 +85,9 @@ namespace controller
 		static const unsigned int PROVOST_INIT_CASE;
 		static const unsigned int BAILIFF_INIT_CASE;
 		static const unsigned int LAST_CASE;
+		static const unsigned int END_DUNGEON;
+		static const unsigned int END_WALLS;
+		static const unsigned int END_TOWERS;
 
 	private:
 		/**

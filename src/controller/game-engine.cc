@@ -91,7 +91,6 @@ void GameEngine::initialResource_()
 	}
 }
 
-
 void GameEngine::play_()
 {
 	sigs_.game_engine_ready();
@@ -147,9 +146,7 @@ void GameEngine::activateBridge_()
 
 void GameEngine::activateCastle_()
 {
-	sigs_.activation_castle_begin();
 	board_.castle().activate();
-	sigs_.activation_castle_end();
 }
 
 void GameEngine::collectIncome_()
@@ -167,12 +164,16 @@ void GameEngine::collectIncome_()
 
 void GameEngine::endOfTurn_()
 {
+	unsigned int previous_bailiff = board_.bailiff();
 	board_.shiftBailiff();
-	if (board_.bailiff() == 17 || board_.bailiff() == 18 ||
-	    board_.bailiff() == 30 || board_.bailiff() == 31 ||
-	    board_.castle().isActivePartComplete())
+	Castle & castle = board_.castle();
+
+	if ((previous_bailiff < Road::END_DUNGEON && board_.bailiff() >= Road::END_DUNGEON) ||
+	    (previous_bailiff < Road::END_WALLS && board_.bailiff() >= Road::END_WALLS) ||
+	    (previous_bailiff < Road::END_TOWERS && board_.bailiff() >= Road::END_TOWERS) ||
+	    castle.isActivePartComplete())
 	{
-		board_.castle().score(players_);
+		castle.score(players_);
 	}
 	if (players_.size() == 2)
 	{

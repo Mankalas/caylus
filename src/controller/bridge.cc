@@ -19,6 +19,11 @@ Bridge::Bridge(Board & board)
 
 void Bridge::add(Player & p)
 {
+	if (has(p))
+	{
+		signals_.already_occupied(this);
+		throw new OccupiedBuildingEx();
+	}
 	if (players_.size() == 0)
 	{
 		//Logger::instance()->playerLog(p, " is granted 1 denier for he is the first on the Bridge.");

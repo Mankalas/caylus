@@ -27,6 +27,7 @@ namespace controller
 	class CastlePart
 	{
 	public:
+
 		/** Constructor. Initialize the attributes.
 		 *
 		 * @param c Capacity (ie number of houses a player can build).
@@ -99,10 +100,7 @@ namespace controller
 		Castle();
 		~Castle();
 
-		/** Add a player to the castle. Check the player's presence.
-		 *
-		 * @param p The player to add.
-		 */
+		// See BoardElement.
 		virtual void add(Player & p);
 
 		virtual bool has(const Player & p) const;
