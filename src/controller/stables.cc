@@ -40,7 +40,7 @@ void Stables::add(Player & current)
 		throw new OccupiedBuildingEx();
 	}
 
-	players_.insert(players_.begin(), &current);
+	players_.push_back(&current);
 	current.decrementWorkers();
 
 	// If no worker, Building::activate will not call onActivate.
@@ -50,6 +50,10 @@ void Stables::add(Player & current)
 
 void Stables::removeWorker()
 {
+	foreach (Player * player, players_)
+	{
+		player->incrementWorkers();
+	}
 	players_.clear();
 }
 

@@ -85,7 +85,7 @@ void GameEngine::shufflePlayers_()
 void GameEngine::initialResource_()
 {
 	// Give each player his initial denier amount.
-	for (unsigned i = 1; i < players_.size(); i++)
+	for (unsigned i = 1; i < order_.size(); i++)
 	{
 		players_[i]->addResources(Resource::denier * ((i < 3) ? 1 : 2));
 	}
@@ -153,7 +153,7 @@ void GameEngine::collectIncome_()
 {
 	sigs_.income_collecting_begin();
 	assert(players_.size() > 0);
-	foreach(Player * p, players_)
+	foreach(Player * p, order_)
 	{
 		ResourceMap income = Resource::denier * (2 + p->residences());
 		sigs_.income_collecting_for_player(p, &income);
@@ -248,18 +248,15 @@ void GameEngine::playerMove_(Player * p)
 				catch (OccupiedBuildingEx *)
 				{
 					DebugLogger::log("Already occupied.");
-					return;
 				}
 				catch (UnactivableBuildingEx *)
 				{
 					DebugLogger::log("Does not accept workers.");
-					return;
 				}
 			}
 			else
 			{
 				DebugLogger::log("Not enough denier to play ");
-				return;
 			}
 		}
 		else
