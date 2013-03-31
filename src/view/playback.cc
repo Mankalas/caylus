@@ -7,6 +7,7 @@
  */
 
 #include "playback.hh"
+#include "file-reader.hh"
 
 #include <iostream>
 #include <fstream>
@@ -19,84 +20,43 @@
 
 using namespace view;
 
-Playback::Playback(const controller::GameEngine * game_engine, const controller::Player * player, std::string record_path)
+Playback::Playback(const controller::GameEngine * game_engine, const controller::Player * player, FileReader & file_reader)
 	: ActiveView(game_engine, player)
+	, reader_(file_reader)
 {
-	file_.open(record_path.append("/input").c_str(), std::ios::in);
-	if (!file_.is_open())
-	{
-		std::cerr << "File " << record_path << " does not exists." << std::endl;
-	}
 }
 
 Playback::~Playback()
 {
-	file_.close();
 }
 
 controller::ResourceMap Playback::askResource(const std::vector<controller::ResourceMap>& resource_choice) const
 {
-	unsigned int choice = next_uint();
+	unsigned int choice = reader_.next_uint();
 	return resource_choice[choice];
 }
 
 std::string Playback::askName() const
 {
-	return next_str();
+	return reader_.next_str();
 }
 
 int Playback::askProvostShift() const
 {
-	return next_int();
+	return reader_.next_int();
 }
 
 unsigned int Playback::askBoardElement() const
 {
-	return next_uint();
+	return reader_.next_uint();
 }
 
 bool Playback::askYesNo() const
 {
 	return true;
 }
-/*
-	 bool Playback::askJoustField() const;
-	 unsigned Playback::askBuilding() const;
-	 unsigned Playback::askResourceChoice() const;
-	 void Playback::boardElementActivation(const controller::BoardElement * board_elt);
-*/
-
-std::string Playback::next_line() const
-{
-	std::string line;
-	if (std::getline(file_, line))
-	{
-		return line;
-	}
-	else
-	{
-		throw new GameOverException();
-	}
-}
-
-std::string Playback::next_str() const
-{
-	return next_line();
-}
-
-int Playback::next_int() const
-{
-	std::string line = next_line();
-	return atoi(line.c_str());
-}
-
-unsigned Playback::next_uint() const
-{
-	std::string line = next_line();
-	return strtoul(line.c_str(), NULL, 0);
-}
 
 unsigned int Playback::askChoice(unsigned int range) const
 {
-	return next_uint();
+	return reader_.next_uint();
 }

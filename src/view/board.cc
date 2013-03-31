@@ -19,6 +19,16 @@ using namespace view;
 using namespace std;
 using namespace sf;
 
+Board::Board()
+	: sprite_(ImageLibrary::inst().get("board"))
+	, height_(904)
+	, width_(1282)
+	, case_height_(100)
+	, case_width_(100)
+	, house_height_(26)
+	, house_width_(39)
+{}
+
 unsigned int Board::getCaseFromCoordinates(int x, int y, bool & is_click_valid) const
 {
 	for (unsigned int case_idx = 0; case_idx < cases_.size(); ++case_idx)
@@ -55,15 +65,6 @@ Vector2<unsigned int> Board::getCoordinatesOfCase(unsigned int case_idx) const
 	return cases_[case_idx];
 }
 
-Board::Board()
-	: height_(904)
-	, width_(1282)
-	, case_height_(100)
-	, case_width_(100)
-	, house_height_(26)
-	, house_width_(39)
-	, sprite_(ImageLibrary::inst().get("board"))
-{}
 
 LimitedEditionBoard::LimitedEditionBoard()
 	: Board()

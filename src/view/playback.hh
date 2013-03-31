@@ -14,10 +14,12 @@
 
 namespace view
 {
+	class FileReader;
+
 	class Playback : public ActiveView
 	{
 	public:
-		Playback(const controller::GameEngine * game_engine, const controller::Player * player, std::string record_path);
+		Playback(const controller::GameEngine * game_engine, const controller::Player * player,  FileReader & file_reader);
 		~Playback();
 
 		virtual std::string askName() const;
@@ -35,15 +37,8 @@ namespace view
 		virtual bool askYesNo() const;
 
 	private:
-		mutable std::ifstream file_;
-
-		std::string next_line() const;
-
-		int next_int() const;
-		unsigned next_uint() const;
-		std::string next_str() const;
+		FileReader & reader_;
 	};
-
 }
 
 #endif
