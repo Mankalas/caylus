@@ -252,6 +252,8 @@ void GameEngine::playerMove_(Player * p)
 			}
 			catch (...)
 			{
+				// No need do to anything: has_played stays false, the loop
+				// keeps running.
 			}
 		}
 		else
