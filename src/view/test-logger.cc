@@ -28,6 +28,8 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 		board_element->signals().activation_sig.connect(boost::bind(&TestLogger::activationBoardElement, this, _1));
 		board_element->signals().already_placed.connect(boost::bind(&TestLogger::boardElementAlreadyOccupied, this, _1));
 		board_element->signals().worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
+		board_element->signals().building_full.connect(boost::bind(&TestLogger::buildingFull, this, _1));
+		board_element->signals().unactivable_building.connect(boost::bind(&TestLogger::unactivableBuilding, this, _1));
 	}
 
 	foreach (const Player * player, game_engine->players())
@@ -47,6 +49,16 @@ TestLogger::~TestLogger()
 {
 	file_.flush();
 	file_.close();
+}
+
+void TestLogger::buildingFull(const controller::BoardElement * building)
+{
+	file_ << building->name() << " is full." << std::endl;
+}
+
+void TestLogger::unactivableBuilding(const controller::BoardElement * building)
+{
+	file_ << building->name() << " cannot be activated." << std::endl;
 }
 
 void TestLogger::provostShifted(int shift)

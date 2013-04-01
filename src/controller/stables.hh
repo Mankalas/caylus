@@ -32,10 +32,8 @@ namespace controller
 		 */
 		Stables(GameEngine * ge);
 
-		virtual void add(Player &);
 		virtual void removeWorker();
 
-		virtual bool has(const Player *) const;
 		const std::vector<Player *> players() const;
 
 		/** @name Visitors accept methods */
@@ -49,7 +47,12 @@ namespace controller
 	private:
 		std::vector<Player *> players_;
 
+		virtual void onAdd_(Player &);
+		virtual bool has_(const Player &) const;
 		virtual void onActivate_();
+		virtual bool canBePlacedOn_() const;
+		virtual bool isFull_() const;
+
 	};
 
 }

@@ -38,6 +38,8 @@ namespace view
 		void playerLosesResources(const controller::Player * player, const controller::ResourceMap & resource_map);
 		void provostShifted(int shift);
 		void bailiffShifted(unsigned int shift);
+		void buildingFull(const controller::BoardElement * building);
+		void unactivableBuilding(const controller::BoardElement * building);
 
 		std::ofstream file_;
 	};

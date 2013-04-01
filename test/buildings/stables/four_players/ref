@@ -14,7 +14,7 @@ CC places a worker on Stables
 CC loses [32m1 denier[0m
 DD places a worker on Stables
 DD loses [32m1 denier[0m
-Stables already occupied
+Stables is full.
 AA places a worker on Neutral quarry
 AA loses [32m1 denier[0m
 BB places a worker on Neutral farm
@@ -55,7 +55,7 @@ DD places a worker on Stables
 DD loses [32m1 denier[0m
 AA places a worker on Stables
 AA loses [32m1 denier[0m
-Stables already occupied
+Stables is full.
 BB places a worker on Neutral farm
 BB loses [32m1 denier[0m
 CC places a worker on Forest

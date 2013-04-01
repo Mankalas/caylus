@@ -33,8 +33,14 @@ namespace controller
 		/** Emitted when a worker is placed on the board element. */
 		worker_placed_signal_t worker_placed;
 
-		/** Emitted when a player tries to place its worker while the board element is full. */
+		/** Emitted when a player tries to place a second worker on a board element. */
 		v_cbe_signal_t already_placed;
+
+		/** Emitted when a player tries to place its worker while the board element is full. */
+		v_cbe_signal_t building_full;
+
+		/** Emitted when a player tries to place its worker although the building in unactivable. */
+		v_cbe_signal_t unactivable_building;
 	};
 
 	/**

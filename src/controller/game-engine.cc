@@ -250,13 +250,8 @@ void GameEngine::playerMove_(Player * p)
 				p->substractResources(Resource::denier * worker_cost);
 				has_played = true;
 			}
-			catch (AlreadyPlacedEx *)
+			catch (...)
 			{
-				DebugLogger::log("Already occupied.");
-			}
-			catch (UnactivableBuildingEx *)
-			{
-				DebugLogger::log("Does not accept workers.");
 			}
 		}
 		else

@@ -29,18 +29,18 @@ Stables::Stables(GameEngine * ge)
 {
 }
 
-void Stables::add(Player & current)
+bool Stables::canBePlacedOn_() const
 {
-	if (has(&current))
-	{
-		signals_.already_placed(this);
-		throw new AlreadyPlacedEx();
-	}
+	return game_engine_->order().size() > 2;
+}
 
+void Stables::onAdd_(Player & current)
+{
+	assert(game_engine_->order().size() > 2);
 	if (players_.size() == 3)
 	{
-		signals_.already_placed(this);
-		throw new AlreadyPlacedEx();
+		signals_.building_full(this);
+		throw new BuildingFullEx();
 	}
 
 	players_.push_back(&current);
@@ -48,7 +48,6 @@ void Stables::add(Player & current)
 
 	// If no worker, Building::activate will not call onActivate.
 	worker_ = &current;
-	signals_.worker_placed(&current, this);
 }
 
 void Stables::removeWorker()
@@ -81,9 +80,9 @@ void Stables::onActivate_()
 	worker_ = 0;
 }
 
-bool Stables::has(const Player * p) const
+bool Stables::has_(const Player & p) const
 {
-	return std::find(players_.begin(), players_.end(), p) != players_.end();
+	return std::find(players_.begin(), players_.end(), &p) != players_.end();
 }
 
 void Stables::accept(ConstVisitor & v) const
@@ -94,6 +93,11 @@ void Stables::accept(ConstVisitor & v) const
 void Stables::accept(Visitor & v)
 {
 	v.operator()(*this);
+}
+
+bool Stables::isFull_() const
+{
+	return players_.size() >= 3;
 }
 
 const std::vector<Player *> Stables::players() const

@@ -52,9 +52,9 @@ on methods resources() and workers() in file player.hh, lines 51 and
 	       [TEST] Prestige point gained by the owner
 	[TEST] Putting on our own building
 	       [TEST] worker costs 1 denier
-	[TEST] Putting at the castle
-	       [TEST] one worker per player
-[TEST] Phase 3/7 : Activating special buildings
+	[DONE] Putting at the castle
+	       [DONE] one worker per player
+[DONE] Phase 3/7 : Activating special buildings
 [TEST] Phase 4/7 : Provost move
        [TEST] Pass
        [TEST] 1 denier per space
@@ -80,7 +80,7 @@ on methods resources() and workers() in file player.hh, lines 51 and
 [DONE] Trading Post
 [DONE] Merchant's Guild
 [TEST] Stables (only one worker per player)
-[TEST] Joust Field
+[DONE] Joust Field
 [TEST] Inn
        [TEST] Activation (move from the left circle to the right)
        [TEST] Effect (worker cost equals 1)

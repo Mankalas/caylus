@@ -36,10 +36,12 @@ void BoardElement::add(Player & p)
 	}
 	if (isFull_())
 	{
+		signals_.building_full(this);
 		throw new BuildingFullEx();
 	}
 	if (!canBePlacedOn_())
 	{
+		signals_.unactivable_building(this);
 		throw new UnactivableBuildingEx();
 	}
 	signals_.worker_placed(&p, this);
