@@ -30,6 +30,7 @@ namespace view
 		virtual int askProvostShift() const;
 		virtual unsigned int askBoardElement() const;
 		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const;
+		virtual bool askInnRemoval() const;
 
 		// @}
 

@@ -45,6 +45,8 @@ namespace view
 		///
 		virtual unsigned int askBoardElement() const = 0;
 
+		virtual bool askInnRemoval() const = 0;
+
 		// @}
 
 		///

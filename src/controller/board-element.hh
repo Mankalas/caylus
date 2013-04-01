@@ -68,17 +68,7 @@ namespace controller
 		 *
 		 * @param worker The worker.
 		 */
-		virtual void add(Player & worker) = 0;
-
-		/**
-		 * Whether the current board element already has the given player.
-		 *
-		 * @param player The player.
-		 *
-		 * @return Whether the current board element already has the given
-		 * player.
-		 */
-		virtual bool has(const Player & player) const = 0;
+		virtual void add(Player & worker);
 
 		/**
 		 * The signals emitted by the element.
@@ -100,10 +90,38 @@ namespace controller
 		virtual void onActivate_() = 0;
 
 		/**
-		 * Whether the current board element can be activated or not,
-		 * globally meaning: is there any worker on the board element?
+		 * Whether the current board element can accept a worker or not.
 		 *
 		 * @return Can be activated or not.
+		 */
+		virtual bool canBePlacedOn_() const;
+
+		/**
+		 * Callback when a worker is placed on the board element.
+		 */
+		virtual void onAdd_(Player & p) = 0;
+
+		/**
+		 * Whether the board element is full or not.
+		 *
+		 * @return Whether the board element is full or not.
+		 */
+		virtual bool isFull_() const = 0;
+
+		/**
+		 * Whether the current board element already has the given player.
+		 *
+		 * @param player The player.
+		 *
+		 * @return Whether the current board element already has the given
+		 * player.
+		 */
+		virtual bool has_(const Player & player) const = 0;
+
+		/**
+		 * Whether the board element is elligible for activation.
+		 *
+		 * @return Whether the board element is elligible for activation.
 		 */
 		virtual bool canBeActivated_() const = 0;
 	};

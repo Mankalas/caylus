@@ -50,7 +50,6 @@ namespace controller
 
 	class GameException : public Exception
 	{
-
 	};
 
 	class GameOverException : public GameException
@@ -65,7 +64,11 @@ namespace controller
 	{
 	};
 
-	class OccupiedBuildingEx : public GameException
+	class BuildingFullEx : public GameException
+	{
+	};
+
+	class AlreadyPlacedEx : public GameException
 	{
 	};
 

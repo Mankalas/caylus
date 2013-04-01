@@ -88,7 +88,7 @@ Board & controller::GameEngine::board()
 inline
 GameSignals * controller::GameEngine::signals() const
 {
-	return &sigs_;
+	return &signals_;
 }
 
 inline

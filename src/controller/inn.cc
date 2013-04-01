@@ -7,7 +7,7 @@
  */
 
 #include "inn.hh"
-#include "const.hh"
+#include "../debug-logger.hh"
 
 Inn::Inn()
 	: Building(INN,
@@ -22,15 +22,28 @@ void Inn::onActivate_()
 {
 	if (worker_)
 	{
-		//ask player if he wants to remove its worker
+		host_ = worker_;
+		worker_ = NULL;
 	}
-	host_ = worker_;
-	worker_ = NULL;
+	else if (host_)
+	{
+		bool do_remove = host_->askInnRemoval();
+		if (do_remove)
+		{
+			host_->incrementWorkers();
+			host_ = NULL;
+		}
+	}
 }
 
 bool Inn::has(const Player * p) const
 {
 	return worker_ == p || host_ == p;
+}
+
+bool Inn::canBePlacedOn_() const
+{
+	return worker_ == NULL;
 }
 
 bool Inn::canBeActivated_() const

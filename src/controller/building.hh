@@ -48,24 +48,6 @@ namespace controller
 		void build(Player & current);
 
 		/**
-		 * Callback when a player places a worker on the
-		 * building.
-		 *
-		 * Checks if the worker can be placed (throws a
-		 * OccupiedBuildingEx if not), checks if the building can
-		 * receive a worker (ie., it's not a Residence, nor a Prestige
-		 * building. Throws a UnactivableBuildingEx if so).
-		 *
-		 * If everything is OK, gives a Prestige point to the
-		 * building's owner (if he is different from the worker's
-		 * player), signals that a worker has been placed here and
-		 * decrease the player's workers count.
-		 *
-		 * @param current The player who placed a worker.
-		 */
-		virtual void add(Player & current);
-
-		/**
 		 * Removes the worker from the building, incrementing the
 		 * worker's player workers count.
 		 */
@@ -85,7 +67,6 @@ namespace controller
 		const std::vector<ResourceMap>& cost() const;
 		const Player * owner() const;
 		const Player * worker() const;
-		virtual bool has(const Player &) const;
 
 		//@}
 
@@ -132,16 +113,41 @@ namespace controller
 		virtual void onBuild_();
 
 		/**
+		 * Specialized actions performed by the building when demolished.
+		 */
+		virtual void onDemolish_();
+
+		/**
 		 * Activates the building. Checks if the building can be
 		 * activated (if it has a worker), performs the Building's
 		 * effect and unset the worker.
 		 */
 		virtual void onActivate_();
 
+		// See BoardElement.
+		virtual bool canBePlacedOn_() const;
+
 		/**
-		 * Specialized actions performed by the building when demolished.
+		 * Callback when a player places a worker on the
+		 * building.
+		 *
+		 * Checks if the worker can be placed (throws a
+		 * AlreadyPlacedEx if not), checks if the building can
+		 * receive a worker (ie., it's not a Residence, nor a Prestige
+		 * building. Throws a UnactivableBuildingEx if so).
+		 *
+		 * If everything is OK, gives a Prestige point to the
+		 * building's owner (if he is different from the worker's
+		 * player), signals that a worker has been placed here and
+		 * decrease the player's workers count.
+		 *
+		 * @param current The player who placed a worker.
 		 */
-		virtual void onDemolish_();
+		virtual void onAdd_(Player & current);
+
+		virtual bool isFull_() const;
+
+		virtual bool has_(const Player &) const;
 
 		virtual bool canBeActivated_() const;
 	};

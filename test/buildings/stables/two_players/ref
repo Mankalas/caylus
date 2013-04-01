@@ -10,7 +10,9 @@ AA places a worker on Stables
 AA loses [32m1 denier[0m
 BB places a worker on Neutral farm
 BB loses [32m1 denier[0m
+AA places a worker on Bridge
 AA gains [32m1 denier[0m
+BB places a worker on Bridge
 Trading post activated
 AA gains [32m3 deniers[0m
 Stables activated
@@ -24,23 +26,25 @@ BB gains [34m1 cloth cube[0m
 Bailiff moves 2 spaces forward
 Provost moves 0 space forward
 Turn 2
-BB gains [32m2 deniers[0m
 AA gains [32m2 deniers[0m
-BB places a worker on Trading post
-BB loses [32m1 denier[0m
-AA places a worker on Stables
+BB gains [32m2 deniers[0m
+AA places a worker on Trading post
 AA loses [32m1 denier[0m
 BB places a worker on Stables
 BB loses [32m1 denier[0m
-AA places a worker on Neutral farm
+AA places a worker on Stables
 AA loses [32m1 denier[0m
-BB gains [32m1 denier[0m
+BB places a worker on Neutral farm
+BB loses [32m1 denier[0m
+AA places a worker on Bridge
+AA gains [32m1 denier[0m
+BB places a worker on Bridge
 Trading post activated
-BB gains [32m3 deniers[0m
+AA gains [32m3 deniers[0m
 Stables activated
 Bridge activated
 Neutral farm activated
-AA gains [34m1 cloth cube[0m
+BB gains [34m1 cloth cube[0m
 Bailiff moves 1 space forward
 Provost moves 1 space forward
 Turn 3

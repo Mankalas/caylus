@@ -60,3 +60,8 @@ unsigned int Playback::askChoice(unsigned int range) const
 {
 	return reader_.next_uint();
 }
+
+bool Playback::askInnRemoval() const
+{
+	return reader_.next_uint();
+}

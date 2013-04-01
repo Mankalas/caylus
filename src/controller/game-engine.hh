@@ -175,7 +175,7 @@ namespace controller
 		Board board_;
 
 		/// The engine's signals.
-		mutable GameSignals sigs_;
+		mutable GameSignals signals_;
 
 		/// The condition used while waiting for players.
 		boost::condition_variable wait_for_players_;

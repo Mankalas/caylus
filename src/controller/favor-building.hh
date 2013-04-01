@@ -27,7 +27,7 @@ namespace controller
 	protected:
 		FavorBuilding();
 
-		virtual bool canBeActivated_() const;
+		virtual bool canBePlacedOn_() const;
 		virtual void onBuild_();
 	};
 

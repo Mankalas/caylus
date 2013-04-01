@@ -49,7 +49,7 @@ void Gate::onActivate_()
 			}
 			is_selection_valid = true;
 		}
-		catch (OccupiedBuildingEx * e)
+		catch (AlreadyPlacedEx * e)
 		{
 			is_selection_valid = false;
 		}

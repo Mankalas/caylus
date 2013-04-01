@@ -25,8 +25,8 @@ namespace controller
 		Player * host_;
 
 		virtual void onActivate_();
-
 		virtual bool canBeActivated_() const;
+		virtual bool canBePlacedOn_() const;
 	};
 
 }

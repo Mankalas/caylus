@@ -106,6 +106,12 @@ bool Human::isHuman() const
 	return true;
 }
 
+bool Human::askInnRemoval() const
+{
+	gui_->showMessage("Inn removal");
+	return gui_->askYesNo();
+}
+
 unsigned int Human::askBoardElement() const
 {
 	return gui_->askCaseNumber();

@@ -33,6 +33,9 @@ namespace controller
 		Board(GameEngine * ge);
 		~Board();
 
+		BoardElement & getBoardElement(unsigned int board_case);
+		bool isPlayerOnBridge(const Player &) const;
+
 		const Road & road() const;
 		Road & road();
 

@@ -16,7 +16,10 @@ BB places a worker on Neutral farm
 BB loses [32m1 denier[0m
 CC places a worker on Forest
 CC loses [32m1 denier[0m
+AA places a worker on Bridge
 AA gains [32m1 denier[0m
+BB places a worker on Bridge
+CC places a worker on Bridge
 Trading post activated
 AA gains [32m3 deniers[0m
 Stables activated
@@ -43,7 +46,10 @@ CC places a worker on Neutral farm
 CC loses [32m1 denier[0m
 AA places a worker on Forest
 AA loses [32m1 denier[0m
+BB places a worker on Bridge
 BB gains [32m1 denier[0m
+CC places a worker on Bridge
+AA places a worker on Bridge
 Trading post activated
 BB gains [32m3 deniers[0m
 Stables activated

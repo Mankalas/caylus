@@ -30,6 +30,10 @@ namespace controller
 		u_v_signal_t ask_board_element;
 		/// Ask for a Resource from a list.
 		resource_choice_signal_t ask_resource;
+		/// Ask whether the player wants to removes his worker from the
+		/// Inn.
+		b_v_signal_t ask_inn_removal;
+
 		/// Resource the player gains.
 		resource_move_signal_t gain_resource;
 		/// Resource the player lose.
@@ -86,6 +90,7 @@ namespace controller
 		int askProvostShift() const;
 		unsigned int askBoardElement() const;
 		ResourceMap askResource(const std::vector<ResourceMap> & choice) const;
+		bool askInnRemoval() const;
 
 		// @}
 

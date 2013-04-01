@@ -77,9 +77,28 @@ std::ostream & operator<<(std::ostream & o, const Board & board)
 
 void Board::activateBuildingAtCase(unsigned int i)
 {
-	BuildingSmartPtr building = road_.get()[i];
+	BuildingSmartPtr & building = road_[i];
 	if (building)
 	{
 		building->activate();
 	}
+}
+
+BoardElement & Board::getBoardElement(unsigned int board_case)
+{
+	if (board_case == Castle::CASE_NUMBER)
+	{
+		return castle_;
+	}
+	if (board_case == Bridge::CASE_NUMBER)
+	{
+		return bridge_;
+	}
+	assert(--board_case < road_.get().size());
+	return *(road_[board_case]);
+}
+
+bool Board::isPlayerOnBridge(const Player & p) const
+{
+	return bridge_.has(p);
 }

@@ -100,10 +100,6 @@ namespace controller
 		Castle();
 		~Castle();
 
-		// See BoardElement.
-		virtual void add(Player & p);
-
-		virtual bool has(const Player & p) const;
 
 		/** Clear the Castle of the workers. */
 		void clear();
@@ -181,8 +177,15 @@ namespace controller
 		 */
 		void build_(Player * p, ResourceMap * resources);
 
-		/** Resolve the Castle's activation. */
+		// See BaordElement.
 		virtual void onActivate_();
+
+		// See BoardElement.
+		virtual void onAdd_(Player & p);
+
+		virtual bool isFull_() const;
+
+		virtual bool has_(const Player & p) const;
 
 		virtual bool canBeActivated_() const;
 	};

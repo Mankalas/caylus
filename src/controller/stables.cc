@@ -16,6 +16,9 @@
 #include "game-engine.hh"
 
 #include "../visitor.hh"
+#include "../exceptions.hh"
+
+using namespace controller;
 
 Stables::Stables(GameEngine * ge)
 	: Building(STABLES,
@@ -31,13 +34,13 @@ void Stables::add(Player & current)
 	if (has(&current))
 	{
 		signals_.already_occupied(this);
-		throw new OccupiedBuildingEx();
+		throw new AlreadyPlacedEx();
 	}
 
 	if (players_.size() == 3)
 	{
 		signals_.already_occupied(this);
-		throw new OccupiedBuildingEx();
+		throw new AlreadyPlacedEx();
 	}
 
 	players_.push_back(&current);

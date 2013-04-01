@@ -28,7 +28,7 @@ FavorBuilding::onBuild_()
 	// owner_->favor_proceed (); TODO:
 }
 
-bool FavorBuilding::canBeActivated_() const
+bool FavorBuilding::canBePlacedOn_() const
 {
 	return false;
 }

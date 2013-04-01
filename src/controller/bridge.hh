@@ -36,21 +36,13 @@ namespace controller
 		 */
 		void clear();
 
-		/** Add a player to the bridge. Checks whether he is the first and
-		 * give him the bonus denier accordingly.
-		 *
-		 * @param p The player to add.
-		 */
-		void add(Player & p);
-
-		// See BoardElement.
-		virtual bool has(const Player & p) const;
-
 		/** @name Accessors. */
 		// @{
 
 		const std::vector<Player *>& players() const;
 		std::vector<Player *>& players();
+
+		bool has(const Player & p) const;
 
 		// @}
 
@@ -67,7 +59,19 @@ namespace controller
 		// See BoardElement.
 		virtual void onActivate_();
 
+		/** Add a player to the bridge. Checks whether he is the first and
+		 * give him the bonus denier accordingly.
+		 *
+		 * @param p The player to add.
+		 */
+		virtual void onAdd_(Player & p);
+
 		// See BoardElement.
+		virtual bool isFull_() const ;
+
+		// See BoardElement.
+		virtual bool has_(const Player & p) const;
+
 		virtual bool canBeActivated_() const;
 	};
 }

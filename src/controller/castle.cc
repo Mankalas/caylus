@@ -149,24 +149,26 @@ void Castle::onActivate_()
 	}
 }
 
-bool Castle::has(const Player & p) const
+bool Castle::has_(const Player & p) const
 {
 	return std::find(players_.begin(), players_.end(), &p) != players_.end();
 }
 
-void Castle::add(Player & p)
+void Castle::onAdd_(Player & p)
 {
-	if (has(p))
-	{
-		signals_.already_occupied(this);
-		throw new OccupiedBuildingEx();
-	}
 	players_.push_back(&p);
-	signals_.worker_placed(&p, this);
+	p.decrementWorkers();
 }
 
 void Castle::clear()
 {
+	foreach (Player * p, players_)
+	{
+		if (p)
+		{
+			p->incrementWorkers();
+		}
+	}
 	players_.clear();
 }
 
@@ -242,7 +244,13 @@ bool Castle::checkResources_(const Player * p) const
 	return count >= 2;
 }
 
+bool Castle::isFull_() const
+{
+	// The Castle is never full.
+	return false;
+}
+
 bool Castle::canBeActivated_() const
 {
-	return !players_.empty();
+	return players_.size() > 0;
 }

@@ -8,6 +8,8 @@
 
 #include "board-element.hh"
 #include "player.hh"
+#include "../exceptions.hh"
+#include "../debug-logger.hh"
 
 using namespace controller;
 
@@ -23,4 +25,27 @@ void BoardElement::activate()
 		signals_.activation_sig(this);
 		onActivate_();
 	}
+}
+
+void BoardElement::add(Player & p)
+{
+	if (has_(p))
+	{
+		throw new AlreadyPlacedEx();
+	}
+	if (isFull_())
+	{
+		throw new BuildingFullEx();
+	}
+	if (!canBePlacedOn_())
+	{
+		throw new UnactivableBuildingEx();
+	}
+	signals_.worker_placed(&p, this);
+	onAdd_(p);
+}
+
+bool BoardElement::canBePlacedOn_() const
+{
+	return true;
 }

@@ -17,31 +17,6 @@ Bridge::Bridge(Board & board)
 	, board_(board)
 {}
 
-void Bridge::add(Player & p)
-{
-	if (has(p))
-	{
-		signals_.already_occupied(this);
-		throw new OccupiedBuildingEx();
-	}
-	if (players_.size() == 0)
-	{
-		//Logger::instance()->playerLog(p, " is granted 1 denier for he is the first on the Bridge.");
-		p.addResources(Resource::denier);
-	}
-	players_.push_back(&p);
-}
-
-bool Bridge::has(const Player & p) const
-{
-	return std::find(players_.begin(), players_.end(), &p) != players_.end();
-}
-
-bool Bridge::canBeActivated_() const
-{
-	return !players_.empty();
-}
-
 void Bridge::onActivate_()
 {
 	foreach (Player * player, players_)
@@ -68,4 +43,34 @@ void Bridge::onActivate_()
 			player->substractResources(Resource::denier * fabs(shift));
 		}
 	}
+}
+
+void Bridge::onAdd_(Player & p)
+{
+	players_.push_back(&p);
+	if (players_.size() == 1)
+	{
+		p.addResources(Resource::denier);
+	}
+}
+
+bool Bridge::isFull_() const
+{
+	// The Bridge is never full.
+	return false;
+}
+
+bool Bridge::has_(const Player & p) const
+{
+	return std::find(players_.begin(), players_.end(), &p) != players_.end();
+}
+
+bool Bridge::has(const Player & p) const
+{
+	return has_(p);
+}
+
+bool Bridge::canBeActivated_() const
+{
+	return players_.size() > 0;
 }

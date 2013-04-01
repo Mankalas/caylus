@@ -66,14 +66,10 @@ namespace controller
 
 		/* Errors, messages and log. */
 
-		/// Player is already on the bridge.
-		v_cp_signal_t already_on_bridge;
 		/// Not enough deniers to play.
 		v_cp_signal_t not_enough_deniers;
 		/// No worker left.
 		v_cp_signal_t no_worker_left;
-		/// A player has been added to the bridge.
-		v_cp_signal_t added_to_bridge;
 
 	};
 }

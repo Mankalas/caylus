@@ -33,6 +33,7 @@ typedef boost::signal<void (void)> v_v_signal_t;
 typedef boost::signal<int (void)> i_v_signal_t;
 typedef boost::signal<void (unsigned)> v_u_signal_t;
 typedef boost::signal<void (int)> v_i_signal_t;
+typedef boost::signal<bool (void)> b_v_signal_t;
 typedef boost::signal<void (const controller::Player *)> v_cp_signal_t;
 typedef boost::signal<void (const controller::BoardElement *)> v_cbe_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap *)> v_cp_cr_signal_t;

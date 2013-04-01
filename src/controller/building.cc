@@ -53,28 +53,6 @@ Building::build(Player & current)
 }
 
 void
-Building::add(Player & current)
-{
-	if (worker_)
-	{
-		signals_.already_occupied(this);
-		throw new OccupiedBuildingEx();
-	}
-	if (type_ == BuildingType::prestige || type_ == BuildingType::residential)
-	{
-		throw new UnactivableBuildingEx();
-	}
-
-	if (owner_ && owner_ != &current)
-	{
-		owner_->addResources(Resource::prestige);
-	}
-	worker_ = &current;
-	signals_.worker_placed(worker_, this);
-	current.decrementWorkers();
-}
-
-void
 Building::removeWorker()
 {
 	if (worker_)
@@ -90,6 +68,42 @@ Building::demolish()
 	assert(!worker_);
 	onDemolish_();
 	owner_ = NULL;
+}
+
+void Building::onActivate_()
+{
+	assert(false);
+}
+
+bool Building::canBePlacedOn_() const
+{
+	return true;
+}
+
+void
+Building::onAdd_(Player & current)
+{
+	if (owner_ && owner_ != &current)
+	{
+		owner_->addResources(Resource::prestige);
+	}
+	worker_ = &current;
+	current.decrementWorkers();
+}
+
+bool Building::isFull_() const
+{
+	return worker_ != NULL;
+}
+
+bool Building::has_(const Player & p) const
+{
+	return worker_ == &p;
+}
+
+bool Building::canBeActivated_() const
+{
+	return worker_ != NULL;
 }
 
 void
@@ -115,19 +129,4 @@ operator<<(std::ostream & o, const Building & b)
 		o << " : " << GREEN << b.worker()->name() << RESET;
 	}
 	return o;
-}
-
-bool Building::has(const Player & p) const
-{
-	return worker_ == &p;
-}
-
-bool Building::canBeActivated_() const
-{
-	return worker_ != NULL;
-}
-
-void Building::onActivate_()
-{
-	assert(false);
 }

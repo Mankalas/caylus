@@ -40,9 +40,11 @@ inline BuildingSmartPtr &
 Road::operator [](const std::string & name)
 {
 	foreach(BuildingSmartPtr & ptr, buildings_)
-	if (ptr->name().compare(name) == 0)
 	{
-		return ptr;
+		if (ptr->name().compare(name) == 0)
+		{
+			return ptr;
+		}
 	}
 	throw new NoBuildingEx();
 }
@@ -51,9 +53,11 @@ inline const BuildingSmartPtr &
 Road::operator [](const std::string & name) const
 {
 	foreach(const BuildingSmartPtr & ptr, buildings_)
-	if (ptr->name().compare(name) == 0)
 	{
-		return ptr;
+		if (ptr->name().compare(name) == 0)
+		{
+			return ptr;
+		}
 	}
 	throw new NoBuildingEx();
 }

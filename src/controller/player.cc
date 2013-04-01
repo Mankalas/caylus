@@ -69,3 +69,8 @@ void Player::substractResources(const ResourceMap & r)
 	resources_ -= r;
 	signals_.lose_resource(this, r);
 }
+
+bool Player::askInnRemoval() const
+{
+	return signals_.ask_inn_removal();
+}
