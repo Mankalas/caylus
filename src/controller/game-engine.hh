@@ -36,8 +36,6 @@ namespace controller
 		/** Destructor. */
 		~GameEngine();
 
-		void addToCastle(Player * p);
-
 		void build(BuildingSmartPtr & building, Player * p);
 
 		/** @name Accessors */

@@ -198,12 +198,6 @@ void GameEngine::placeWorkers_()
 	signals_.worker_placement_end();
 }
 
-void GameEngine::addToCastle(Player * p)
-{
-	assert(p);
-	board_.castle().add(*p);
-}
-
 void GameEngine::playerMove_(Player * p)
 {
 	bool has_played = false;
@@ -229,9 +223,16 @@ void GameEngine::playerMove_(Player * p)
 		Castle & castle = board_.castle();
 		if (&board_element == &castle && p->resources()[Resource::denier] >= worker_cost)
 		{
-			castle.add(*p);
-			p->substractResources(Resource::denier * worker_cost);
-			has_played = true;
+			try
+			{
+				castle.add(*p);
+				p->substractResources(Resource::denier * worker_cost);
+				has_played = true;
+			}
+			catch (AlreadyPlacedEx *)
+			{
+				DebugLogger::log("Already occupied.");
+			}
 			continue;
 		}
 

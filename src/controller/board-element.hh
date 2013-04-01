@@ -34,7 +34,7 @@ namespace controller
 		worker_placed_signal_t worker_placed;
 
 		/** Emitted when a player tries to place its worker while the board element is full. */
-		v_cbe_signal_t already_occupied;
+		v_cbe_signal_t already_placed;
 	};
 
 	/**

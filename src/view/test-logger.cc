@@ -26,7 +26,7 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 	foreach (const BoardElement * board_element, game_engine->getEveryBoardElements())
 	{
 		board_element->signals().activation_sig.connect(boost::bind(&TestLogger::activationBoardElement, this, _1));
-		board_element->signals().already_occupied.connect(boost::bind(&TestLogger::boardElementAlreadyOccupied, this, _1));
+		board_element->signals().already_placed.connect(boost::bind(&TestLogger::boardElementAlreadyOccupied, this, _1));
 		board_element->signals().worker_placed.connect(boost::bind(&TestLogger::workerPlacement, this, _1, _2));
 	}
 

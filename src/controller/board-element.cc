@@ -31,6 +31,7 @@ void BoardElement::add(Player & p)
 {
 	if (has_(p))
 	{
+		signals_.already_placed(this);
 		throw new AlreadyPlacedEx();
 	}
 	if (isFull_())

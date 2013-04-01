@@ -7,7 +7,7 @@ on methods resources() and workers() in file player.hh, lines 51 and
 53.
 
 * Game implementation *
-[TODO] Establish a test engine
+[DONE] Establish a test engine
 [TODO] User interfaces
 [TODO] Graphical interface (SFML?)
        [TODO] Alternative compilation if SFML not present
@@ -26,9 +26,9 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TODO] If more than one favor during a phase, activation on different lines
        [????] Impossible to gain more than 4 favors in a phase
        [TODO] Use of buildings
-[TEST] Neutral buildings random placement
-[TEST] Random player order
-[TEST] Initial resources
+[DONE] Neutral buildings random placement
+[DONE] Random player order
+[DONE] Initial resources
 [TEST] Scoring
        [TODO] Following the turn order
        [TEST] Counting house in the actual section then bonus/malus
@@ -45,9 +45,9 @@ on methods resources() and workers() in file player.hh, lines 51 and
 [TEST] Phase 2/7 : Placing workers
 	[TEST] No worker on residences, prestige, unbuild or occupied
 	[TEST] Worker cost
-	[TEST] Pass
-	       [TEST] 1 denier for the first to pass
-	[TEST] Putting on a special, fixed or neutral
+	[DONE] Pass
+	       [DONE] 1 denier for the first to pass
+	[DONE] Putting on a special, fixed or neutral
 	[TEST] Putting on another player's building
 	       [TEST] Prestige point gained by the owner
 	[TEST] Putting on our own building

@@ -33,13 +33,13 @@ void Stables::add(Player & current)
 {
 	if (has(&current))
 	{
-		signals_.already_occupied(this);
+		signals_.already_placed(this);
 		throw new AlreadyPlacedEx();
 	}
 
 	if (players_.size() == 3)
 	{
-		signals_.already_occupied(this);
+		signals_.already_placed(this);
 		throw new AlreadyPlacedEx();
 	}
 
