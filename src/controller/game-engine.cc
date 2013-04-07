@@ -309,6 +309,7 @@ void GameEngine::build(unsigned int building_rank, Player * p)
 	assert(p);
 	assert(building);
 	building->build(*p);
+	signals_.built(*(building.get()), *p);
 	board_.road().build(building);
 	buildings_.erase(buildings_.begin() + building_rank);
 }

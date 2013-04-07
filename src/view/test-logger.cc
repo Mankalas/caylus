@@ -19,6 +19,7 @@ TestLogger::TestLogger(const GameEngine * game_engine, const std::string & outpu
 	: PassiveView(game_engine)
 {
 	game_engine->signals()->turn_start.connect(boost::bind(&TestLogger::newTurn, this, _1, _2));
+	game_engine->signals()->built.connect(boost::bind(&TestLogger::built, this, _1, _2));
 
 	game_engine->board().signals().provost_shifted.connect(boost::bind(&TestLogger::provostShifted, this, _1));
 	game_engine->board().signals().bailiff_shifted.connect(boost::bind(&TestLogger::bailiffShifted, this, _1));
@@ -49,6 +50,11 @@ TestLogger::~TestLogger()
 {
 	file_.flush();
 	file_.close();
+}
+
+void TestLogger::built(const controller::Building & building, const controller::Player & p)
+{
+	file_ << p.name() << " has built the " << building.name() << std::endl;
 }
 
 void TestLogger::buildingFull(const controller::BoardElement * building)

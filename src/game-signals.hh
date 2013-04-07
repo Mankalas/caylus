@@ -64,6 +64,8 @@ namespace controller
 
 		v_v_signal_t game_over;
 
+		built_signal_t built;
+
 		/* Errors, messages and log. */
 
 		/// Not enough deniers to play.

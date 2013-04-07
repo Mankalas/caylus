@@ -15,6 +15,7 @@ namespace controller
 {
 	class Player;
 	class ResourceMap;
+	class Building;
 	class BoardElement;
 }
 
@@ -40,6 +41,7 @@ namespace view
 		void bailiffShifted(unsigned int shift);
 		void buildingFull(const controller::BoardElement * building);
 		void unactivableBuilding(const controller::BoardElement * building);
+		void built(const controller::Building & building, const controller::Player & p);
 
 		std::ofstream file_;
 	};

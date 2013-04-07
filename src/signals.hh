@@ -18,6 +18,7 @@ namespace controller
 	class Player;
 	class GameEngine;
 	class ResourceMap;
+	class Building;
 }
 
 //struct Signals
@@ -46,6 +47,7 @@ typedef boost::signal<void ( const controller::Player *, const controller::Board
 typedef boost::signal<unsigned int (std::vector<unsigned int>)> u_vu_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap &)> resource_move_signal_t;
 typedef boost::signal<controller::ResourceMap (const std::vector<controller::ResourceMap>&)> resource_choice_signal_t;
+typedef boost::signal<void (const controller::Building &, const controller::Player &)> built_signal_t;
 
 /* Player interactions.
 
