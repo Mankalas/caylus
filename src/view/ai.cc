@@ -51,6 +51,11 @@ bool AI::askInnRemoval() const
 	return true;
 }
 
+unsigned int AI::askBuildingToConstruct() const
+{
+	return 0;
+}
+
 controller::ResourceMap AI::askResource(const std::vector<controller::ResourceMap>& resource_choice) const
 {
 	unsigned int choice = askChoice(resource_choice.size() - 1);

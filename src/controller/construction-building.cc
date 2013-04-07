@@ -28,17 +28,26 @@ ConstructionBuilding::ConstructionBuilding(GameEngine * ge, const BuildingType &
 void ConstructionBuilding::onActivate_()
 {
 	unsigned choice = 0;
+	bool has_built = false;
 
-	std::map<unsigned, BuildingSmartPtr> building_choice;
-	choice = ask_building_signal_();
-	if (choice == 0)
+	while (!has_built)
 	{
-		return;
+		choice = worker_->signals().ask_building_to_construct();
+		if (choice == 0)
+		{
+			break;
+		}
+		try
+		{
+			game_engine_->build(choice, worker_);
+			has_built = true;
+		}
+		catch (NotEnoughResourceEx * ex)
+		{
+			std::cerr << ex->msg() << std::endl;
+			// Nothing to do, keep looping...
+		}
 	}
-	else
-		game_engine_->build(*(std::find(game_engine_->buildings().begin(),
-		                                game_engine_->buildings().end(),
-		                                building_choice[choice])), worker_);
 }
 
 void ConstructionBuilding::onBuild_()

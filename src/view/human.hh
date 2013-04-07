@@ -44,6 +44,7 @@ namespace view
 		virtual int askProvostShift() const;
 		virtual unsigned int askBoardElement() const;
 		virtual bool askInnRemoval() const;
+		virtual unsigned int askBuildingToConstruct() const;
 
 		// @}
 

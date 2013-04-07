@@ -33,6 +33,8 @@ namespace controller
 		/// Ask whether the player wants to removes his worker from the
 		/// Inn.
 		b_v_signal_t ask_inn_removal;
+		/// Ask a building to construct from the buildings list.
+		u_v_signal_t ask_building_to_construct;
 
 		/// Resource the player gains.
 		resource_move_signal_t gain_resource;

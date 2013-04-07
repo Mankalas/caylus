@@ -11,6 +11,7 @@
 #include "../exceptions.hh"
 #include "player.hh"
 #include "../const.hh"
+#include "../debug-logger.hh"
 
 Building::Building(const std::string & name,
                    const BuildingType & type,

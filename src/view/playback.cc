@@ -65,3 +65,8 @@ bool Playback::askInnRemoval() const
 {
 	return reader_.next_uint();
 }
+
+unsigned int Playback::askBuildingToConstruct() const
+{
+	return reader_.next_uint();
+}

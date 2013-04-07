@@ -47,6 +47,8 @@ namespace view
 
 		virtual bool askInnRemoval() const = 0;
 
+		virtual unsigned int askBuildingToConstruct() const = 0;
+
 		// @}
 
 		///

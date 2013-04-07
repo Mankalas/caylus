@@ -79,21 +79,22 @@ on methods resources() and workers() in file player.hh, lines 51 and
   [DONE] Reject Bridge as valid choice
 [DONE] Trading Post
 [DONE] Merchant's Guild
-[TEST] Stables (only one worker per player)
+[DONE] Stables (only one worker per player)
 [DONE] Joust Field
-[TEST] Inn
-       [TEST] Activation (move from the left circle to the right)
-       [TEST] Effect (worker cost equals 1)
-       [TEST] Remove the worker
+[DONE] Inn
+       [DONE] Activation (move from the left circle to the right)
+       [DONE] Effect (worker cost equals 1)
+       [DONE] Remove the worker
 [TEST] Lawyer
        [TEST] Replaced building goes back to the pile
        [TEST] Cannot be replaced
        [TEST] If there is a worker on the replaced building, action is delayed until activated
 [TEST] Production buildings
        [TODO] Stone buildings "tax"
-[TEST] Construction buildings
+[TEST] Carpenter
+       [DONE] Prestige point earned
        [TEST] Suppress the building from the game's pile
-       [TEST] Prestige point earned
+[TEST] Construction buildings
        [TEST] Residential and prestige buildings' rules (built on neutral or own building)
 [TEST] Trade buildings
 [TEST] No worker on residences, prestige, unbuild or occupied

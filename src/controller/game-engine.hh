@@ -36,7 +36,7 @@ namespace controller
 		/** Destructor. */
 		~GameEngine();
 
-		void build(BuildingSmartPtr & building, Player * p);
+		void build(unsigned int building_rank, Player * p);
 
 		/** @name Accessors */
 		//@{

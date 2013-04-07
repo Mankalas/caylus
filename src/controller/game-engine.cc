@@ -302,15 +302,15 @@ unsigned GameEngine::getWorkerCost_(const Player * p) const
 	return (inn->host() == p) ? 1 : board_.bridge().players().size() + 1;
 }
 
-void GameEngine::build(BuildingSmartPtr & building, Player * p)
+void GameEngine::build(unsigned int building_rank, Player * p)
 {
-	BuildingSmartPtr game_b = *(std::find(buildings_.begin(), buildings_.end(), building));
+	BuildingSmartPtr building = buildings_.at(building_rank);
 
 	assert(p);
 	assert(building);
-	game_b->build(*p);
-	board_.road().build(game_b);
-	buildings_.erase(std::find(buildings_.begin(), buildings_.end(), building));
+	building->build(*p);
+	board_.road().build(building);
+	buildings_.erase(buildings_.begin() + building_rank);
 }
 
 Player * GameEngine::newPlayer()

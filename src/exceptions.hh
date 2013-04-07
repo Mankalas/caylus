@@ -17,8 +17,7 @@ namespace controller
 	class Exception
 	{
 	public:
-		Exception() {}
-		Exception(const std::string & msg) :
+		Exception(const std::string msg) :
 			msg_(msg)
 		{}
 
@@ -33,7 +32,7 @@ namespace controller
 	class SystemException : public Exception
 	{
 	public:
-		SystemException(const std::string & msg) :
+		SystemException(const std::string msg) :
 			Exception(msg)
 		{
 		}
@@ -42,7 +41,7 @@ namespace controller
 	class SignalNotConnected : public SystemException
 	{
 	public:
-		SignalNotConnected(const std::string & signal) :
+		SignalNotConnected(const std::string signal) :
 			SystemException(signal)
 		{
 		}
@@ -50,42 +49,65 @@ namespace controller
 
 	class GameException : public Exception
 	{
+	public:
+		GameException(const std::string msg)
+			: Exception(msg){}
 	};
 
 	class GameOverException : public GameException
 	{
+	public:
+		GameOverException()
+			: GameException("Game Over"){}
 	};
 
 	class NotEnoughDenierEx : public GameException
 	{
+	public:
+		NotEnoughDenierEx()
+			: GameException("Not enough denier"){}
 	};
 
 	class NotEnoughResourceEx : public GameException
 	{
+	public:
+		NotEnoughResourceEx()
+			: GameException("Not enough resource"){}
 	};
 
 	class BuildingFullEx : public GameException
 	{
+	public:
+		BuildingFullEx()
+			: GameException("Building full"){}
 	};
 
 	class AlreadyPlacedEx : public GameException
 	{
+	public:
+		AlreadyPlacedEx()
+			: GameException("Worker already placed"){}
 	};
 
 	class UnactivableBuildingEx : public GameException
 	{
+	public:
+		UnactivableBuildingEx()
+			: GameException("The building cannot be activated"){}
 	};
 
 	class NoBuildingEx : public GameException
 	{
-	};
-
-	class MemAllocError : public GameException
-	{
+	public:
+		NoBuildingEx()
+			: GameException("There's no building here."){}
 	};
 
 	class ImageNotFound : public GameException
 	{
+	public:
+		ImageNotFound()
+			: GameException("The required image has not been found."){}
 	};
 
 }

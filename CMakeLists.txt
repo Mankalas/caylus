@@ -58,5 +58,5 @@ add_test(StablesWithFourPlayers ./Caylus -d test/buildings/stables/four_players)
 add_test(Inn ./Caylus -d test/buildings/inn)
 add_test(NeutralFarm ./Caylus -d test/buildings/neutral_farm)
 add_test(NeutralSawmill ./Caylus -d test/buildings/neutral_sawmill)
-
+add_test(Carpenter ./Caylus -d test/buildings/carpenter/simple)
 add_test(CastleOnlyOneWorker ./Caylus -d test/castle/only_one_worker)

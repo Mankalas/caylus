@@ -7,7 +7,6 @@
  */
 
 #include "active-view.hh"
-#include "player-signals.hh"
 #include "../controller/game-engine.hh"
 #include <boost/bind.hpp>
 
@@ -22,4 +21,5 @@ ActiveView::ActiveView(const GameEngine * ge, const Player * player)
 	player_->signals().ask_board_element.connect(boost::bind(&ActiveView::askBoardElement, this));
 	player_->signals().ask_resource.connect(boost::bind(&ActiveView::askResource, this, _1));
 	player_->signals().ask_inn_removal.connect(boost::bind(&ActiveView::askInnRemoval, this));
+	player_->signals().ask_building_to_construct.connect(boost::bind(&ActiveView::askBuildingToConstruct, this));
 }

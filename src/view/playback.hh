@@ -31,6 +31,7 @@ namespace view
 		virtual unsigned int askBoardElement() const;
 		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const;
 		virtual bool askInnRemoval() const;
+		virtual unsigned int askBuildingToConstruct() const;
 
 		// @}
 

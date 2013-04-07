@@ -123,7 +123,7 @@ NFarm::NFarm()
 }
 
 WFFarm::WFFarm()
-	: Building(WOOD_FOOD_FARM,
+	: Building(FOOD_CLOTH_FARM,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),
@@ -135,7 +135,7 @@ WFFarm::WFFarm()
 }
 
 WCFarm::WCFarm()
-	: Building(WOOD_CLOTH_FARM,
+	: Building(CLOTH_FOOD_FARM,
 	           BuildingType::wood,
 	           Resource::food + Resource::wood,
 	           Resource::prestige * 2),

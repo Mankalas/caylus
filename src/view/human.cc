@@ -112,6 +112,11 @@ bool Human::askInnRemoval() const
 	return gui_->askYesNo();
 }
 
+unsigned int Human::askBuildingToConstruct() const
+{
+	return 0;
+}
+
 unsigned int Human::askBoardElement() const
 {
 	return gui_->askCaseNumber();
