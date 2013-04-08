@@ -1,10 +1,10 @@
-/*!
-  \file   trade-building.hh
-  \brief  This file contains TradeBuilding class declaration.
-
-  \author nicuveo
-  \date   2009-01-06
-*/
+/**
+ * @file   trade-building.hh
+ * @author Nicuvëo (crucuny@gmail.com)
+ * @date   Jun  1 20:54:34 2009
+ *
+ * @brief  Declaration of the trade-building class.
+ */
 
 #ifndef TRADE_BUILDING_HH_
 # define TRADE_BUILDING_HH_
@@ -13,7 +13,6 @@
 
 namespace controller
 {
-
 	/** \brief It represents all the buildings that, when activated, allow
 	 * the worker to trade resouces. The constructor takes three additional
 	 * arguments:
@@ -40,7 +39,7 @@ namespace controller
 	protected:
 		TradeBuilding(const ResourceMap & supply,
 		              const ResourceMap & demand,
-		              const std::vector<std::pair<unsigned, unsigned> >& ratios);
+		              const std::vector<std::pair<unsigned, unsigned> > & ratios);
 
 	private:
 		std::vector<std::pair<ResourceMap, ResourceMap> > createExchangeVector() const;

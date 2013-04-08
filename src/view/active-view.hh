@@ -49,6 +49,8 @@ namespace view
 
 		virtual unsigned int askBuildingToConstruct() const = 0;
 
+		virtual unsigned int askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >&) const = 0;
+
 		// @}
 
 		///

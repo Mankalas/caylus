@@ -67,6 +67,8 @@ namespace controller
 		ResourceMap  operator * (const unsigned & mul) const;
 		ResourceMap & operator *= (const unsigned & mul);
 
+		bool canPay(const ResourceMap & r) const;
+
 	private:
 		std::map<Resource, unsigned> map_;
 	};

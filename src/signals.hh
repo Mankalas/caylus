@@ -11,6 +11,7 @@
 
 # include <boost/signals.hpp>
 # include <string>
+# include <utility>
 
 namespace controller
 {
@@ -48,6 +49,7 @@ typedef boost::signal<unsigned int (std::vector<unsigned int>)> u_vu_signal_t;
 typedef boost::signal<void (const controller::Player *, const controller::ResourceMap &)> resource_move_signal_t;
 typedef boost::signal<controller::ResourceMap (const std::vector<controller::ResourceMap>&)> resource_choice_signal_t;
 typedef boost::signal<void (const controller::Building &, const controller::Player &)> built_signal_t;
+typedef boost::signal<unsigned int (const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> > &)> trade_signal_t;
 
 /* Player interactions.
 

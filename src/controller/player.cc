@@ -74,3 +74,8 @@ bool Player::askInnRemoval() const
 {
 	return signals_.ask_inn_removal();
 }
+
+unsigned int Player::askTrade(const std::vector<std::pair<ResourceMap, ResourceMap> > & trade) const
+{
+	return signals_.ask_trade(trade);
+}

@@ -153,3 +153,8 @@ bool Human::isInteractive() const
 {
 	return true;
 }
+
+unsigned int Human::askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >&) const
+{
+	return 0;
+}

@@ -43,6 +43,7 @@ namespace view
 		virtual controller::ResourceMap askResource(const std::vector<controller::ResourceMap>& resource_choice) const;
 		virtual bool askInnRemoval() const;
 		virtual unsigned int askBuildingToConstruct() const;
+		virtual unsigned int askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >&) const;
 
 
 		// @}

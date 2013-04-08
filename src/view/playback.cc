@@ -70,3 +70,8 @@ unsigned int Playback::askBuildingToConstruct() const
 {
 	return reader_.next_uint();
 }
+
+unsigned int Playback::askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >&) const
+{
+	return reader_.next_uint();
+}

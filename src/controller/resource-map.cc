@@ -202,6 +202,23 @@ ResourceMap::operator *= (const unsigned & mul)
 	return *this;
 }
 
+bool
+ResourceMap::canPay(const ResourceMap & rmap) const
+{
+	std::map<Resource, unsigned>::const_iterator it = rmap.map_.begin();
+	while (it != rmap.map_.end())
+	{
+		Resource r = it->first;
+		if (rmap[r] < (*this)[r])
+		{
+			return false;
+		}
+		++it;
+	}
+	return true;
+}
+
+
 std::ostream &
 operator << (std::ostream & ostr, const ResourceMap & rm)
 {

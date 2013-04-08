@@ -45,6 +45,7 @@ namespace view
 		virtual unsigned int askBoardElement() const;
 		virtual bool askInnRemoval() const;
 		virtual unsigned int askBuildingToConstruct() const;
+		virtual unsigned int askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >&) const;
 
 		// @}
 

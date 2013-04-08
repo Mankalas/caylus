@@ -63,7 +63,7 @@ controller::ResourceMap AI::askResource(const std::vector<controller::ResourceMa
 }
 
 unsigned AI::askChoice(unsigned int range) const
-{
+	{
 	return range - 1;
 }
 
@@ -103,4 +103,9 @@ void AI::updateBoard()
 bool AI::isInteractive() const
 {
 	return false;
+}
+
+unsigned int AI::askTrade(const std::vector<std::pair<controller::ResourceMap, controller::ResourceMap> >& trade) const
+{
+	return 0;
 }

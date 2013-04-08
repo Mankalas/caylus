@@ -12,6 +12,7 @@
 # include <string>
 # include <iostream>
 # include "resource-map.hh"
+
 # include "../signals.hh"
 # include "../view/playback.hh"
 
@@ -35,6 +36,8 @@ namespace controller
 		b_v_signal_t ask_inn_removal;
 		/// Ask a building to construct from the buildings list.
 		u_v_signal_t ask_building_to_construct;
+		/// Ask for a trade.
+		trade_signal_t ask_trade;
 
 		/// Resource the player gains.
 		resource_move_signal_t gain_resource;
@@ -93,6 +96,7 @@ namespace controller
 		unsigned int askBoardElement() const;
 		ResourceMap askResource(const std::vector<ResourceMap> & choice) const;
 		bool askInnRemoval() const;
+		unsigned int askTrade(const std::vector<std::pair<ResourceMap, ResourceMap> > & trade) const;
 
 		// @}
 

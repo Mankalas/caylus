@@ -91,12 +91,12 @@ on methods resources() and workers() in file player.hh, lines 51 and
        [TEST] If there is a worker on the replaced building, action is delayed until activated
 [TEST] Production buildings
        [TODO] Stone buildings "tax"
-[TEST] Carpenter
+[DONE] Carpenter
        [DONE] Prestige point earned
-       [TEST] Suppress the building from the game's pile
+       [DONE] Suppress the building from the game's pile
 [TEST] Construction buildings
        [TEST] Residential and prestige buildings' rules (built on neutral or own building)
-[TEST] Trade buildings
+[DONE] Trade buildings
 [TEST] No worker on residences, prestige, unbuild or occupied
 [TEST] 1 prestige if another player's building
 
